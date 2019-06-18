@@ -12942,11 +12942,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Lucho\\Source\\Repos\\LDHellsing\\Patron_Center\\Patron-Center\\Patron-Center.csproj",
+      "projectUniqueName": "C:\\LDHellsing\\Patron_Center\\Patron-Center\\Patron-Center.csproj",
       "projectName": "Patron-Center",
-      "projectPath": "C:\\Users\\Lucho\\Source\\Repos\\LDHellsing\\Patron_Center\\Patron-Center\\Patron-Center.csproj",
+      "projectPath": "C:\\LDHellsing\\Patron_Center\\Patron-Center\\Patron-Center.csproj",
       "packagesPath": "C:\\Users\\Lucho\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Lucho\\Source\\Repos\\LDHellsing\\Patron_Center\\Patron-Center\\obj\\",
+      "outputPath": "C:\\LDHellsing\\Patron_Center\\Patron-Center\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
