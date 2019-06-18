@@ -6,10 +6,18 @@
     <RootNamespace>Patron_Center</RootNamespace>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Remove="Migrations\20190618003903_Initial.cs" />
+    <Compile Remove="Migrations\20190618003903_Initial.Designer.cs" />
+    <Compile Remove="Migrations\20190618004355_Initial.cs" />
+    <Compile Remove="Migrations\20190618004355_Initial.Designer.cs" />
+  </ItemGroup>
+
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.2.3" />
   </ItemGroup>
 
 </Project>
