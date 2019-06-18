@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\LDHellsing\\Patron_Center\\Patron-Center\\Patron-Center.csproj": {}
+    "C:\\PatronCenter\\Patron_Center\\Patron-Center\\Patron-Center.csproj": {}
   },
   "projects": {
-    "C:\\LDHellsing\\Patron_Center\\Patron-Center\\Patron-Center.csproj": {
+    "C:\\PatronCenter\\Patron_Center\\Patron-Center\\Patron-Center.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\LDHellsing\\Patron_Center\\Patron-Center\\Patron-Center.csproj",
+        "projectUniqueName": "C:\\PatronCenter\\Patron_Center\\Patron-Center\\Patron-Center.csproj",
         "projectName": "Patron-Center",
-        "projectPath": "C:\\LDHellsing\\Patron_Center\\Patron-Center\\Patron-Center.csproj",
+        "projectPath": "C:\\PatronCenter\\Patron_Center\\Patron-Center\\Patron-Center.csproj",
         "packagesPath": "C:\\Users\\Lucho\\.nuget\\packages\\",
-        "outputPath": "C:\\LDHellsing\\Patron_Center\\Patron-Center\\obj\\",
+        "outputPath": "C:\\PatronCenter\\Patron_Center\\Patron-Center\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
