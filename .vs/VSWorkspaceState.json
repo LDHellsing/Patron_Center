@@ -1,7 +1,13 @@
 {
   "ExpandedNodes": [
     "",
-    "\\Patron-Center"
+    "\\Patron-Center",
+    "\\Patron-Center\\bin",
+    "\\Patron-Center\\Controllers",
+    "\\Patron-Center\\Data",
+    "\\Patron-Center\\Models",
+    "\\Patron-Center\\Views"
   ],
+  "SelectedNode": "\\.gitignore",
   "PreviewInSolutionExplorer": false
 }

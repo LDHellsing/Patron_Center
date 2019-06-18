@@ -32,3 +32,5 @@ C:\Users\Lucho\Source\Repos\LDHellsing\Patron_Center\Patron-Center\obj\Debug\net
 C:\Users\Lucho\Source\Repos\LDHellsing\Patron_Center\Patron-Center\obj\Debug\netcoreapp2.2\Patron-Center.dll
 C:\Users\Lucho\Source\Repos\LDHellsing\Patron_Center\Patron-Center\obj\Debug\netcoreapp2.2\Patron-Center.pdb
 C:\Users\Lucho\Source\Repos\LDHellsing\Patron_Center\Patron-Center\obj\Debug\netcoreapp2.2\Patron-Center.csproj.CopyComplete
+C:\Users\facultad\Source\Repos\Patron_Center\Patron-Center\obj\Debug\netcoreapp2.2\Patron-Center.dll
+C:\Users\facultad\Source\Repos\Patron_Center\Patron-Center\obj\Debug\netcoreapp2.2\Patron-Center.pdb
