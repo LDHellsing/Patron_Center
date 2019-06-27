@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\PatronCenter\\Patron_Center\\Patron-Center\\Patron-Center.csproj": {}
+    "C:\\PatronCenter\\Patron-Center\\Patron-Center.csproj": {}
   },
   "projects": {
-    "C:\\PatronCenter\\Patron_Center\\Patron-Center\\Patron-Center.csproj": {
+    "C:\\PatronCenter\\Patron-Center\\Patron-Center.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\PatronCenter\\Patron_Center\\Patron-Center\\Patron-Center.csproj",
+        "projectUniqueName": "C:\\PatronCenter\\Patron-Center\\Patron-Center.csproj",
         "projectName": "Patron-Center",
-        "projectPath": "C:\\PatronCenter\\Patron_Center\\Patron-Center\\Patron-Center.csproj",
-        "packagesPath": "C:\\Users\\Lucho\\.nuget\\packages\\",
-        "outputPath": "C:\\PatronCenter\\Patron_Center\\Patron-Center\\obj\\",
+        "projectPath": "C:\\PatronCenter\\Patron-Center\\Patron-Center.csproj",
+        "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
+        "outputPath": "C:\\PatronCenter\\Patron-Center\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\Lucho\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
