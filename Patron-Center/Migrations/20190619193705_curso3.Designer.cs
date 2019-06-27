@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Patron_Center.Models;
 
 namespace Patron_Center.Migrations
 {
     [DbContext(typeof(Patron_CenterContext))]
-    partial class Patron_CenterContextModelSnapshot : ModelSnapshot
+    [Migration("20190619193705_curso3")]
+    partial class curso3
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -27,8 +29,6 @@ namespace Patron_Center.Migrations
 
                     b.Property<string>("Descripcion");
 
-                    b.Property<int>("DocenteId");
-
                     b.Property<bool>("Eliminado");
 
                     b.Property<DateTime>("FechaFinalizacion");
@@ -36,8 +36,6 @@ namespace Patron_Center.Migrations
                     b.Property<string>("Nombre");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("DocenteId");
 
                     b.ToTable("Curso");
                 });
@@ -49,6 +47,10 @@ namespace Patron_Center.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Apellido");
+
+                    b.Property<int?>("CursoId");
+
+                    b.Property<int?>("CursoId1");
 
                     b.Property<string>("Documento");
 
@@ -64,15 +66,22 @@ namespace Patron_Center.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CursoId");
+
+                    b.HasIndex("CursoId1");
+
                     b.ToTable("Usuario");
                 });
 
-            modelBuilder.Entity("Patron_Center.Models.Curso", b =>
+            modelBuilder.Entity("Patron_Center.Models.Usuario", b =>
                 {
-                    b.HasOne("Patron_Center.Models.Usuario", "Docente")
-                        .WithMany()
-                        .HasForeignKey("DocenteId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                    b.HasOne("Patron_Center.Models.Curso")
+                        .WithMany("Alumnos")
+                        .HasForeignKey("CursoId");
+
+                    b.HasOne("Patron_Center.Models.Curso")
+                        .WithMany("Docente")
+                        .HasForeignKey("CursoId1");
                 });
 #pragma warning restore 612, 618
         }

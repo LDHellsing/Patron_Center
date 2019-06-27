@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Patron_Center.Models;
 
 namespace Patron_Center.Migrations
 {
     [DbContext(typeof(Patron_CenterContext))]
-    partial class Patron_CenterContextModelSnapshot : ModelSnapshot
+    [Migration("20190619191034_curso2")]
+    partial class curso2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -27,7 +29,7 @@ namespace Patron_Center.Migrations
 
                     b.Property<string>("Descripcion");
 
-                    b.Property<int>("DocenteId");
+                    b.Property<int?>("DocenteId");
 
                     b.Property<bool>("Eliminado");
 
@@ -50,6 +52,8 @@ namespace Patron_Center.Migrations
 
                     b.Property<string>("Apellido");
 
+                    b.Property<int?>("CursoId");
+
                     b.Property<string>("Documento");
 
                     b.Property<bool>("Eliminado");
@@ -64,6 +68,8 @@ namespace Patron_Center.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CursoId");
+
                     b.ToTable("Usuario");
                 });
 
@@ -71,8 +77,14 @@ namespace Patron_Center.Migrations
                 {
                     b.HasOne("Patron_Center.Models.Usuario", "Docente")
                         .WithMany()
-                        .HasForeignKey("DocenteId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("DocenteId");
+                });
+
+            modelBuilder.Entity("Patron_Center.Models.Usuario", b =>
+                {
+                    b.HasOne("Patron_Center.Models.Curso")
+                        .WithMany("Alumnos")
+                        .HasForeignKey("CursoId");
                 });
 #pragma warning restore 612, 618
         }

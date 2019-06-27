@@ -14,5 +14,6 @@ namespace Patron_Center.Models
         }
 
         public DbSet<Patron_Center.Models.Usuario> Usuario { get; set; }
+        public DbSet<Patron_Center.Models.Curso> Curso { get; set; }
     }
 }
