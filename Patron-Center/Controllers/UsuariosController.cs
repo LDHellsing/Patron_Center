@@ -19,8 +19,8 @@ namespace Patron_Center.Controllers
         }
 
         // GET: Usuarios
-        public async Task<IActionResult> Index()
-        {
+        public async Task<IActionResult> Index()      
+        {       
             return View(await _context.Usuario.ToListAsync());
         }
 

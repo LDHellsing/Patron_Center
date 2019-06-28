@@ -35,5 +35,14 @@ namespace Patron_Center.Models
         [DisplayName("Eliminado")]
         public Boolean Eliminado { get; set; }
 
+        [HiddenInput(DisplayValue = false)]
+        
+        public string NombreCompleto
+        {
+            get
+            {
+                return string.Format("{0} {1}", Nombre, Apellido);
+            }
+        }
     }
 }

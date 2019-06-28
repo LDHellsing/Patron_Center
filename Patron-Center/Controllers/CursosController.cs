@@ -48,7 +48,7 @@ namespace Patron_Center.Controllers
         public IActionResult Create()
         {
 
-            ViewData["DocenteId"] = new SelectList(_context.Usuario.Where(x => x.TipoUsuario.Equals(TipoUsuario.Docente)), "Id", "Nombre");
+            ViewData["DocenteId"] = new SelectList(_context.Usuario.Where(x => x.TipoUsuario.Equals(TipoUsuario.Docente) && !x.Eliminado), "Id","NombreCompleto");
             return View();
         }
 
@@ -82,7 +82,7 @@ namespace Patron_Center.Controllers
             {
                 return NotFound();
             }
-            ViewData["DocenteId"] = new SelectList(_context.Usuario.Where(x => x.TipoUsuario.Equals(TipoUsuario.Docente)), "Id", "Nombre");
+            ViewData["DocenteId"] = new SelectList(_context.Usuario.Where(x => x.TipoUsuario.Equals(TipoUsuario.Docente) && !x.Eliminado), "Id", "NombreCompleto");
             return View(curso);
         }
 
@@ -118,7 +118,7 @@ namespace Patron_Center.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["DocenteId"] = new SelectList(_context.Usuario.Where(x => x.TipoUsuario.Equals(TipoUsuario.Docente)), "Id", "Nombre");
+            ViewData["DocenteId"] = new SelectList(_context.Usuario.Where(x => x.TipoUsuario.Equals(TipoUsuario.Docente) && !x.Eliminado), "Id", "NombreCompleto");
             return View(curso);
         }
 
