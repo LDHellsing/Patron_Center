@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Patron_Center.Models;
 
 namespace Patron_Center.Migrations
 {
     [DbContext(typeof(Patron_CenterContext))]
-    partial class Patron_CenterContextModelSnapshot : ModelSnapshot
+    [Migration("20190628151712_cursoUsuario")]
+    partial class cursoUsuario
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -25,8 +27,6 @@ namespace Patron_Center.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("AlumnosId");
-
                     b.Property<string>("Descripcion");
 
                     b.Property<int>("DocenteId");
@@ -38,8 +38,6 @@ namespace Patron_Center.Migrations
                     b.Property<string>("Nombre");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("AlumnosId");
 
                     b.HasIndex("DocenteId");
 
@@ -86,10 +84,6 @@ namespace Patron_Center.Migrations
 
             modelBuilder.Entity("Patron_Center.Models.Curso", b =>
                 {
-                    b.HasOne("Patron_Center.Models.Usuario", "Alumnos")
-                        .WithMany()
-                        .HasForeignKey("AlumnosId");
-
                     b.HasOne("Patron_Center.Models.Usuario", "Docente")
                         .WithMany()
                         .HasForeignKey("DocenteId")

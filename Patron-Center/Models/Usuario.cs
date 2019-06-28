@@ -35,8 +35,9 @@ namespace Patron_Center.Models
         [DisplayName("Eliminado")]
         public Boolean Eliminado { get; set; }
 
-        [HiddenInput(DisplayValue = false)]
-        
+        public List<CursoUsuario> CursoUsuario { get; set; }
+
+        [HiddenInput(DisplayValue = false)]        
         public string NombreCompleto
         {
             get

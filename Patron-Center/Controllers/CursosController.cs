@@ -47,8 +47,7 @@ namespace Patron_Center.Controllers
         // GET: Cursos/Create
         public IActionResult Create()
         {
-
-            ViewData["DocenteId"] = new SelectList(_context.Usuario.Where(x => x.TipoUsuario.Equals(TipoUsuario.Docente) && !x.Eliminado), "Id","NombreCompleto");
+            ViewData["DocenteId"] = new SelectList(_context.Usuario.Where(x => x.TipoUsuario.Equals(TipoUsuario.Docente) && !x.Eliminado), "Id", "NombreCompleto");
             return View();
         }
 
@@ -65,7 +64,7 @@ namespace Patron_Center.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["DocenteId"] = new SelectList(_context.Usuario, "Id", "Nombre", curso.DocenteId);
+            ViewData["DocenteId"] = new SelectList(_context.Usuario.Where(x => x.TipoUsuario.Equals(TipoUsuario.Docente) && !x.Eliminado), "Id", "NombreCompleto");
             return View(curso);
         }
 
