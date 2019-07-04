@@ -45,8 +45,8 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Eliminado)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Docente.Id)
+            <td>                
+                @(String.Format("{0} {1}", item.Docente.Nombre, item.Docente.Apellido))
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
