@@ -36,11 +36,11 @@ namespace Patron_Center.Controllers
             var cursoUsuario = await _context.CursoUsuario
                 .Include(c => c.Curso)
                 .Include(c => c.Usuario)
-                .FirstOrDefaultAsync(m => m.CursoId == id);
+                .FirstOrDefaultAsync(m => m.Id == id);
             if (cursoUsuario == null)
             {
                 return NotFound();
-            }   
+            }
 
             return View(cursoUsuario);
         }
@@ -48,7 +48,6 @@ namespace Patron_Center.Controllers
         // GET: CursoUsuarios/Create
         public IActionResult Create()
         {
-
             ViewData["CursoId"] = new SelectList(_context.Curso.Where(x => !x.Eliminado), "Id", "Nombre");
             ViewData["UsuarioId"] = new SelectList(_context.Usuario.Where(x => x.TipoUsuario.Equals(TipoUsuario.Alumno) && !x.Eliminado), "Id", "NombreCompleto");
             return View();
@@ -59,7 +58,7 @@ namespace Patron_Center.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("UsuarioId,CursoId")] CursoUsuario cursoUsuario)
+        public async Task<IActionResult> Create([Bind("Id,UsuarioId,CursoId")] CursoUsuario cursoUsuario)
         {
             if (ModelState.IsValid)
             {
@@ -67,8 +66,8 @@ namespace Patron_Center.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CursoId"] = new SelectList(_context.Curso, "Id", "Nombre", cursoUsuario.CursoId);
-            ViewData["UsuarioId"] = new SelectList(_context.Usuario, "Id", "NombreCompleto", cursoUsuario.UsuarioId);
+            ViewData["CursoId"] = new SelectList(_context.Curso, "Id", "Id", cursoUsuario.CursoId);
+            ViewData["UsuarioId"] = new SelectList(_context.Usuario, "Id", "Id", cursoUsuario.UsuarioId);
             return View(cursoUsuario);
         }
 
@@ -86,7 +85,7 @@ namespace Patron_Center.Controllers
                 return NotFound();
             }
             ViewData["CursoId"] = new SelectList(_context.Curso, "Id", "Nombre", cursoUsuario.CursoId);
-            ViewData["UsuarioId"] = new SelectList(_context.Usuario, "Id", "NombreCompleto", cursoUsuario.UsuarioId);
+            ViewData["UsuarioId"] = new SelectList(_context.Usuario.Where(x => x.TipoUsuario.Equals(TipoUsuario.Alumno) && !x.Eliminado), "Id", "NombreCompleto");
             return View(cursoUsuario);
         }
 
@@ -95,9 +94,9 @@ namespace Patron_Center.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("UsuarioId,CursoId")] CursoUsuario cursoUsuario)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,UsuarioId,CursoId")] CursoUsuario cursoUsuario)
         {
-            if (id != cursoUsuario.CursoId)
+            if (id != cursoUsuario.Id)
             {
                 return NotFound();
             }
@@ -111,7 +110,7 @@ namespace Patron_Center.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!CursoUsuarioExists(cursoUsuario.CursoId))
+                    if (!CursoUsuarioExists(cursoUsuario.Id))
                     {
                         return NotFound();
                     }
@@ -122,8 +121,8 @@ namespace Patron_Center.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CursoId"] = new SelectList(_context.Curso, "Id", "Nombre", cursoUsuario.CursoId);
-            ViewData["UsuarioId"] = new SelectList(_context.Usuario, "Id", "NombreCompleto", cursoUsuario.UsuarioId);
+            ViewData["CursoId"] = new SelectList(_context.Curso, "Id", "Id", cursoUsuario.CursoId);
+            ViewData["UsuarioId"] = new SelectList(_context.Usuario, "Id", "Id", cursoUsuario.UsuarioId);
             return View(cursoUsuario);
         }
 
@@ -138,7 +137,7 @@ namespace Patron_Center.Controllers
             var cursoUsuario = await _context.CursoUsuario
                 .Include(c => c.Curso)
                 .Include(c => c.Usuario)
-                .FirstOrDefaultAsync(m => m.CursoId == id);
+                .FirstOrDefaultAsync(m => m.Id == id);
             if (cursoUsuario == null)
             {
                 return NotFound();
@@ -160,7 +159,7 @@ namespace Patron_Center.Controllers
 
         private bool CursoUsuarioExists(int id)
         {
-            return _context.CursoUsuario.Any(e => e.CursoId == id);
+            return _context.CursoUsuario.Any(e => e.Id == id);
         }
     }
 }

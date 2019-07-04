@@ -10,8 +10,8 @@ using Patron_Center.Models;
 namespace Patron_Center.Migrations
 {
     [DbContext(typeof(Patron_CenterContext))]
-    [Migration("20190628151712_cursoUsuario")]
-    partial class cursoUsuario
+    [Migration("20190704192504_usuariosCursos")]
+    partial class usuariosCursos
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -27,6 +27,8 @@ namespace Patron_Center.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int?>("AlumnosId");
+
                     b.Property<string>("Descripcion");
 
                     b.Property<int>("DocenteId");
@@ -39,6 +41,8 @@ namespace Patron_Center.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("AlumnosId");
+
                     b.HasIndex("DocenteId");
 
                     b.ToTable("Curso");
@@ -46,11 +50,17 @@ namespace Patron_Center.Migrations
 
             modelBuilder.Entity("Patron_Center.Models.CursoUsuario", b =>
                 {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
                     b.Property<int>("CursoId");
 
                     b.Property<int>("UsuarioId");
 
-                    b.HasKey("CursoId", "UsuarioId");
+                    b.HasKey("Id");
+
+                    b.HasIndex("CursoId");
 
                     b.HasIndex("UsuarioId");
 
@@ -84,6 +94,10 @@ namespace Patron_Center.Migrations
 
             modelBuilder.Entity("Patron_Center.Models.Curso", b =>
                 {
+                    b.HasOne("Patron_Center.Models.Usuario", "Alumnos")
+                        .WithMany()
+                        .HasForeignKey("AlumnosId");
+
                     b.HasOne("Patron_Center.Models.Usuario", "Docente")
                         .WithMany()
                         .HasForeignKey("DocenteId")

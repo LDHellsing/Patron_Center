@@ -48,11 +48,17 @@ namespace Patron_Center.Migrations
 
             modelBuilder.Entity("Patron_Center.Models.CursoUsuario", b =>
                 {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
                     b.Property<int>("CursoId");
 
                     b.Property<int>("UsuarioId");
 
-                    b.HasKey("CursoId", "UsuarioId");
+                    b.HasKey("Id");
+
+                    b.HasIndex("CursoId");
 
                     b.HasIndex("UsuarioId");
 

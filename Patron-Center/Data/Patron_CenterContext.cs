@@ -22,7 +22,7 @@ namespace Patron_Center.Models
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         { 
             modelBuilder.Entity<CursoUsuario>()
-                    .HasKey(cu => new {cu.CursoId, cu.UsuarioId});
+                    .HasKey(cu => new {cu.Id});
 
             modelBuilder.Entity<CursoUsuario>()
                     .HasOne<Usuario>(sc => sc.Usuario)

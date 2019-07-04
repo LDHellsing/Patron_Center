@@ -13,6 +13,12 @@
     <Compile Remove="Migrations\20190618004355_Initial.Designer.cs" />
     <Compile Remove="Migrations\20190628134848_curso5.cs" />
     <Compile Remove="Migrations\20190628134848_curso5.Designer.cs" />
+    <Compile Remove="Migrations\20190628151712_cursoUsuario.cs" />
+    <Compile Remove="Migrations\20190628151712_cursoUsuario.Designer.cs" />
+    <Compile Remove="Migrations\20190628152557_cursoUsuario2.cs" />
+    <Compile Remove="Migrations\20190628152557_cursoUsuario2.Designer.cs" />
+    <Compile Remove="Migrations\20190704192056_usuariosCursos.cs" />
+    <Compile Remove="Migrations\20190704192056_usuariosCursos.Designer.cs" />
   </ItemGroup>
 
 
