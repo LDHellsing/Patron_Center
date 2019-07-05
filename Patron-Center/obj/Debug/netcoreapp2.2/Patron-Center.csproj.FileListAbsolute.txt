@@ -110,3 +110,4 @@ C:\PatronCenter\Patron-Center\obj\Debug\netcoreapp2.2\Razor\Views\CursoUsuarios\
 C:\PatronCenter\Patron-Center\obj\Debug\netcoreapp2.2\Razor\Views\CursoUsuarios\Details.g.cshtml.cs
 C:\PatronCenter\Patron-Center\obj\Debug\netcoreapp2.2\Razor\Views\CursoUsuarios\Edit.g.cshtml.cs
 C:\PatronCenter\Patron-Center\obj\Debug\netcoreapp2.2\Razor\Views\CursoUsuarios\Index.g.cshtml.cs
+C:\PatronCenter\Patron-Center\obj\Debug\netcoreapp2.2\Razor\Views\Login\Index.g.cshtml.cs

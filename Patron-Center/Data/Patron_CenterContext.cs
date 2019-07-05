@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -17,8 +18,38 @@ namespace Patron_Center.Models
         public DbSet<Patron_Center.Models.Curso> Curso { get; set; }
         public DbSet<CursoUsuario> CursoUsuario { get; set; }
 
+        //FindUserByDocument(string document)
+        public async Task<Usuario> FindUserByDocumentAsync(string document)
+        {
+            Usuario user = null;
+            user = await Usuario.Where(u => u.Documento == document).FirstAsync();
+            return user;
+        }
+
+        //Validar Usuario
+        public async Task<ArrayList> ValidarUsuario(LoginViewModel usuario)
+        {
+            ArrayList result = new ArrayList();
+            Usuario user = null;
+
+            user = await FindUserByDocumentAsync(usuario.User);
+
+            if (user != null)
+            {
+                result[0] = true;
+                result[1] = user;
+            }
+            else
+            {
+                result[0] = false;
+                result[1] = null;
+            }
+
+            return result;
+        }
+
         //Relacion muchos a muchos Curso Usuario
-       
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         { 
             modelBuilder.Entity<CursoUsuario>()

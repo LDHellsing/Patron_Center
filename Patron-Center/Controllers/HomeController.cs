@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Patron_Center.Models;
+using Microsoft.AspNetCore.Http;
 
 namespace Patron_Center.Controllers
 {
@@ -12,6 +13,7 @@ namespace Patron_Center.Controllers
     {
         public IActionResult Index()
         {
+            ViewBag.Nombre = HttpContext.Session.GetString("_Nombre");
             return View();
         }
 

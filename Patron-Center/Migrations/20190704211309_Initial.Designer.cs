@@ -10,8 +10,8 @@ using Patron_Center.Models;
 namespace Patron_Center.Migrations
 {
     [DbContext(typeof(Patron_CenterContext))]
-    [Migration("20190627205252_curso4")]
-    partial class curso4
+    [Migration("20190704211309_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -27,6 +27,8 @@ namespace Patron_Center.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int?>("AlumnosId");
+
                     b.Property<string>("Descripcion");
 
                     b.Property<int>("DocenteId");
@@ -39,9 +41,30 @@ namespace Patron_Center.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("AlumnosId");
+
                     b.HasIndex("DocenteId");
 
                     b.ToTable("Curso");
+                });
+
+            modelBuilder.Entity("Patron_Center.Models.CursoUsuario", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("CursoId");
+
+                    b.Property<int>("UsuarioId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CursoId");
+
+                    b.HasIndex("UsuarioId");
+
+                    b.ToTable("CursoUsuario");
                 });
 
             modelBuilder.Entity("Patron_Center.Models.Usuario", b =>
@@ -71,10 +94,27 @@ namespace Patron_Center.Migrations
 
             modelBuilder.Entity("Patron_Center.Models.Curso", b =>
                 {
+                    b.HasOne("Patron_Center.Models.Usuario", "Alumnos")
+                        .WithMany()
+                        .HasForeignKey("AlumnosId");
+
                     b.HasOne("Patron_Center.Models.Usuario", "Docente")
                         .WithMany()
                         .HasForeignKey("DocenteId")
                         .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("Patron_Center.Models.CursoUsuario", b =>
+                {
+                    b.HasOne("Patron_Center.Models.Curso", "Curso")
+                        .WithMany("CursoUsuario")
+                        .HasForeignKey("CursoId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("Patron_Center.Models.Usuario", "Usuario")
+                        .WithMany("CursoUsuario")
+                        .HasForeignKey("UsuarioId")
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 #pragma warning restore 612, 618
         }
