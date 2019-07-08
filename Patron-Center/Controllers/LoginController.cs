@@ -33,10 +33,10 @@ namespace Patron_Center.Controllers
                 // TODO: Add insert logic here
                 if (ModelState.IsValid)
                 {
-                    System.Collections.ArrayList result;
-                    result = await _context.ValidarUsuario(usuario);
+                    
+                   UsuarioValidoDTO result = await _context.ValidarUsuario(usuario);
 
-                    if ((bool) result[0] == false)
+                    if (result.UsuarioValido == false)
                     {
                         return NotFound(usuario);
                     }
@@ -44,13 +44,11 @@ namespace Patron_Center.Controllers
                      * Puede que sea mejor que el metodo de vaidar usuario solo retorne algunos
                      * valores en ves del objeto entero
                      */
-                    Usuario user = (Usuario) result[1];
-                    HttpContext.Session.SetInt32("_IdUsuario", user.Id);
-                    HttpContext.Session.SetString("_Documento", user.Documento);
+                    HttpContext.Session.SetInt32("_IdUsuario", result.IdUsuario);
+                    HttpContext.Session.SetString("_Documento", result.Documento);
                     //O nombre completo
-                    HttpContext.Session.SetString("_Nombre", user.Nombre);
-                    HttpContext.Session.SetString("_TipoUsuario", user.TipoUsuario.ToString());
-                    HttpContext.Session.GetString("_Nombre");
+                    HttpContext.Session.SetString("_Nombre", result.NombreUsuario);
+                    HttpContext.Session.SetString("_TipoUsuario", result.Rol);
                     /*
                      * creo que para validar si una sesion fue inicializada vamos a tener que 
                      * hacer algo como:
@@ -60,7 +58,7 @@ namespace Patron_Center.Controllers
                     }
                      */
 
-                    return RedirectToAction("Index", "HomeController");
+                    return RedirectToAction("Index", "Home");
                 }
                 return View(usuario);
 

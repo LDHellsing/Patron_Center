@@ -13,6 +13,10 @@ namespace Patron_Center.Controllers
     {
         public IActionResult Index()
         {
+            if (HttpContext.Session.GetInt32("_IdUsuario") == null)
+            {
+                return RedirectToAction("Index", "Login");
+            }
             ViewBag.Nombre = HttpContext.Session.GetString("_Nombre");
             return View();
         }

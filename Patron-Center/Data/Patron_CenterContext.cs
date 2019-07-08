@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
@@ -27,25 +28,23 @@ namespace Patron_Center.Models
         }
 
         //Validar Usuario
-        public async Task<ArrayList> ValidarUsuario(LoginViewModel usuario)
+        public async Task<UsuarioValidoDTO> ValidarUsuario(LoginViewModel usuario)
         {
-            ArrayList result = new ArrayList();
             Usuario user = null;
-
+            UsuarioValidoDTO usuaruoDTO = null;
             user = await FindUserByDocumentAsync(usuario.User);
 
             if (user != null)
             {
-                result[0] = true;
-                result[1] = user;
+                //El usuario existe en la BD
+                usuaruoDTO = new UsuarioValidoDTO(user.Id, user.Nombre, user.Documento, user.TipoUsuario.ToString(), true);
             }
             else
             {
-                result[0] = false;
-                result[1] = null;
+                //El usuario NO existe en la BD
+                usuaruoDTO = new UsuarioValidoDTO(false);
             }
-
-            return result;
+            return usuaruoDTO;
         }
 
         //Relacion muchos a muchos Curso Usuario
