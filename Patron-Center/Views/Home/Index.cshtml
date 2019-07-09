@@ -2,11 +2,19 @@
     ViewData["Title"] = "Pagina de Bienvenida";
 }
 
-@if(ViewBag.Nombre != null)
-{
-    <h1> Bienvenido a Patron Center @ViewBag.Nombre</h1>
-}
-<div class="text-center">
-    <h1 class="display-4">Bienvenido a Patron Center</h1>
-    <p>Software de aprendizaje de Patrones de Diseño.</p>
-</div>
+
+    <div class="text-center">
+        @if (ViewBag.Nombre != null)
+        {
+            <h1> Bienvenido a Patron Center @ViewBag.Nombre</h1>
+        }
+        else
+        {
+            <h1> No deberia deberia mostrar este mensaje nunca</h1>
+        }
+        <p>Software de aprendizaje de Patrones de Diseño.</p>
+
+        <form asp-controller="Login" asp-action="Logout" class="navbar-right">
+            <button type="submit" class="btn btn-link navbar-btn nav-link">Logout</button>
+        </form>
+    </div>
