@@ -34,7 +34,7 @@ namespace Patron_Center.Models
             UsuarioValidoDTO usuaruoDTO = null;
             user = await FindUserByDocumentAsync(usuario.User);
 
-            if (user != null)
+            if (user != null && user.Password == usuario.Password)
             {
                 //El usuario existe en la BD
                 usuaruoDTO = new UsuarioValidoDTO(user.Id, user.Nombre, user.Documento, user.TipoUsuario.ToString(), true);

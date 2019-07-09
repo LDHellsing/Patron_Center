@@ -38,7 +38,7 @@ namespace Patron_Center.Controllers
 
                     if (result.UsuarioValido == false)
                     {
-                        return NotFound(usuario);
+                        return ValidationProblem();
                     }
                     /*
                      * Puede que sea mejor que el metodo de vaidar usuario solo retorne algunos
@@ -60,14 +60,22 @@ namespace Patron_Center.Controllers
 
                     return RedirectToAction("Index", "Home");
                 }
-                return View(usuario);
+
+                return ValidationProblem();
 
             }
             catch
             {
-                return View();
+                return ValidationProblem();
             }
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Logout()
+        {
+            HttpContext.Session.Clear();
+            return RedirectToAction("Index", "Login");
+        }
     }
 }
