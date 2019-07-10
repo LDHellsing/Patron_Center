@@ -38,7 +38,8 @@ namespace Patron_Center.Controllers
 
                     if (result.UsuarioValido == false)
                     {
-                        return ValidationProblem();
+                        ViewBag.InvalidUserMessage = "Usuario o contraseña no valido";
+                        return View();
                     }
                     /*
                      * Puede que sea mejor que el metodo de vaidar usuario solo retorne algunos
