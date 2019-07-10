@@ -55,13 +55,23 @@ namespace Patron_Center.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Documento,Nombre,Apellido,Email,Password,TipoUsuario,Eliminado")] Usuario usuario)
         {
-            if (ModelState.IsValid)
+            //Busco si ya existe un usuario con el documento a ingresar
+            var patron_CenterContext = _context.Usuario.Where(u => u.Documento == usuario.Documento);
+            //Si no existe creo el usuario
+            if (patron_CenterContext.Count() == 0)
+            { 
+                if (ModelState.IsValid)
             {
                 _context.Add(usuario);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
             return View(usuario);
+            }
+            else
+            {
+                return View();
+            }
         }
 
         // GET: Usuarios/Edit/5
