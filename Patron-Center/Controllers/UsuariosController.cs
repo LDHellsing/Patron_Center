@@ -179,25 +179,37 @@ namespace Patron_Center.Controllers
                 return NotFound();
             }
 
-            if (ModelState.IsValid)
+            //Busco si ya existe un usuario con el documento a ingresar
+            var patron_CenterContext = _context.Usuario.Where(u => u.Documento == usuario.Documento);
+            //Si no existe creo el usuario
+            if (patron_CenterContext.Count() == 0)
             {
-                try
+
+                if (ModelState.IsValid)
                 {
-                    _context.Update(usuario);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!UsuarioExists(usuario.Id))
+                    try
                     {
-                        return NotFound();
+                        _context.Update(usuario);
+                        await _context.SaveChangesAsync();
                     }
-                    else
+                    catch (DbUpdateConcurrencyException)
                     {
-                        throw;
+                        if (!UsuarioExists(usuario.Id))
+                        {
+                            return NotFound();
+                        }
+                        else
+                        {
+                            throw;
+                        }
                     }
+                    return RedirectToAction(nameof(Index));
                 }
-                return RedirectToAction(nameof(Index));
+            }
+            else
+            {
+                ViewBag.UsuarioDuplicado = string.Format("El usuario con el documento: {0} ya se encuentra en el sistema", usuario.Documento);
+                return View(usuario);
             }
             return View(usuario);
         }

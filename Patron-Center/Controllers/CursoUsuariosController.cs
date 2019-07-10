@@ -83,7 +83,7 @@ namespace Patron_Center.Controllers
             }
             else
             {
-                ViewBag.UsuarioYaEnCurso = "El Alumno ya se encuentra en el curso";
+                ViewBag.UsuarioYaEnCurso = "El Alumno ya se encuentra inscripto en el Curso";
                 //Cargo nuevamente los combobox
                 Create();
                 return View(cursoUsuario);
@@ -119,26 +119,38 @@ namespace Patron_Center.Controllers
             {
                 return NotFound();
             }
-
-            if (ModelState.IsValid)
+            //Busco si ya existe la asociacion curso usuario
+            var patron_CenterContext = _context.CursoUsuario.Where(c => c.CursoId == cursoUsuario.CursoId && c.UsuarioId == cursoUsuario.UsuarioId);
+            //Si no existe creo la asociacion curso usuario
+            if (patron_CenterContext.Count() == 0)
             {
-                try
+                if (ModelState.IsValid)
                 {
-                    _context.Update(cursoUsuario);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!CursoUsuarioExists(cursoUsuario.Id))
+                    try
                     {
-                        return NotFound();
+                        _context.Update(cursoUsuario);
+                        await _context.SaveChangesAsync();
                     }
-                    else
+                    catch (DbUpdateConcurrencyException)
                     {
-                        throw;
+                        if (!CursoUsuarioExists(cursoUsuario.Id))
+                        {
+                            return NotFound();
+                        }
+                        else
+                        {
+                            throw;
+                        }
                     }
+                    return RedirectToAction(nameof(Index));
                 }
-                return RedirectToAction(nameof(Index));
+            }
+            else
+            {
+                ViewBag.UsuarioYaEnCurso = "El Alumno ya se encuentra inscripto en el Curso";
+                //Cargo nuevamente los combobox
+                Create();
+                return View(cursoUsuario);
             }
             ViewData["CursoId"] = new SelectList(_context.Curso, "Id", "Id", cursoUsuario.CursoId);
             ViewData["UsuarioId"] = new SelectList(_context.Usuario, "Id", "Id", cursoUsuario.UsuarioId);

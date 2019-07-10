@@ -28,6 +28,7 @@ namespace Patron_Center.Models
 
         [DisplayName("Email")]
         [Required(ErrorMessage = "Email es un campo requerido")]
+        [EmailAddress(ErrorMessage = "Debe ingresar un email con formato valido")]
         public String Email { get; set; }
 
         [DisplayName("Password")]
