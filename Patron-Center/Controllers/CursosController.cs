@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -21,6 +22,18 @@ namespace Patron_Center.Controllers
         // GET: Cursos
         public async Task<IActionResult> Index()
         {
+            if (HttpContext.Session.GetInt32("_IdUsuario") == null)
+            {
+                return RedirectToAction("Index", "Login");
+            }
+
+            if (HttpContext.Session.GetString("_TipoUsuario") == "Alumno")
+            {
+                HttpContext.Session.Clear();
+                ViewBag.InvalidUserMessage = "Usted no tiene permiso para acceder a este sitio";
+                return View("Views/Login/Index.cshtml");
+            }
+
             var patron_CenterContext = _context.Curso.Include(c => c.Docente);
             return View(await patron_CenterContext.ToListAsync());
         }
