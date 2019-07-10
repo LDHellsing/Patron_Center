@@ -23,8 +23,16 @@ namespace Patron_Center.Models
         public async Task<Usuario> FindUserByDocumentAsync(string document)
         {
             Usuario user = null;
-            user = await Usuario.Where(u => u.Documento == document).FirstAsync();
-            return user;
+            try
+            {
+                user = await Usuario.Where(u => u.Documento == document).FirstAsync();
+                Debug.WriteLine($"Objeto obtenido --------------> {user}");
+                return user;
+            }
+            catch (InvalidOperationException e)
+            {
+                return user = null;
+            };
         }
 
         //Validar Usuario

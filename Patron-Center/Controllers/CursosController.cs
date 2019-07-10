@@ -31,7 +31,7 @@ namespace Patron_Center.Controllers
             {
                 HttpContext.Session.Clear();
                 ViewBag.InvalidUserMessage = "Usted no tiene permiso para acceder a este sitio";
-                return View("Views/Login/Index.cshtml");
+                return View("Views/Shared/UnauthorisedUserError.cshtml");
             }
 
             var patron_CenterContext = _context.Curso.Include(c => c.Docente);
@@ -41,6 +41,18 @@ namespace Patron_Center.Controllers
         // GET: Cursos/Details/5
         public async Task<IActionResult> Details(int? id)
         {
+            if (HttpContext.Session.GetInt32("_IdUsuario") == null)
+            {
+                return RedirectToAction("Index", "Login");
+            }
+
+            if (HttpContext.Session.GetString("_TipoUsuario") == "Alumno")
+            {
+                HttpContext.Session.Clear();
+                ViewBag.InvalidUserMessage = "Usted no tiene permiso para acceder a este sitio";
+                return View("Views/Shared/UnauthorisedUserError.cshtml");
+            }
+
             if (id == null)
             {
                 return NotFound();
@@ -60,6 +72,18 @@ namespace Patron_Center.Controllers
         // GET: Cursos/Create
         public IActionResult Create()
         {
+            if (HttpContext.Session.GetInt32("_IdUsuario") == null)
+            {
+                return RedirectToAction("Index", "Login");
+            }
+
+            if (HttpContext.Session.GetString("_TipoUsuario") == "Alumno")
+            {
+                HttpContext.Session.Clear();
+                ViewBag.InvalidUserMessage = "Usted no tiene permiso para acceder a este sitio";
+                return View("Views/Shared/UnauthorisedUserError.cshtml");
+            }
+
             ViewData["DocenteId"] = new SelectList(_context.Usuario.Where(x => x.TipoUsuario.Equals(TipoUsuario.Docente) && !x.Eliminado), "Id", "NombreCompleto");
             return View();
         }
@@ -71,6 +95,18 @@ namespace Patron_Center.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Nombre,Descripcion,FechaFinalizacion,Eliminado,DocenteId")] Curso curso)
         {
+            if (HttpContext.Session.GetInt32("_IdUsuario") == null)
+            {
+                return RedirectToAction("Index", "Login");
+            }
+
+            if (HttpContext.Session.GetString("_TipoUsuario") == "Alumno")
+            {
+                HttpContext.Session.Clear();
+                ViewBag.InvalidUserMessage = "Usted no tiene permiso para acceder a este sitio";
+                return View("Views/Shared/UnauthorisedUserError.cshtml");
+            }
+
             if (ModelState.IsValid)
             {
                 _context.Add(curso);
@@ -84,6 +120,18 @@ namespace Patron_Center.Controllers
         // GET: Cursos/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
+            if (HttpContext.Session.GetInt32("_IdUsuario") == null)
+            {
+                return RedirectToAction("Index", "Login");
+            }
+
+            if (HttpContext.Session.GetString("_TipoUsuario") == "Alumno")
+            {
+                HttpContext.Session.Clear();
+                ViewBag.InvalidUserMessage = "Usted no tiene permiso para acceder a este sitio";
+                return View("Views/Shared/UnauthorisedUserError.cshtml");
+            }
+
             if (id == null)
             {
                 return NotFound();
@@ -105,6 +153,18 @@ namespace Patron_Center.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Nombre,Descripcion,FechaFinalizacion,Eliminado,DocenteId")] Curso curso)
         {
+            if (HttpContext.Session.GetInt32("_IdUsuario") == null)
+            {
+                return RedirectToAction("Index", "Login");
+            }
+
+            if (HttpContext.Session.GetString("_TipoUsuario") == "Alumno")
+            {
+                HttpContext.Session.Clear();
+                ViewBag.InvalidUserMessage = "Usted no tiene permiso para acceder a este sitio";
+                return View("Views/Shared/UnauthorisedUserError.cshtml");
+            }
+
             if (id != curso.Id)
             {
                 return NotFound();
@@ -137,6 +197,18 @@ namespace Patron_Center.Controllers
         // GET: Cursos/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
+            if (HttpContext.Session.GetInt32("_IdUsuario") == null)
+            {
+                return RedirectToAction("Index", "Login");
+            }
+
+            if (HttpContext.Session.GetString("_TipoUsuario") == "Alumno")
+            {
+                HttpContext.Session.Clear();
+                ViewBag.InvalidUserMessage = "Usted no tiene permiso para acceder a este sitio";
+                return View("Views/Shared/UnauthorisedUserError.cshtml");
+            }
+
             if (id == null)
             {
                 return NotFound();
@@ -158,6 +230,18 @@ namespace Patron_Center.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
+            if (HttpContext.Session.GetInt32("_IdUsuario") == null)
+            {
+                return RedirectToAction("Index", "Login");
+            }
+
+            if (HttpContext.Session.GetString("_TipoUsuario") == "Alumno")
+            {
+                HttpContext.Session.Clear();
+                ViewBag.InvalidUserMessage = "Usted no tiene permiso para acceder a este sitio";
+                return View("Views/Shared/UnauthorisedUserError.cshtml");
+            }
+
             var curso = await _context.Curso.FindAsync(id);
             _context.Curso.Remove(curso);
             await _context.SaveChangesAsync();
