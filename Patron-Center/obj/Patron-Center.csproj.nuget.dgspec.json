@@ -10,14 +10,14 @@
         "projectUniqueName": "C:\\PatronCenter\\Patron-Center\\Patron-Center.csproj",
         "projectName": "Patron-Center",
         "projectPath": "C:\\PatronCenter\\Patron-Center\\Patron-Center.csproj",
-        "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
+        "packagesPath": "C:\\Users\\Lucho\\.nuget\\packages\\",
         "outputPath": "C:\\PatronCenter\\Patron-Center\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Lucho\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
