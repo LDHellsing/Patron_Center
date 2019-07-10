@@ -15,11 +15,13 @@ namespace Patron_Center.Models
         public int Id { get; set; }
 
         [DisplayName("Alumno")]
+        [Required(ErrorMessage = "Alumno es un campo requerido")]
         public int UsuarioId { get; set; }
 
         public Usuario Usuario { get; set; }
 
         [DisplayName("Curso")]
+        [Required(ErrorMessage = "Curso es un campo requerido")]
         public int CursoId { get; set; }
 
         public Curso Curso { get; set; }

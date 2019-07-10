@@ -8,9 +8,9 @@ namespace Patron_Center.Models
 {
     public class LoginViewModel
     {
-        [Required]
+        [Required(ErrorMessage = "Usuario es un campo requerido")]
         public string User { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Password es un campo requerido")]
         public string Password { get; set; }
     }
 }
