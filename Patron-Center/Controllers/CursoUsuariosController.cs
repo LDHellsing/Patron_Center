@@ -69,7 +69,7 @@ namespace Patron_Center.Controllers
                 {
                     _context.Add(cursoUsuario);
                     await _context.SaveChangesAsync();
-                    return RedirectToAction(nameof(Index));
+                    return RedirectToAction(nameof(Create));
                 }
                 ViewData["CursoId"] = new SelectList(_context.Curso, "Id", "Id", cursoUsuario.CursoId);
                 ViewData["UsuarioId"] = new SelectList(_context.Usuario, "Id", "Id", cursoUsuario.UsuarioId);
@@ -77,7 +77,10 @@ namespace Patron_Center.Controllers
             }
             else
             {
-                return View();
+                ViewBag.UsuarioYaEnCurso = "El Alumno ya se encuentra en el curso";
+                //Cargo nuevamente los combobox
+                Create();
+                return View(cursoUsuario);
             }
         }
 

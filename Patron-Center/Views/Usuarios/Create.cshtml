@@ -14,27 +14,27 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Documento" class="control-label"></label>
-                <input asp-for="Documento" class="form-control" />
+                <input asp-for="Documento" class="form-control" required/>
                 <span asp-validation-for="Documento" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Nombre" class="control-label"></label>
-                <input asp-for="Nombre" class="form-control" />
+                <input asp-for="Nombre" class="form-control" required/>
                 <span asp-validation-for="Nombre" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Apellido" class="control-label"></label>
-                <input asp-for="Apellido" class="form-control" />
+                <input asp-for="Apellido" class="form-control" required/>
                 <span asp-validation-for="Apellido" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Email" class="control-label"></label>
-                <input asp-for="Email" class="form-control" />
+                <input asp-for="Email" class="form-control" required/>
                 <span asp-validation-for="Email" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Password" class="control-label"></label>
-                <input asp-for="Password" type="password" class="form-control" />
+                <input asp-for="Password" type="password" class="form-control" required/>
                 <span asp-validation-for="Password" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -42,9 +42,14 @@
                 <select asp-for="TipoUsuario" asp-items="Html.GetEnumSelectList<TipoUsuario>()" class="form-control"></select>
                 <span asp-validation-for="TipoUsuario" class="text-danger"></span>
             </div>
+            @if (ViewBag.UsuarioDuplicado != null)
+            {
+                <span class="text-danger">@ViewBag.UsuarioDuplicado</span>
+            }
             <div class="form-group">
                 <input type="submit" value="Crear" class="btn btn-primary" />
             </div>
+
         </form>
     </div>
 </div>

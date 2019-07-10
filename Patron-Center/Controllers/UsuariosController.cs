@@ -64,13 +64,14 @@ namespace Patron_Center.Controllers
             {
                 _context.Add(usuario);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Create));
             }
             return View(usuario);
             }
             else
             {
-                return View();
+                ViewBag.UsuarioDuplicado = string.Format("El usuario con el documento: {0} ya se encuentra en el sistema",usuario.Documento);
+                return View(usuario);
             }
         }
 

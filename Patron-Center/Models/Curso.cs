@@ -15,12 +15,15 @@ namespace Patron_Center.Models
         public int Id { get; set; }
 
         [DisplayName("Nombre")]
+        [Required(ErrorMessage = "Nombre es un campo requerido")]
         public string Nombre { get; set; }
 
         [DisplayName("Descripción")]
+        [Required(ErrorMessage = "Descripción es un campo requerido")]
         public string Descripcion { get; set; }
 
         [DisplayName("Fecha de Finalización")]
+        [Required(ErrorMessage = "Fecha de Finalización es un campo requerido")]
         public DateTime FechaFinalizacion { get; set; }
 
         [DisplayName("Eliminado")]
