@@ -27,6 +27,13 @@ namespace Patron_Center.Controllers
                 return RedirectToAction("Index", "Login");
             }
 
+            if (HttpContext.Session.GetString("_TipoUsuario") == "Alumno")
+            {
+                HttpContext.Session.Clear();
+                ViewBag.InvalidUserMessage = "Usted no tiene permiso para acceder a este sitio";
+                return View("Views/Shared/UnauthorisedUserError.cshtml");
+            }
+
             var patron_CenterContext = _context.CursoUsuario.Include(c => c.Curso).Include(c => c.Usuario);
             return View(await patron_CenterContext.ToListAsync());
         }
@@ -34,6 +41,18 @@ namespace Patron_Center.Controllers
         // GET: CursoUsuarios/Details/5
         public async Task<IActionResult> Details(int? id)
         {
+            if (HttpContext.Session.GetInt32("_IdUsuario") == null)
+            {
+                return RedirectToAction("Index", "Login");
+            }
+
+            if (HttpContext.Session.GetString("_TipoUsuario") == "Alumno")
+            {
+                HttpContext.Session.Clear();
+                ViewBag.InvalidUserMessage = "Usted no tiene permiso para acceder a este sitio";
+                return View("Views/Shared/UnauthorisedUserError.cshtml");
+            }
+
             if (id == null)
             {
                 return NotFound();
@@ -54,6 +73,18 @@ namespace Patron_Center.Controllers
         // GET: CursoUsuarios/Create
         public IActionResult Create()
         {
+            if (HttpContext.Session.GetInt32("_IdUsuario") == null)
+            {
+                return RedirectToAction("Index", "Login");
+            }
+
+            if (HttpContext.Session.GetString("_TipoUsuario") == "Alumno")
+            {
+                HttpContext.Session.Clear();
+                ViewBag.InvalidUserMessage = "Usted no tiene permiso para acceder a este sitio";
+                return View("Views/Shared/UnauthorisedUserError.cshtml");
+            }
+
             ViewData["CursoId"] = new SelectList(_context.Curso.Where(x => !x.Eliminado), "Id", "Nombre");
             ViewData["UsuarioId"] = new SelectList(_context.Usuario.Where(x => x.TipoUsuario.Equals(TipoUsuario.Alumno) && !x.Eliminado), "Id", "NombreCompleto");
             return View();
@@ -66,6 +97,18 @@ namespace Patron_Center.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,UsuarioId,CursoId")] CursoUsuario cursoUsuario)
         {
+            if (HttpContext.Session.GetInt32("_IdUsuario") == null)
+            {
+                return RedirectToAction("Index", "Login");
+            }
+
+            if (HttpContext.Session.GetString("_TipoUsuario") == "Alumno")
+            {
+                HttpContext.Session.Clear();
+                ViewBag.InvalidUserMessage = "Usted no tiene permiso para acceder a este sitio";
+                return View("Views/Shared/UnauthorisedUserError.cshtml");
+            }
+
             //Busco si ya existe la asociacion curso usuario
             var patron_CenterContext = _context.CursoUsuario.Where(c => c.CursoId == cursoUsuario.CursoId && c.UsuarioId == cursoUsuario.UsuarioId);
             //Si no existe creo la asociacion curso usuario
@@ -93,6 +136,18 @@ namespace Patron_Center.Controllers
         // GET: CursoUsuarios/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
+            if (HttpContext.Session.GetInt32("_IdUsuario") == null)
+            {
+                return RedirectToAction("Index", "Login");
+            }
+
+            if (HttpContext.Session.GetString("_TipoUsuario") == "Alumno")
+            {
+                HttpContext.Session.Clear();
+                ViewBag.InvalidUserMessage = "Usted no tiene permiso para acceder a este sitio";
+                return View("Views/Shared/UnauthorisedUserError.cshtml");
+            }
+
             if (id == null)
             {
                 return NotFound();
@@ -115,6 +170,18 @@ namespace Patron_Center.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,UsuarioId,CursoId")] CursoUsuario cursoUsuario)
         {
+            if (HttpContext.Session.GetInt32("_IdUsuario") == null)
+            {
+                return RedirectToAction("Index", "Login");
+            }
+
+            if (HttpContext.Session.GetString("_TipoUsuario") == "Alumno")
+            {
+                HttpContext.Session.Clear();
+                ViewBag.InvalidUserMessage = "Usted no tiene permiso para acceder a este sitio";
+                return View("Views/Shared/UnauthorisedUserError.cshtml");
+            }
+
             if (id != cursoUsuario.Id)
             {
                 return NotFound();
@@ -160,6 +227,18 @@ namespace Patron_Center.Controllers
         // GET: CursoUsuarios/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
+            if (HttpContext.Session.GetInt32("_IdUsuario") == null)
+            {
+                return RedirectToAction("Index", "Login");
+            }
+
+            if (HttpContext.Session.GetString("_TipoUsuario") == "Alumno")
+            {
+                HttpContext.Session.Clear();
+                ViewBag.InvalidUserMessage = "Usted no tiene permiso para acceder a este sitio";
+                return View("Views/Shared/UnauthorisedUserError.cshtml");
+            }
+
             if (id == null)
             {
                 return NotFound();
@@ -182,6 +261,18 @@ namespace Patron_Center.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
+            if (HttpContext.Session.GetInt32("_IdUsuario") == null)
+            {
+                return RedirectToAction("Index", "Login");
+            }
+
+            if (HttpContext.Session.GetString("_TipoUsuario") == "Alumno")
+            {
+                HttpContext.Session.Clear();
+                ViewBag.InvalidUserMessage = "Usted no tiene permiso para acceder a este sitio";
+                return View("Views/Shared/UnauthorisedUserError.cshtml");
+            }
+
             var cursoUsuario = await _context.CursoUsuario.FindAsync(id);
             _context.CursoUsuario.Remove(cursoUsuario);
             await _context.SaveChangesAsync();
