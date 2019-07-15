@@ -10,18 +10,19 @@ using Patron_Center.Models;
 
 namespace Patron_Center.Controllers
 {
-    public class CursosController : Controller
+    public class UnidadesController : Controller
     {
         private readonly Patron_CenterContext _context;
 
-        public CursosController(Patron_CenterContext context)
+        public UnidadesController(Patron_CenterContext context)
         {
             _context = context;
         }
 
-        // GET: Cursos
+        // GET: Unidades
         public async Task<IActionResult> Index()
         {
+
             if (HttpContext.Session.GetInt32("_IdUsuario") == null)
             {
                 return RedirectToAction("Index", "Login");
@@ -30,70 +31,46 @@ namespace Patron_Center.Controllers
             if (HttpContext.Session.GetString("_TipoUsuario") == "Alumno")
             {
                 HttpContext.Session.Clear();
-                ViewBag.InvalidUserMessage = "Usted no tiene permiso para acceder a este sitio";
+                ViewBag.InvalidUserMessage = "Usted no tiene permiso para acceder a este sitio.";
                 return View("Views/Shared/UnauthorisedUserError.cshtml");
             }
 
-            var patron_CenterContext = _context.Curso.Include(c => c.Docente);
+            var patron_CenterContext = _context.Unidad.Include(u => u.Curso);
             return View(await patron_CenterContext.ToListAsync());
         }
 
-        // GET: Cursos/Details/5
+        // GET: Unidades/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (HttpContext.Session.GetInt32("_IdUsuario") == null)
-            {
-                return RedirectToAction("Index", "Login");
-            }
-
-            if (HttpContext.Session.GetString("_TipoUsuario") == "Alumno")
-            {
-                HttpContext.Session.Clear();
-                ViewBag.InvalidUserMessage = "Usted no tiene permiso para acceder a este sitio";
-                return View("Views/Shared/UnauthorisedUserError.cshtml");
-            }
-
             if (id == null)
             {
                 return NotFound();
             }
 
-            var curso = await _context.Curso
-                .Include(c => c.Docente)
+            var unidad = await _context.Unidad
+                .Include(u => u.Curso)
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (curso == null)
+            if (unidad == null)
             {
                 return NotFound();
             }
 
-            return View(curso);
+            return View(unidad);
         }
 
-        // GET: Cursos/Create
+        // GET: Unidades/Create
         public IActionResult Create()
         {
-            if (HttpContext.Session.GetInt32("_IdUsuario") == null)
-            {
-                return RedirectToAction("Index", "Login");
-            }
-
-            if (HttpContext.Session.GetString("_TipoUsuario") == "Alumno")
-            {
-                HttpContext.Session.Clear();
-                ViewBag.InvalidUserMessage = "Usted no tiene permiso para acceder a este sitio";
-                return View("Views/Shared/UnauthorisedUserError.cshtml");
-            }
-
-            ViewData["DocenteId"] = new SelectList(_context.Usuario.Where(x => x.TipoUsuario.Equals(TipoUsuario.Docente) && !x.Eliminado), "Id", "NombreCompleto");
+            ViewData["CursoId"] = new SelectList(_context.Curso, "Id", "Descripcion");
             return View();
         }
 
-        // POST: Cursos/Create
+        // POST: Unidades/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Nombre,Descripcion,FechaFinalizacion,Eliminado,DocenteId")] Curso curso)
+        public async Task<IActionResult> Create([Bind("Id,CursoId,Nombre,Descripcion,Eliminado")] Unidad unidad)
         {
             if (HttpContext.Session.GetInt32("_IdUsuario") == null)
             {
@@ -103,23 +80,24 @@ namespace Patron_Center.Controllers
             if (HttpContext.Session.GetString("_TipoUsuario") == "Alumno")
             {
                 HttpContext.Session.Clear();
-                ViewBag.InvalidUserMessage = "Usted no tiene permiso para acceder a este sitio";
+                ViewBag.InvalidUserMessage = "Usted no tiene permiso para acceder a este sitio.";
                 return View("Views/Shared/UnauthorisedUserError.cshtml");
             }
 
             if (ModelState.IsValid)
             {
-                _context.Add(curso);
+                _context.Add(unidad);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["DocenteId"] = new SelectList(_context.Usuario.Where(x => x.TipoUsuario.Equals(TipoUsuario.Docente) && !x.Eliminado), "Id", "NombreCompleto");
-            return View(curso);
+            ViewData["CursoId"] = new SelectList(_context.Curso, "Id", "Descripcion", unidad.CursoId);
+            return View(unidad);
         }
 
-        // GET: Cursos/Edit/5
+        // GET: Unidades/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
+
             if (HttpContext.Session.GetInt32("_IdUsuario") == null)
             {
                 return RedirectToAction("Index", "Login");
@@ -128,7 +106,7 @@ namespace Patron_Center.Controllers
             if (HttpContext.Session.GetString("_TipoUsuario") == "Alumno")
             {
                 HttpContext.Session.Clear();
-                ViewBag.InvalidUserMessage = "Usted no tiene permiso para acceder a este sitio";
+                ViewBag.InvalidUserMessage = "Usted no tiene permiso para acceder a este sitio.";
                 return View("Views/Shared/UnauthorisedUserError.cshtml");
             }
 
@@ -137,22 +115,23 @@ namespace Patron_Center.Controllers
                 return NotFound();
             }
 
-            var curso = await _context.Curso.FindAsync(id);
-            if (curso == null)
+            var unidad = await _context.Unidad.FindAsync(id);
+            if (unidad == null)
             {
                 return NotFound();
             }
-            ViewData["DocenteId"] = new SelectList(_context.Usuario.Where(x => x.TipoUsuario.Equals(TipoUsuario.Docente) && !x.Eliminado), "Id", "NombreCompleto");
-            return View(curso);
+            ViewData["CursoId"] = new SelectList(_context.Curso, "Id", "Descripcion", unidad.CursoId);
+            return View(unidad);
         }
 
-        // POST: Cursos/Edit/5
+        // POST: Unidades/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Nombre,Descripcion,FechaFinalizacion,Eliminado,DocenteId")] Curso curso)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,CursoId,Nombre,Descripcion,Eliminado")] Unidad unidad)
         {
+
             if (HttpContext.Session.GetInt32("_IdUsuario") == null)
             {
                 return RedirectToAction("Index", "Login");
@@ -161,11 +140,11 @@ namespace Patron_Center.Controllers
             if (HttpContext.Session.GetString("_TipoUsuario") == "Alumno")
             {
                 HttpContext.Session.Clear();
-                ViewBag.InvalidUserMessage = "Usted no tiene permiso para acceder a este sitio";
+                ViewBag.InvalidUserMessage = "Usted no tiene permiso para acceder a este sitio.";
                 return View("Views/Shared/UnauthorisedUserError.cshtml");
             }
 
-            if (id != curso.Id)
+            if (id != unidad.Id)
             {
                 return NotFound();
             }
@@ -174,12 +153,12 @@ namespace Patron_Center.Controllers
             {
                 try
                 {
-                    _context.Update(curso);
+                    _context.Update(unidad);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!CursoExists(curso.Id))
+                    if (!UnidadExists(unidad.Id))
                     {
                         return NotFound();
                     }
@@ -190,13 +169,13 @@ namespace Patron_Center.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["DocenteId"] = new SelectList(_context.Usuario.Where(x => x.TipoUsuario.Equals(TipoUsuario.Docente) && !x.Eliminado), "Id", "NombreCompleto");
-            return View(curso);
+            ViewData["CursoId"] = new SelectList(_context.Curso, "Id", "Descripcion", unidad.CursoId);
+            return View(unidad);
         }
-
-        private bool CursoExists(int id)
+              
+        private bool UnidadExists(int id)
         {
-            return _context.Curso.Any(e => e.Id == id);
+            return _context.Unidad.Any(e => e.Id == id);
         }
     }
 }

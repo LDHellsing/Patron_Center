@@ -222,62 +222,7 @@ namespace Patron_Center.Controllers
             ViewData["CursoId"] = new SelectList(_context.Curso, "Id", "Id", cursoUsuario.CursoId);
             ViewData["UsuarioId"] = new SelectList(_context.Usuario, "Id", "Id", cursoUsuario.UsuarioId);
             return View(cursoUsuario);
-        }
-
-        // GET: CursoUsuarios/Delete/5
-        public async Task<IActionResult> Delete(int? id)
-        {
-            if (HttpContext.Session.GetInt32("_IdUsuario") == null)
-            {
-                return RedirectToAction("Index", "Login");
-            }
-
-            if (HttpContext.Session.GetString("_TipoUsuario") == "Alumno")
-            {
-                HttpContext.Session.Clear();
-                ViewBag.InvalidUserMessage = "Usted no tiene permiso para acceder a este sitio";
-                return View("Views/Shared/UnauthorisedUserError.cshtml");
-            }
-
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var cursoUsuario = await _context.CursoUsuario
-                .Include(c => c.Curso)
-                .Include(c => c.Usuario)
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (cursoUsuario == null)
-            {
-                return NotFound();
-            }
-
-            return View(cursoUsuario);
-        }
-
-        // POST: CursoUsuarios/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            if (HttpContext.Session.GetInt32("_IdUsuario") == null)
-            {
-                return RedirectToAction("Index", "Login");
-            }
-
-            if (HttpContext.Session.GetString("_TipoUsuario") == "Alumno")
-            {
-                HttpContext.Session.Clear();
-                ViewBag.InvalidUserMessage = "Usted no tiene permiso para acceder a este sitio";
-                return View("Views/Shared/UnauthorisedUserError.cshtml");
-            }
-
-            var cursoUsuario = await _context.CursoUsuario.FindAsync(id);
-            _context.CursoUsuario.Remove(cursoUsuario);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
-        }
+        }        
 
         private bool CursoUsuarioExists(int id)
         {

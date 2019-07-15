@@ -112,3 +112,7 @@ C:\PatronCenter\Patron-Center\obj\Debug\netcoreapp2.2\Patron-Center.pdb
 C:\PatronCenter\Patron-Center\obj\Debug\netcoreapp2.2\Patron-Center.csproj.CopyComplete
 C:\PatronCenter\Patron-Center\obj\Debug\netcoreapp2.2\Razor\Views\Shared\UnauthorisedUserError.g.cshtml.cs
 C:\PatronCenter\Patron-Center\obj\Debug\netcoreapp2.2\Patron-Center.csprojAssemblyReference.cache
+C:\PatronCenter\Patron-Center\obj\Debug\netcoreapp2.2\Razor\Views\Unidades\Create.g.cshtml.cs
+C:\PatronCenter\Patron-Center\obj\Debug\netcoreapp2.2\Razor\Views\Unidades\Details.g.cshtml.cs
+C:\PatronCenter\Patron-Center\obj\Debug\netcoreapp2.2\Razor\Views\Unidades\Edit.g.cshtml.cs
+C:\PatronCenter\Patron-Center\obj\Debug\netcoreapp2.2\Razor\Views\Unidades\Index.g.cshtml.cs

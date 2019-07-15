@@ -3,8 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
+
 
 namespace Patron_Center.Models
 {
@@ -33,7 +32,7 @@ namespace Patron_Center.Models
 
         [DisplayName("Password")]
         [Required(ErrorMessage = "Password es un campo requerido")]
-        public String Password { get; set; }
+        public String Password { get; set }
 
         [DisplayName("Tipo de Usuario")]
         public TipoUsuario TipoUsuario { get; set; }
@@ -43,7 +42,7 @@ namespace Patron_Center.Models
 
         public List<CursoUsuario> CursoUsuario { get; set; }
 
-        [HiddenInput(DisplayValue = false)]        
+        [HiddenInput(DisplayValue = false)]
         public string NombreCompleto
         {
             get

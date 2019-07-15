@@ -103,7 +103,7 @@ namespace Patron_Center.Controllers
             if (HttpContext.Session.GetString("_TipoUsuario") == "Alumno")
             {
                 HttpContext.Session.Clear();
-                ViewBag.InvalidUserMessage = "Usted no tiene permiso para acceder a este sitio";
+                ViewBag.InvalidUserMessage = "Usted no tiene permiso para acceder a este sitio.";
                 return View("Views/Shared/UnauthorisedUserError.cshtml");
             }
 
@@ -115,14 +115,14 @@ namespace Patron_Center.Controllers
                 if (ModelState.IsValid)
             {
                 _context.Add(usuario);
-                await _context.SaveChangesAsync();
+                await _context.SaveChangesAsync();               
                 return RedirectToAction(nameof(Create));
-            }
+                }
             return View(usuario);
             }
             else
             {
-                ViewBag.UsuarioDuplicado = string.Format("El usuario con el documento: {0} ya se encuentra en el sistema",usuario.Documento);
+                ViewBag.UsuarioDuplicado = string.Format("El usuario con el documento {0} ya se encuentra en el sistema.",usuario.Documento);
                 return View(usuario);
             }
         }
@@ -208,66 +208,12 @@ namespace Patron_Center.Controllers
             }
             else
             {
-                ViewBag.UsuarioDuplicado = string.Format("El usuario con el documento: {0} ya se encuentra en el sistema", usuario.Documento);
+                ViewBag.UsuarioDuplicado = string.Format("El usuario con el documento {0} ya se encuentra en el sistema", usuario.Documento);
                 return View(usuario);
             }
             return View(usuario);
-        }
+        }      
 
-        // GET: Usuarios/Delete/5
-        public async Task<IActionResult> Delete(int? id)
-        {
-            if (HttpContext.Session.GetInt32("_IdUsuario") == null)
-            {
-                return RedirectToAction("Index", "Login");
-            }
-
-            if (HttpContext.Session.GetString("_TipoUsuario") == "Alumno")
-            {
-                HttpContext.Session.Clear();
-                ViewBag.InvalidUserMessage = "Usted no tiene permiso para acceder a este sitio";
-                return View("Views/Shared/UnauthorisedUserError.cshtml");
-            }
-
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var usuario = await _context.Usuario
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (usuario == null)
-            {
-                return NotFound();
-            }
-
-            return View(usuario);
-        }
-
-        // POST: Usuarios/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            if (HttpContext.Session.GetInt32("_IdUsuario") == null)
-            {
-                return RedirectToAction("Index", "Login");
-            }
-
-            if (HttpContext.Session.GetString("_TipoUsuario") == "Alumno")
-            {
-                HttpContext.Session.Clear();
-                ViewBag.InvalidUserMessage = "Usted no tiene permiso para acceder a este sitio";
-                return View("Views/Shared/UnauthorisedUserError.cshtml");
-            }
-
-            var usuario = await _context.Usuario.FindAsync(id);
-            _context.Usuario.Remove(usuario);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
-        }
-
-        //No estoy seguro si a este metodo hay que añadirle las validaciones de tipo de usuario...
         private bool UsuarioExists(int id)
         {
             return _context.Usuario.Any(e => e.Id == id);

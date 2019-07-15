@@ -5,6 +5,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using Patron_Center.Models;
 
 namespace Patron_Center.Models
 {
@@ -74,6 +75,10 @@ namespace Patron_Center.Models
                     .HasForeignKey(sc => sc.CursoId)
                     .OnDelete(DeleteBehavior.Cascade);                    
         }
+
+        //Relacion muchos a muchos Curso Usuario
+
+        public DbSet<Patron_Center.Models.Unidad> Unidad { get; set; }
         
     }
 }
