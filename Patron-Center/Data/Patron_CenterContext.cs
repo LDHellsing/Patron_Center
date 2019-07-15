@@ -73,10 +73,92 @@ namespace Patron_Center.Models
                     .HasOne<Curso>(sc => sc.Curso)
                     .WithMany(s => s.CursoUsuario)
                     .HasForeignKey(sc => sc.CursoId)
-                    .OnDelete(DeleteBehavior.Cascade);                    
-        }
+                    .OnDelete(DeleteBehavior.Cascade);
 
-        //Relacion muchos a muchos Curso Usuario
+            //Seeding de datos
+            //Creación de Usuarios
+            modelBuilder.Entity<Usuario>().HasData(
+                new Usuario
+                {
+                    Id = 1,
+                    Documento = "1",
+                    Nombre = "Usuario",
+                    Apellido = "Administrador",
+                    Email = "admin@patroncenter.com",
+                    Password = "admin",
+                    TipoUsuario = TipoUsuario.Administrador,
+                    Eliminado = false                    
+                }
+                );
+            modelBuilder.Entity<Usuario>().HasData(
+                new Usuario
+                {
+                    Id = 2,
+                    Documento = "2",
+                    Nombre = "Usuario",
+                    Apellido = "Docente",
+                    Email = "docente@patroncenter.com",
+                    Password = "admin",
+                    TipoUsuario = TipoUsuario.Docente,
+                    Eliminado = false
+                }
+                );
+            modelBuilder.Entity<Usuario>().HasData(
+                new Usuario
+                {
+                    Id = 3,
+                    Documento = "3",
+                    Nombre = "Usuario",
+                    Apellido = "Alumno",
+                    Email = "alumno@patroncenter.com",
+                    Password = "admin",
+                    TipoUsuario = TipoUsuario.Alumno,
+                    Eliminado = false
+                }
+                );
+            //Creación de Cursos
+            modelBuilder.Entity<Curso>().HasData(
+                new Curso
+                {
+                    Id = 1,
+                    Nombre = "Curso de Prueba",
+                    Descripcion = "Descripción de curso de prueba",
+                    FechaFinalizacion = DateTime.Now,
+                    Eliminado = false,
+                    DocenteId = 2
+                }
+                );
+            //Creación de Unidades
+            modelBuilder.Entity<Unidad>().HasData(
+                new Unidad
+                {
+                    Id = 1,
+                    CursoId = 1,
+                    Nombre = "1- Unidad de prueba 1",
+                    Descripcion = "Descripción de Unidad de prueba 1",
+                    Eliminado = false
+                }
+                );
+            modelBuilder.Entity<Unidad>().HasData(
+                new Unidad
+                {
+                    Id = 2,
+                    CursoId = 1,
+                    Nombre = "2- Unidad de prueba 2",
+                    Descripcion = "Descripción de Unidad de prueba 2",
+                    Eliminado = false
+                }
+                );
+            //Creación de relacion Alumno Curso
+            modelBuilder.Entity<CursoUsuario>().HasData(
+                new CursoUsuario
+                {
+                    Id = 1,
+                    CursoId = 1,
+                    UsuarioId = 3
+                }
+                );
+        }        
 
         public DbSet<Patron_Center.Models.Unidad> Unidad { get; set; }
         

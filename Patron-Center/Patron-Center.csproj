@@ -6,6 +6,13 @@
     <RootNamespace>Patron_Center</RootNamespace>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Remove="Migrations\20190715223757_seeding.cs" />
+    <Compile Remove="Migrations\20190715223757_seeding.Designer.cs" />
+    <Compile Remove="Migrations\20190715225025_seeder.cs" />
+    <Compile Remove="Migrations\20190715225025_seeder.Designer.cs" />
+  </ItemGroup>
+
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.App" />
