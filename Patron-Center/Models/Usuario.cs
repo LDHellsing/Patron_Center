@@ -32,7 +32,7 @@ namespace Patron_Center.Models
 
         [DisplayName("Password")]
         [Required(ErrorMessage = "Password es un campo requerido")]
-        public String Password { get; set }
+        public String Password { get; set; }
 
         [DisplayName("Tipo de Usuario")]
         public TipoUsuario TipoUsuario { get; set; }

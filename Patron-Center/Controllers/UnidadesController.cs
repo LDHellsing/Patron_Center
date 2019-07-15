@@ -61,7 +61,7 @@ namespace Patron_Center.Controllers
         // GET: Unidades/Create
         public IActionResult Create()
         {
-            ViewData["CursoId"] = new SelectList(_context.Curso, "Id", "Descripcion");
+            ViewData["CursoId"] = new SelectList(_context.Curso, "Id", "Nombre");
             return View();
         }
 
@@ -90,7 +90,7 @@ namespace Patron_Center.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CursoId"] = new SelectList(_context.Curso, "Id", "Descripcion", unidad.CursoId);
+            ViewData["CursoId"] = new SelectList(_context.Curso, "Id", "Nombre", unidad.CursoId);
             return View(unidad);
         }
 
@@ -120,7 +120,7 @@ namespace Patron_Center.Controllers
             {
                 return NotFound();
             }
-            ViewData["CursoId"] = new SelectList(_context.Curso, "Id", "Descripcion", unidad.CursoId);
+            ViewData["CursoId"] = new SelectList(_context.Curso, "Id", "Nombre", unidad.CursoId);
             return View(unidad);
         }
 
@@ -169,7 +169,7 @@ namespace Patron_Center.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CursoId"] = new SelectList(_context.Curso, "Id", "Descripcion", unidad.CursoId);
+            ViewData["CursoId"] = new SelectList(_context.Curso, "Id", "Nombre", unidad.CursoId);
             return View(unidad);
         }
               
