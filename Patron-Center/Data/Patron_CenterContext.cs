@@ -32,6 +32,7 @@ namespace Patron_Center.Models
             }
             catch (InvalidOperationException e)
             {
+                Debug.WriteLine(e);
                 return user = null;
             };
         }
@@ -43,7 +44,7 @@ namespace Patron_Center.Models
             UsuarioValidoDTO usuaruoDTO = null;
             user = await FindUserByDocumentAsync(usuario.User);
 
-            if (user != null && user.Password == usuario.Password)
+            if (user != null && user.Password == usuario.Password && user.Eliminado == false)
             {
                 //El usuario existe en la BD
                 usuaruoDTO = new UsuarioValidoDTO(user.Id, user.Nombre, user.Documento, user.TipoUsuario.ToString(), true);
@@ -82,7 +83,7 @@ namespace Patron_Center.Models
                 {
                     Id = 1,
                     Documento = "1",
-                    Nombre = "Usuario",
+                    Nombre = "Administrador",
                     Apellido = "Administrador",
                     Email = "admin@patroncenter.com",
                     Password = "admin",
@@ -95,7 +96,7 @@ namespace Patron_Center.Models
                 {
                     Id = 2,
                     Documento = "2",
-                    Nombre = "Usuario",
+                    Nombre = "Docecente",
                     Apellido = "Docente",
                     Email = "docente@patroncenter.com",
                     Password = "admin",
@@ -108,7 +109,7 @@ namespace Patron_Center.Models
                 {
                     Id = 3,
                     Documento = "3",
-                    Nombre = "Usuario",
+                    Nombre = "Alumno",
                     Apellido = "Alumno",
                     Email = "alumno@patroncenter.com",
                     Password = "admin",
@@ -116,6 +117,32 @@ namespace Patron_Center.Models
                     Eliminado = false
                 }
                 );
+            modelBuilder.Entity<Usuario>().HasData(
+              new Usuario
+              {
+                  Id = 4,
+                  Documento = "4",
+                  Nombre = "Alumno Eliminado",
+                  Apellido = "Alumno",
+                  Email = "alumno@patroncenter.com",
+                  Password = "admin",
+                  TipoUsuario = TipoUsuario.Alumno,
+                  Eliminado = true
+              }
+              );
+            modelBuilder.Entity<Usuario>().HasData(
+               new Usuario
+               {
+                   Id = 5,
+                   Documento = "5",
+                   Nombre = "Docecente Eliminado",
+                   Apellido = "Docente",
+                   Email = "docente@patroncenter.com",
+                   Password = "admin",
+                   TipoUsuario = TipoUsuario.Docente,
+                   Eliminado = true
+               }
+               );
             //Creación de Cursos
             modelBuilder.Entity<Curso>().HasData(
                 new Curso

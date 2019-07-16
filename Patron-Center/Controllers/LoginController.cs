@@ -41,23 +41,12 @@ namespace Patron_Center.Controllers
                         ViewBag.InvalidUserMessage = "Usuario o contraseña no valido";
                         return View(usuario);
                     }
-                    /*
-                     * Puede que sea mejor que el metodo de vaidar usuario solo retorne algunos
-                     * valores en ves del objeto entero
-                     */
+                    
                     HttpContext.Session.SetInt32("_IdUsuario", result.IdUsuario);
                     HttpContext.Session.SetString("_Documento", result.Documento);
-                    //O nombre completo
                     HttpContext.Session.SetString("_Nombre", result.NombreUsuario);
                     HttpContext.Session.SetString("_TipoUsuario", result.Rol);
-                    /*
-                     * creo que para validar si una sesion fue inicializada vamos a tener que 
-                     * hacer algo como:
-                     * if (HttpContext.Session.GetInt32("_IdUsuario") == null)
-                    {
-                        //Redireccionamos al login 
-                    }
-                     */
+                 
 
                     return RedirectToAction("Index", "Home");
                 }
