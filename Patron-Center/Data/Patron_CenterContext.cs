@@ -76,6 +76,10 @@ namespace Patron_Center.Models
                     .HasForeignKey(sc => sc.CursoId)
                     .OnDelete(DeleteBehavior.Cascade);
 
+            modelBuilder.Entity<Usuario>()
+                .HasAlternateKey(u => u.Documento)
+                .HasName("Documento");
+
             //Seeding de datos
             //Creación de Usuarios
             modelBuilder.Entity<Usuario>().HasData(

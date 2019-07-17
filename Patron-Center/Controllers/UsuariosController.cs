@@ -171,13 +171,6 @@ namespace Patron_Center.Controllers
             {
                 return NotFound();
             }
-
-            //Busco si ya existe un usuario con el documento a ingresar
-            var patron_CenterContext = _context.Usuario.Where(u => u.Documento == usuario.Documento);
-            //Si no existe creo el usuario
-            if (patron_CenterContext.Count() == 0)
-            {
-
                 if (ModelState.IsValid)
                 {
                     try
@@ -198,12 +191,7 @@ namespace Patron_Center.Controllers
                     }
                     return RedirectToAction(nameof(Index));
                 }
-            }
-            else
-            {
-                ViewBag.UsuarioDuplicado = string.Format("El usuario con el documento {0} ya se encuentra en el sistema", usuario.Documento);
-                return View(usuario);
-            }
+
             return View(usuario);
         }      
 
