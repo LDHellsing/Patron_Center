@@ -188,6 +188,10 @@ namespace Patron_Center.Models
         }        
 
         public DbSet<Patron_Center.Models.Unidad> Unidad { get; set; }
+
+        public DbSet<Patron_Center.Models.Teorico> Teorico { get; set; }
+
+        public DbSet<Patron_Center.Models.Diapositiva> Diapositiva { get; set; }
         
     }
 }

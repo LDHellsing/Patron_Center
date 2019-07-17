@@ -11,6 +11,8 @@
     <Compile Remove="Migrations\20190715223757_seeding.Designer.cs" />
     <Compile Remove="Migrations\20190715225025_seeder.cs" />
     <Compile Remove="Migrations\20190715225025_seeder.Designer.cs" />
+    <Compile Remove="Migrations\20190716235225_teorico.cs" />
+    <Compile Remove="Migrations\20190716235225_teorico.Designer.cs" />
   </ItemGroup>
 
 

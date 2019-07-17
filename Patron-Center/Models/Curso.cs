@@ -23,6 +23,7 @@ namespace Patron_Center.Models
         public string Descripcion { get; set; }
 
         [DisplayName("Fecha de Finalización")]
+        [DataType(DataType.Date)]
         [Required(ErrorMessage = "Fecha de Finalización es un campo requerido")]
         public DateTime FechaFinalizacion { get; set; }
 
