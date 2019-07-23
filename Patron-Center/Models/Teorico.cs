@@ -20,5 +20,12 @@ namespace Patron_Center.Models
 
         [DisplayName("Eliminado")]
         public bool Eliminado { get; set; }
+
+        [DisplayName("Unidad")]
+        [Required(ErrorMessage = "Unidad es un campo requerido")]
+        public int UnidadId { get; set; }
+
+        public Unidad Unidad { get; set; }
+
     }
 }

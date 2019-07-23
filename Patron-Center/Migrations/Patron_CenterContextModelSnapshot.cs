@@ -54,7 +54,7 @@ namespace Patron_Center.Migrations
                             Descripcion = "Descripción de curso de prueba",
                             DocenteId = 2,
                             Eliminado = false,
-                            FechaFinalizacion = new DateTime(2019, 7, 16, 22, 53, 14, 283, DateTimeKind.Local).AddTicks(2405),
+                            FechaFinalizacion = new DateTime(2019, 7, 22, 21, 28, 17, 394, DateTimeKind.Local).AddTicks(3649),
                             Nombre = "Curso de Prueba"
                         });
                 });
@@ -119,7 +119,11 @@ namespace Patron_Center.Migrations
                     b.Property<string>("Nombre")
                         .IsRequired();
 
+                    b.Property<int>("UnidadId");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("UnidadId");
 
                     b.ToTable("Teorico");
                 });
@@ -285,6 +289,14 @@ namespace Patron_Center.Migrations
                     b.HasOne("Patron_Center.Models.Teorico", "Teorico")
                         .WithMany()
                         .HasForeignKey("TeoricoId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("Patron_Center.Models.Teorico", b =>
+                {
+                    b.HasOne("Patron_Center.Models.Unidad", "Unidad")
+                        .WithMany()
+                        .HasForeignKey("UnidadId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 

@@ -13,6 +13,16 @@
     <Compile Remove="Migrations\20190715225025_seeder.Designer.cs" />
     <Compile Remove="Migrations\20190716235225_teorico.cs" />
     <Compile Remove="Migrations\20190716235225_teorico.Designer.cs" />
+    <Compile Remove="Migrations\20190717000952_teorico.cs" />
+    <Compile Remove="Migrations\20190717000952_teorico.Designer.cs" />
+    <Compile Remove="Migrations\20190717015314_documentoUnique.cs" />
+    <Compile Remove="Migrations\20190717015314_documentoUnique.Designer.cs" />
+    <Compile Remove="Migrations\20190722234033_teorico.cs" />
+    <Compile Remove="Migrations\20190722234033_teorico.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="Views\CursoUsuarios\Index - Copia.cshtml" />
   </ItemGroup>
 
 
@@ -20,6 +30,11 @@
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.2.3" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <Folder Include="ViewModels\" />
   </ItemGroup>
 
 </Project>

@@ -1,14 +1,11 @@
-﻿@model IEnumerable<Patron_Center.Models.Teorico>
+﻿@model IEnumerable<Patron_Center.Models.Unidad>
 
 @{
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+    <h1>Unidades</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
 <table class="table">
     <thead>
         <tr>
@@ -16,10 +13,7 @@
                 @Html.DisplayNameFor(model => model.Nombre)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Eliminado)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Unidad)
+                @Html.DisplayNameFor(model => model.Descripcion)
             </th>
             <th></th>
         </tr>
@@ -31,15 +25,11 @@
                 @Html.DisplayFor(modelItem => item.Nombre)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Eliminado)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Unidad.Descripcion)
+                @Html.DisplayFor(modelItem => item.Descripcion)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a>
             </td>
         </tr>
 }

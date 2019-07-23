@@ -37,6 +37,26 @@ namespace Patron_Center.Controllers
             return View(await patron_CenterContext.ToListAsync());
         }
 
+        // GET: CursoUsuarios/VerCursosUsuario
+        public async Task<IActionResult> VerCursosUsuario()
+        {
+            if (HttpContext.Session.GetInt32("_IdUsuario") == null)
+            {
+                return RedirectToAction("Index", "Login");
+            }
+
+            if (HttpContext.Session.GetString("_TipoUsuario") == "Alumno")
+            {
+                // Si el usuario es alumno muestro solo los cursos que tiene asignado.
+                var patron_CenterContextFiltrado = _context.CursoUsuario.Include(c => c.Curso).Include(c => c.Usuario).Where(c => c.UsuarioId == HttpContext.Session.GetInt32("_IdUsuario"));                
+                return View(await patron_CenterContextFiltrado.ToListAsync());
+            }
+
+            var patron_CenterContext = _context.CursoUsuario.Include(c => c.Curso).Include(c => c.Usuario);
+            return View(await patron_CenterContext.ToListAsync());
+        }
+
+
         // GET: CursoUsuarios/Details/5
         public async Task<IActionResult> Details(int? id)
         {

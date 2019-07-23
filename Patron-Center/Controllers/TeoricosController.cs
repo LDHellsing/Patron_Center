@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -22,41 +21,20 @@ namespace Patron_Center.Controllers
         // GET: Teoricos
         public async Task<IActionResult> Index()
         {
-            if (HttpContext.Session.GetInt32("_IdUsuario") == null)
-            {
-                return RedirectToAction("Index", "Login");
-            }
-
-            if (HttpContext.Session.GetString("_TipoUsuario") == "Alumno")
-            {
-                ViewBag.InvalidUserMessage = "Usted no tiene permiso para acceder a este sitio. Por favor Ingrese con un usuario Administrador, ";
-                return View("Views/Shared/UnauthorisedUserError.cshtml");
-            }
-
-            return View(await _context.Teorico.ToListAsync());
+            var patron_CenterContext = _context.Teorico.Include(t => t.Unidad);
+            return View(await patron_CenterContext.ToListAsync());
         }
 
         // GET: Teoricos/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-
-            if (HttpContext.Session.GetInt32("_IdUsuario") == null)
-            {
-                return RedirectToAction("Index", "Login");
-            }
-
-            if (HttpContext.Session.GetString("_TipoUsuario") == "Alumno")
-            {
-                ViewBag.InvalidUserMessage = "Usted no tiene permiso para acceder a este sitio. Por favor Ingrese con un usuario Administrador, ";
-                return View("Views/Shared/UnauthorisedUserError.cshtml");
-            }
-
             if (id == null)
             {
                 return NotFound();
             }
 
             var teorico = await _context.Teorico
+                .Include(t => t.Unidad)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (teorico == null)
             {
@@ -69,6 +47,7 @@ namespace Patron_Center.Controllers
         // GET: Teoricos/Create
         public IActionResult Create()
         {
+            ViewData["UnidadId"] = new SelectList(_context.Unidad, "Id", "Descripcion");
             return View();
         }
 
@@ -77,42 +56,21 @@ namespace Patron_Center.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Nombre,Eliminado")] Teorico teorico)
+        public async Task<IActionResult> Create([Bind("Id,Nombre,Eliminado,UnidadId")] Teorico teorico)
         {
-            if (HttpContext.Session.GetInt32("_IdUsuario") == null)
-            {
-                return RedirectToAction("Index", "Login");
-            }
-
-            if (HttpContext.Session.GetString("_TipoUsuario") == "Alumno")
-            {
-                ViewBag.InvalidUserMessage = "Usted no tiene permiso para acceder a este sitio. Por favor Ingrese con un usuario Administrador, ";
-                return View("Views/Shared/UnauthorisedUserError.cshtml");
-            }
-
             if (ModelState.IsValid)
             {
                 _context.Add(teorico);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["UnidadId"] = new SelectList(_context.Unidad, "Id", "Descripcion", teorico.UnidadId);
             return View(teorico);
         }
 
         // GET: Teoricos/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (HttpContext.Session.GetInt32("_IdUsuario") == null)
-            {
-                return RedirectToAction("Index", "Login");
-            }
-
-            if (HttpContext.Session.GetString("_TipoUsuario") == "Alumno")
-            {
-                ViewBag.InvalidUserMessage = "Usted no tiene permiso para acceder a este sitio. Por favor Ingrese con un usuario Administrador, ";
-                return View("Views/Shared/UnauthorisedUserError.cshtml");
-            }
-
             if (id == null)
             {
                 return NotFound();
@@ -123,6 +81,7 @@ namespace Patron_Center.Controllers
             {
                 return NotFound();
             }
+            ViewData["UnidadId"] = new SelectList(_context.Unidad, "Id", "Descripcion", teorico.UnidadId);
             return View(teorico);
         }
 
@@ -131,19 +90,8 @@ namespace Patron_Center.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Nombre,Eliminado")] Teorico teorico)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Nombre,Eliminado,UnidadId")] Teorico teorico)
         {
-            if (HttpContext.Session.GetInt32("_IdUsuario") == null)
-            {
-                return RedirectToAction("Index", "Login");
-            }
-
-            if (HttpContext.Session.GetString("_TipoUsuario") == "Alumno")
-            {
-                ViewBag.InvalidUserMessage = "Usted no tiene permiso para acceder a este sitio. Por favor Ingrese con un usuario Administrador, ";
-                return View("Views/Shared/UnauthorisedUserError.cshtml");
-            }
-
             if (id != teorico.Id)
             {
                 return NotFound();
@@ -169,8 +117,9 @@ namespace Patron_Center.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["UnidadId"] = new SelectList(_context.Unidad, "Id", "Descripcion", teorico.UnidadId);
             return View(teorico);
-        }
+        }             
 
         private bool TeoricoExists(int id)
         {

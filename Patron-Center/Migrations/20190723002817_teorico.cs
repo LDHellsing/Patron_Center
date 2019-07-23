@@ -8,6 +8,17 @@ namespace Patron_Center.Migrations
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.AlterColumn<string>(
+                name: "Documento",
+                table: "Usuario",
+                nullable: false,
+                oldClrType: typeof(string));
+
+            migrationBuilder.AddUniqueConstraint(
+                name: "Documento",
+                table: "Usuario",
+                column: "Documento");
+
             migrationBuilder.CreateTable(
                 name: "Teorico",
                 columns: table => new
@@ -15,11 +26,18 @@ namespace Patron_Center.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Nombre = table.Column<string>(nullable: false),
-                    Eliminado = table.Column<bool>(nullable: false)
+                    Eliminado = table.Column<bool>(nullable: false),
+                    UnidadId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Teorico", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Teorico_Unidad_UnidadId",
+                        column: x => x.UnidadId,
+                        principalTable: "Unidad",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -49,12 +67,17 @@ namespace Patron_Center.Migrations
                 keyColumn: "Id",
                 keyValue: 1,
                 column: "FechaFinalizacion",
-                value: new DateTime(2019, 7, 16, 21, 9, 52, 311, DateTimeKind.Local).AddTicks(5636));
+                value: new DateTime(2019, 7, 22, 21, 28, 17, 394, DateTimeKind.Local).AddTicks(3649));
 
             migrationBuilder.CreateIndex(
                 name: "IX_Diapositiva_TeoricoId",
                 table: "Diapositiva",
                 column: "TeoricoId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Teorico_UnidadId",
+                table: "Teorico",
+                column: "UnidadId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -64,6 +87,16 @@ namespace Patron_Center.Migrations
 
             migrationBuilder.DropTable(
                 name: "Teorico");
+
+            migrationBuilder.DropUniqueConstraint(
+                name: "Documento",
+                table: "Usuario");
+
+            migrationBuilder.AlterColumn<string>(
+                name: "Documento",
+                table: "Usuario",
+                nullable: false,
+                oldClrType: typeof(string));
 
             migrationBuilder.UpdateData(
                 table: "Curso",
