@@ -48,6 +48,15 @@
                             </div>
                     </ul>
                 </div>
+                <div>
+                    @if (ViewBag.Nombre != null)
+                    {
+                        <form asp-controller="Login" asp-action="Logout" class="navbar-right">
+                            <button type="submit" class="btn btn-link navbar-btn nav-link">Logout</button>
+                        </form>
+                    }
+
+                </div>
             </div>
         </nav>
     </header>
