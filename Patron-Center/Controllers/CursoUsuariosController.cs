@@ -38,7 +38,7 @@ namespace Patron_Center.Controllers
         }
 
         // GET: CursoUsuarios/VerCursosUsuario
-        public async Task<IActionResult> VerCursosUsuario()
+        public async Task<IActionResult> ViewUserLessons()
         {
             if (HttpContext.Session.GetInt32("_IdUsuario") == null)
             {

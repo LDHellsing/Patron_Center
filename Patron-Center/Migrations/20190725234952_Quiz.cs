@@ -12,36 +12,36 @@ namespace Patron_Center.Migrations
                 name: "Quiz",
                 columns: table => new
                 {
-                    ID = table.Column<int>(nullable: false)
+                    Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    IDCurso = table.Column<int>(nullable: false),
+                    IdCurso = table.Column<int>(nullable: false),
                     Nombre = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Quiz", x => x.ID);
+                    table.PrimaryKey("PK_Quiz", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
                 name: "Pregunta",
                 columns: table => new
                 {
-                    ID = table.Column<int>(nullable: false)
+                    Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    IDQuiz = table.Column<int>(nullable: false),
-                    TipoPregunta = table.Column<bool>(nullable: false),
+                    IdQuiz = table.Column<int>(nullable: false),
+                    EsMultipleOpcion = table.Column<bool>(nullable: false),
                     Orden = table.Column<int>(nullable: false),
                     Enunciado = table.Column<string>(nullable: false),
-                    QuizID = table.Column<int>(nullable: true)
+                    QuizId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Pregunta", x => x.ID);
+                    table.PrimaryKey("PK_Pregunta", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Pregunta_Quiz_QuizID",
-                        column: x => x.QuizID,
+                        name: "FK_Pregunta_Quiz_QuizId",
+                        column: x => x.QuizId,
                         principalTable: "Quiz",
-                        principalColumn: "ID",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
 
@@ -49,22 +49,22 @@ namespace Patron_Center.Migrations
                 name: "Respuesta",
                 columns: table => new
                 {
-                    ID = table.Column<int>(nullable: false)
+                    Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    IDPregunta = table.Column<int>(nullable: false),
+                    IdPregunta = table.Column<int>(nullable: false),
                     RespuestaCorrecta = table.Column<bool>(nullable: false),
                     RespuestaUnica = table.Column<bool>(nullable: false),
                     Enunciado = table.Column<string>(nullable: false),
-                    PreguntaID = table.Column<int>(nullable: true)
+                    PreguntaId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Respuesta", x => x.ID);
+                    table.PrimaryKey("PK_Respuesta", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Respuesta_Pregunta_PreguntaID",
-                        column: x => x.PreguntaID,
+                        name: "FK_Respuesta_Pregunta_PreguntaId",
+                        column: x => x.PreguntaId,
                         principalTable: "Pregunta",
-                        principalColumn: "ID",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
 
@@ -73,17 +73,17 @@ namespace Patron_Center.Migrations
                 keyColumn: "Id",
                 keyValue: 1,
                 column: "FechaFinalizacion",
-                value: new DateTime(2019, 7, 24, 23, 58, 7, 514, DateTimeKind.Local).AddTicks(816));
+                value: new DateTime(2019, 7, 25, 20, 49, 52, 95, DateTimeKind.Local).AddTicks(1531));
 
             migrationBuilder.CreateIndex(
-                name: "IX_Pregunta_QuizID",
+                name: "IX_Pregunta_QuizId",
                 table: "Pregunta",
-                column: "QuizID");
+                column: "QuizId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Respuesta_PreguntaID",
+                name: "IX_Respuesta_PreguntaId",
                 table: "Respuesta",
-                column: "PreguntaID");
+                column: "PreguntaId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -102,7 +102,7 @@ namespace Patron_Center.Migrations
                 keyColumn: "Id",
                 keyValue: 1,
                 column: "FechaFinalizacion",
-                value: new DateTime(2019, 7, 24, 23, 55, 13, 240, DateTimeKind.Local).AddTicks(7592));
+                value: new DateTime(2019, 7, 22, 21, 28, 17, 394, DateTimeKind.Local).AddTicks(3649));
         }
     }
 }

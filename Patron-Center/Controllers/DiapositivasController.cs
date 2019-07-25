@@ -189,7 +189,7 @@ namespace Patron_Center.Controllers
         }
 
 
-        public async Task<IActionResult> VerDiapositivas()
+        public async Task<IActionResult> ViewSlides()
         {
             return View();
         }

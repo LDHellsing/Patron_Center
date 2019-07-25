@@ -10,7 +10,7 @@ using Patron_Center.Models;
 namespace Patron_Center.Migrations
 {
     [DbContext(typeof(Patron_CenterContext))]
-    [Migration("20190725025808_Quiz")]
+    [Migration("20190725234952_Quiz")]
     partial class Quiz
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -56,7 +56,7 @@ namespace Patron_Center.Migrations
                             Descripcion = "Descripción de curso de prueba",
                             DocenteId = 2,
                             Eliminado = false,
-                            FechaFinalizacion = new DateTime(2019, 7, 24, 23, 58, 7, 514, DateTimeKind.Local).AddTicks(816),
+                            FechaFinalizacion = new DateTime(2019, 7, 25, 20, 49, 52, 95, DateTimeKind.Local).AddTicks(1531),
                             Nombre = "Curso de Prueba"
                         });
                 });
@@ -112,64 +112,64 @@ namespace Patron_Center.Migrations
 
             modelBuilder.Entity("Patron_Center.Models.Pregunta", b =>
                 {
-                    b.Property<int>("ID")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Enunciado")
                         .IsRequired();
 
-                    b.Property<int>("IDQuiz");
+                    b.Property<bool>("EsMultipleOpcion");
+
+                    b.Property<int>("IdQuiz");
 
                     b.Property<int>("Orden");
 
-                    b.Property<int?>("QuizID");
+                    b.Property<int?>("QuizId");
 
-                    b.Property<bool>("TipoPregunta");
+                    b.HasKey("Id");
 
-                    b.HasKey("ID");
-
-                    b.HasIndex("QuizID");
+                    b.HasIndex("QuizId");
 
                     b.ToTable("Pregunta");
                 });
 
             modelBuilder.Entity("Patron_Center.Models.Quiz", b =>
                 {
-                    b.Property<int>("ID")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("IDCurso");
+                    b.Property<int>("IdCurso");
 
                     b.Property<string>("Nombre")
                         .IsRequired();
 
-                    b.HasKey("ID");
+                    b.HasKey("Id");
 
                     b.ToTable("Quiz");
                 });
 
             modelBuilder.Entity("Patron_Center.Models.Respuesta", b =>
                 {
-                    b.Property<int>("ID")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Enunciado")
                         .IsRequired();
 
-                    b.Property<int>("IDPregunta");
+                    b.Property<int>("IdPregunta");
 
-                    b.Property<int?>("PreguntaID");
+                    b.Property<int?>("PreguntaId");
 
                     b.Property<bool>("RespuestaCorrecta");
 
                     b.Property<bool>("RespuestaUnica");
 
-                    b.HasKey("ID");
+                    b.HasKey("Id");
 
-                    b.HasIndex("PreguntaID");
+                    b.HasIndex("PreguntaId");
 
                     b.ToTable("Respuesta");
                 });
@@ -362,14 +362,14 @@ namespace Patron_Center.Migrations
                 {
                     b.HasOne("Patron_Center.Models.Quiz")
                         .WithMany("Preguntas")
-                        .HasForeignKey("QuizID");
+                        .HasForeignKey("QuizId");
                 });
 
             modelBuilder.Entity("Patron_Center.Models.Respuesta", b =>
                 {
                     b.HasOne("Patron_Center.Models.Pregunta")
                         .WithMany("Respuestas")
-                        .HasForeignKey("PreguntaID");
+                        .HasForeignKey("PreguntaId");
                 });
 
             modelBuilder.Entity("Patron_Center.Models.Teorico", b =>

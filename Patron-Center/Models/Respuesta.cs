@@ -10,8 +10,8 @@ namespace Patron_Center.Models
     public class Respuesta
     {
         [Key]
-        public int ID { get; set; }
-        public int IDPregunta { get; set; }
+        public int Id { get; set; }
+        public int IdPregunta { get; set; }
         public bool RespuestaCorrecta { get; set; }
         public bool RespuestaUnica { get; set; }
         [Required]

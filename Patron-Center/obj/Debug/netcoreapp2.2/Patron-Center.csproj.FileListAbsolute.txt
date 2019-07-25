@@ -75,7 +75,6 @@ C:\PatronCenter\Patron-Center\bin\Debug\netcoreapp2.2\Patron-Center.dll
 C:\PatronCenter\Patron-Center\bin\Debug\netcoreapp2.2\Patron-Center.pdb
 C:\PatronCenter\Patron-Center\bin\Debug\netcoreapp2.2\Patron-Center.Views.dll
 C:\PatronCenter\Patron-Center\bin\Debug\netcoreapp2.2\Patron-Center.Views.pdb
-C:\PatronCenter\Patron-Center\obj\Debug\netcoreapp2.2\Patron-Center.csprojAssemblyReference.cache
 C:\PatronCenter\Patron-Center\obj\Debug\netcoreapp2.2\Patron-Center.csproj.CoreCompileInputs.cache
 C:\PatronCenter\Patron-Center\obj\Debug\netcoreapp2.2\Patron-Center.RazorAssemblyInfo.cache
 C:\PatronCenter\Patron-Center\obj\Debug\netcoreapp2.2\Patron-Center.RazorAssemblyInfo.cs
@@ -92,11 +91,12 @@ C:\PatronCenter\Patron-Center\obj\Debug\netcoreapp2.2\Razor\Views\CursoUsuarios\
 C:\PatronCenter\Patron-Center\obj\Debug\netcoreapp2.2\Razor\Views\CursoUsuarios\Details.g.cshtml.cs
 C:\PatronCenter\Patron-Center\obj\Debug\netcoreapp2.2\Razor\Views\CursoUsuarios\Edit.g.cshtml.cs
 C:\PatronCenter\Patron-Center\obj\Debug\netcoreapp2.2\Razor\Views\CursoUsuarios\Index.g.cshtml.cs
-C:\PatronCenter\Patron-Center\obj\Debug\netcoreapp2.2\Razor\Views\CursoUsuarios\VerCursosUsuario.g.cshtml.cs
+C:\PatronCenter\Patron-Center\obj\Debug\netcoreapp2.2\Razor\Views\CursoUsuarios\ViewUserLessons.g.cshtml.cs
 C:\PatronCenter\Patron-Center\obj\Debug\netcoreapp2.2\Razor\Views\Diapositivas\Create.g.cshtml.cs
 C:\PatronCenter\Patron-Center\obj\Debug\netcoreapp2.2\Razor\Views\Diapositivas\Details.g.cshtml.cs
 C:\PatronCenter\Patron-Center\obj\Debug\netcoreapp2.2\Razor\Views\Diapositivas\Edit.g.cshtml.cs
 C:\PatronCenter\Patron-Center\obj\Debug\netcoreapp2.2\Razor\Views\Diapositivas\Index.g.cshtml.cs
+C:\PatronCenter\Patron-Center\obj\Debug\netcoreapp2.2\Razor\Views\Diapositivas\ViewSlides.g.cshtml.cs
 C:\PatronCenter\Patron-Center\obj\Debug\netcoreapp2.2\Razor\Views\Home\Index.g.cshtml.cs
 C:\PatronCenter\Patron-Center\obj\Debug\netcoreapp2.2\Razor\Views\Home\Privacy.g.cshtml.cs
 C:\PatronCenter\Patron-Center\obj\Debug\netcoreapp2.2\Razor\Views\Login\Index.g.cshtml.cs
@@ -126,4 +126,3 @@ C:\PatronCenter\Patron-Center\obj\Debug\netcoreapp2.2\Patron-Center.Views.pdb
 C:\PatronCenter\Patron-Center\obj\Debug\netcoreapp2.2\Patron-Center.dll
 C:\PatronCenter\Patron-Center\obj\Debug\netcoreapp2.2\Patron-Center.pdb
 C:\PatronCenter\Patron-Center\obj\Debug\netcoreapp2.2\Patron-Center.csproj.CopyComplete
-C:\PatronCenter\Patron-Center\obj\Debug\netcoreapp2.2\Razor\Views\Diapositivas\VerDiapositivas.g.cshtml.cs

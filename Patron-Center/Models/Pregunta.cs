@@ -8,12 +8,11 @@ namespace Patron_Center.Models
 {
     public class Pregunta
     {
-        public int ID { get; set; }
-        public int IDQuiz { get; set; }
+        public int Id { get; set; }
+        public int IdQuiz { get; set; }
         public ICollection<Respuesta> Respuestas { get; set; }
-        [Required]
-        //Multiple opcion true
-        public bool TipoPregunta { get; set; }
+        [Required]        
+        public bool EsMultipleOpcion { get; set; }
         [Required]
         public int Orden { get; set; }
         [Required]

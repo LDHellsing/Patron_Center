@@ -19,6 +19,8 @@
     <Compile Remove="Migrations\20190717015314_documentoUnique.Designer.cs" />
     <Compile Remove="Migrations\20190722234033_teorico.cs" />
     <Compile Remove="Migrations\20190722234033_teorico.Designer.cs" />
+    <Compile Remove="Migrations\20190725025808_Quiz.cs" />
+    <Compile Remove="Migrations\20190725025808_Quiz.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
