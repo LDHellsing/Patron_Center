@@ -19,6 +19,9 @@ namespace Patron_Center.Models
         public DbSet<Patron_Center.Models.Usuario> Usuario { get; set; }
         public DbSet<Patron_Center.Models.Curso> Curso { get; set; }
         public DbSet<CursoUsuario> CursoUsuario { get; set; }
+        public DbSet<Respuesta> Respuesta { get; set; }
+        public DbSet<Pregunta> Pregunta { get; set; }
+        public DbSet<Quiz> Quiz { get; set; }
 
         //FindUserByDocument(string document)
         public async Task<Usuario> FindUserByDocumentAsync(string document)
