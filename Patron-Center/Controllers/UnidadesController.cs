@@ -186,7 +186,7 @@ namespace Patron_Center.Controllers
             ViewData["CursoId"] = new SelectList(_context.Curso, "Id", "Nombre", unidad.CursoId);
             return View(unidad);
         }
-              
+
         private bool UnidadExists(int id)
         {
             return _context.Unidad.Any(e => e.Id == id);

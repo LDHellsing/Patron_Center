@@ -186,7 +186,13 @@ namespace Patron_Center.Controllers
             }
             ViewData["TeoricoId"] = new SelectList(_context.Teorico, "Id", "Nombre", diapositiva.TeoricoId);
             return View(diapositiva);
-        } 
+        }
+
+
+        public async Task<IActionResult> VerDiapositivas()
+        {
+            return View();
+        }
 
         private bool DiapositivaExists(int id)
         {
