@@ -36,25 +36,7 @@ namespace Patron_Center.Controllers
 
             var patron_CenterContext = _context.Unidad.Include(u => u.Curso);
             return View(await patron_CenterContext.ToListAsync());
-        }
-        // GET: Unidades/VerUnidadesCurso/5
-        public async Task<IActionResult> VerUnidadesCurso(int CursoId)
-        {
-
-            if (HttpContext.Session.GetInt32("_IdUsuario") == null)
-            {
-                return RedirectToAction("Index", "Login");
-            }
-
-            //if (HttpContext.Session.GetString("_TipoUsuario") == "Alumno")
-            //{
-            //    ViewBag.InvalidUserMessage = "Usted no tiene permiso para acceder a este sitio. Por favor Ingrese con un usuario Administrador, ";
-            //    return View("Views/Shared/UnauthorisedUserError.cshtml");
-            //}
-
-            var patron_CenterContext = _context.Unidad.Include(u => u.Curso).Where(u => u.CursoId == CursoId && u.Eliminado == false);
-            return View(await patron_CenterContext.ToListAsync());
-        }
+        }        
 
         // GET: Unidades/Details/5
         public async Task<IActionResult> Details(int? id)
@@ -185,6 +167,25 @@ namespace Patron_Center.Controllers
             }
             ViewData["CursoId"] = new SelectList(_context.Curso, "Id", "Nombre", unidad.CursoId);
             return View(unidad);
+        }
+
+        // GET: Unidades/ViewUnitsLessons
+        public async Task<IActionResult> ViewUnitsLessons(int CursoId)
+        {
+
+            if (HttpContext.Session.GetInt32("_IdUsuario") == null)
+            {
+                return RedirectToAction("Index", "Login");
+            }
+
+            //if (HttpContext.Session.GetString("_TipoUsuario") == "Alumno")
+            //{
+            //    ViewBag.InvalidUserMessage = "Usted no tiene permiso para acceder a este sitio. Por favor Ingrese con un usuario Administrador, ";
+            //    return View("Views/Shared/UnauthorisedUserError.cshtml");
+            //}
+
+            var patron_CenterContext = _context.Unidad.Include(u => u.Curso).Where(u => u.CursoId == CursoId && u.Eliminado == false);
+            return View(await patron_CenterContext.ToListAsync());
         }
 
         private bool UnidadExists(int id)

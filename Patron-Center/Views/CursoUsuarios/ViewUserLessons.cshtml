@@ -37,7 +37,7 @@
                 @Html.DisplayFor(modelItem => item.Curso.FechaFinalizacion)
             </td>
             <td>
-                <form asp-controller="Unidades" asp-action="VerUnidadesCurso">
+                <form asp-controller="Unidades" asp-action="ViewUnitsLessons">
                     <p>
                         <input type="hidden" name="CursoId" value="@item.Id">
                         <input class="btn btn-primary btn-sm" type="submit" value="Acceder al curso" />

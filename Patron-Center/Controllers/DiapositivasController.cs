@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -22,42 +21,20 @@ namespace Patron_Center.Controllers
         // GET: Diapositivas
         public async Task<IActionResult> Index()
         {
-            if (HttpContext.Session.GetInt32("_IdUsuario") == null)
-            {
-                return RedirectToAction("Index", "Login");
-            }
-
-            if (HttpContext.Session.GetString("_TipoUsuario") == "Alumno")
-            {
-                ViewBag.InvalidUserMessage = "Usted no tiene permiso para acceder a este sitio. Por favor Ingrese con un usuario Administrador, ";
-                return View("Views/Shared/UnauthorisedUserError.cshtml");
-            }
-
-            var patron_CenterContext = _context.Diapositiva.Include(d => d.Teorico);
+            var patron_CenterContext = _context.Diapositiva.Include(d => d.Unidad);
             return View(await patron_CenterContext.ToListAsync());
         }
 
         // GET: Diapositivas/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (HttpContext.Session.GetInt32("_IdUsuario") == null)
-            {
-                return RedirectToAction("Index", "Login");
-            }
-
-            if (HttpContext.Session.GetString("_TipoUsuario") == "Alumno")
-            {
-                ViewBag.InvalidUserMessage = "Usted no tiene permiso para acceder a este sitio. Por favor Ingrese con un usuario Administrador, ";
-                return View("Views/Shared/UnauthorisedUserError.cshtml");
-            }
-
             if (id == null)
             {
                 return NotFound();
             }
 
             var diapositiva = await _context.Diapositiva
-                .Include(d => d.Teorico)
+                .Include(d => d.Unidad)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (diapositiva == null)
             {
@@ -70,18 +47,7 @@ namespace Patron_Center.Controllers
         // GET: Diapositivas/Create
         public IActionResult Create()
         {
-            if (HttpContext.Session.GetInt32("_IdUsuario") == null)
-            {
-                return RedirectToAction("Index", "Login");
-            }
-
-            if (HttpContext.Session.GetString("_TipoUsuario") == "Alumno")
-            {
-                ViewBag.InvalidUserMessage = "Usted no tiene permiso para acceder a este sitio. Por favor Ingrese con un usuario Administrador, ";
-                return View("Views/Shared/UnauthorisedUserError.cshtml");
-            }
-
-            ViewData["TeoricoId"] = new SelectList(_context.Teorico, "Id", "Nombre");
+            ViewData["UnidadId"] = new SelectList(_context.Unidad, "Id", "Descripcion");
             return View();
         }
 
@@ -90,43 +56,21 @@ namespace Patron_Center.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Idy,Texto,Orden,Eliminado,TeoricoId")] Diapositiva diapositiva)
+        public async Task<IActionResult> Create([Bind("Id,Texto,Orden,Eliminado,UnidadId")] Diapositiva diapositiva)
         {
-            if (HttpContext.Session.GetInt32("_IdUsuario") == null)
-            {
-                return RedirectToAction("Index", "Login");
-            }
-
-            if (HttpContext.Session.GetString("_TipoUsuario") == "Alumno")
-            {
-                ViewBag.InvalidUserMessage = "Usted no tiene permiso para acceder a este sitio. Por favor Ingrese con un usuario Administrador, ";
-                return View("Views/Shared/UnauthorisedUserError.cshtml");
-            }
-
             if (ModelState.IsValid)
             {
                 _context.Add(diapositiva);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["TeoricoId"] = new SelectList(_context.Teorico, "Id", "Nombre", diapositiva.TeoricoId);
+            ViewData["UnidadId"] = new SelectList(_context.Unidad, "Id", "Descripcion", diapositiva.UnidadId);
             return View(diapositiva);
         }
 
         // GET: Diapositivas/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (HttpContext.Session.GetInt32("_IdUsuario") == null)
-            {
-                return RedirectToAction("Index", "Login");
-            }
-
-            if (HttpContext.Session.GetString("_TipoUsuario") == "Alumno")
-            {
-                ViewBag.InvalidUserMessage = "Usted no tiene permiso para acceder a este sitio. Por favor Ingrese con un usuario Administrador, ";
-                return View("Views/Shared/UnauthorisedUserError.cshtml");
-            }
-
             if (id == null)
             {
                 return NotFound();
@@ -137,7 +81,7 @@ namespace Patron_Center.Controllers
             {
                 return NotFound();
             }
-            ViewData["TeoricoId"] = new SelectList(_context.Teorico, "Id", "Nombre", diapositiva.TeoricoId);
+            ViewData["UnidadId"] = new SelectList(_context.Unidad, "Id", "Descripcion", diapositiva.UnidadId);
             return View(diapositiva);
         }
 
@@ -146,19 +90,8 @@ namespace Patron_Center.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Idy,Texto,Orden,Eliminado,TeoricoId")] Diapositiva diapositiva)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Texto,Orden,Eliminado,UnidadId")] Diapositiva diapositiva)
         {
-            if (HttpContext.Session.GetInt32("_IdUsuario") == null)
-            {
-                return RedirectToAction("Index", "Login");
-            }
-
-            if (HttpContext.Session.GetString("_TipoUsuario") == "Alumno")
-            {
-                ViewBag.InvalidUserMessage = "Usted no tiene permiso para acceder a este sitio. Por favor Ingrese con un usuario Administrador, ";
-                return View("Views/Shared/UnauthorisedUserError.cshtml");
-            }
-
             if (id != diapositiva.Id)
             {
                 return NotFound();
@@ -184,14 +117,15 @@ namespace Patron_Center.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["TeoricoId"] = new SelectList(_context.Teorico, "Id", "Nombre", diapositiva.TeoricoId);
+            ViewData["UnidadId"] = new SelectList(_context.Unidad, "Id", "Descripcion", diapositiva.UnidadId);
             return View(diapositiva);
         }
 
-
-        public async Task<IActionResult> ViewSlides()
+        // GET: Diapositivas
+        public async Task<IActionResult> ViewSlides(int UnidadId)
         {
-            return View();
+            var patron_CenterContext = _context.Diapositiva.Include(d => d.Unidad).Where(d => d.UnidadId == UnidadId);
+            return View(await patron_CenterContext.ToListAsync());
         }
 
         private bool DiapositivaExists(int id)

@@ -26,10 +26,10 @@ namespace Patron_Center.Models
         [DisplayName("Eliminado")]
         public bool Eliminado { get; set; }
 
-        [DisplayName("Teorico")]
-        [Required(ErrorMessage = "Teorico es un campo requerido")]
-        public int TeoricoId { get; set; }
+        [DisplayName("Unidad")]
+        [Required(ErrorMessage = "Unidad es un campo requerido")]
+        public int UnidadId { get; set; }
 
-        public Teorico Teorico { get; set; }
+        public Unidad Unidad { get; set; }
     }
 }
