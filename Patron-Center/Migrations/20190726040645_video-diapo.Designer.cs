@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Patron_Center.Models;
 
 namespace Patron_Center.Migrations
 {
     [DbContext(typeof(Patron_CenterContext))]
-    partial class Patron_CenterContextModelSnapshot : ModelSnapshot
+    [Migration("20190726040645_video-diapo")]
+    partial class videodiapo
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -54,7 +56,7 @@ namespace Patron_Center.Migrations
                             Descripcion = "Descripción de curso de prueba",
                             DocenteId = 2,
                             Eliminado = false,
-                            FechaFinalizacion = new DateTime(2019, 7, 26, 1, 40, 1, 521, DateTimeKind.Local).AddTicks(8973),
+                            FechaFinalizacion = new DateTime(2019, 7, 26, 1, 6, 44, 964, DateTimeKind.Local).AddTicks(9238),
                             Nombre = "Curso de Prueba"
                         });
                 });

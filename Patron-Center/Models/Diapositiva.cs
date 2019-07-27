@@ -19,6 +19,10 @@ namespace Patron_Center.Models
         [DataType(DataType.MultilineText)]
         public String Texto { get; set; }
 
+        [DisplayName("Url del Video")]
+        [DataType(DataType.Text)]
+        public String UrlVideo { get; set; }
+
         [Required(ErrorMessage = "Orden es un campo requerido")]
         [DisplayName("Orden")]
         public int Orden { get; set; }

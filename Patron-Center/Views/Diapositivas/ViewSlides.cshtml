@@ -28,15 +28,18 @@
         {
             @if (Model.First() == item)
             {
-                <div class="carousel-item active" style="text-align:center;font:Sans-serif;font-size:25px;padding: 25px 100px 25px 100px;min-height:600px">
-                    <a>@Html.DisplayFor(modelItem => item.Texto)</a>
-                </div>
+        <div class="carousel-item active" style="text-align:center;font:Sans-serif;font-size:25px;padding: 25px 100px 25px 100px;min-height:600px">
+            <a>@Html.DisplayFor(modelItem => item.Texto)</a>
+            <iframe width="1203" height="684" src="@item.UrlVideo" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            
+        </div>
             }
             else
             {
-                <div class="carousel-item" style="text-align:center;font:Sans-serif;font-size:25px;padding: 25px 100px 25px 100px;min-height:600px">
-                    <a>@Html.DisplayFor(modelItem => item.Texto)</a>
-                </div>
+    <div class="carousel-item" style="text-align:center;font:Sans-serif;font-size:25px;padding: 25px 100px 25px 100px;min-height:600px">
+        <a>@Html.DisplayFor(modelItem => item.Texto)</a>
+        <iframe width="1203" height="684" src="@item.UrlVideo" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
             }
 
         }

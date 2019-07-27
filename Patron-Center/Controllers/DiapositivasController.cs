@@ -56,7 +56,7 @@ namespace Patron_Center.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Texto,Orden,Eliminado,UnidadId")] Diapositiva diapositiva)
+        public async Task<IActionResult> Create([Bind("Id,Texto,UrlVide,Orden,Eliminado,UnidadId")] Diapositiva diapositiva)
         {
             if (ModelState.IsValid)
             {
@@ -90,7 +90,7 @@ namespace Patron_Center.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Texto,Orden,Eliminado,UnidadId")] Diapositiva diapositiva)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Texto,UrlVideo,Orden,Eliminado,UnidadId")] Diapositiva diapositiva)
         {
             if (id != diapositiva.Id)
             {
