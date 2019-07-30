@@ -124,7 +124,7 @@ namespace Patron_Center.Controllers
         // GET: Diapositivas
         public async Task<IActionResult> ViewSlides(int UnidadId)
         {
-            var patron_CenterContext = _context.Diapositiva.Include(d => d.Unidad).Where(d => d.UnidadId == UnidadId);
+            var patron_CenterContext = _context.Diapositiva.Include(d => d.Unidad).Where(d => d.UnidadId == UnidadId && d.Eliminado == false).OrderBy(d => d.Orden);
             return View(await patron_CenterContext.ToListAsync());
         }
 
