@@ -6,19 +6,7 @@
 
 <h1>Index</h1>
 
-
-
-@foreach (var item in Model)
-{
-    <form asp-controller="Unidades" asp-action="Create" method="get">
-        <a>
-            <input type="hidden" name="CursoId" value=@item.CursoId>
-            <input class="btn btn-link" type="submit" value="Crear Unidad" />
-        </a>
-    </form>
-    break;
-}
-
+<a asp-controller="Unidades" asp-action="Create" asp-route-CursoId="@ViewBag.CursoId" class="btn btn-link">Crear Unidad</a>
 
 <table class="table">
     <thead>
@@ -55,7 +43,7 @@
                     @Html.DisplayFor(modelItem => item.Eliminado)
                 </td>
                 <td>
-                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a>
                     <a asp-action="Details" asp-route-id="@item.Id">Details</a>
                     <a asp-controller="Diapositivas" asp-action="Index" asp-route-UnidadId="@item.Id" class="btn btn-link">Ver Diapositivas</a>
                 </td>
@@ -63,4 +51,6 @@
         }
     </tbody>
 </table>
-
+<div>
+    <a href='javascript:history.go(-1)'>Volver atras</a>
+</div>

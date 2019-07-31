@@ -33,7 +33,7 @@ namespace Patron_Center.Controllers
                 ViewBag.InvalidUserMessage = "Usted no tiene permiso para acceder a este sitio. Por favor Ingrese con un usuario Administrador, ";
                 return View("Views/Shared/UnauthorisedUserError.cshtml");
             }
-
+            ViewBag.CursoId = CursoId;
             var patron_CenterContext = _context.Unidad.Include(u => u.Curso).Where(u => u.CursoId == CursoId);
             return View(await patron_CenterContext.ToListAsync());
         }        
@@ -166,7 +166,8 @@ namespace Patron_Center.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                //return RedirectToAction(nameof(Index));
+                return RedirectToAction("Index", "Unidades", new { CursoId = unidad.CursoId });
             }
             ViewData["CursoId"] = new SelectList(_context.Curso, "Id", "Nombre", unidad.CursoId);
             return View(unidad);
