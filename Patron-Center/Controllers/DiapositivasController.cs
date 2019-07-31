@@ -19,9 +19,9 @@ namespace Patron_Center.Controllers
         }
 
         // GET: Diapositivas
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int UnidadId)
         {
-            var patron_CenterContext = _context.Diapositiva.Include(d => d.Unidad);
+            var patron_CenterContext = _context.Diapositiva.Include(d => d.Unidad).Where(d => d.UnidadId == UnidadId);
             return View(await patron_CenterContext.ToListAsync());
         }
 

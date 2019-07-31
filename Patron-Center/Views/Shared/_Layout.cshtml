@@ -13,7 +13,7 @@
               asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
               asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute"
               crossorigin="anonymous"
-              integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"/>
+              integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" />
     </environment>
     <link rel="stylesheet" href="~/css/site.css" />
 </head>
@@ -36,9 +36,10 @@
                             <div class="dropdown-menu">
                                 <a class="dropdown-item" text-dark" asp-area="" asp-controller="Usuarios" asp-action="Index">Usuarios</a>
                                 <a class="dropdown-item" text-dark" asp-area="" asp-controller="Cursos" asp-action="Index">Cursos</a>
-                                <a class="dropdown-item" text-dark" asp-area="" asp-controller="Unidades" asp-action="Index">Unidades</a>
+                                @*<a class="dropdown-item" text-dark" asp-area="" asp-controller="Unidades" asp-action="Index">Unidades</a>
+                                <a class="dropdown-item" text-dark" asp-area="" asp-controller="Diapositivas" asp-action="Index">Diapositivas</a>*@
                                 <a class="dropdown-item" text-dark" asp-area="" asp-controller="CursoUsuarios" asp-action="Index">Alumnos a Cursos</a>
-                                <a class="dropdown-item" text-dark" asp-area="" asp-controller="Diapositivas" asp-action="Index">Diapositivas</a>
+
                             </div>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Alumnos</a>
@@ -50,9 +51,9 @@
                 <div>
                     @if (ViewBag.Nombre != null)
                     {
-                        <form asp-controller="Login" asp-action="Logout" class="navbar-right">
-                            <button type="submit" class="btn btn-link navbar-btn nav-link">Logout</button>
-                        </form>
+                    <form asp-controller="Login" asp-action="Logout" class="navbar-right">
+                        <button type="submit" class="btn btn-link navbar-btn nav-link">Logout</button>
+                    </form>
                     }
 
                 </div>

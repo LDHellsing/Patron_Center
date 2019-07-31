@@ -20,7 +20,7 @@ namespace Patron_Center.Controllers
         }
 
         // GET: Unidades
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int CursoId)
         {
 
             if (HttpContext.Session.GetInt32("_IdUsuario") == null)
@@ -34,7 +34,7 @@ namespace Patron_Center.Controllers
                 return View("Views/Shared/UnauthorisedUserError.cshtml");
             }
 
-            var patron_CenterContext = _context.Unidad.Include(u => u.Curso);
+            var patron_CenterContext = _context.Unidad.Include(u => u.Curso).Where(u => u.CursoId == CursoId);
             return View(await patron_CenterContext.ToListAsync());
         }        
 
@@ -58,9 +58,9 @@ namespace Patron_Center.Controllers
         }
 
         // GET: Unidades/Create
-        public IActionResult Create()
+        public IActionResult Create(int CursoId)
         {
-            ViewData["CursoId"] = new SelectList(_context.Curso, "Id", "Nombre");
+            ViewData["CursoId"] = new SelectList(_context.Curso.Where(c => c.Id == CursoId), "Id", "Nombre", CursoId);
             return View();
         }
 
@@ -86,10 +86,13 @@ namespace Patron_Center.Controllers
             {
                 _context.Add(unidad);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                //return RedirectToAction(nameof(Index));
+                return RedirectToAction("Index", "Unidades", new { CursoId = unidad.CursoId });
             }
-            ViewData["CursoId"] = new SelectList(_context.Curso, "Id", "Nombre", unidad.CursoId);
+            ViewData["CursoId"] = new SelectList(_context.Curso, "Id", "Nombre");
+
             return View(unidad);
+
         }
 
         // GET: Unidades/Edit/5

@@ -31,29 +31,29 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Nombre)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Descripcion)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FechaFinalizacion)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Eliminado)
-            </td>
-            <td>                
-                @(String.Format("{0} {1}", item.Docente.Nombre, item.Docente.Apellido))
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-controller="Unidades" asp-action="Index" >Ver Unidades</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Descripcion)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FechaFinalizacion)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Eliminado)
+                </td>
+                <td>
+                    @(String.Format("{0} {1}", item.Docente.Nombre, item.Docente.Apellido))
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-link">Edit</a>
+                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-link">Details</a>
+                    <a asp-controller="Unidades" asp-action="Index" asp-route-CursoId="@item.Id" class="btn btn-link">Ver Unidades</a>
+            </tr>
+        }
     </tbody>
 </table>
