@@ -26,6 +26,13 @@ namespace Patron_Center.Controllers
             {
                 return RedirectToAction("Index", "Login");
             }
+            else
+            {
+                ViewBag.Nombre = HttpContext.Session.GetString("_Nombre");
+                ViewBag.IdUsuario = HttpContext.Session.GetInt32("_IdUsuario");
+                ViewBag.TipoUsuario = HttpContext.Session.GetString("_TipoUsuario");
+                
+            }
 
             if (HttpContext.Session.GetString("_TipoUsuario") == "Alumno")
             {
@@ -43,6 +50,12 @@ namespace Patron_Center.Controllers
             if (HttpContext.Session.GetInt32("_IdUsuario") == null)
             {
                 return RedirectToAction("Index", "Login");
+            }
+            else
+            {
+                ViewBag.Nombre = HttpContext.Session.GetString("_Nombre");
+                ViewBag.IdUsuario = HttpContext.Session.GetInt32("_IdUsuario");
+                ViewBag.TipoUsuario = HttpContext.Session.GetString("_TipoUsuario");
             }
 
             if (HttpContext.Session.GetString("_TipoUsuario") == "Alumno")
@@ -74,6 +87,12 @@ namespace Patron_Center.Controllers
             {
                 return RedirectToAction("Index", "Login");
             }
+            else
+            {
+                ViewBag.Nombre = HttpContext.Session.GetString("_Nombre");
+                ViewBag.IdUsuario = HttpContext.Session.GetInt32("_IdUsuario");
+                ViewBag.TipoUsuario = HttpContext.Session.GetString("_TipoUsuario");
+            }
 
             if (HttpContext.Session.GetString("_TipoUsuario") == "Alumno")
             {
@@ -95,6 +114,12 @@ namespace Patron_Center.Controllers
             if (HttpContext.Session.GetInt32("_IdUsuario") == null)
             {
                 return RedirectToAction("Index", "Login");
+            }
+            else
+            {
+                ViewBag.Nombre = HttpContext.Session.GetString("_Nombre");
+                ViewBag.IdUsuario = HttpContext.Session.GetInt32("_IdUsuario");
+                ViewBag.TipoUsuario = HttpContext.Session.GetString("_TipoUsuario");
             }
 
             if (HttpContext.Session.GetString("_TipoUsuario") == "Alumno")
@@ -119,6 +144,12 @@ namespace Patron_Center.Controllers
             if (HttpContext.Session.GetInt32("_IdUsuario") == null)
             {
                 return RedirectToAction("Index", "Login");
+            }
+            else
+            {
+                ViewBag.Nombre = HttpContext.Session.GetString("_Nombre");
+                ViewBag.IdUsuario = HttpContext.Session.GetInt32("_IdUsuario");
+                ViewBag.TipoUsuario = HttpContext.Session.GetString("_TipoUsuario");
             }
 
             if (HttpContext.Session.GetString("_TipoUsuario") == "Alumno")
@@ -151,6 +182,12 @@ namespace Patron_Center.Controllers
             if (HttpContext.Session.GetInt32("_IdUsuario") == null)
             {
                 return RedirectToAction("Index", "Login");
+            }
+            else
+            {
+                ViewBag.Nombre = HttpContext.Session.GetString("_Nombre");
+                ViewBag.IdUsuario = HttpContext.Session.GetInt32("_IdUsuario");
+                ViewBag.TipoUsuario = HttpContext.Session.GetString("_TipoUsuario");
             }
 
             if (HttpContext.Session.GetString("_TipoUsuario") == "Alumno")

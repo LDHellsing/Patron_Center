@@ -19,46 +19,64 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Patron Center</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Administración</a>
-                            <div class="dropdown-menu">
-                                <a class="dropdown-item" text-dark" asp-area="" asp-controller="Usuarios" asp-action="Index">Usuarios</a>
-                                <a class="dropdown-item" text-dark" asp-area="" asp-controller="Cursos" asp-action="Index">Cursos</a>
-                                @*<a class="dropdown-item" text-dark" asp-area="" asp-controller="Unidades" asp-action="Index">Unidades</a>
-                                <a class="dropdown-item" text-dark" asp-area="" asp-controller="Diapositivas" asp-action="Index">Diapositivas</a>*@
-                                <a class="dropdown-item" text-dark" asp-area="" asp-controller="CursoUsuarios" asp-action="Index">Alumnos a Cursos</a>
+        @if (ViewBag.TipoUsuario != null)
+        {
+            <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+                <div class="container">
+                    <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Patron Center</a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                            aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                        <ul class="navbar-nav flex-grow-1">
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Administración</a>
+                                <div class="dropdown-menu">
+                                    <a class="dropdown-item" text-dark" asp-area="" asp-controller="Usuarios" asp-action="Index">Usuarios</a>
+                                    <a class="dropdown-item" text-dark" asp-area="" asp-controller="Cursos" asp-action="Index">Cursos</a>
+                                    <a class="dropdown-item" text-dark" asp-area="" asp-controller="CursoUsuarios" asp-action="Index">Alumnos a Cursos</a>
 
-                            </div>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Alumnos</a>
-                            <div class="dropdown-menu">
-                                <a class="dropdown-item" text-dark" asp-area="" asp-controller="CursoUsuarios" asp-action="ViewUserLessons">Cursos</a>
-                            </div>
-                    </ul>
-                </div>
-                <div>
-                    @if (ViewBag.Nombre != null)
-                    {
-                    <form asp-controller="Login" asp-action="Logout" class="navbar-right">
-                        <button type="submit" class="btn btn-link navbar-btn nav-link">Logout</button>
-                    </form>
-                    }
+                                </div>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Alumnos</a>
+                                <div class="dropdown-menu">
+                                    <a class="dropdown-item" text-dark" asp-area="" asp-controller="CursoUsuarios" asp-action="ViewUserLessons">Cursos</a>
+                                </div>
+                        </ul>
+                    </div>
+                    <div>
+                        @if (ViewBag.Nombre != null)
+                        {
 
+                            <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                                <ul class="navbar-nav flex-grow-1">                                    
+                                    <li class="nav-item dropdown">
+                                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Mi cuenta</a>
+                                        <div class="dropdown-menu">                                            
+                                            <div>
+                                                <form asp-controller="Usuarios" asp-action="Details" asp-route-id="@ViewBag.IdUsuario" class="dropdown-item">
+                                                    <button type="submit" class="btn btn-link text-body" style="text-decoration: none">Mi Cuenta</button>
+                                                </form>
+                                            </div>
+                                            <div class="container">
+                                                <form asp-controller="Login" asp-action="Logout" class="dropdown-item">
+                                                    <button type="submit" class="btn btn-link text-body" style="text-decoration: none">Logout</button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                </ul>
+                            </div>
+
+                        }
+
+                    </div>
                 </div>
-            </div>
-        </nav>
+            </nav>
+        }
     </header>
     <div class="container">
         @*<partial name="_CookieConsentPartial" />*@

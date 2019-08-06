@@ -21,11 +21,17 @@ namespace Patron_Center.Controllers
 
 
         // GET: Usuarios
-        public async Task<IActionResult> Index()      
+        public async Task<IActionResult> Index()
         {
             if (HttpContext.Session.GetInt32("_IdUsuario") == null)
             {
                 return RedirectToAction("Index", "Login");
+            }
+            else
+            {
+                ViewBag.Nombre = HttpContext.Session.GetString("_Nombre");
+                ViewBag.IdUsuario = HttpContext.Session.GetInt32("_IdUsuario");
+                ViewBag.TipoUsuario = HttpContext.Session.GetString("_TipoUsuario");
             }
 
             if (HttpContext.Session.GetString("_TipoUsuario") == "Alumno")
@@ -37,6 +43,8 @@ namespace Patron_Center.Controllers
             return View(await _context.Usuario.ToListAsync());
         }
 
+
+
         // GET: Usuarios/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -45,8 +53,14 @@ namespace Patron_Center.Controllers
             {
                 return RedirectToAction("Index", "Login");
             }
+            else
+            {
+                ViewBag.Nombre = HttpContext.Session.GetString("_Nombre");
+                ViewBag.IdUsuario = HttpContext.Session.GetInt32("_IdUsuario");
+                ViewBag.TipoUsuario = HttpContext.Session.GetString("_TipoUsuario");
+            }
 
-            if (HttpContext.Session.GetString("_TipoUsuario") == "Alumno")
+            if (HttpContext.Session.GetString("_TipoUsuario") == "Alumno" && id != HttpContext.Session.GetInt32("_IdUsuario"))
             {
                 ViewBag.InvalidUserMessage = "Usted no tiene permiso para acceder a este sitio. Por favor Ingrese con un usuario Administrador, ";
                 return View("Views/Shared/UnauthorisedUserError.cshtml");
@@ -74,6 +88,12 @@ namespace Patron_Center.Controllers
             {
                 return RedirectToAction("Index", "Login");
             }
+            else
+            {
+                ViewBag.Nombre = HttpContext.Session.GetString("_Nombre");
+                ViewBag.IdUsuario = HttpContext.Session.GetInt32("_IdUsuario");
+                ViewBag.TipoUsuario = HttpContext.Session.GetString("_TipoUsuario");
+            }
 
             if (HttpContext.Session.GetString("_TipoUsuario") == "Alumno")
             {
@@ -90,10 +110,15 @@ namespace Patron_Center.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Documento,Nombre,Apellido,Email,Password,TipoUsuario,Eliminado")] Usuario usuario)
         {
-
             if (HttpContext.Session.GetInt32("_IdUsuario") == null)
             {
                 return RedirectToAction("Index", "Login");
+            }
+            else
+            {
+                ViewBag.Nombre = HttpContext.Session.GetString("_Nombre");
+                ViewBag.IdUsuario = HttpContext.Session.GetInt32("_IdUsuario");
+                ViewBag.TipoUsuario = HttpContext.Session.GetString("_TipoUsuario");
             }
 
             if (HttpContext.Session.GetString("_TipoUsuario") == "Alumno")
@@ -106,18 +131,18 @@ namespace Patron_Center.Controllers
             var patron_CenterContext = _context.Usuario.Where(u => u.Documento == usuario.Documento);
             //Si no existe creo el usuario
             if (patron_CenterContext.Count() == 0)
-            { 
-                if (ModelState.IsValid)
             {
-                _context.Add(usuario);
-                await _context.SaveChangesAsync();               
-                return RedirectToAction(nameof(Create));
+                if (ModelState.IsValid)
+                {
+                    _context.Add(usuario);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Create));
                 }
-            return View(usuario);
+                return View(usuario);
             }
             else
             {
-                ViewBag.UsuarioDuplicado = string.Format("El usuario con el documento {0} ya se encuentra en el sistema.",usuario.Documento);
+                ViewBag.UsuarioDuplicado = string.Format("El usuario con el documento {0} ya se encuentra en el sistema.", usuario.Documento);
                 return View(usuario);
             }
         }
@@ -129,8 +154,14 @@ namespace Patron_Center.Controllers
             {
                 return RedirectToAction("Index", "Login");
             }
+            else
+            {
+                ViewBag.Nombre = HttpContext.Session.GetString("_Nombre");
+                ViewBag.IdUsuario = HttpContext.Session.GetInt32("_IdUsuario");
+                ViewBag.TipoUsuario = HttpContext.Session.GetString("_TipoUsuario");
+            }
 
-            if (HttpContext.Session.GetString("_TipoUsuario") == "Alumno")
+            if (HttpContext.Session.GetString("_TipoUsuario") == "Alumno" && id != HttpContext.Session.GetInt32("_IdUsuario"))
             {
                 ViewBag.InvalidUserMessage = "Usted no tiene permiso para acceder a este sitio. Por favor Ingrese con un usuario Administrador, ";
                 return View("Views/Shared/UnauthorisedUserError.cshtml");
@@ -160,8 +191,14 @@ namespace Patron_Center.Controllers
             {
                 return RedirectToAction("Index", "Login");
             }
+            else
+            {
+                ViewBag.Nombre = HttpContext.Session.GetString("_Nombre");
+                ViewBag.IdUsuario = HttpContext.Session.GetInt32("_IdUsuario");
+                ViewBag.TipoUsuario = HttpContext.Session.GetString("_TipoUsuario");
+            }
 
-            if (HttpContext.Session.GetString("_TipoUsuario") == "Alumno")
+            if (HttpContext.Session.GetString("_TipoUsuario") == "Alumno" && id != HttpContext.Session.GetInt32("_IdUsuario"))
             {
                 ViewBag.InvalidUserMessage = "Usted no tiene permiso para acceder a este sitio. Por favor Ingrese con un usuario Administrador, ";
                 return View("Views/Shared/UnauthorisedUserError.cshtml");
@@ -171,29 +208,37 @@ namespace Patron_Center.Controllers
             {
                 return NotFound();
             }
-                if (ModelState.IsValid)
+            if (ModelState.IsValid)
+            {
+                try
                 {
-                    try
+                    _context.Update(usuario);
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!UsuarioExists(usuario.Id))
                     {
-                        _context.Update(usuario);
-                        await _context.SaveChangesAsync();
+                        return NotFound();
                     }
-                    catch (DbUpdateConcurrencyException)
+                    else
                     {
-                        if (!UsuarioExists(usuario.Id))
-                        {
-                            return NotFound();
-                        }
-                        else
-                        {
-                            throw;
-                        }
+                        throw;
                     }
+                }
+                if (HttpContext.Session.GetString("_TipoUsuario") == "Alumno")
+                {
+                    return RedirectToAction("Index", "Home");
+                }
+                else
+                {
                     return RedirectToAction(nameof(Index));
                 }
 
+            }
+
             return View(usuario);
-        }      
+        }
 
         private bool UsuarioExists(int id)
         {

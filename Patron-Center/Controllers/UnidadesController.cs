@@ -22,10 +22,15 @@ namespace Patron_Center.Controllers
         // GET: Unidades
         public async Task<IActionResult> Index(int CursoId)
         {
-
             if (HttpContext.Session.GetInt32("_IdUsuario") == null)
             {
                 return RedirectToAction("Index", "Login");
+            }
+            else
+            {
+                ViewBag.Nombre = HttpContext.Session.GetString("_Nombre");
+                ViewBag.IdUsuario = HttpContext.Session.GetInt32("_IdUsuario");
+                ViewBag.TipoUsuario = HttpContext.Session.GetString("_TipoUsuario");
             }
 
             if (HttpContext.Session.GetString("_TipoUsuario") == "Alumno")
@@ -33,6 +38,7 @@ namespace Patron_Center.Controllers
                 ViewBag.InvalidUserMessage = "Usted no tiene permiso para acceder a este sitio. Por favor Ingrese con un usuario Administrador, ";
                 return View("Views/Shared/UnauthorisedUserError.cshtml");
             }
+
             ViewBag.CursoId = CursoId;
             var patron_CenterContext = _context.Unidad.Include(u => u.Curso).Where(u => u.CursoId == CursoId);
             return View(await patron_CenterContext.ToListAsync());
@@ -75,6 +81,12 @@ namespace Patron_Center.Controllers
             {
                 return RedirectToAction("Index", "Login");
             }
+            else
+            {
+                ViewBag.Nombre = HttpContext.Session.GetString("_Nombre");
+                ViewBag.IdUsuario = HttpContext.Session.GetInt32("_IdUsuario");
+                ViewBag.TipoUsuario = HttpContext.Session.GetString("_TipoUsuario");
+            }
 
             if (HttpContext.Session.GetString("_TipoUsuario") == "Alumno")
             {
@@ -98,10 +110,15 @@ namespace Patron_Center.Controllers
         // GET: Unidades/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-
             if (HttpContext.Session.GetInt32("_IdUsuario") == null)
             {
                 return RedirectToAction("Index", "Login");
+            }
+            else
+            {
+                ViewBag.Nombre = HttpContext.Session.GetString("_Nombre");
+                ViewBag.IdUsuario = HttpContext.Session.GetInt32("_IdUsuario");
+                ViewBag.TipoUsuario = HttpContext.Session.GetString("_TipoUsuario");
             }
 
             if (HttpContext.Session.GetString("_TipoUsuario") == "Alumno")
@@ -131,10 +148,15 @@ namespace Patron_Center.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,CursoId,Nombre,Descripcion,Eliminado")] Unidad unidad)
         {
-
             if (HttpContext.Session.GetInt32("_IdUsuario") == null)
             {
                 return RedirectToAction("Index", "Login");
+            }
+            else
+            {
+                ViewBag.Nombre = HttpContext.Session.GetString("_Nombre");
+                ViewBag.IdUsuario = HttpContext.Session.GetInt32("_IdUsuario");
+                ViewBag.TipoUsuario = HttpContext.Session.GetString("_TipoUsuario");
             }
 
             if (HttpContext.Session.GetString("_TipoUsuario") == "Alumno")
@@ -180,6 +202,12 @@ namespace Patron_Center.Controllers
             if (HttpContext.Session.GetInt32("_IdUsuario") == null)
             {
                 return RedirectToAction("Index", "Login");
+            }
+            else
+            {
+                ViewBag.Nombre = HttpContext.Session.GetString("_Nombre");
+                ViewBag.IdUsuario = HttpContext.Session.GetInt32("_IdUsuario");
+                ViewBag.TipoUsuario = HttpContext.Session.GetString("_TipoUsuario");
             }
 
             //if (HttpContext.Session.GetString("_TipoUsuario") == "Alumno")

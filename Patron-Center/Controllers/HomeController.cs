@@ -18,6 +18,8 @@ namespace Patron_Center.Controllers
                 return RedirectToAction("Index", "Login");
             }
             ViewBag.Nombre = HttpContext.Session.GetString("_Nombre");
+            ViewBag.IdUsuario = HttpContext.Session.GetInt32("_IdUsuario");
+            ViewBag.TipoUsuario = HttpContext.Session.GetString("_TipoUsuario");
             return View();
         }
 
