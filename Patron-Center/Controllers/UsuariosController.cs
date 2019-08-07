@@ -34,7 +34,7 @@ namespace Patron_Center.Controllers
                 ViewBag.TipoUsuario = HttpContext.Session.GetString("_TipoUsuario");
             }
 
-            if (HttpContext.Session.GetString("_TipoUsuario") == "Alumno")
+            if (HttpContext.Session.GetString("_TipoUsuario") != "Administrador")
             {
                 ViewBag.InvalidUserMessage = "Usted no tiene permiso para acceder a este sitio. Por favor Ingrese con un usuario Administrador, ";
                 return View("Views/Shared/UnauthorisedUserError.cshtml");
@@ -95,7 +95,7 @@ namespace Patron_Center.Controllers
                 ViewBag.TipoUsuario = HttpContext.Session.GetString("_TipoUsuario");
             }
 
-            if (HttpContext.Session.GetString("_TipoUsuario") == "Alumno")
+            if (HttpContext.Session.GetString("_TipoUsuario") != "Administrador")
             {
                 ViewBag.InvalidUserMessage = "Usted no tiene permiso para acceder a este sitio. Por favor Ingrese con un usuario Administrador, ";
                 return View("Views/Shared/UnauthorisedUserError.cshtml");
@@ -121,7 +121,7 @@ namespace Patron_Center.Controllers
                 ViewBag.TipoUsuario = HttpContext.Session.GetString("_TipoUsuario");
             }
 
-            if (HttpContext.Session.GetString("_TipoUsuario") == "Alumno")
+            if (HttpContext.Session.GetString("_TipoUsuario") != "Administrador")
             {
                 ViewBag.InvalidUserMessage = "Usted no tiene permiso para acceder a este sitio. Por favor Ingrese con un usuario Administrador, ";
                 return View("Views/Shared/UnauthorisedUserError.cshtml");
@@ -161,7 +161,7 @@ namespace Patron_Center.Controllers
                 ViewBag.TipoUsuario = HttpContext.Session.GetString("_TipoUsuario");
             }
 
-            if (HttpContext.Session.GetString("_TipoUsuario") == "Alumno" && id != HttpContext.Session.GetInt32("_IdUsuario"))
+            if (HttpContext.Session.GetString("_TipoUsuario") != "Administrador" && id != HttpContext.Session.GetInt32("_IdUsuario"))
             {
                 ViewBag.InvalidUserMessage = "Usted no tiene permiso para acceder a este sitio. Por favor Ingrese con un usuario Administrador, ";
                 return View("Views/Shared/UnauthorisedUserError.cshtml");
@@ -198,7 +198,7 @@ namespace Patron_Center.Controllers
                 ViewBag.TipoUsuario = HttpContext.Session.GetString("_TipoUsuario");
             }
 
-            if (HttpContext.Session.GetString("_TipoUsuario") == "Alumno" && id != HttpContext.Session.GetInt32("_IdUsuario"))
+            if (HttpContext.Session.GetString("_TipoUsuario") != "Administrador" && id != HttpContext.Session.GetInt32("_IdUsuario"))
             {
                 ViewBag.InvalidUserMessage = "Usted no tiene permiso para acceder a este sitio. Por favor Ingrese con un usuario Administrador, ";
                 return View("Views/Shared/UnauthorisedUserError.cshtml");

@@ -5,10 +5,12 @@
 }
 
 <h1>Listado de Cursos</h1>
-
-<p>
-    <a asp-action="Create">Crear</a>
-</p>
+@if (ViewBag.TipoUsuario == "Administrador")
+{
+    <p>
+        <a asp-action="Create">Crear</a>
+    </p>
+}
 <table class="table">
     <thead>
         <tr>

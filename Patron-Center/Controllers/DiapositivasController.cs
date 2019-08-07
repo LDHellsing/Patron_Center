@@ -22,6 +22,23 @@ namespace Patron_Center.Controllers
         // GET: Diapositivas
         public async Task<IActionResult> Index(int UnidadId)
         {
+            if (HttpContext.Session.GetInt32("_IdUsuario") == null)
+            {
+                return RedirectToAction("Index", "Login");
+            }
+            else
+            {
+                ViewBag.Nombre = HttpContext.Session.GetString("_Nombre");
+                ViewBag.IdUsuario = HttpContext.Session.GetInt32("_IdUsuario");
+                ViewBag.TipoUsuario = HttpContext.Session.GetString("_TipoUsuario");
+            }
+
+            //if (HttpContext.Session.GetString("_TipoUsuario") == "Alumno")
+            //{
+            //    ViewBag.InvalidUserMessage = "Usted no tiene permiso para acceder a este sitio. Por favor Ingrese con un usuario Administrador, ";
+            //    return View("Views/Shared/UnauthorisedUserError.cshtml");
+            //}
+
             ViewBag.UnidadId = UnidadId;
             var patron_CenterContext = _context.Diapositiva.Include(d => d.Unidad).Where(d => d.UnidadId == UnidadId);
             return View(await patron_CenterContext.ToListAsync());

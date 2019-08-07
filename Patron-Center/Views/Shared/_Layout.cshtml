@@ -38,9 +38,13 @@
                                 <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Administración</a>
                                     <div class="dropdown-menu">
-                                        <a class="dropdown-item" text-dark" asp-area="" asp-controller="Usuarios" asp-action="Index">Usuarios</a>
+
+                                        @if (ViewBag.TipoUsuario == "Administrador")
+                                        {
+                                            <a class="dropdown-item" text-dark" asp-area="" asp-controller="Usuarios" asp-action="Index">Usuarios</a>
+                                            <a class="dropdown-item" text-dark" asp-area="" asp-controller="CursoUsuarios" asp-action="Index">Alumnos a Cursos</a>
+                                        }
                                         <a class="dropdown-item" text-dark" asp-area="" asp-controller="Cursos" asp-action="Index">Cursos</a>
-                                        <a class="dropdown-item" text-dark" asp-area="" asp-controller="CursoUsuarios" asp-action="Index">Alumnos a Cursos</a>
 
                                     </div>
                                 </li>
@@ -58,10 +62,10 @@
                         {
 
                             <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-                                <ul class="navbar-nav flex-grow-1">                                    
+                                <ul class="navbar-nav flex-grow-1">
                                     <li class="nav-item dropdown">
                                         <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Mi cuenta</a>
-                                        <div class="dropdown-menu">                                            
+                                        <div class="dropdown-menu">
                                             <div>
                                                 <form asp-controller="Usuarios" asp-action="Details" asp-route-id="@ViewBag.IdUsuario" class="dropdown-item">
                                                     <button type="submit" class="btn btn-link text-body" style="text-decoration: none">Mi Cuenta</button>

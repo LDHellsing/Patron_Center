@@ -3,14 +3,14 @@
 }
 
 
-    <div class="text-center">
-        @if (ViewBag.Nombre != null)
-        {
-            <h1> Bienvenido a Patron Center @ViewBag.Nombre</h1>
-        }
-        else
-        {
-            <h1> No deberia deberia mostrar este mensaje nunca</h1>
-        }
-        <p>Software de aprendizaje de Patrones de Diseño.</p>
+<div class="text-center">
+    @if (ViewBag.Nombre != null)
+    {
+        <h1> Bienvenido a Patron Center @ViewBag.Nombre</h1>
+    }
+
+    <p>Software de aprendizaje de Patrones de Diseño.</p>
+    <div style="position:center; bottom:0px">
+        <img src="~/images/udeLogo.png" class="img-fluid" alt="UDE Logo">
     </div>
+</div>
