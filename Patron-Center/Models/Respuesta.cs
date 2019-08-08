@@ -12,8 +12,8 @@ namespace Patron_Center.Models
         [Key]
         public int Id { get; set; }
         public int IdPregunta { get; set; }
-        public bool RespuestaCorrecta { get; set; }
-        public bool RespuestaUnica { get; set; }
+        public bool EsRespuestaCorrecta { get; set; }
+        public bool EsRespuestaUnica { get; set; }
         [Required]
         public string Enunciado { get; set; }
     }
