@@ -21,6 +21,49 @@
                 <label asp-for="UrlVideo" class="control-label"></label>
                 <input asp-for="UrlVideo" class="form-control" />
                 <span asp-validation-for="UrlVideo" class="text-danger"></span>
+
+                <!-- Button trigger modal -->
+                <button type="button" class="btn btn-info container" data-toggle="modal" data-target="#exampleModalLong">Como cargar el Id del video</button>
+
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLongTitle">Como cargar el Id del video de Youtube</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <ol>
+                                    <li>
+                                        <p>Debes buscar en Youtube el video que desees agregar a la diapositiva.</p>
+                                    </li>
+                                    <li>
+                                        <p>Debes copiar el texto que está después de "watch?v=", como se muestra en la imagen a continuación.</p>
+                                        <div style="position:center; bottom:0px">
+                                            <img src="~/images/YoutubeId1.png" class="img-fluid" alt="Id Youtube1">
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <p>Pegas el texto en el campo "ID de Video de Youtube", como se muestra en la imagen a continuación.</p>
+                                        <div style="position:center; bottom:0px">
+                                            <img src="~/images/YoutubeId2.png" class="img-fluid" alt="Id Youtube2">
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <p>Listo! Continuas cargando el resto de los datos.</p>
+                                    </li>
+                                </ol>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-primary" data-dismiss="modal">Cerrar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
             <div class="form-group">
                 <label asp-for="Orden" class="control-label"></label>
@@ -38,7 +81,7 @@
                 <span asp-validation-for="UnidadId" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <input type="submit" value="Grabar" class="btn btn-primary" />
             </div>
         </form>
     </div>

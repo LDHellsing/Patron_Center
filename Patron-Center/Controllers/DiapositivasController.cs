@@ -137,7 +137,7 @@ namespace Patron_Center.Controllers
             {
                 return NotFound();
             }
-            ViewData["UnidadId"] = new SelectList(_context.Unidad, "Id", "Nombre", diapositiva.UnidadId);
+            ViewData["UnidadId"] = new SelectList(_context.Unidad.Where(u => u.Id == diapositiva.UnidadId), "Id", "Nombre", diapositiva.UnidadId);
             return View(diapositiva);
         }
 

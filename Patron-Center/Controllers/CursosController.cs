@@ -39,9 +39,18 @@ namespace Patron_Center.Controllers
                 ViewBag.InvalidUserMessage = "Usted no tiene permiso para acceder a este sitio. Por favor Ingrese con un usuario Administrador, ";
                 return View("Views/Shared/UnauthorisedUserError.cshtml");
             }
-
-            var patron_CenterContext = _context.Curso.Include(c => c.Docente);
-            return View(await patron_CenterContext.ToListAsync());
+            
+            if (HttpContext.Session.GetString("_TipoUsuario") == "Administrador")
+            {                
+                var patron_CenterContext = _context.Curso.Include(c => c.Docente);
+                return View(await patron_CenterContext.ToListAsync());
+            }
+            else
+            {
+                var patron_CenterContext = _context.Curso.Include(c => c.Docente).Where(c => c.DocenteId == HttpContext.Session.GetInt32("_IdUsuario") && c.Eliminado != true);
+                return View(await patron_CenterContext.ToListAsync());
+            }
+            
         }
 
         // GET: Cursos/Details/5

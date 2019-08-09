@@ -19,7 +19,7 @@ namespace Patron_Center.Models
         [DataType(DataType.MultilineText)]
         public String Texto { get; set; }
 
-        [DisplayName("URL de Video de Youtube")]
+        [DisplayName("ID de Video de Youtube")]
         [DataType(DataType.Text)]
         public String UrlVideo { get; set; }
 
