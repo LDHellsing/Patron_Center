@@ -15,9 +15,27 @@ namespace Patron_Center.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.2.6-servicing-10079")
+                .HasAnnotation("ProductVersion", "2.2.4-servicing-10062")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+            modelBuilder.Entity("Patron_Center.Models.Correccion", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("IdAlumno");
+
+                    b.Property<int>("IdQuiz");
+
+                    b.Property<string>("Resultado")
+                        .IsRequired();
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Correccion");
+                });
 
             modelBuilder.Entity("Patron_Center.Models.Curso", b =>
                 {
@@ -54,7 +72,7 @@ namespace Patron_Center.Migrations
                             Descripcion = "Descripción de curso de prueba",
                             DocenteId = 2,
                             Eliminado = false,
-                            FechaFinalizacion = new DateTime(2019, 7, 26, 1, 40, 1, 521, DateTimeKind.Local).AddTicks(8973),
+                            FechaFinalizacion = new DateTime(2019, 8, 8, 21, 54, 38, 297, DateTimeKind.Local).AddTicks(7219),
                             Nombre = "Curso de Prueba"
                         });
                 });
@@ -158,14 +176,20 @@ namespace Patron_Center.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("ComentarioDocente");
+
                     b.Property<string>("Enunciado")
                         .IsRequired();
+
+                    b.Property<bool>("EsEliminado");
 
                     b.Property<bool>("EsMultipleOpcion");
 
                     b.Property<int>("IdQuiz");
 
                     b.Property<int>("Orden");
+
+                    b.Property<int>("Puntaje");
 
                     b.Property<int?>("QuizId");
 
@@ -182,10 +206,16 @@ namespace Patron_Center.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<bool>("EsEliminado");
+
+                    b.Property<bool>("EsEvaluacion");
+
                     b.Property<int>("IdCurso");
 
                     b.Property<string>("Nombre")
                         .IsRequired();
+
+                    b.Property<int>("Puntaje");
 
                     b.HasKey("Id");
 
@@ -201,13 +231,15 @@ namespace Patron_Center.Migrations
                     b.Property<string>("Enunciado")
                         .IsRequired();
 
+                    b.Property<bool>("EsEliminado");
+
+                    b.Property<bool>("EsRespuestaCorrecta");
+
+                    b.Property<bool>("EsRespuestaUnica");
+
                     b.Property<int>("IdPregunta");
 
                     b.Property<int?>("PreguntaId");
-
-                    b.Property<bool>("RespuestaCorrecta");
-
-                    b.Property<bool>("RespuestaUnica");
 
                     b.HasKey("Id");
 

@@ -1,6 +1,9 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -8,14 +11,24 @@ namespace Patron_Center.Models
 {
     public class Pregunta
     {
+        [HiddenInput(DisplayValue = false)]
+        [Editable(false)]
+        [Key]
         public int Id { get; set; }
+        [Editable (false)]
         public int IdQuiz { get; set; }
+        public int Puntaje { get; set; }
+        [DisplayName("Eliminado")]
+        public bool EsEliminado { get; set; }
+        [DisplayName("Comentario")]
+        public string ComentarioDocente { get; set; }
         public ICollection<Respuesta> Respuestas { get; set; }
-        [Required]        
+        [DisplayName("¿Multiple Opción?")]
         public bool EsMultipleOpcion { get; set; }
-        [Required]
+        //testear si el orden se reinicia a 0 cuando se crea un nuevo quiz
+        [Required(ErrorMessage = "El campo oden de pregunta es requerido")]
         public int Orden { get; set; }
-        [Required]
+        [Required(ErrorMessage = "El enunciado es un campo requerido")]
         public string Enunciado { get; set; }
     }
 }

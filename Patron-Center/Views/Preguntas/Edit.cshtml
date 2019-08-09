@@ -1,0 +1,61 @@
+﻿@model Patron_Center.Models.Pregunta
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Pregunta</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="IdQuiz" class="control-label"></label>
+                <input asp-for="IdQuiz" class="form-control" />
+                <span asp-validation-for="IdQuiz" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Puntaje" class="control-label"></label>
+                <input asp-for="Puntaje" class="form-control" />
+                <span asp-validation-for="Puntaje" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="EsEliminado" /> @Html.DisplayNameFor(model => model.EsEliminado)
+                </label>
+            </div>
+            <div class="form-group">
+                <label asp-for="ComentarioDocente" class="control-label"></label>
+                <input asp-for="ComentarioDocente" class="form-control" />
+                <span asp-validation-for="ComentarioDocente" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="EsMultipleOpcion" /> @Html.DisplayNameFor(model => model.EsMultipleOpcion)
+                </label>
+            </div>
+            <div class="form-group">
+                <label asp-for="Orden" class="control-label"></label>
+                <input asp-for="Orden" class="form-control" />
+                <span asp-validation-for="Orden" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Enunciado" class="control-label"></label>
+                <input asp-for="Enunciado" class="form-control" />
+                <span asp-validation-for="Enunciado" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

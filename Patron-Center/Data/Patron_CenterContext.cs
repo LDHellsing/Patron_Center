@@ -22,6 +22,7 @@ namespace Patron_Center.Models
         public DbSet<Respuesta> Respuesta { get; set; }
         public DbSet<Pregunta> Pregunta { get; set; }
         public DbSet<Quiz> Quiz { get; set; }
+        public DbSet<Correccion> Correccion { get; set; }
         public DbSet<Patron_Center.Models.Unidad> Unidad { get; set; }
         public DbSet<Patron_Center.Models.Diapositiva> Diapositiva { get; set; }
 
