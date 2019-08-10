@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Patron_Center.Models;
 
 namespace Patron_Center.Migrations
 {
     [DbContext(typeof(Patron_CenterContext))]
-    partial class Patron_CenterContextModelSnapshot : ModelSnapshot
+    [Migration("20190810212637_Actualizacion-Quiz-Pregunta-Respuesta")]
+    partial class ActualizacionQuizPreguntaRespuesta
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

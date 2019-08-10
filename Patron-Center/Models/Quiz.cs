@@ -11,11 +11,10 @@ namespace Patron_Center.Models
     public class Quiz
     {
         [HiddenInput(DisplayValue = false)]
-        [Editable(false)]
         [Key]
         public int Id { get; set; }
-        [Editable(false)]
-        public int IdCurso { get; set; }
+        public int UnidadId { get; set; }
+        public Unidad Unidad { get; set; }
         public int Puntaje { get; set; }
         [DisplayName("¿Evaluación?")]
         public bool EsEvaluacion { get; set; }

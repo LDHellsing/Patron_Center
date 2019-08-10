@@ -4,16 +4,16 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+    <h1>Listado de Practicos</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-controller="Quizes" asp-action="Create" asp-route-UnidadId="@ViewBag.UnidadId" class="btn btn-link">Crear</a>
 </p>
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.IdCurso)
+                @Html.DisplayNameFor(model => model.Unidad)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Puntaje)
@@ -34,7 +34,7 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.IdCurso)
+                @Html.DisplayFor(modelItem => item.Unidad.Descripcion)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Puntaje)
@@ -49,9 +49,9 @@
                 @Html.DisplayFor(modelItem => item.Nombre)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a>
+                <a asp-controller="Preguntas" asp-action="Index" asp-route-UnidadId="@item.Id" class="btn btn-link">Ver Preguntas</a>
             </td>
         </tr>
 }

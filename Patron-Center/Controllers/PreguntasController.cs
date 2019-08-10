@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Patron_Center.Models;
 
-namespace Patron_Center
+namespace Patron_Center.Controllers
 {
     public class PreguntasController : Controller
     {
@@ -19,9 +19,10 @@ namespace Patron_Center
         }
 
         // GET: Preguntas
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int QuizId)
         {
-            return View(await _context.Pregunta.ToListAsync());
+            var patron_CenterContext = _context.Pregunta.Include(p => p.Quiz);
+            return View(await patron_CenterContext.ToListAsync());
         }
 
         // GET: Preguntas/Details/5
@@ -33,6 +34,7 @@ namespace Patron_Center
             }
 
             var pregunta = await _context.Pregunta
+                .Include(p => p.Quiz)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (pregunta == null)
             {
@@ -45,6 +47,7 @@ namespace Patron_Center
         // GET: Preguntas/Create
         public IActionResult Create()
         {
+            ViewData["QuizId"] = new SelectList(_context.Quiz, "Id", "Nombre");
             return View();
         }
 
@@ -53,7 +56,7 @@ namespace Patron_Center
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,IdQuiz,Puntaje,EsEliminado,ComentarioDocente,EsMultipleOpcion,Orden,Enunciado")] Pregunta pregunta)
+        public async Task<IActionResult> Create([Bind("Id,QuizId,Puntaje,EsEliminado,ComentarioDocente,EsMultipleOpcion,Orden,Enunciado")] Pregunta pregunta)
         {
             if (ModelState.IsValid)
             {
@@ -61,6 +64,7 @@ namespace Patron_Center
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["QuizId"] = new SelectList(_context.Quiz, "Id", "Nombre", pregunta.QuizId);
             return View(pregunta);
         }
 
@@ -77,6 +81,7 @@ namespace Patron_Center
             {
                 return NotFound();
             }
+            ViewData["QuizId"] = new SelectList(_context.Quiz, "Id", "Nombre", pregunta.QuizId);
             return View(pregunta);
         }
 
@@ -85,7 +90,7 @@ namespace Patron_Center
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,IdQuiz,Puntaje,EsEliminado,ComentarioDocente,EsMultipleOpcion,Orden,Enunciado")] Pregunta pregunta)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,QuizId,Puntaje,EsEliminado,ComentarioDocente,EsMultipleOpcion,Orden,Enunciado")] Pregunta pregunta)
         {
             if (id != pregunta.Id)
             {
@@ -112,6 +117,7 @@ namespace Patron_Center
                 }
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["QuizId"] = new SelectList(_context.Quiz, "Id", "Nombre", pregunta.QuizId);
             return View(pregunta);
         }
 
@@ -124,6 +130,7 @@ namespace Patron_Center
             }
 
             var pregunta = await _context.Pregunta
+                .Include(p => p.Quiz)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (pregunta == null)
             {

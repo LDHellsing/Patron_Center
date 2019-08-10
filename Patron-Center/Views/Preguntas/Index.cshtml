@@ -7,13 +7,13 @@
 <h1>Index</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create">Crear</a>
 </p>
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.IdQuiz)
+                @Html.DisplayNameFor(model => model.Quiz)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Puntaje)
@@ -40,7 +40,7 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.IdQuiz)
+                @Html.DisplayFor(modelItem => item.Quiz.Nombre)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Puntaje)

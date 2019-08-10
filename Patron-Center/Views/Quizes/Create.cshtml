@@ -13,9 +13,8 @@
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="IdCurso" class="control-label"></label>
-                <input asp-for="IdCurso" class="form-control" />
-                <span asp-validation-for="IdCurso" class="text-danger"></span>
+                <label asp-for="UnidadId" class="control-label"></label>
+                <select asp-for="UnidadId" class="form-control" asp-items="ViewBag.UnidadId"></select>
             </div>
             <div class="form-group">
                 <label asp-for="Puntaje" class="control-label"></label>
@@ -25,11 +24,6 @@
             <div class="form-group form-check">
                 <label class="form-check-label">
                     <input class="form-check-input" asp-for="EsEvaluacion" /> @Html.DisplayNameFor(model => model.EsEvaluacion)
-                </label>
-            </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="EsEliminado" /> @Html.DisplayNameFor(model => model.EsEliminado)
                 </label>
             </div>
             <div class="form-group">
@@ -45,6 +39,6 @@
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">Volver atras</a>
 </div>
 

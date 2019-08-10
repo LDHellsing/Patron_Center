@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Patron_Center.Models;
 
-namespace Patron_Center
+namespace Patron_Center.Controllers
 {
     public class RespuestasController : Controller
     {
@@ -21,7 +21,8 @@ namespace Patron_Center
         // GET: Respuestas
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Respuesta.ToListAsync());
+            var patron_CenterContext = _context.Respuesta.Include(r => r.Pregunta);
+            return View(await patron_CenterContext.ToListAsync());
         }
 
         // GET: Respuestas/Details/5
@@ -33,6 +34,7 @@ namespace Patron_Center
             }
 
             var respuesta = await _context.Respuesta
+                .Include(r => r.Pregunta)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (respuesta == null)
             {
@@ -45,6 +47,7 @@ namespace Patron_Center
         // GET: Respuestas/Create
         public IActionResult Create()
         {
+            ViewData["PreguntaId"] = new SelectList(_context.Pregunta, "Id", "Enunciado");
             return View();
         }
 
@@ -53,7 +56,7 @@ namespace Patron_Center
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,IdPregunta,EsRespuestaCorrecta,EsRespuestaUnica,EsEliminado,Enunciado")] Respuesta respuesta)
+        public async Task<IActionResult> Create([Bind("Id,PreguntaId,EsRespuestaCorrecta,EsRespuestaUnica,EsEliminado,Enunciado")] Respuesta respuesta)
         {
             if (ModelState.IsValid)
             {
@@ -61,6 +64,7 @@ namespace Patron_Center
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["PreguntaId"] = new SelectList(_context.Pregunta, "Id", "Enunciado", respuesta.PreguntaId);
             return View(respuesta);
         }
 
@@ -77,6 +81,7 @@ namespace Patron_Center
             {
                 return NotFound();
             }
+            ViewData["PreguntaId"] = new SelectList(_context.Pregunta, "Id", "Enunciado", respuesta.PreguntaId);
             return View(respuesta);
         }
 
@@ -85,7 +90,7 @@ namespace Patron_Center
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,IdPregunta,EsRespuestaCorrecta,EsRespuestaUnica,EsEliminado,Enunciado")] Respuesta respuesta)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,PreguntaId,EsRespuestaCorrecta,EsRespuestaUnica,EsEliminado,Enunciado")] Respuesta respuesta)
         {
             if (id != respuesta.Id)
             {
@@ -112,6 +117,7 @@ namespace Patron_Center
                 }
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["PreguntaId"] = new SelectList(_context.Pregunta, "Id", "Enunciado", respuesta.PreguntaId);
             return View(respuesta);
         }
 
@@ -124,6 +130,7 @@ namespace Patron_Center
             }
 
             var respuesta = await _context.Respuesta
+                .Include(r => r.Pregunta)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (respuesta == null)
             {

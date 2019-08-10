@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Patron_Center.Models;
 
-namespace Patron_Center
+namespace Patron_Center.Controllers
 {
     public class QuizesController : Controller
     {
@@ -19,9 +19,11 @@ namespace Patron_Center
         }
 
         // GET: Quizes
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int UnidadId)
         {
-            return View(await _context.Quiz.ToListAsync());
+            ViewBag.UnidadId = UnidadId;
+            var patron_CenterContext = _context.Quiz.Include(q => q.Unidad).Where(q => q.UnidadId == UnidadId); ;
+            return View(await patron_CenterContext.ToListAsync());
         }
 
         // GET: Quizes/Details/5
@@ -33,6 +35,7 @@ namespace Patron_Center
             }
 
             var quiz = await _context.Quiz
+                .Include(q => q.Unidad)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (quiz == null)
             {
@@ -43,8 +46,10 @@ namespace Patron_Center
         }
 
         // GET: Quizes/Create
-        public IActionResult Create()
+        public IActionResult Create(int UnidadId)
         {
+            ViewData["UnidadId"] = new SelectList(_context.Unidad.Where(c => c.Id == UnidadId), "Id", "Nombre", UnidadId);
+            // ViewData["UnidadId"] = new SelectList(_context.Unidad, "Id", "Descripcion");
             return View();
         }
 
@@ -53,14 +58,19 @@ namespace Patron_Center
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,IdCurso,Puntaje,EsEvaluacion,EsEliminado,Nombre")] Quiz quiz)
+        public async Task<IActionResult> Create([Bind("Id,UnidadId,Puntaje,EsEvaluacion,EsEliminado,Nombre")] Quiz quiz)
         {
             if (ModelState.IsValid)
             {
                 _context.Add(quiz);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                //return RedirectToAction(nameof(Index));
+                return RedirectToAction("Index", "Quizes", new { UnidadId = quiz.UnidadId });
             }
+            // ViewData["UnidadId"] = new SelectList(_context.Unidad, "Id", "Descripcion", quiz.UnidadId);
+            // return View(quiz);
+            ViewData["UnidadId"] = new SelectList(_context.Unidad, "Id", "Nombre");
+
             return View(quiz);
         }
 
@@ -77,6 +87,7 @@ namespace Patron_Center
             {
                 return NotFound();
             }
+            ViewData["UnidadId"] = new SelectList(_context.Unidad, "Id", "Descripcion", quiz.UnidadId);
             return View(quiz);
         }
 
@@ -85,7 +96,7 @@ namespace Patron_Center
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,IdCurso,Puntaje,EsEvaluacion,EsEliminado,Nombre")] Quiz quiz)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,UnidadId,Puntaje,EsEvaluacion,EsEliminado,Nombre")] Quiz quiz)
         {
             if (id != quiz.Id)
             {
@@ -112,6 +123,7 @@ namespace Patron_Center
                 }
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["UnidadId"] = new SelectList(_context.Unidad, "Id", "Descripcion", quiz.UnidadId);
             return View(quiz);
         }
 
@@ -124,6 +136,7 @@ namespace Patron_Center
             }
 
             var quiz = await _context.Quiz
+                .Include(q => q.Unidad)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (quiz == null)
             {
