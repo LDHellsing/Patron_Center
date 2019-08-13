@@ -38,5 +38,5 @@
 </div>
 <div>
     <a asp-action="Edit" asp-route-id="@Model.Id">Editar</a> |
-    <a href='javascript:history.go(-1)'>Volver atras</a>
+    <a asp-controller="Unidades" asp-action="Index" asp-route-CursoId=@ViewBag.CursoId>Volver atras</a>
 </div>
