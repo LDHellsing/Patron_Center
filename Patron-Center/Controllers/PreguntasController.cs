@@ -21,7 +21,8 @@ namespace Patron_Center.Controllers
         // GET: Preguntas
         public async Task<IActionResult> Index(int QuizId)
         {
-            var patron_CenterContext = _context.Pregunta.Include(p => p.Quiz);
+            ViewBag.QuizId = QuizId;
+            var patron_CenterContext = _context.Pregunta.Include(p => p.Quiz).Where(p => p.QuizId == QuizId);
             return View(await patron_CenterContext.ToListAsync());
         }
 
@@ -45,9 +46,9 @@ namespace Patron_Center.Controllers
         }
 
         // GET: Preguntas/Create
-        public IActionResult Create()
+        public IActionResult Create(int QuizId)
         {
-            ViewData["QuizId"] = new SelectList(_context.Quiz, "Id", "Nombre");
+            ViewData["QuizId"] = new SelectList(_context.Quiz.Where(q => q.Id == QuizId), "Id", "Nombre", QuizId);
             return View();
         }
 
@@ -60,11 +61,17 @@ namespace Patron_Center.Controllers
         {
             if (ModelState.IsValid)
             {
+                // Quiz quizPadre = await _context.Quiz.FindAsync(pregunta.QuizId);
+                // quizPadre.Preguntas.Add(Pregunta)
                 _context.Add(pregunta);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                // return RedirectToAction(nameof(Index));
+                return RedirectToAction("Index", "Preguntas", new { QuizId = pregunta.QuizId });
             }
-            ViewData["QuizId"] = new SelectList(_context.Quiz, "Id", "Nombre", pregunta.QuizId);
+            // ViewData["QuizId"] = new SelectList(_context.Quiz, "Id", "Nombre", pregunta.QuizId);
+            // return View(pregunta);
+            ViewData["QuizId"] = new SelectList(_context.Quiz, "Id", "Nombre");
+
             return View(pregunta);
         }
 

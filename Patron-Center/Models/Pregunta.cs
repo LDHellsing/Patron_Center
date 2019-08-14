@@ -18,6 +18,7 @@ namespace Patron_Center.Models
         public int QuizId { get; set; }
         public Quiz Quiz { get; set; }
         public int Puntaje { get; set; }
+        [HiddenInput(DisplayValue = false)]
         [DisplayName("Eliminado")]
         public bool EsEliminado { get; set; }
         [DisplayName("Comentario")]
@@ -26,7 +27,7 @@ namespace Patron_Center.Models
         [DisplayName("¿Multiple Opción?")]
         public bool EsMultipleOpcion { get; set; }
         //testear si el orden se reinicia a 0 cuando se crea un nuevo quiz
-        [Required(ErrorMessage = "El campo oden de pregunta es requerido")]
+        [Required(ErrorMessage = "El campo orden de pregunta es requerido")]
         public int Orden { get; set; }
         [Required(ErrorMessage = "El enunciado es un campo requerido")]
         public string Enunciado { get; set; }

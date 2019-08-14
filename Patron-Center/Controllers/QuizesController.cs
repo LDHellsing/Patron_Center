@@ -22,7 +22,7 @@ namespace Patron_Center.Controllers
         public async Task<IActionResult> Index(int UnidadId)
         {
             ViewBag.UnidadId = UnidadId;
-            var patron_CenterContext = _context.Quiz.Include(q => q.Unidad).Where(q => q.UnidadId == UnidadId); ;
+            var patron_CenterContext = _context.Quiz.Include(q => q.Unidad).Where(q => q.UnidadId == UnidadId);
             return View(await patron_CenterContext.ToListAsync());
         }
 
@@ -48,7 +48,7 @@ namespace Patron_Center.Controllers
         // GET: Quizes/Create
         public IActionResult Create(int UnidadId)
         {
-            ViewData["UnidadId"] = new SelectList(_context.Unidad.Where(c => c.Id == UnidadId), "Id", "Nombre", UnidadId);
+            ViewData["UnidadId"] = new SelectList(_context.Unidad.Where(u => u.Id == UnidadId), "Id", "Nombre", UnidadId);
             // ViewData["UnidadId"] = new SelectList(_context.Unidad, "Id", "Descripcion");
             return View();
         }
