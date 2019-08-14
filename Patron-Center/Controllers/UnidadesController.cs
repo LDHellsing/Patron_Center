@@ -38,9 +38,9 @@ namespace Patron_Center.Controllers
                 ViewBag.InvalidUserMessage = "Usted no tiene permiso para acceder a este sitio. Por favor Ingrese con un usuario Administrador, ";
                 return View("Views/Shared/UnauthorisedUserError.cshtml");
             }
-
-            ViewBag.CursoId = CursoId;
+            
             var patron_CenterContext = _context.Unidad.Include(u => u.Curso).Where(u => u.CursoId == CursoId);
+            ViewBag.CursoId = CursoId;
             return View(await patron_CenterContext.ToListAsync());
         }        
 
@@ -59,13 +59,14 @@ namespace Patron_Center.Controllers
             {
                 return NotFound();
             }
-
+            ViewBag.CursoId = unidad.CursoId;
             return View(unidad);
         }
 
         // GET: Unidades/Create
         public IActionResult Create(int CursoId)
         {
+            ViewBag.CursoId_ = CursoId;
             ViewData["CursoId"] = new SelectList(_context.Curso.Where(c => c.Id == CursoId), "Id", "Nombre", CursoId);
             return View();
         }
@@ -97,8 +98,7 @@ namespace Patron_Center.Controllers
             if (ModelState.IsValid)
             {
                 _context.Add(unidad);
-                await _context.SaveChangesAsync();
-                //return RedirectToAction(nameof(Index));
+                await _context.SaveChangesAsync();                
                 return RedirectToAction("Index", "Unidades", new { CursoId = unidad.CursoId });
             }
             ViewData["CursoId"] = new SelectList(_context.Curso, "Id", "Nombre");
@@ -137,6 +137,7 @@ namespace Patron_Center.Controllers
             {
                 return NotFound();
             }
+            ViewBag.CursoId_ = unidad.CursoId;
             ViewData["CursoId"] = new SelectList(_context.Curso.Where(c => c.Id == unidad.CursoId), "Id", "Nombre", unidad.CursoId);
             return View(unidad);
         }
@@ -210,12 +211,7 @@ namespace Patron_Center.Controllers
                 ViewBag.TipoUsuario = HttpContext.Session.GetString("_TipoUsuario");
             }
 
-            //if (HttpContext.Session.GetString("_TipoUsuario") == "Alumno")
-            //{
-            //    ViewBag.InvalidUserMessage = "Usted no tiene permiso para acceder a este sitio. Por favor Ingrese con un usuario Administrador, ";
-            //    return View("Views/Shared/UnauthorisedUserError.cshtml");
-            //}
-
+            ViewBag.CursoId = CursoId;
             var patron_CenterContext = _context.Unidad.Include(u => u.Curso).Where(u => u.CursoId == CursoId && u.Eliminado == false);
             return View(await patron_CenterContext.ToListAsync());
         }
