@@ -38,7 +38,7 @@
                 <input asp-for="Password" type="password" class="form-control" value="@Model.Password" />
                 <span asp-validation-for="Password" class="text-danger"></span>
             </div>
-            @if (ViewBag.TipoUsuario == "Administrador" )
+            @if (ViewBag.TipoUsuario == "Administrador")
             {
                 <div class="form-group">
                     <label asp-for="TipoUsuario" class="control-label"></label>
@@ -67,6 +67,10 @@
     <div>
         <a asp-action="Index">Volver a la lista</a>
     </div>
+}
+else
+{
+    <a asp-controller="Home" asp-action="Index">Volver atras</a>
 }
 
 @section Scripts {

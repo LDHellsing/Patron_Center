@@ -15,7 +15,8 @@
                 </div>
             </nav>
         </header>
-        <h1>Login</h1>
+        <h1>Bienvenido a Patron Center</h1>
+        <p>Ingrese su numero de documento y contraseña para acceder.</p>
         <div class="row">
             <div class="col-md-4">
                 <form asp-action="Index">
@@ -41,9 +42,12 @@
                     </div>
                 </form>
             </div>
+            <div class="col-md-4">
+                <img src="~/images/udeLogo.png" class="img-fluid" alt="UDE Logo">
+            </div>
         </div>
 
-        </body>
+    </body>
             @section Scripts {
                 @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
             }

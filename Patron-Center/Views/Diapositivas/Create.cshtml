@@ -66,7 +66,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="Orden" class="control-label"></label>
-                <input asp-for="Orden" class="form-control" />
+                <input asp-for="Orden" class="form-control" value="@ViewBag.NextOrder"/>
                 <span asp-validation-for="Orden" class="text-danger"></span>
             </div>
             <div class="form-group form-check">

@@ -38,14 +38,14 @@ namespace Patron_Center.Controllers
                 ViewBag.InvalidUserMessage = "Usted no tiene permiso para acceder a este sitio. Por favor Ingrese con un usuario Administrador, ";
                 return View("Views/Shared/UnauthorisedUserError.cshtml");
             }
-            
+
             var patron_CenterContext = _context.Diapositiva.Include(d => d.Unidad).Where(d => d.UnidadId == UnidadId);
 
-            var diapositiva = await _context.Diapositiva
-                .Include(d => d.Unidad)
-                .FirstOrDefaultAsync(m => m.UnidadId == UnidadId);
+            var Unidad = await _context.Unidad               
+                .FirstOrDefaultAsync(m => m.Id == UnidadId);
 
-            ViewBag.CursoId = diapositiva.Unidad.CursoId;
+            ViewBag.UnidadId = UnidadId;
+            ViewBag.CursoId = Unidad.CursoId;
             return View(await patron_CenterContext.ToListAsync());
         }
 
@@ -89,6 +89,28 @@ namespace Patron_Center.Controllers
         // GET: Diapositivas/Create
         public IActionResult Create(int UnidadId)
         {
+            int NextOrder;
+
+            var SlidesCount = _context.Diapositiva
+                .Where(d => d.UnidadId == UnidadId)
+                .Count();
+
+            if (SlidesCount == 0)
+            {
+                NextOrder = 1;
+            }
+            else
+            {
+
+                NextOrder = _context.Diapositiva
+                .Where(d => d.UnidadId == UnidadId)
+                .Max(d => d.Orden);
+
+                NextOrder = NextOrder + 1;
+            }
+
+
+            ViewBag.NextOrder = NextOrder;
             ViewBag.UnidadId_ = UnidadId;
             ViewData["UnidadId"] = new SelectList(_context.Unidad.Where(u => u.Id == UnidadId), "Id", "Nombre");
             return View();
@@ -106,10 +128,9 @@ namespace Patron_Center.Controllers
             {
                 _context.Add(diapositiva);
                 await _context.SaveChangesAsync();
-                //return RedirectToAction(nameof(Index));
                 return RedirectToAction("Index", "Diapositivas", new { UnidadId = diapositiva.UnidadId });
             }
-            
+
             ViewData["UnidadId"] = new SelectList(_context.Unidad, "Id", "Nombre", diapositiva.UnidadId);
             return View(diapositiva);
         }
@@ -217,12 +238,10 @@ namespace Patron_Center.Controllers
                 ViewBag.TipoUsuario = HttpContext.Session.GetString("_TipoUsuario");
             }
 
-            //if (HttpContext.Session.GetString("_TipoUsuario") == "Alumno")
-            //{
-            //    ViewBag.InvalidUserMessage = "Usted no tiene permiso para acceder a este sitio. Por favor Ingrese con un usuario Administrador, ";
-            //    return View("Views/Shared/UnauthorisedUserError.cshtml");
-            //}
+            var Unidad = await _context.Unidad
+                .FirstOrDefaultAsync(m => m.Id == UnidadId);
 
+            ViewBag.CursoId = Unidad.CursoId;
             var patron_CenterContext = _context.Diapositiva.Include(d => d.Unidad).Where(d => d.UnidadId == UnidadId && d.Eliminado == false).OrderBy(d => d.Orden);
             return View(await patron_CenterContext.ToListAsync());
         }
