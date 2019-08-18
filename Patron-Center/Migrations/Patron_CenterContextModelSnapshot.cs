@@ -72,7 +72,7 @@ namespace Patron_Center.Migrations
                             Descripcion = "Descripción de curso de prueba",
                             DocenteId = 2,
                             Eliminado = false,
-                            FechaFinalizacion = new DateTime(2019, 8, 13, 20, 54, 22, 300, DateTimeKind.Local).AddTicks(8721),
+                            FechaFinalizacion = new DateTime(2019, 8, 17, 22, 45, 2, 319, DateTimeKind.Local).AddTicks(7097),
                             Nombre = "Curso de Prueba"
                         });
                 });
@@ -178,12 +178,12 @@ namespace Patron_Center.Migrations
 
                     b.Property<string>("ComentarioDocente");
 
+                    b.Property<bool>("Eliminado");
+
                     b.Property<string>("Enunciado")
                         .IsRequired();
 
-                    b.Property<bool>("EsEliminado");
-
-                    b.Property<bool>("EsMultipleOpcion");
+                    b.Property<bool>("MultipleOpcion");
 
                     b.Property<int>("Orden");
 
@@ -196,6 +196,28 @@ namespace Patron_Center.Migrations
                     b.HasIndex("QuizId");
 
                     b.ToTable("Pregunta");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Eliminado = false,
+                            Enunciado = "Esta pregunta no es mas que una prueba",
+                            MultipleOpcion = true,
+                            Orden = 1,
+                            Puntaje = 5,
+                            QuizId = 1
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Eliminado = false,
+                            Enunciado = "Esta pregunta no es mas que otra una prueba",
+                            MultipleOpcion = true,
+                            Orden = 2,
+                            Puntaje = 10,
+                            QuizId = 1
+                        });
                 });
 
             modelBuilder.Entity("Patron_Center.Models.Quiz", b =>
@@ -204,9 +226,9 @@ namespace Patron_Center.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<bool>("EsEliminado");
+                    b.Property<bool>("Eliminado");
 
-                    b.Property<bool>("EsEvaluacion");
+                    b.Property<bool>("Evaluacion");
 
                     b.Property<string>("Nombre")
                         .IsRequired();
@@ -220,6 +242,17 @@ namespace Patron_Center.Migrations
                     b.HasIndex("UnidadId");
 
                     b.ToTable("Quiz");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Eliminado = false,
+                            Evaluacion = false,
+                            Nombre = "Quiz de Prueba",
+                            Puntaje = 5,
+                            UnidadId = 1
+                        });
                 });
 
             modelBuilder.Entity("Patron_Center.Models.Respuesta", b =>
@@ -228,24 +261,60 @@ namespace Patron_Center.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<bool>("Eliminado");
+
                     b.Property<string>("Enunciado")
                         .IsRequired();
 
-                    b.Property<bool>("EsEliminado");
-
-                    b.Property<bool>("EsRespuestaCorrecta");
-
-                    b.Property<bool>("EsRespuestaUnica");
-
-                    b.Property<bool>("EsSeleccionada");
-
                     b.Property<int>("PreguntaId");
+
+                    b.Property<bool>("RespuestaCorrecta");
+
+                    b.Property<bool>("Seleccionada");
 
                     b.HasKey("Id");
 
                     b.HasIndex("PreguntaId");
 
                     b.ToTable("Respuesta");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Eliminado = false,
+                            Enunciado = "Esta respuesta no es correcta y no esta seleccionada",
+                            PreguntaId = 1,
+                            RespuestaCorrecta = false,
+                            Seleccionada = false
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Eliminado = false,
+                            Enunciado = "Esta respuesta es correcta y esta seleccionada",
+                            PreguntaId = 1,
+                            RespuestaCorrecta = true,
+                            Seleccionada = true
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Eliminado = false,
+                            Enunciado = "Esta respuesta es correcta y no esta seleccionada",
+                            PreguntaId = 2,
+                            RespuestaCorrecta = true,
+                            Seleccionada = false
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Eliminado = false,
+                            Enunciado = "Esta respuesta no es correcta y esta seleccionada",
+                            PreguntaId = 2,
+                            RespuestaCorrecta = false,
+                            Seleccionada = true
+                        });
                 });
 
             modelBuilder.Entity("Patron_Center.Models.Unidad", b =>

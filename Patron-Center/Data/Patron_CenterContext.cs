@@ -11,7 +11,7 @@ namespace Patron_Center.Models
 {
     public class Patron_CenterContext : DbContext
     {
-        public Patron_CenterContext (DbContextOptions<Patron_CenterContext> options)
+        public Patron_CenterContext(DbContextOptions<Patron_CenterContext> options)
             : base(options)
         {
         }
@@ -66,16 +66,16 @@ namespace Patron_Center.Models
         //Relacion muchos a muchos Curso Usuario
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
-        { 
+        {
             modelBuilder.Entity<CursoUsuario>()
-                    .HasKey(cu => new {cu.Id});
+                    .HasKey(cu => new { cu.Id });
 
             modelBuilder.Entity<CursoUsuario>()
                     .HasOne<Usuario>(sc => sc.Usuario)
                     .WithMany(s => s.CursoUsuario)
                     .HasForeignKey(sc => sc.UsuarioId)
                     .OnDelete(DeleteBehavior.Restrict);
-            
+
             modelBuilder.Entity<CursoUsuario>()
                     .HasOne<Curso>(sc => sc.Curso)
                     .WithMany(s => s.CursoUsuario)
@@ -98,7 +98,7 @@ namespace Patron_Center.Models
                     Email = "admin@patroncenter.com",
                     Password = "admin",
                     TipoUsuario = TipoUsuario.Administrador,
-                    Eliminado = false                    
+                    Eliminado = false
                 }
                 );
             modelBuilder.Entity<Usuario>().HasData(
@@ -246,8 +246,91 @@ namespace Patron_Center.Models
                     UnidadId = 2
                 }
                 );
-        }        
 
-        
+            // Creacion de quizes
+            modelBuilder.Entity<Quiz>().HasData(
+                new Quiz
+                {
+                    Id = 1,
+                    UnidadId = 1,
+                    Puntaje = 5,
+                    Evaluacion = false,
+                    Eliminado = false,
+                    Nombre = "Quiz de Prueba"
+                }
+                );
+            // Creacion de Preguntas
+            modelBuilder.Entity<Pregunta>().HasData(
+                new Pregunta
+                {
+                    Id = 1,
+                    QuizId = 1,
+                    Puntaje = 5,
+                    Eliminado = false,
+                    MultipleOpcion = true,
+                    Orden = 1,
+                    Enunciado = "Esta pregunta no es mas que una prueba"
+                }
+                );
+            modelBuilder.Entity<Pregunta>().HasData(
+                new Pregunta
+                {
+                    Id = 2,
+                    QuizId = 1,
+                    Puntaje = 10,
+                    Eliminado = false,
+                    MultipleOpcion = true,
+                    Orden = 2,
+                    Enunciado = "Esta pregunta no es mas que otra una prueba"
+                }
+                );
+            // Creacion de Respuestas
+            modelBuilder.Entity<Respuesta>().HasData(
+                new Respuesta
+                {
+                    Id = 1,
+                    PreguntaId = 1,
+                    RespuestaCorrecta = false,
+                    Seleccionada = false,
+                    Eliminado = false,
+                    Enunciado = "Esta respuesta no es correcta y no esta seleccionada"
+                }
+                );
+            modelBuilder.Entity<Respuesta>().HasData(
+                new Respuesta
+                {
+                    Id = 2,
+                    PreguntaId = 1,
+                    RespuestaCorrecta = true,
+                    Seleccionada = true,
+                    Eliminado = false,
+                    Enunciado = "Esta respuesta es correcta y esta seleccionada"
+                }
+                );
+            modelBuilder.Entity<Respuesta>().HasData(
+                new Respuesta
+                {
+                    Id = 3,
+                    PreguntaId = 2,
+                    RespuestaCorrecta = true,
+                    Seleccionada = false,
+                    Eliminado = false,
+                    Enunciado = "Esta respuesta es correcta y no esta seleccionada"
+                }
+                );
+            modelBuilder.Entity<Respuesta>().HasData(
+                new Respuesta
+                {
+                    Id = 4,
+                    PreguntaId = 2,
+                    RespuestaCorrecta = false,
+                    Seleccionada = true,
+                    Eliminado = false,
+                    Enunciado = "Esta respuesta no es correcta y esta seleccionada"
+                }
+                );
+        }
+
+
     }
 }

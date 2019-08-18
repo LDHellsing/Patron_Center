@@ -10,16 +10,34 @@ using Patron_Center.Models;
 namespace Patron_Center.Migrations
 {
     [DbContext(typeof(Patron_CenterContext))]
-    [Migration("20190726044002_video-diapo3")]
-    partial class videodiapo3
+    [Migration("20190818014502_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.2.6-servicing-10079")
+                .HasAnnotation("ProductVersion", "2.2.4-servicing-10062")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+            modelBuilder.Entity("Patron_Center.Models.Correccion", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("IdAlumno");
+
+                    b.Property<int>("IdQuiz");
+
+                    b.Property<string>("Resultado")
+                        .IsRequired();
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Correccion");
+                });
 
             modelBuilder.Entity("Patron_Center.Models.Curso", b =>
                 {
@@ -56,7 +74,7 @@ namespace Patron_Center.Migrations
                             Descripcion = "Descripción de curso de prueba",
                             DocenteId = 2,
                             Eliminado = false,
-                            FechaFinalizacion = new DateTime(2019, 7, 26, 1, 40, 1, 521, DateTimeKind.Local).AddTicks(8973),
+                            FechaFinalizacion = new DateTime(2019, 8, 17, 22, 45, 2, 319, DateTimeKind.Local).AddTicks(7097),
                             Nombre = "Curso de Prueba"
                         });
                 });
@@ -160,22 +178,48 @@ namespace Patron_Center.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("ComentarioDocente");
+
+                    b.Property<bool>("Eliminado");
+
                     b.Property<string>("Enunciado")
                         .IsRequired();
 
-                    b.Property<bool>("EsMultipleOpcion");
-
-                    b.Property<int>("IdQuiz");
+                    b.Property<bool>("MultipleOpcion");
 
                     b.Property<int>("Orden");
 
-                    b.Property<int?>("QuizId");
+                    b.Property<int>("Puntaje");
+
+                    b.Property<int>("QuizId");
 
                     b.HasKey("Id");
 
                     b.HasIndex("QuizId");
 
                     b.ToTable("Pregunta");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Eliminado = false,
+                            Enunciado = "Esta pregunta no es mas que una prueba",
+                            MultipleOpcion = true,
+                            Orden = 1,
+                            Puntaje = 5,
+                            QuizId = 1
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Eliminado = false,
+                            Enunciado = "Esta pregunta no es mas que otra una prueba",
+                            MultipleOpcion = true,
+                            Orden = 2,
+                            Puntaje = 10,
+                            QuizId = 1
+                        });
                 });
 
             modelBuilder.Entity("Patron_Center.Models.Quiz", b =>
@@ -184,14 +228,33 @@ namespace Patron_Center.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("IdCurso");
+                    b.Property<bool>("Eliminado");
+
+                    b.Property<bool>("Evaluacion");
 
                     b.Property<string>("Nombre")
                         .IsRequired();
 
+                    b.Property<int>("Puntaje");
+
+                    b.Property<int>("UnidadId");
+
                     b.HasKey("Id");
 
+                    b.HasIndex("UnidadId");
+
                     b.ToTable("Quiz");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Eliminado = false,
+                            Evaluacion = false,
+                            Nombre = "Quiz de Prueba",
+                            Puntaje = 5,
+                            UnidadId = 1
+                        });
                 });
 
             modelBuilder.Entity("Patron_Center.Models.Respuesta", b =>
@@ -200,22 +263,60 @@ namespace Patron_Center.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<bool>("Eliminado");
+
                     b.Property<string>("Enunciado")
                         .IsRequired();
 
-                    b.Property<int>("IdPregunta");
-
-                    b.Property<int?>("PreguntaId");
+                    b.Property<int>("PreguntaId");
 
                     b.Property<bool>("RespuestaCorrecta");
 
-                    b.Property<bool>("RespuestaUnica");
+                    b.Property<bool>("Seleccionada");
 
                     b.HasKey("Id");
 
                     b.HasIndex("PreguntaId");
 
                     b.ToTable("Respuesta");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Eliminado = false,
+                            Enunciado = "Esta respuesta no es correcta y no esta seleccionada",
+                            PreguntaId = 1,
+                            RespuestaCorrecta = false,
+                            Seleccionada = false
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Eliminado = false,
+                            Enunciado = "Esta respuesta es correcta y esta seleccionada",
+                            PreguntaId = 1,
+                            RespuestaCorrecta = true,
+                            Seleccionada = true
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Eliminado = false,
+                            Enunciado = "Esta respuesta es correcta y no esta seleccionada",
+                            PreguntaId = 2,
+                            RespuestaCorrecta = true,
+                            Seleccionada = false
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Eliminado = false,
+                            Enunciado = "Esta respuesta no es correcta y esta seleccionada",
+                            PreguntaId = 2,
+                            RespuestaCorrecta = false,
+                            Seleccionada = true
+                        });
                 });
 
             modelBuilder.Entity("Patron_Center.Models.Unidad", b =>
@@ -384,16 +485,26 @@ namespace Patron_Center.Migrations
 
             modelBuilder.Entity("Patron_Center.Models.Pregunta", b =>
                 {
-                    b.HasOne("Patron_Center.Models.Quiz")
+                    b.HasOne("Patron_Center.Models.Quiz", "Quiz")
                         .WithMany("Preguntas")
-                        .HasForeignKey("QuizId");
+                        .HasForeignKey("QuizId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("Patron_Center.Models.Quiz", b =>
+                {
+                    b.HasOne("Patron_Center.Models.Unidad", "Unidad")
+                        .WithMany()
+                        .HasForeignKey("UnidadId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Patron_Center.Models.Respuesta", b =>
                 {
-                    b.HasOne("Patron_Center.Models.Pregunta")
+                    b.HasOne("Patron_Center.Models.Pregunta", "Pregunta")
                         .WithMany("Respuestas")
-                        .HasForeignKey("PreguntaId");
+                        .HasForeignKey("PreguntaId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Patron_Center.Models.Unidad", b =>

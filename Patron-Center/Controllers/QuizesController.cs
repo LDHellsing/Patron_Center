@@ -58,7 +58,7 @@ namespace Patron_Center.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,UnidadId,Puntaje,EsEvaluacion,EsEliminado,Nombre")] Quiz quiz)
+        public async Task<IActionResult> Create([Bind("Id,UnidadId,Puntaje,Evaluacion,Eliminado,Nombre")] Quiz quiz)
         {
             if (ModelState.IsValid)
             {
@@ -96,7 +96,7 @@ namespace Patron_Center.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,UnidadId,Puntaje,EsEvaluacion,EsEliminado,Nombre")] Quiz quiz)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,UnidadId,Puntaje,Evaluacion,Eliminado,Nombre")] Quiz quiz)
         {
             if (id != quiz.Id)
             {

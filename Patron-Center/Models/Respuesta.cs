@@ -19,14 +19,12 @@ namespace Patron_Center.Models
         public int PreguntaId { get; set; }
         public Pregunta Pregunta { get; set; }
         [DisplayName("¿Respuesta Correcta?")]
-        public bool EsRespuestaCorrecta { get; set; }
-        [DisplayName("¿Unica Repuesta Correcta?")]
-        public bool EsRespuestaUnica { get; set; }
+        public bool RespuestaCorrecta { get; set; }
         //Esta property va a ser true si es la respuesta que el alumno eligio (solo para MultipleOpcion)
         [HiddenInput(DisplayValue = false)]
-        public bool EsSeleccionada { get; set; }
+        public bool Seleccionada { get; set; }
         [HiddenInput(DisplayValue = false)]
-        public bool EsEliminado { get; set; }
+        public bool Eliminado { get; set; }
         [Required(ErrorMessage = "El enunciado es un campo requerido")]
         public string Enunciado { get; set; }
     }

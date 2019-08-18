@@ -20,12 +20,12 @@ namespace Patron_Center.Models
         public int Puntaje { get; set; }
         [HiddenInput(DisplayValue = false)]
         [DisplayName("Eliminado")]
-        public bool EsEliminado { get; set; }
+        public bool Eliminado { get; set; }
         [DisplayName("Comentario")]
         public string ComentarioDocente { get; set; }
         public ICollection<Respuesta> Respuestas { get; set; }
         [DisplayName("¿Multiple Opción?")]
-        public bool EsMultipleOpcion { get; set; }
+        public bool MultipleOpcion { get; set; }
         //testear si el orden se reinicia a 0 cuando se crea un nuevo quiz
         [Required(ErrorMessage = "El campo orden de pregunta es requerido")]
         public int Orden { get; set; }

@@ -7,23 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Migrations\20190715223757_seeding.cs" />
-    <Compile Remove="Migrations\20190715223757_seeding.Designer.cs" />
-    <Compile Remove="Migrations\20190715225025_seeder.cs" />
-    <Compile Remove="Migrations\20190715225025_seeder.Designer.cs" />
-    <Compile Remove="Migrations\20190716235225_teorico.cs" />
-    <Compile Remove="Migrations\20190716235225_teorico.Designer.cs" />
-    <Compile Remove="Migrations\20190717000952_teorico.cs" />
-    <Compile Remove="Migrations\20190717000952_teorico.Designer.cs" />
-    <Compile Remove="Migrations\20190717015314_documentoUnique.cs" />
-    <Compile Remove="Migrations\20190717015314_documentoUnique.Designer.cs" />
-    <Compile Remove="Migrations\20190722234033_teorico.cs" />
-    <Compile Remove="Migrations\20190722234033_teorico.Designer.cs" />
-    <Compile Remove="Migrations\20190725025808_Quiz.cs" />
-    <Compile Remove="Migrations\20190725025808_Quiz.Designer.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Content Remove="Views\CursoUsuarios\Index - Copia.cshtml" />
   </ItemGroup>
 

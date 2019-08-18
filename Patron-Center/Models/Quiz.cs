@@ -17,9 +17,9 @@ namespace Patron_Center.Models
         public Unidad Unidad { get; set; }
         public int Puntaje { get; set; }
         [DisplayName("¿Evaluación?")]
-        public bool EsEvaluacion { get; set; }
+        public bool Evaluacion { get; set; }
         [HiddenInput(DisplayValue = false)]
-        public bool EsEliminado { get; set; }
+        public bool Eliminado { get; set; }
         public ICollection<Pregunta> Preguntas { get; set; }
         [Required(ErrorMessage = "El nombre es un campo requerido")]
         public string Nombre { get; set; }
