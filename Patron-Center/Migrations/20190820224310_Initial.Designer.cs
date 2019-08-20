@@ -10,7 +10,7 @@ using Patron_Center.Models;
 namespace Patron_Center.Migrations
 {
     [DbContext(typeof(Patron_CenterContext))]
-    [Migration("20190820003225_Initial")]
+    [Migration("20190820224310_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -74,7 +74,7 @@ namespace Patron_Center.Migrations
                             Descripcion = "Descripción de curso de prueba",
                             DocenteId = 2,
                             Eliminado = false,
-                            FechaFinalizacion = new DateTime(2019, 8, 19, 21, 32, 24, 292, DateTimeKind.Local).AddTicks(5072),
+                            FechaFinalizacion = new DateTime(2019, 8, 20, 19, 43, 10, 275, DateTimeKind.Local).AddTicks(6649),
                             Nombre = "Curso de Prueba"
                         });
                 });
@@ -253,7 +253,7 @@ namespace Patron_Center.Migrations
                             Id = 1,
                             Ejercicio = 0,
                             Eliminado = false,
-                            Evaluacion = 2,
+                            Evaluacion = 1,
                             Nombre = "Quiz de Prueba",
                             Puntaje = 5,
                             UnidadId = 1

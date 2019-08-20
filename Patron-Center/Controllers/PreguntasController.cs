@@ -82,7 +82,7 @@ namespace Patron_Center.Controllers
                 ViewBag.InvalidUserMessage = "Usted no tiene permiso para acceder a este sitio. Por favor Ingrese con un usuario Administrador, ";
                 return View("Views/Shared/UnauthorisedUserError.cshtml");
             }
-
+            ViewBag.QuizId_ = QuizId;
             ViewData["QuizId"] = new SelectList(_context.Quiz.Where(q => q.Id == QuizId), "Id", "Nombre", QuizId);
             return View();
         }

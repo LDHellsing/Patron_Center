@@ -83,7 +83,7 @@ namespace Patron_Center.Controllers
                 return View("Views/Shared/UnauthorisedUserError.cshtml");
             }
 
-            ViewBag.UnidadId = UnidadId;
+            ViewBag.UnidadId_ = UnidadId;
             ViewData["UnidadId"] = new SelectList(_context.Unidad.Where(u => u.Id == UnidadId), "Id", "Nombre", UnidadId);
             return View();
         }

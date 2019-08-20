@@ -231,7 +231,7 @@ namespace Patron_Center.Migrations
             migrationBuilder.InsertData(
                 table: "Curso",
                 columns: new[] { "Id", "AlumnosId", "Descripcion", "DocenteId", "Eliminado", "FechaFinalizacion", "Nombre" },
-                values: new object[] { 1, null, "Descripción de curso de prueba", 2, false, new DateTime(2019, 8, 19, 21, 32, 24, 292, DateTimeKind.Local).AddTicks(5072), "Curso de Prueba" });
+                values: new object[] { 1, null, "Descripción de curso de prueba", 2, false, new DateTime(2019, 8, 20, 19, 43, 10, 275, DateTimeKind.Local).AddTicks(6649), "Curso de Prueba" });
 
             migrationBuilder.InsertData(
                 table: "CursoUsuario",
@@ -263,7 +263,7 @@ namespace Patron_Center.Migrations
             migrationBuilder.InsertData(
                 table: "Quiz",
                 columns: new[] { "Id", "Ejercicio", "Eliminado", "Evaluacion", "Nombre", "Puntaje", "UnidadId" },
-                values: new object[] { 1, 0, false, 2, "Quiz de Prueba", 5, 1 });
+                values: new object[] { 1, 0, false, 1, "Quiz de Prueba", 5, 1 });
 
             migrationBuilder.InsertData(
                 table: "Pregunta",

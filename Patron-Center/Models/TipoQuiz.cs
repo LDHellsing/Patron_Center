@@ -7,8 +7,7 @@ namespace Patron_Center.Models
 {
     public enum TipoQuiz
     {
-        Evaluacion_Curso,
-        Evaluacion_Unidad,
+        Evaluacion,
         Ejercicio
     }
 }

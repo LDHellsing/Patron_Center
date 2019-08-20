@@ -33,7 +33,6 @@ namespace Patron_Center.Models
             try
             {
                 user = await Usuario.Where(u => u.Documento == document).FirstAsync();
-                Debug.WriteLine($"Objeto obtenido --------------> {user}");
                 return user;
             }
             catch (InvalidOperationException e)
