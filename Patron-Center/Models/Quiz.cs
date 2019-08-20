@@ -16,8 +16,10 @@ namespace Patron_Center.Models
         public int UnidadId { get; set; }
         public Unidad Unidad { get; set; }
         public int Puntaje { get; set; }
-        [DisplayName("¿Evaluación?")]
-        public bool Evaluacion { get; set; }
+        [Required(ErrorMessage = "El tipo de evaluacion es un campo requerido")]
+        public TipoQuiz Evaluacion { get; set; }
+        [Required(ErrorMessage = "El tipo de ejercicio un campo requerido")]
+        public TipoEjercicio Ejercicio { get; set; }
         [HiddenInput(DisplayValue = false)]
         public bool Eliminado { get; set; }
         public ICollection<Pregunta> Preguntas { get; set; }

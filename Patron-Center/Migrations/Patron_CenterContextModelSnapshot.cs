@@ -72,7 +72,7 @@ namespace Patron_Center.Migrations
                             Descripcion = "Descripción de curso de prueba",
                             DocenteId = 2,
                             Eliminado = false,
-                            FechaFinalizacion = new DateTime(2019, 8, 17, 22, 45, 2, 319, DateTimeKind.Local).AddTicks(7097),
+                            FechaFinalizacion = new DateTime(2019, 8, 19, 21, 32, 24, 292, DateTimeKind.Local).AddTicks(5072),
                             Nombre = "Curso de Prueba"
                         });
                 });
@@ -226,9 +226,11 @@ namespace Patron_Center.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int>("Ejercicio");
+
                     b.Property<bool>("Eliminado");
 
-                    b.Property<bool>("Evaluacion");
+                    b.Property<int>("Evaluacion");
 
                     b.Property<string>("Nombre")
                         .IsRequired();
@@ -247,8 +249,9 @@ namespace Patron_Center.Migrations
                         new
                         {
                             Id = 1,
+                            Ejercicio = 0,
                             Eliminado = false,
-                            Evaluacion = false,
+                            Evaluacion = 2,
                             Nombre = "Quiz de Prueba",
                             Puntaje = 5,
                             UnidadId = 1

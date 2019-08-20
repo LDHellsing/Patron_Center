@@ -66,6 +66,23 @@ namespace Patron_Center.Controllers
         // GET: Unidades/Create
         public IActionResult Create(int CursoId)
         {
+            if (HttpContext.Session.GetInt32("_IdUsuario") == null)
+            {
+                return RedirectToAction("Index", "Login");
+            }
+            else
+            {
+                ViewBag.Nombre = HttpContext.Session.GetString("_Nombre");
+                ViewBag.IdUsuario = HttpContext.Session.GetInt32("_IdUsuario");
+                ViewBag.TipoUsuario = HttpContext.Session.GetString("_TipoUsuario");
+            }
+
+            if (HttpContext.Session.GetString("_TipoUsuario") == "Alumno")
+            {
+                ViewBag.InvalidUserMessage = "Usted no tiene permiso para acceder a este sitio. Por favor Ingrese con un usuario Administrador, ";
+                return View("Views/Shared/UnauthorisedUserError.cshtml");
+            }
+
             ViewBag.CursoId_ = CursoId;
             ViewData["CursoId"] = new SelectList(_context.Curso.Where(c => c.Id == CursoId), "Id", "Nombre", CursoId);
             return View();

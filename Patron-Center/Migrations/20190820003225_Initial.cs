@@ -152,7 +152,8 @@ namespace Patron_Center.Migrations
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     UnidadId = table.Column<int>(nullable: false),
                     Puntaje = table.Column<int>(nullable: false),
-                    Evaluacion = table.Column<bool>(nullable: false),
+                    Evaluacion = table.Column<int>(nullable: false),
+                    Ejercicio = table.Column<int>(nullable: false),
                     Eliminado = table.Column<bool>(nullable: false),
                     Nombre = table.Column<string>(nullable: false)
                 },
@@ -230,7 +231,7 @@ namespace Patron_Center.Migrations
             migrationBuilder.InsertData(
                 table: "Curso",
                 columns: new[] { "Id", "AlumnosId", "Descripcion", "DocenteId", "Eliminado", "FechaFinalizacion", "Nombre" },
-                values: new object[] { 1, null, "Descripción de curso de prueba", 2, false, new DateTime(2019, 8, 17, 22, 45, 2, 319, DateTimeKind.Local).AddTicks(7097), "Curso de Prueba" });
+                values: new object[] { 1, null, "Descripción de curso de prueba", 2, false, new DateTime(2019, 8, 19, 21, 32, 24, 292, DateTimeKind.Local).AddTicks(5072), "Curso de Prueba" });
 
             migrationBuilder.InsertData(
                 table: "CursoUsuario",
@@ -261,8 +262,8 @@ namespace Patron_Center.Migrations
 
             migrationBuilder.InsertData(
                 table: "Quiz",
-                columns: new[] { "Id", "Eliminado", "Evaluacion", "Nombre", "Puntaje", "UnidadId" },
-                values: new object[] { 1, false, false, "Quiz de Prueba", 5, 1 });
+                columns: new[] { "Id", "Ejercicio", "Eliminado", "Evaluacion", "Nombre", "Puntaje", "UnidadId" },
+                values: new object[] { 1, 0, false, 2, "Quiz de Prueba", 5, 1 });
 
             migrationBuilder.InsertData(
                 table: "Pregunta",

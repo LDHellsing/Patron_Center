@@ -254,7 +254,8 @@ namespace Patron_Center.Models
                     Id = 1,
                     UnidadId = 1,
                     Puntaje = 5,
-                    Evaluacion = false,
+                    Evaluacion = TipoQuiz.Ejercicio,
+                    Ejercicio = TipoEjercicio.Multiple_Opcion,
                     Eliminado = false,
                     Nombre = "Quiz de Prueba"
                 }
