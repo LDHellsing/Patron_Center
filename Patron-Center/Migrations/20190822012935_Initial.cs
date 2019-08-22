@@ -221,17 +221,17 @@ namespace Patron_Center.Migrations
                 columns: new[] { "Id", "Apellido", "Documento", "Eliminado", "Email", "Nombre", "Password", "TipoUsuario" },
                 values: new object[,]
                 {
-                    { 1, "Administrador", "1", false, "admin@patroncenter.com", "Administrador", "admin", 2 },
-                    { 2, "Docente", "2", false, "docente@patroncenter.com", "Docecente", "admin", 1 },
-                    { 3, "Alumno", "3", false, "alumno@patroncenter.com", "Alumno", "admin", 0 },
-                    { 4, "Alumno", "4", true, "alumno@patroncenter.com", "Alumno Eliminado", "admin", 0 },
-                    { 5, "Docente", "5", true, "docente@patroncenter.com", "Docecente Eliminado", "admin", 1 }
+                    { 1, "Administrador", "1", false, "admin@patroncenter.com", "Administrador", "YWRtaW4=", 2 },
+                    { 2, "Docente", "2", false, "docente@patroncenter.com", "Docecente", "YWRtaW4=", 1 },
+                    { 3, "Alumno", "3", false, "alumno@patroncenter.com", "Alumno", "YWRtaW4=", 0 },
+                    { 4, "Alumno", "4", true, "alumno@patroncenter.com", "Alumno Eliminado", "YWRtaW4=", 0 },
+                    { 5, "Docente", "5", true, "docente@patroncenter.com", "Docecente Eliminado", "YWRtaW4=", 1 }
                 });
 
             migrationBuilder.InsertData(
                 table: "Curso",
                 columns: new[] { "Id", "AlumnosId", "Descripcion", "DocenteId", "Eliminado", "FechaFinalizacion", "Nombre" },
-                values: new object[] { 1, null, "Descripción de curso de prueba", 2, false, new DateTime(2019, 8, 20, 19, 43, 10, 275, DateTimeKind.Local).AddTicks(6649), "Curso de Prueba" });
+                values: new object[] { 1, null, "Descripción de curso de prueba", 2, false, new DateTime(2019, 8, 21, 22, 29, 34, 910, DateTimeKind.Local).AddTicks(3144), "Curso de Prueba" });
 
             migrationBuilder.InsertData(
                 table: "CursoUsuario",

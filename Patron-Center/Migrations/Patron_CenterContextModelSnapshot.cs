@@ -72,7 +72,7 @@ namespace Patron_Center.Migrations
                             Descripcion = "Descripción de curso de prueba",
                             DocenteId = 2,
                             Eliminado = false,
-                            FechaFinalizacion = new DateTime(2019, 8, 20, 19, 43, 10, 275, DateTimeKind.Local).AddTicks(6649),
+                            FechaFinalizacion = new DateTime(2019, 8, 21, 22, 29, 34, 910, DateTimeKind.Local).AddTicks(3144),
                             Nombre = "Curso de Prueba"
                         });
                 });
@@ -402,7 +402,7 @@ namespace Patron_Center.Migrations
                             Eliminado = false,
                             Email = "admin@patroncenter.com",
                             Nombre = "Administrador",
-                            Password = "admin",
+                            Password = "YWRtaW4=",
                             TipoUsuario = 2
                         },
                         new
@@ -413,7 +413,7 @@ namespace Patron_Center.Migrations
                             Eliminado = false,
                             Email = "docente@patroncenter.com",
                             Nombre = "Docecente",
-                            Password = "admin",
+                            Password = "YWRtaW4=",
                             TipoUsuario = 1
                         },
                         new
@@ -424,7 +424,7 @@ namespace Patron_Center.Migrations
                             Eliminado = false,
                             Email = "alumno@patroncenter.com",
                             Nombre = "Alumno",
-                            Password = "admin",
+                            Password = "YWRtaW4=",
                             TipoUsuario = 0
                         },
                         new
@@ -435,7 +435,7 @@ namespace Patron_Center.Migrations
                             Eliminado = true,
                             Email = "alumno@patroncenter.com",
                             Nombre = "Alumno Eliminado",
-                            Password = "admin",
+                            Password = "YWRtaW4=",
                             TipoUsuario = 0
                         },
                         new
@@ -446,7 +446,7 @@ namespace Patron_Center.Migrations
                             Eliminado = true,
                             Email = "docente@patroncenter.com",
                             Nombre = "Docecente Eliminado",
-                            Password = "admin",
+                            Password = "YWRtaW4=",
                             TipoUsuario = 1
                         });
                 });
