@@ -134,6 +134,10 @@ namespace Patron_Center.Controllers
             {
                 if (ModelState.IsValid)
                 {
+                    //Encripto password
+                    var PasswordToBytes = System.Text.Encoding.UTF8.GetBytes(usuario.Password);
+                    usuario.Password = System.Convert.ToBase64String(PasswordToBytes);
+
                     _context.Add(usuario);
                     await _context.SaveChangesAsync();
                     return RedirectToAction(nameof(Create));
@@ -177,6 +181,11 @@ namespace Patron_Center.Controllers
             {
                 return NotFound();
             }
+
+            //Desencripto password
+            var PasswordDecrypted = System.Convert.FromBase64String(usuario.Password);
+            usuario.Password = System.Text.Encoding.UTF8.GetString(PasswordDecrypted);
+
             return View(usuario);
         }
 
@@ -212,6 +221,10 @@ namespace Patron_Center.Controllers
             {
                 try
                 {
+                    //Encripto password
+                    var PasswordToBytes = System.Text.Encoding.UTF8.GetBytes(usuario.Password);
+                    usuario.Password = System.Convert.ToBase64String(PasswordToBytes);                 
+
                     _context.Update(usuario);
                     await _context.SaveChangesAsync();
                 }

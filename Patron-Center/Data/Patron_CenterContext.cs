@@ -49,6 +49,10 @@ namespace Patron_Center.Models
             UsuarioValidoDTO usuaruoDTO = null;
             user = await FindUserByDocumentAsync(usuario.User);
 
+            //Encripto password
+            var PasswordToBytes = System.Text.Encoding.UTF8.GetBytes(usuario.Password);
+            usuario.Password = System.Convert.ToBase64String(PasswordToBytes);
+
             if (user != null && user.Password == usuario.Password && user.Eliminado == false)
             {
                 //El usuario existe en la BD
@@ -95,7 +99,7 @@ namespace Patron_Center.Models
                     Nombre = "Administrador",
                     Apellido = "Administrador",
                     Email = "admin@patroncenter.com",
-                    Password = "admin",
+                    Password = "YWRtaW4=",
                     TipoUsuario = TipoUsuario.Administrador,
                     Eliminado = false
                 }
@@ -108,7 +112,7 @@ namespace Patron_Center.Models
                     Nombre = "Docecente",
                     Apellido = "Docente",
                     Email = "docente@patroncenter.com",
-                    Password = "admin",
+                    Password = "YWRtaW4=",
                     TipoUsuario = TipoUsuario.Docente,
                     Eliminado = false
                 }
@@ -121,7 +125,7 @@ namespace Patron_Center.Models
                     Nombre = "Alumno",
                     Apellido = "Alumno",
                     Email = "alumno@patroncenter.com",
-                    Password = "admin",
+                    Password = "YWRtaW4=",
                     TipoUsuario = TipoUsuario.Alumno,
                     Eliminado = false
                 }
@@ -134,7 +138,7 @@ namespace Patron_Center.Models
                   Nombre = "Alumno Eliminado",
                   Apellido = "Alumno",
                   Email = "alumno@patroncenter.com",
-                  Password = "admin",
+                  Password = "YWRtaW4=",
                   TipoUsuario = TipoUsuario.Alumno,
                   Eliminado = true
               }
@@ -147,7 +151,7 @@ namespace Patron_Center.Models
                    Nombre = "Docecente Eliminado",
                    Apellido = "Docente",
                    Email = "docente@patroncenter.com",
-                   Password = "admin",
+                   Password = "YWRtaW4=",
                    TipoUsuario = TipoUsuario.Docente,
                    Eliminado = true
                }

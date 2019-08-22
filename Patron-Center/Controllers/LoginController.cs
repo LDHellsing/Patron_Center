@@ -29,8 +29,7 @@ namespace Patron_Center.Controllers
         public async Task<IActionResult> Index([Bind("User,Password")] LoginViewModel usuario)
         {
             try
-            {
-                // TODO: Add insert logic here
+            {                
                 if (ModelState.IsValid)
                 {
                     
