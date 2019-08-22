@@ -207,12 +207,6 @@ namespace Patron_Center.Controllers
                 ViewBag.TipoUsuario = HttpContext.Session.GetString("_TipoUsuario");
             }
 
-            if (HttpContext.Session.GetString("_TipoUsuario") != "Administrador" && id != HttpContext.Session.GetInt32("_IdUsuario"))
-            {
-                ViewBag.InvalidUserMessage = "Usted no tiene permiso para acceder a este sitio. Por favor Ingrese con un usuario Administrador, ";
-                return View("Views/Shared/UnauthorisedUserError.cshtml");
-            }
-
             if (id != usuario.Id)
             {
                 return NotFound();
