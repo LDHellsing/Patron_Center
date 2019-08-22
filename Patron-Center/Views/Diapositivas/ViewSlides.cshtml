@@ -28,26 +28,34 @@
         {
             @if (Model.First() == item)
             {
-        <div class="carousel-item active" style="text-align:center;font:Sans-serif;font-size:25px;padding: 25px 100px 25px 100px;min-height:600px">
-            <a>@Html.DisplayFor(modelItem => item.Texto)</a>
+                <div class="carousel-item active" style="text-align:center;font:Sans-serif;font-size:25px;padding: 25px 100px 25px 100px;min-height:600px">
 
-            @if(item.UrlVideo != null)
-            {
-                <iframe width="700" height="500" src=https://www.youtube.com/embed/@item.UrlVideo frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-            }
-                              
-        </div>
+                    <div>
+                        <a>@Html.DisplayFor(modelItem => item.Texto)</a>
+                    </div>
+
+                    @if (item.UrlVideo != null)
+                    {
+                        <div>
+                            <iframe width="700" height="500" src=https://www.youtube.com/embed/@item.UrlVideo frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        </div>
+                    }
+
+                </div>
             }
             else
             {
-        <div class="carousel-item" style="text-align:center;font:Sans-serif;font-size:25px;padding: 25px 100px 25px 100px;min-height:600px">
-            <a>@Html.DisplayFor(modelItem => item.Texto)</a>
-
-            @if (item.UrlVideo != null)
-            {
-                <iframe width="700" height="500" src=https://www.youtube.com/embed/@item.UrlVideo frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-            }
-        </div>
+                <div class="carousel-item" style="text-align:center;font:Sans-serif;font-size:25px;padding: 25px 100px 25px 100px;min-height:600px">
+                    <div>
+                        <a>@Html.DisplayFor(modelItem => item.Texto)</a>
+                    </div>
+                    @if (item.UrlVideo != null)
+                    {
+                        <div>
+                            <iframe width="700" height="500" src=https://www.youtube.com/embed/@item.UrlVideo frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        </div>
+                    }
+                </div>
             }
 
         }

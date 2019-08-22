@@ -21,6 +21,7 @@ namespace Patron_Center.Models
         [Required(ErrorMessage = "El tipo de ejercicio un campo requerido")]
         public TipoEjercicio Ejercicio { get; set; }
         [HiddenInput(DisplayValue = false)]
+        [DisplayName("Inactivo")]
         public bool Eliminado { get; set; }
         public ICollection<Pregunta> Preguntas { get; set; }
         [Required(ErrorMessage = "El nombre es un campo requerido")]

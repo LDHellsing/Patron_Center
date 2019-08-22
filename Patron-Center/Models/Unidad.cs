@@ -28,7 +28,7 @@ namespace Patron_Center.Models
         [DisplayName("Descripción")]
         public String Descripcion { get; set; }
 
-        [DisplayName("Eliminado")]
+        [DisplayName("Inactivo")]
         public bool Eliminado { get; set; }
 
 

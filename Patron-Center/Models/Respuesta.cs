@@ -24,6 +24,7 @@ namespace Patron_Center.Models
         [HiddenInput(DisplayValue = false)]
         public bool Seleccionada { get; set; }
         [HiddenInput(DisplayValue = false)]
+        [DisplayName("Inactivo")]
         public bool Eliminado { get; set; }
         [Required(ErrorMessage = "El enunciado es un campo requerido")]
         public string Enunciado { get; set; }

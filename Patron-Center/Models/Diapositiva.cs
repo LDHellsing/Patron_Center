@@ -27,7 +27,7 @@ namespace Patron_Center.Models
         [DisplayName("Orden")]
         public int Orden { get; set; }
 
-        [DisplayName("Eliminado")]
+        [DisplayName("Inactivo")]
         public bool Eliminado { get; set; }
 
         [DisplayName("Unidad")]

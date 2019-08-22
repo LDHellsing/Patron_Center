@@ -27,7 +27,7 @@ namespace Patron_Center.Models
         [Required(ErrorMessage = "Fecha de Finalización es un campo requerido")]
         public DateTime FechaFinalizacion { get; set; }
 
-        [DisplayName("Eliminado")]
+        [DisplayName("Inactivo")]
         public Boolean Eliminado { get; set; }
 
         [DisplayName("Docente")]

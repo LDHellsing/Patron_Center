@@ -37,7 +37,7 @@ namespace Patron_Center.Models
         [DisplayName("Tipo de Usuario")]
         public TipoUsuario TipoUsuario { get; set; }
 
-        [DisplayName("Eliminado")]
+        [DisplayName("Inactivo")]
         public Boolean Eliminado { get; set; }
 
         public List<CursoUsuario> CursoUsuario { get; set; }
