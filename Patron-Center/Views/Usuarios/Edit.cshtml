@@ -42,7 +42,7 @@
             {
                 <div class="form-group">
                     <label asp-for="TipoUsuario" class="control-label"></label>
-                    <select asp-for="TipoUsuario" asp-items="Html.GetEnumSelectList<TipoUsuario>()" class="form-control"></select>
+                    <select value="@ViewBag.TipoUsuario" asp-for="TipoUsuario" asp-items="Html.GetEnumSelectList<TipoUsuario>()" class="form-control" ></select>
                     <span asp-validation-for="TipoUsuario" class="text-danger"></span>
                 </div>
 

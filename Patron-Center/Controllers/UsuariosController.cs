@@ -227,6 +227,9 @@ namespace Patron_Center.Controllers
 
                     _context.Update(usuario);
                     await _context.SaveChangesAsync();
+
+                    HttpContext.Session.SetString("_Nombre", usuario.Nombre);
+                    HttpContext.Session.SetString("_TipoUsuario", Enum.GetName(typeof(TipoUsuario),usuario.TipoUsuario));
                 }
                 catch (DbUpdateConcurrencyException)
                 {
