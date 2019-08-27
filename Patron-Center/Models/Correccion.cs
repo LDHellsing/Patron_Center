@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -9,16 +8,14 @@ namespace Patron_Center.Models
 {
     public class Correccion
     {
-        [HiddenInput(DisplayValue = false)]
-        [Editable(false)]
         public int Id { get; set; }
-        [HiddenInput(DisplayValue = false)]
-        [Editable(false)]
-        public int IdQuiz { get; set; }
-        [HiddenInput(DisplayValue = false)]
-        [Editable(false)]
-        public int IdAlumno { get; set; }
-        [Required(ErrorMessage = "El resultado es un campo requerido")]
-        public string Resultado { get; set; }
+        // Alumno
+        public int UsuarioId { get; set; }
+        public int QuizId { get; set; }
+        public int PreguntaId { get; set; }
+        public int IdProfesor { get; set; }
+        public RespuestaAlumno RespuestaAlumno { get; set; }
+        [Required(ErrorMessage = "Calificacion es un campo requerido")]
+        public int Calificacion { get; set; }
     }
 }

@@ -24,8 +24,6 @@ namespace Patron_Center.Models
         [DisplayName("Comentario")]
         public string ComentarioDocente { get; set; }
         public ICollection<Respuesta> Respuestas { get; set; }
-        [DisplayName("¿Multiple Opción?")]
-        public bool MultipleOpcion { get; set; }
         //testear si el orden se reinicia a 0 cuando se crea un nuevo quiz
         [Required(ErrorMessage = "El campo orden de pregunta es requerido")]
         public int Orden { get; set; }
