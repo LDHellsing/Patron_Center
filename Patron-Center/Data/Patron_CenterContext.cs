@@ -23,6 +23,9 @@ namespace Patron_Center.Models
         public DbSet<Pregunta> Pregunta { get; set; }
         public DbSet<Quiz> Quiz { get; set; }
         public DbSet<Correccion> Correccion { get; set; }
+        public DbSet<Calificacion> Calificacion { get; set; }
+        public DbSet<RespuestaAlumno> RespuestaAlumno { get; set; }
+
         public DbSet<Patron_Center.Models.Unidad> Unidad { get; set; }
         public DbSet<Patron_Center.Models.Diapositiva> Diapositiva { get; set; }
 
@@ -271,7 +274,6 @@ namespace Patron_Center.Models
                     QuizId = 1,
                     Puntaje = 5,
                     Eliminado = false,
-                    MultipleOpcion = true,
                     Orden = 1,
                     Enunciado = "Esta pregunta no es mas que una prueba"
                 }
@@ -283,7 +285,6 @@ namespace Patron_Center.Models
                     QuizId = 1,
                     Puntaje = 10,
                     Eliminado = false,
-                    MultipleOpcion = true,
                     Orden = 2,
                     Enunciado = "Esta pregunta no es mas que otra una prueba"
                 }

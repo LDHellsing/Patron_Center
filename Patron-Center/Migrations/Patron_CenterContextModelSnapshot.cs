@@ -19,20 +19,48 @@ namespace Patron_Center.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("Patron_Center.Models.Calificacion", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("CursoId");
+
+                    b.Property<DateTime>("Fecha");
+
+                    b.Property<int>("Nota");
+
+                    b.Property<int>("UnidadId");
+
+                    b.Property<int>("UsuarioId");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Calificacion");
+                });
+
             modelBuilder.Entity("Patron_Center.Models.Correccion", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("IdAlumno");
+                    b.Property<int>("Calificacion");
 
-                    b.Property<int>("IdQuiz");
+                    b.Property<int>("IdProfesor");
 
-                    b.Property<string>("Resultado")
-                        .IsRequired();
+                    b.Property<int>("PreguntaId");
+
+                    b.Property<int>("QuizId");
+
+                    b.Property<int?>("RespuestaAlumnoId");
+
+                    b.Property<int>("UsuarioId");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("RespuestaAlumnoId");
 
                     b.ToTable("Correccion");
                 });
@@ -72,7 +100,7 @@ namespace Patron_Center.Migrations
                             Descripcion = "Descripción de curso de prueba",
                             DocenteId = 2,
                             Eliminado = false,
-                            FechaFinalizacion = new DateTime(2019, 8, 21, 22, 29, 34, 910, DateTimeKind.Local).AddTicks(3144),
+                            FechaFinalizacion = new DateTime(2019, 8, 26, 22, 38, 2, 812, DateTimeKind.Local).AddTicks(6250),
                             Nombre = "Curso de Prueba"
                         });
                 });
@@ -183,8 +211,6 @@ namespace Patron_Center.Migrations
                     b.Property<string>("Enunciado")
                         .IsRequired();
 
-                    b.Property<bool>("MultipleOpcion");
-
                     b.Property<int>("Orden");
 
                     b.Property<int>("Puntaje");
@@ -203,7 +229,6 @@ namespace Patron_Center.Migrations
                             Id = 1,
                             Eliminado = false,
                             Enunciado = "Esta pregunta no es mas que una prueba",
-                            MultipleOpcion = true,
                             Orden = 1,
                             Puntaje = 5,
                             QuizId = 1
@@ -213,7 +238,6 @@ namespace Patron_Center.Migrations
                             Id = 2,
                             Eliminado = false,
                             Enunciado = "Esta pregunta no es mas que otra una prueba",
-                            MultipleOpcion = true,
                             Orden = 2,
                             Puntaje = 10,
                             QuizId = 1
@@ -318,6 +342,25 @@ namespace Patron_Center.Migrations
                             RespuestaCorrecta = false,
                             Seleccionada = true
                         });
+                });
+
+            modelBuilder.Entity("Patron_Center.Models.RespuestaAlumno", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("PreguntaId");
+
+                    b.Property<string>("RespuestaDesarrollo");
+
+                    b.Property<int>("RespuestaId");
+
+                    b.Property<int>("UsuarioId");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("RespuestaAlumno");
                 });
 
             modelBuilder.Entity("Patron_Center.Models.Unidad", b =>
@@ -449,6 +492,13 @@ namespace Patron_Center.Migrations
                             Password = "YWRtaW4=",
                             TipoUsuario = 1
                         });
+                });
+
+            modelBuilder.Entity("Patron_Center.Models.Correccion", b =>
+                {
+                    b.HasOne("Patron_Center.Models.RespuestaAlumno", "RespuestaAlumno")
+                        .WithMany()
+                        .HasForeignKey("RespuestaAlumnoId");
                 });
 
             modelBuilder.Entity("Patron_Center.Models.Curso", b =>

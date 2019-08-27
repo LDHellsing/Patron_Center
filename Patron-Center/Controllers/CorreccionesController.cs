@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Patron_Center.Models;
 
-namespace Patron_Center
+namespace Patron_Center.Controllers
 {
     public class CorreccionesController : Controller
     {
@@ -53,7 +53,7 @@ namespace Patron_Center
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,IdQuiz,IdAlumno,Resultado")] Correccion correccion)
+        public async Task<IActionResult> Create([Bind("Id,UsuarioId,QuizId,PreguntaId,IdProfesor,Calificacion")] Correccion correccion)
         {
             if (ModelState.IsValid)
             {
@@ -85,7 +85,7 @@ namespace Patron_Center
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,IdQuiz,IdAlumno,Resultado")] Correccion correccion)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,UsuarioId,QuizId,PreguntaId,IdProfesor,Calificacion")] Correccion correccion)
         {
             if (id != correccion.Id)
             {
