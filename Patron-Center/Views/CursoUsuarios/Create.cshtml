@@ -4,9 +4,8 @@
     ViewData["Title"] = "Create";
 }
 
-<h1>Create</h1>
+<h1>Incripción de Alumnos</h1>
 
-<h4>CursoUsuario</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -32,7 +31,7 @@
 </div>
 
 <div>
-    <a asp-action="Index">Volver a la lista</a>
+    <a asp-action="Index" asp-route-CursoId=@ViewBag.CursoId_>Volver a la lista</a>
 </div>
 
 @section Scripts {

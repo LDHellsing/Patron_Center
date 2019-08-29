@@ -4,43 +4,39 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>Alumnos del curso</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create" asp-route-CursoId=@ViewBag.CursoId>Inscribir Alumno</a>
 </p>
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Usuario)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Curso)
+                Alumno
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model)
-{
-        <tr>
-            <td>
-                @(String.Format("{0} {1}", item.Usuario.Nombre, item.Usuario.Apellido))
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Curso.Nombre)
-            </td>
-
-            @if (ViewBag.TipoUsuario != "Alumno")
-            {
+        @foreach (var item in Model)
+        {
+            <tr>
                 <td>
-                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.Id">Details</a>
+                    @(String.Format("{0} {1}", item.Usuario.Nombre, item.Usuario.Apellido))
                 </td>
-             }
-          
-        </tr>
-}
+
+                @if (ViewBag.TipoUsuario != "Alumno")
+                {
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.Id">Editar</a>
+                    </td>
+                }
+
+            </tr>
+        }
     </tbody>
 </table>
+<div>
+    <a asp-controller="Cursos" asp-action="Index">Volver atras</a>
+</div>

@@ -20,7 +20,7 @@ namespace Patron_Center.Controllers
         }
 
         // GET: CursoUsuarios
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int CursoId)
         {
             if (HttpContext.Session.GetInt32("_IdUsuario") == null)
             {
@@ -39,7 +39,9 @@ namespace Patron_Center.Controllers
                 return View("Views/Shared/UnauthorisedUserError.cshtml");
             }
 
-            var patron_CenterContext = _context.CursoUsuario.Include(c => c.Curso).Include(c => c.Usuario);
+            var patron_CenterContext = _context.CursoUsuario.Include(c => c.Curso).Include(c => c.Usuario).Where(c => c.CursoId == CursoId);
+            ViewBag.CursoId = CursoId;
+
             return View(await patron_CenterContext.ToListAsync());
         }
 
@@ -89,48 +91,8 @@ namespace Patron_Center.Controllers
             return View(await patron_CenterContext.ToListAsync());
         }
 
-
-
-
-        // GET: CursoUsuarios/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (HttpContext.Session.GetInt32("_IdUsuario") == null)
-            {
-                return RedirectToAction("Index", "Login");
-            }
-            else
-            {
-                ViewBag.Nombre = HttpContext.Session.GetString("_Nombre");
-                ViewBag.IdUsuario = HttpContext.Session.GetInt32("_IdUsuario");
-                ViewBag.TipoUsuario = HttpContext.Session.GetString("_TipoUsuario");
-            }
-
-            if (HttpContext.Session.GetString("_TipoUsuario") == "Alumno")
-            {
-                ViewBag.InvalidUserMessage = "Usted no tiene permiso para acceder a este sitio. Por favor Ingrese con un usuario Administrador, ";
-                return View("Views/Shared/UnauthorisedUserError.cshtml");
-            }
-
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var cursoUsuario = await _context.CursoUsuario
-                .Include(c => c.Curso)
-                .Include(c => c.Usuario)
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (cursoUsuario == null)
-            {
-                return NotFound();
-            }
-
-            return View(cursoUsuario);
-        }
-
         // GET: CursoUsuarios/Create
-        public IActionResult Create()
+        public IActionResult Create(int CursoId)
         {
             if (HttpContext.Session.GetInt32("_IdUsuario") == null)
             {
@@ -149,7 +111,8 @@ namespace Patron_Center.Controllers
                 return View("Views/Shared/UnauthorisedUserError.cshtml");
             }
 
-            ViewData["CursoId"] = new SelectList(_context.Curso.Where(x => !x.Eliminado), "Id", "Nombre");
+            ViewBag.CursoId_ = CursoId;
+            ViewData["CursoId"] = new SelectList(_context.Curso.Where(x => !x.Eliminado && x.Id == CursoId), "Id", "Nombre");
             ViewData["UsuarioId"] = new SelectList(_context.Usuario.Where(x => x.TipoUsuario.Equals(TipoUsuario.Alumno) && !x.Eliminado), "Id", "NombreCompleto");
             return View();
         }
@@ -197,7 +160,8 @@ namespace Patron_Center.Controllers
             {
                 ViewBag.UsuarioYaEnCurso = "El Alumno ya se encuentra inscripto en el Curso";
                 //Cargo nuevamente los combobox
-                Create();
+                Create(cursoUsuario.CursoId);
+
                 return View(cursoUsuario);
             }
         }
@@ -239,7 +203,7 @@ namespace Patron_Center.Controllers
                 return NotFound();
             }
             ViewData["CursoId"] = new SelectList(_context.Curso, "Id", "Nombre", cursoUsuario.CursoId);
-            ViewData["UsuarioId"] = new SelectList(_context.Usuario.Where(x => x.TipoUsuario.Equals(TipoUsuario.Alumno) && !x.Eliminado), "Id", "NombreCompleto");
+            ViewData["UsuarioId"] = new SelectList(_context.Usuario.Where(x => x.TipoUsuario.Equals(TipoUsuario.Alumno) && x.Id == cursoUsuario.UsuarioId), "Id", "NombreCompleto");
             return View(cursoUsuario);
         }
 
@@ -301,13 +265,15 @@ namespace Patron_Center.Controllers
                         }
                     }
                     return RedirectToAction(nameof(Index));
+                    //return RedirectToAction("Index", "CursoUsuario", new { CursoId = cursoUsuario.CursoId });
                 }
             }
             else
             {
                 ViewBag.UsuarioYaEnCurso = "El Alumno ya se encuentra inscripto en el Curso";
                 //Cargo nuevamente los combobox
-                Create();
+                Create(cursoUsuario.CursoId);
+
                 return View(cursoUsuario);
             }
             ViewData["CursoId"] = new SelectList(_context.Curso, "Id", "Id", cursoUsuario.CursoId);
