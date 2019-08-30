@@ -69,6 +69,23 @@ namespace Patron_Center.Models
             return usuaruoDTO;
         }
 
+        public async Task<Quiz> CreateQuiz(int quizId)
+        {
+            try
+            {
+                Quiz quizAux = await Quiz.Where(q => q.Id == quizId).Include(p => p.Preguntas).ThenInclude(re => re.Respuestas).FirstAsync();
+
+                Debug.WriteLine("El quiz resultante es ---------> " + quizAux.Preguntas.ElementAt(0).Enunciado);
+
+                return quizAux;
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine("error: " + e);
+                return null;
+            }
+        }
+
         //Relacion muchos a muchos Curso Usuario
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

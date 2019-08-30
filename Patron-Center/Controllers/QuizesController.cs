@@ -275,9 +275,26 @@ namespace Patron_Center.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        // Cursar quiz
+        // GET
+        // Quizes/DoQuiz
+        public Task DoQuiz(int QuizId)
+        {
+            var quiz = _context.CreateQuiz(1);
+
+            return quiz;
+        }
+       // [HttpPost]
+       // [ValidateAntiForgeryToken]
+       // public async Task<IActionResult> QuizCorrection( Quiz quiz)
+       // {
+            //
+       // }
+
         private bool QuizExists(int id)
         {
             return _context.Quiz.Any(e => e.Id == id);
         }
+
     }
 }
