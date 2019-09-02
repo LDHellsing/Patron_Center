@@ -52,7 +52,10 @@
                     @(String.Format("{0} {1}", item.Docente.Nombre, item.Docente.Apellido))
                 </td>
                 <td>
-                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-link">Editar</a>
+                    @if (ViewBag.TipoUsuario == "Administrador")
+                    {
+                        <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-link">Editar</a>
+                    }
                     <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-link">Detalles</a>
                     <a asp-controller="Unidades" asp-action="Index" asp-route-CursoId="@item.Id" class="btn btn-link">Unidades</a>
                     <a asp-controller="CursoUsuarios" asp-action="Index" asp-route-CursoId="@item.Id" class="btn btn-link">Alumnos</a>
