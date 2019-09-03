@@ -84,7 +84,6 @@ C:\PatronCenter\Patron-Center\obj\Debug\netcoreapp2.2\Patron-Center.TagHelpers.i
 C:\PatronCenter\Patron-Center\obj\Debug\netcoreapp2.2\Patron-Center.TagHelpers.output.cache
 C:\PatronCenter\Patron-Center\obj\Debug\netcoreapp2.2\Patron-Center.RazorCoreGenerate.cache
 C:\PatronCenter\Patron-Center\obj\Debug\netcoreapp2.2\Razor\Views\Cursos\Create.g.cshtml.cs
-C:\PatronCenter\Patron-Center\obj\Debug\netcoreapp2.2\Razor\Views\Cursos\Details.g.cshtml.cs
 C:\PatronCenter\Patron-Center\obj\Debug\netcoreapp2.2\Razor\Views\Cursos\Edit.g.cshtml.cs
 C:\PatronCenter\Patron-Center\obj\Debug\netcoreapp2.2\Razor\Views\Cursos\Index.g.cshtml.cs
 C:\PatronCenter\Patron-Center\obj\Debug\netcoreapp2.2\Razor\Views\CursoUsuarios\Create.g.cshtml.cs

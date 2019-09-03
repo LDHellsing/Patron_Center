@@ -150,10 +150,11 @@ namespace Patron_Center.Controllers
                 {
                     _context.Add(cursoUsuario);
                     await _context.SaveChangesAsync();
-                    return RedirectToAction(nameof(Create));
+                    //return RedirectToAction(nameof(Create));
                 }
-                ViewData["CursoId"] = new SelectList(_context.Curso, "Id", "Id", cursoUsuario.CursoId);
-                ViewData["UsuarioId"] = new SelectList(_context.Usuario, "Id", "Id", cursoUsuario.UsuarioId);
+                ViewData["CursoId"] = new SelectList(_context.Curso.Where(x => !x.Eliminado && x.Id == cursoUsuario.CursoId), "Id", "Nombre", cursoUsuario.CursoId);
+                ViewData["UsuarioId"] = new SelectList(_context.Usuario.Where(x => x.TipoUsuario.Equals(TipoUsuario.Alumno) && !x.Eliminado), "Id", "NombreCompleto", cursoUsuario.UsuarioId);
+                ViewBag.CursoId_ = cursoUsuario.CursoId;
                 return View(cursoUsuario);
             }
             else
@@ -202,6 +203,8 @@ namespace Patron_Center.Controllers
             {
                 return NotFound();
             }
+            ViewBag.CursoId_ = cursoUsuario.CursoId;
+
             ViewData["CursoId"] = new SelectList(_context.Curso, "Id", "Nombre", cursoUsuario.CursoId);
             ViewData["UsuarioId"] = new SelectList(_context.Usuario.Where(x => x.TipoUsuario.Equals(TipoUsuario.Alumno) && x.Id == cursoUsuario.UsuarioId), "Id", "NombreCompleto");
             return View(cursoUsuario);
@@ -264,8 +267,8 @@ namespace Patron_Center.Controllers
                             throw;
                         }
                     }
-                    return RedirectToAction(nameof(Index));
-                    //return RedirectToAction("Index", "CursoUsuario", new { CursoId = cursoUsuario.CursoId });
+                    //Lleva al usuario al nuevo curso
+                    return RedirectToAction("Index", new { CursoId = cursoUsuario.CursoId });
                 }
             }
             else
@@ -276,8 +279,8 @@ namespace Patron_Center.Controllers
 
                 return View(cursoUsuario);
             }
-            ViewData["CursoId"] = new SelectList(_context.Curso, "Id", "Id", cursoUsuario.CursoId);
-            ViewData["UsuarioId"] = new SelectList(_context.Usuario, "Id", "Id", cursoUsuario.UsuarioId);
+            ViewData["CursoId"] = new SelectList(_context.Curso, "Id", "Nombre", cursoUsuario.CursoId);
+            ViewData["UsuarioId"] = new SelectList(_context.Usuario, "Id", "NombreCompleto", cursoUsuario.UsuarioId);
             return View(cursoUsuario);
         }
 
