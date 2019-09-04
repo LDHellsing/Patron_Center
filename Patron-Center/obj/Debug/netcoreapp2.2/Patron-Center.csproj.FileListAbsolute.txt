@@ -132,7 +132,6 @@ C:\PatronCenter\Patron-Center\obj\Debug\netcoreapp2.2\Razor\Views\Quizes\Create.
 C:\PatronCenter\Patron-Center\obj\Debug\netcoreapp2.2\Razor\Views\Quizes\Details.g.cshtml.cs
 C:\PatronCenter\Patron-Center\obj\Debug\netcoreapp2.2\Razor\Views\Quizes\Edit.g.cshtml.cs
 C:\PatronCenter\Patron-Center\obj\Debug\netcoreapp2.2\Razor\Views\Quizes\Index.g.cshtml.cs
-C:\PatronCenter\Patron-Center\obj\Debug\netcoreapp2.2\Patron-Center.csprojAssemblyReference.cache
 C:\PatronCenter\Patron-Center\obj\Debug\netcoreapp2.2\Razor\Views\Calificaciones\Create.g.cshtml.cs
 C:\PatronCenter\Patron-Center\obj\Debug\netcoreapp2.2\Razor\Views\Calificaciones\Delete.g.cshtml.cs
 C:\PatronCenter\Patron-Center\obj\Debug\netcoreapp2.2\Razor\Views\Calificaciones\Details.g.cshtml.cs
@@ -148,3 +147,5 @@ C:\PatronCenter\Patron-Center\obj\Debug\netcoreapp2.2\Razor\Views\RespuestaAlumn
 C:\PatronCenter\Patron-Center\obj\Debug\netcoreapp2.2\Razor\Views\RespuestaAlumnos\Details.g.cshtml.cs
 C:\PatronCenter\Patron-Center\obj\Debug\netcoreapp2.2\Razor\Views\RespuestaAlumnos\Edit.g.cshtml.cs
 C:\PatronCenter\Patron-Center\obj\Debug\netcoreapp2.2\Razor\Views\RespuestaAlumnos\Index.g.cshtml.cs
+C:\PatronCenter\Patron-Center\obj\Debug\netcoreapp2.2\Razor\Views\Quizes\AnswerQuiz.g.cshtml.cs
+C:\PatronCenter\Patron-Center\obj\Debug\netcoreapp2.2\Patron-Center.csprojAssemblyReference.cache
