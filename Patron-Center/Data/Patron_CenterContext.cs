@@ -129,7 +129,7 @@ namespace Patron_Center.Models
                 {
                     Id = 2,
                     Documento = "2",
-                    Nombre = "Docecente",
+                    Nombre = "Docente",
                     Apellido = "Docente",
                     Email = "docente@patroncenter.com",
                     Password = "YWRtaW4=",
