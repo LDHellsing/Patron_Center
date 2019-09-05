@@ -17,14 +17,14 @@
         <div class="form-group">
             @foreach (var pregunta in Model.Preguntas)
             {
-                <div class="form-group">
+                <div >
                     <label asp-for="@pregunta.Enunciado" class="control-label">@pregunta.Enunciado</label>
                 </div>
                 <div class="form-group">
                     @foreach(var respuesta in pregunta.Respuestas)
                     {
                     <div class="form-group">
-                        <input type="radio" asp-for="@respuesta.Seleccionada" value="@respuesta.Id" id="@respuesta.PreguntaId" /> @respuesta.Enunciado <br/>
+                        <input type="radio" name="@respuesta.PreguntaId" value=@respuesta.Id id=@respuesta.PreguntaId /> @respuesta.Enunciado <br/>
                     </div>
                     }
                 </div>
