@@ -31,7 +31,6 @@ namespace Patron_Center.Controllers
                 ViewBag.Nombre = HttpContext.Session.GetString("_Nombre");
                 ViewBag.IdUsuario = HttpContext.Session.GetInt32("_IdUsuario");
                 ViewBag.TipoUsuario = HttpContext.Session.GetString("_TipoUsuario");
-                
             }
 
             if (HttpContext.Session.GetString("_TipoUsuario") == "Alumno")
@@ -39,19 +38,27 @@ namespace Patron_Center.Controllers
                 ViewBag.InvalidUserMessage = "Usted no tiene permiso para acceder a este sitio. Por favor Ingrese con un usuario Administrador, ";
                 return View("Views/Shared/UnauthorisedUserError.cshtml");
             }
-            
+
             if (HttpContext.Session.GetString("_TipoUsuario") == "Administrador")
-            {                
+            {
                 var patron_CenterContext = _context.Curso.Include(c => c.Docente);
                 return View(await patron_CenterContext.ToListAsync());
             }
             else
             {
                 var patron_CenterContext = _context.Curso.Include(c => c.Docente).Where(c => c.DocenteId == HttpContext.Session.GetInt32("_IdUsuario") && c.Eliminado != true);
+
+                foreach (var curso in patron_CenterContext)
+                {
+                    if (curso.FechaFinalizacion < DateTime.Today)
+                    {
+                        curso.Finalizado = true;
+                    }
+                }
                 return View(await patron_CenterContext.ToListAsync());
             }
-            
-        }        
+
+        }
 
         // GET: Cursos/Create
         public IActionResult Create()
@@ -141,6 +148,7 @@ namespace Patron_Center.Controllers
             {
                 return NotFound();
             }
+
             ViewData["DocenteId"] = new SelectList(_context.Usuario.Where(x => x.TipoUsuario.Equals(TipoUsuario.Docente) && !x.Eliminado), "Id", "NombreCompleto");
             return View(curso);
         }

@@ -29,23 +29,23 @@ namespace Patron_Center.Controllers
         public async Task<IActionResult> Index([Bind("User,Password")] LoginViewModel usuario)
         {
             try
-            {                
+            {
                 if (ModelState.IsValid)
                 {
-                    
-                   UsuarioValidoDTO result = await _context.ValidarUsuario(usuario);
+
+                    UsuarioValidoDTO result = await _context.ValidarUsuario(usuario);
 
                     if (result.UsuarioValido == false)
                     {
                         ViewBag.InvalidUserMessage = "Usuario o contraseña no valido";
                         return View(usuario);
                     }
-                    
+
                     HttpContext.Session.SetInt32("_IdUsuario", result.IdUsuario);
                     HttpContext.Session.SetString("_Documento", result.Documento);
                     HttpContext.Session.SetString("_Nombre", result.NombreUsuario);
                     HttpContext.Session.SetString("_TipoUsuario", result.Rol);
-                 
+
 
                     return RedirectToAction("Index", "Home");
                 }
