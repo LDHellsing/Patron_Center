@@ -9,6 +9,7 @@
 <p>
     <a asp-controller="Diapositivas" asp-action="Create" asp-route-UnidadId="@ViewBag.UnidadId" class="btn btn-link">Crear Diapositiva</a>
 </p>
+
 <table class="table">
     <thead>
         <tr>
@@ -16,13 +17,13 @@
                 @Html.DisplayNameFor(model => model.Texto)
             </th>
             <th>
+                YouTube
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.Orden)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Eliminado)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Unidad)
             </th>
             <th></th>
         </tr>
@@ -31,17 +32,26 @@
         @foreach (var item in Model)
         {
             <tr>
-                <td>
+                <td width="700px">
                     @Html.DisplayFor(modelItem => item.Texto)
+                </td>
+                <td>
+                    @if (item.UrlVideo != null)
+                    {
+                   
+                        <a href="@(String.Format("{0}{1}", "www.youtube.com/watch?v=", item.UrlVideo))">Ver Video</a>
+
+                    }
+                    else
+                    {
+                        <p>Sin Video</p>
+                    }
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Orden)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Eliminado)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Unidad.Descripcion)
                 </td>
                 <td>
                     <a asp-action="Edit" asp-route-id="@item.Id">Editar</a> |

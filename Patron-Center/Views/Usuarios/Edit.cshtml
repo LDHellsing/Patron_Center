@@ -42,7 +42,7 @@
             {
                 <div class="form-group">
                     <label asp-for="TipoUsuario" class="control-label"></label>
-                    <select value="@ViewBag.TipoUsuario" asp-for="TipoUsuario" asp-items="Html.GetEnumSelectList<TipoUsuario>()" class="form-control" ></select>
+                    <select value="@ViewBag.TipoUsuario" asp-for="TipoUsuario" asp-items="Html.GetEnumSelectList<TipoUsuario>()" class="form-control"></select>
                     <span asp-validation-for="TipoUsuario" class="text-danger"></span>
                 </div>
 
@@ -62,16 +62,9 @@
         </form>
     </div>
 </div>
-@if (ViewBag.TipoUsuario == "Administrador")
-{
-    <div>
-        <a asp-action="Index">Volver a la lista</a>
-    </div>
-}
-else
-{
-    <a asp-controller="Home" asp-action="Index">Volver atras</a>
-}
+
+<a asp-controller="Home" asp-action="Index">Volver atras</a>
+
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

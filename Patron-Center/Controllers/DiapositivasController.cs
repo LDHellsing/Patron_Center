@@ -39,7 +39,7 @@ namespace Patron_Center.Controllers
                 return View("Views/Shared/UnauthorisedUserError.cshtml");
             }
 
-            var patron_CenterContext = _context.Diapositiva.Include(d => d.Unidad).Where(d => d.UnidadId == UnidadId);
+            var patron_CenterContext = _context.Diapositiva.Include(d => d.Unidad).Where(d => d.UnidadId == UnidadId).OrderBy(d => d.Id).OrderBy(d => d.Orden);
 
             var Unidad = await _context.Unidad               
                 .FirstOrDefaultAsync(m => m.Id == UnidadId);
@@ -242,7 +242,7 @@ namespace Patron_Center.Controllers
                 .FirstOrDefaultAsync(m => m.Id == UnidadId);
 
             ViewBag.CursoId = Unidad.CursoId;
-            var patron_CenterContext = _context.Diapositiva.Include(d => d.Unidad).Where(d => d.UnidadId == UnidadId && d.Eliminado == false).OrderBy(d => d.Orden);
+            var patron_CenterContext = _context.Diapositiva.Include(d => d.Unidad).Where(d => d.UnidadId == UnidadId && d.Eliminado == false).OrderBy(d => d.Id).OrderBy(d => d.Orden);
             return View(await patron_CenterContext.ToListAsync());
         }
 
