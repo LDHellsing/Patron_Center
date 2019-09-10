@@ -22,7 +22,8 @@ namespace Patron_Center.Models
         public bool RespuestaCorrecta { get; set; }
         //Esta property va a ser true si es la respuesta que el alumno eligio (solo para MultipleOpcion)
         [HiddenInput(DisplayValue = false)]
-        public bool Seleccionada { get; set; }
+		[BindProperty, Required]
+		public bool Seleccionada { get; set; }
         [HiddenInput(DisplayValue = false)]
         [DisplayName("Inactivo")]
         public bool Eliminado { get; set; }

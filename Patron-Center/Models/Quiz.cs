@@ -23,7 +23,8 @@ namespace Patron_Center.Models
         [HiddenInput(DisplayValue = false)]
         [DisplayName("Inactivo")]
         public bool Eliminado { get; set; }
-        public ICollection<Pregunta> Preguntas { get; set; }
+		[BindProperty]
+		public List<Pregunta> Preguntas { get; set; }
         [Required(ErrorMessage = "El nombre es un campo requerido")]
         public string Nombre { get; set; }
 

@@ -2,34 +2,36 @@
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 
-@model Patron_Center.Models.Quiz
+@model Patron_Center.Models.RespuestaAlumnoMO
 
 @{
     ViewData["Title"] = "Anawer Quiz";
 }
 
-<h1>@Model.Nombre</h1>
+<h1>@Model.QuizName</h1>
 <br />
 
 <div class="row">
-    <form asp-action="QuizCorrection">
+    <form asp-action="QuizCorrection" method="post">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <div class="form-group">
-            @foreach (var pregunta in Model.Preguntas)
+            @for (int i = 0; i < Model.Preguntas.Count; i++)
             {
-                <div >
-                    <label asp-for="@pregunta.Enunciado" class="control-label">@pregunta.Enunciado</label>
+                <div>
+                    <label asp-for="@Model.Preguntas[i].Enunciado" class="control-label">@Model.Preguntas[i].Enunciado</label>
                 </div>
                 <div class="form-group">
-                    @foreach(var respuesta in pregunta.Respuestas)
+                    @for (int j = 0; j < @Model.Preguntas[i].Respuestas.Count; j++)
                     {
-                    <div class="form-group">
-                        <input type="radio" name="@respuesta.PreguntaId" value=@respuesta.Id id=@respuesta.PreguntaId /> @respuesta.Enunciado <br/>
-                    </div>
+                        <div class="form-group">
+                            <input type="radio" asp-for="@Model.Preguntas[i].Id" value="@Model.Preguntas.ElementAt(i).Respuestas.ElementAt(j);" /> @Model.Preguntas[i].Respuestas[j].Enunciado <br />
+                        </div>
                     }
                 </div>
-                <br />
             }
+        </div>
+        <div class="form-group">
+            <input asp-for="@Model.IdQuiz" class="form-control data-form" hidden="hidden" />
         </div>
         <div class="form-group">
             <input type="submit" value="Enviar" class="btn btn-primary" />

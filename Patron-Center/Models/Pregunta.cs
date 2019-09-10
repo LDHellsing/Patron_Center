@@ -23,7 +23,8 @@ namespace Patron_Center.Models
         public bool Eliminado { get; set; }
         [DisplayName("Comentario")]
         public string ComentarioDocente { get; set; }
-        public ICollection<Respuesta> Respuestas { get; set; }
+		[BindProperty]
+		public List<Respuesta> Respuestas { get; set; }
         //testear si el orden se reinicia a 0 cuando se crea un nuevo quiz
         [Required(ErrorMessage = "El campo orden de pregunta es requerido")]
         public int Orden { get; set; }

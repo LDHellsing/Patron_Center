@@ -280,19 +280,24 @@ namespace Patron_Center.Controllers
         // Quizes/AnswerQuiz
         public async Task<IActionResult> AnswerQuiz(int QuizId)
         {
-            var quiz = await _context.CreateQuiz(1);
+            var quizAux = await _context.CreateQuiz(1);
+            RespuestaAlumnoMO quiz = new RespuestaAlumnoMO();
+            quiz.IdQuiz = quizAux.Id;
+            quiz.QuizName = quizAux.Nombre;
+            quiz.Preguntas = quizAux.Preguntas;
 
             return View("AnswerQuiz", quiz);
         }
-        // [HttpPost]
-        // [ValidateAntiForgeryToken]
-        // Esta coleccion de ints tiene todos los ids de las respuestas
-        // public async Task<IActionResult> QuizCorrection(ICollection<int> respuestas)
-        // {
-        //
-        // }
+		[HttpPost]
+		[ValidateAntiForgeryToken]
+		 public async Task<IActionResult> QuizCorrection([Bind(include: "IdQuiz,QuizName,Preguntas")]RespuestaAlumnoMO respuestaAlumnoMO)
+        {
 
-        private bool QuizExists(int id)
+			var q = await _context.CreateQuiz(1);
+			return View(q);
+      	}
+
+		private bool QuizExists(int id)
         {
             return _context.Quiz.Any(e => e.Id == id);
         }
