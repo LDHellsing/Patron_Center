@@ -279,19 +279,35 @@ namespace Patron_Center.Controllers
         // GET
         // Quizes/AnswerQuiz
         public async Task<IActionResult> AnswerQuiz(int QuizId)
-        {
+        {	
             var quizAux = await _context.CreateQuiz(1);
-            RespuestaAlumnoMO quiz = new RespuestaAlumnoMO();
-            quiz.IdQuiz = quizAux.Id;
-            quiz.QuizName = quizAux.Nombre;
-            quiz.Preguntas = quizAux.Preguntas;
+			RespuestaAlumnoMO quiz = new RespuestaAlumnoMO();
+			quiz.IdQuiz = quizAux.Id;
+			quiz.QuizName = quizAux.Nombre;
+			foreach (var pregunta in quizAux.Preguntas)
+			{
+				PreguntaViewModel preguntaViewModel = new PreguntaViewModel();
+				preguntaViewModel.IdPregunta = pregunta.Id;
+				preguntaViewModel.Enunciado = pregunta.Enunciado;
 
+				foreach (var respuesta in pregunta.Respuestas)
+				{
+					preguntaViewModel.Respuestas.Add(new RespuestaViewModel()
+					{
+						IdRespuesta = respuesta.Id,
+						Enunciado = respuesta.Enunciado
+					});
+				}
+				quiz.Preguntas.Add(preguntaViewModel);
+			}
+			
             return View("AnswerQuiz", quiz);
         }
 		[HttpPost]
 		[ValidateAntiForgeryToken]
-		 public async Task<IActionResult> QuizCorrection([Bind(include: "IdQuiz,QuizName,Preguntas")]RespuestaAlumnoMO respuestaAlumnoMO)
-        {
+		// Esta coleccion de ints tiene todos los ids de las respuestas
+		public async Task<IActionResult> QuizCorrection(RespuestaAlumnoMO respuestaAlumnoMO)
+		{
 
 			var q = await _context.CreateQuiz(1);
 			return View(q);
