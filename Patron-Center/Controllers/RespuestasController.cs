@@ -38,29 +38,11 @@ namespace Patron_Center.Controllers
                 ViewBag.InvalidUserMessage = "Usted no tiene permiso para acceder a este sitio. Por favor Ingrese con un usuario Administrador, ";
                 return View("Views/Shared/UnauthorisedUserError.cshtml");
             }
-
+            var patron_CenterContext = _context.Respuesta.Include(r => r.Pregunta).Where(r => r.PreguntaId == PreguntaId);
+            var QuizId = patron_CenterContext.Select(q => q.Pregunta.QuizId).FirstOrDefault();
             ViewBag.PreguntaId = PreguntaId;
-            var patron_CenterContext = _context.Respuesta.Include(r => r.Pregunta).Where(r => r.PreguntaId == PreguntaId); ;
+            ViewBag.QuizId = QuizId;
             return View(await patron_CenterContext.ToListAsync());
-        }
-
-        // GET: Respuestas/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var respuesta = await _context.Respuesta
-                .Include(r => r.Pregunta)
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (respuesta == null)
-            {
-                return NotFound();
-            }
-
-            return View(respuesta);
         }
 
         // GET: Respuestas/Create
@@ -152,6 +134,7 @@ namespace Patron_Center.Controllers
             {
                 return NotFound();
             }
+            ViewBag.PreguntaId_ = respuesta.PreguntaId;
             ViewData["PreguntaId"] = new SelectList(_context.Pregunta, "Id", "Enunciado", respuesta.PreguntaId);
             return View(respuesta);
         }
@@ -204,73 +187,10 @@ namespace Patron_Center.Controllers
                     }
                 }
                 return RedirectToAction(nameof(Index));
-            }
+            }    
+            
             ViewData["PreguntaId"] = new SelectList(_context.Pregunta, "Id", "Enunciado", respuesta.PreguntaId);
             return View(respuesta);
-        }
-
-        // GET: Respuestas/Delete/5
-        public async Task<IActionResult> Delete(int? id)
-        {
-            if (HttpContext.Session.GetInt32("_IdUsuario") == null)
-            {
-                return RedirectToAction("Index", "Login");
-            }
-            else
-            {
-                ViewBag.Nombre = HttpContext.Session.GetString("_Nombre");
-                ViewBag.IdUsuario = HttpContext.Session.GetInt32("_IdUsuario");
-                ViewBag.TipoUsuario = HttpContext.Session.GetString("_TipoUsuario");
-            }
-
-            if (HttpContext.Session.GetString("_TipoUsuario") == "Alumno")
-            {
-                ViewBag.InvalidUserMessage = "Usted no tiene permiso para acceder a este sitio. Por favor Ingrese con un usuario Administrador, ";
-                return View("Views/Shared/UnauthorisedUserError.cshtml");
-            }
-
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var respuesta = await _context.Respuesta
-                .Include(r => r.Pregunta)
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (respuesta == null)
-            {
-                return NotFound();
-            }
-
-            return View(respuesta);
-        }
-
-        // POST: Respuestas/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            if (HttpContext.Session.GetInt32("_IdUsuario") == null)
-            {
-                return RedirectToAction("Index", "Login");
-            }
-            else
-            {
-                ViewBag.Nombre = HttpContext.Session.GetString("_Nombre");
-                ViewBag.IdUsuario = HttpContext.Session.GetInt32("_IdUsuario");
-                ViewBag.TipoUsuario = HttpContext.Session.GetString("_TipoUsuario");
-            }
-
-            if (HttpContext.Session.GetString("_TipoUsuario") == "Alumno")
-            {
-                ViewBag.InvalidUserMessage = "Usted no tiene permiso para acceder a este sitio. Por favor Ingrese con un usuario Administrador, ";
-                return View("Views/Shared/UnauthorisedUserError.cshtml");
-            }
-
-            var respuesta = await _context.Respuesta.FindAsync(id);
-            _context.Respuesta.Remove(respuesta);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
         }
 
         private bool RespuestaExists(int id)

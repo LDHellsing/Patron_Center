@@ -60,14 +60,13 @@
                     @if (item.Finalizado == true)
                     {
                         <a class="alert-primary"><b>Curso Finalizado</b></a>
+                        <a class="alert-primary"><b>Curso Finalizado</b></a>
                     }
                     else
                     {
                         <a asp-controller="Unidades" asp-action="Index" asp-route-CursoId="@item.Id" class="btn btn-link">Unidades</a>
                         <a asp-controller="CursoUsuarios" asp-action="Index" asp-route-CursoId="@item.Id" class="btn btn-link">Alumnos</a>
                     }
-
-
                 </td>
             </tr>
         }

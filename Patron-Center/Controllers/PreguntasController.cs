@@ -38,29 +38,11 @@ namespace Patron_Center.Controllers
                 ViewBag.InvalidUserMessage = "Usted no tiene permiso para acceder a este sitio. Por favor Ingrese con un usuario Administrador, ";
                 return View("Views/Shared/UnauthorisedUserError.cshtml");
             }
-
-            ViewBag.QuizId = QuizId;
             var patron_CenterContext = _context.Pregunta.Include(p => p.Quiz).Where(p => p.QuizId == QuizId);
+            var UnidadId = patron_CenterContext.Select(u => u.Quiz.UnidadId).FirstOrDefault();
+            ViewBag.QuizId = QuizId;
+            ViewBag.UnidadId = UnidadId;
             return View(await patron_CenterContext.ToListAsync());
-        }
-
-        // GET: Preguntas/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var pregunta = await _context.Pregunta
-                .Include(p => p.Quiz)
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (pregunta == null)
-            {
-                return NotFound();
-            }
-
-            return View(pregunta);
         }
 
         // GET: Preguntas/Create
@@ -157,6 +139,7 @@ namespace Patron_Center.Controllers
             {
                 return NotFound();
             }
+            ViewBag.QuizId_ = pregunta.QuizId;
             ViewData["QuizId"] = new SelectList(_context.Quiz, "Id", "Nombre", pregunta.QuizId);
             return View(pregunta);
         }

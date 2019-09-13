@@ -40,27 +40,10 @@ namespace Patron_Center.Controllers
             }
 
             var patron_CenterContext = _context.Quiz.Include(q => q.Unidad).Where(q => q.UnidadId == UnidadId);
+            var CursoId = patron_CenterContext.Select(c => c.Unidad.CursoId).FirstOrDefault();
             ViewBag.UnidadId = UnidadId;
+            ViewBag.CursoId = CursoId;
             return View(await patron_CenterContext.ToListAsync());
-        }
-
-        // GET: Quizes/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var quiz = await _context.Quiz
-                .Include(q => q.Unidad)
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (quiz == null)
-            {
-                return NotFound();
-            }
-
-            return View(quiz);
         }
 
         // GET: Quizes/Create
@@ -154,6 +137,7 @@ namespace Patron_Center.Controllers
             {
                 return NotFound();
             }
+            ViewBag.UnidadId_ = quiz.UnidadId;
             ViewData["UnidadId"] = new SelectList(_context.Unidad, "Id", "Descripcion", quiz.UnidadId);
             return View(quiz);
         }
@@ -279,7 +263,19 @@ namespace Patron_Center.Controllers
         // GET
         // Quizes/AnswerQuiz
         public async Task<IActionResult> AnswerQuiz(int QuizId)
-        {	
+        {
+
+            if (HttpContext.Session.GetInt32("_IdUsuario") == null)
+            {
+                return RedirectToAction("Index", "Login");
+            }
+            else
+            {
+                ViewBag.Nombre = HttpContext.Session.GetString("_Nombre");
+                ViewBag.IdUsuario = HttpContext.Session.GetInt32("_IdUsuario");
+                ViewBag.TipoUsuario = HttpContext.Session.GetString("_TipoUsuario");
+            }
+
             var quizAux = await _context.CreateQuiz(1);
 			RespuestaAlumnoMO quiz = new RespuestaAlumnoMO();
 			quiz.IdQuiz = quizAux.Id;
