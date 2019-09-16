@@ -37,16 +37,17 @@
                                     <div class="dropdown-menu">
                                         @if (ViewBag.TipoUsuario == "Administrador")
                                         {
-                                            <a class="dropdown-item" text-dark" asp-area="" asp-controller="Usuarios" asp-action="Index">Usuarios</a>
+                                            <a class="dropdown-item" text-dark" asp-area="" asp-controller="Usuarios" asp-action="Index">Gestión de Usuarios</a>
                                         }
-                                        <a class="dropdown-item" text-dark" asp-area="" asp-controller="Cursos" asp-action="Index">Cursos</a>
+                                    <a class="dropdown-item" text-dark" asp-area="" asp-controller="Cursos" asp-action="Index">Gestión de Cursos</a>
                                     </div>
                                 </li>
                             }
                             <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Alumnos</a>
+                                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Cursos</a>
                                 <div class="dropdown-menu">
-                                    <a class="dropdown-item" text-dark" asp-area="" asp-controller="CursoUsuarios" asp-action="ViewUserLessons">Cursos</a>
+                                    <a class="dropdown-item" text-dark" asp-area="" asp-controller="CursoUsuarios" asp-action="ViewUserLessons">Ver mis cursos</a>
+                                    <a class="dropdown-item" text-dark" asp-area="" asp-controller="CursoUsuarios" asp-action="ViewUserLessons">Mis Cursos Finalizados</a>
                                 </div>
                             </li>
                         </ul>
