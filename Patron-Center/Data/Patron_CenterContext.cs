@@ -86,6 +86,35 @@ namespace Patron_Center.Models
             }
         }
 
+        public async Task<List<CorreccionMOViewModel>> ObtenerRespuestasCorrectas (List<int> respuestasId)
+        {
+            try
+            {
+                List<CorreccionMOViewModel> coleccionRespuestas = new List<CorreccionMOViewModel>();
+                CorreccionMOViewModel respuestaCorrecta = new CorreccionMOViewModel();
+                List<Respuesta> resultado = new List<Respuesta>();
+
+                resultado = await Respuesta.Where(r => respuestasId.Contains(r.Id)).ToListAsync();
+
+                foreach (var respuesta in resultado)
+                {
+                    respuestaCorrecta.EnunciadoPregunta = respuesta.Pregunta.Enunciado;
+                    respuestaCorrecta.OrdenPregunta = respuesta.Pregunta.Orden;
+                    respuestaCorrecta.IdRespuesta = respuesta.Id;
+                    respuestaCorrecta.RespuestaCorrecta = respuesta.RespuestaCorrecta;
+                    coleccionRespuestas.Add(respuestaCorrecta);
+                };
+
+                Debug.WriteLine("respuestas resultante es ---------> " + coleccionRespuestas);
+
+                return coleccionRespuestas;
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine("error: " + e);
+                return null;
+            }
+        }
         //Relacion muchos a muchos Curso Usuario
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
