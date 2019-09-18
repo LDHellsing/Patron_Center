@@ -1,0 +1,34 @@
+﻿@model IEnumerable<CorreccionMOViewModel>
+
+@{
+    ViewData["Title"] = "Resultados del Quiz";
+}
+
+@foreach (var correccion in Model)
+{
+    if (correccion.RespuestaCorrecta == true)
+    {
+        <div>
+            Pregunta @correccion.OrdenPregunta: @correccion.EnunciadoPregunta
+        </div>
+        <div>
+            <b>Correcta</b>
+        </div>
+        <br />
+    }
+    else
+    {
+        <div>
+            Pregunta @correccion.OrdenPregunta: @correccion.EnunciadoPregunta
+
+        </div>
+        <div>
+            <b>Incorrecta</b>
+        </div>
+        <br />
+    }
+}
+
+
+
+

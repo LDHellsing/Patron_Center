@@ -305,17 +305,16 @@ namespace Patron_Center.Controllers
 		public async Task<IActionResult> QuizCorrection(RespuestaAlumnoMO respuestaAlumnoMO)
 		{
             List<int> respuestasSeleccionadas = new List<int>();
-            List<Respuesta> correccion = new List<Respuesta>();
             // Las respuestas selccionadas desde la view vienen como strings este foreach lo que hace es crear una lista de ints con las respuestas seleccionadas
             foreach (var respuesta in respuestaAlumnoMO.Preguntas)
             {
                 respuestasSeleccionadas.Add(Int32.Parse(respuesta.Seleccionada));
             }
             // Me traigo una lista que contiene los datos de las respuestas seleccionadas por el alumno en la BD
-            var correccions = await _context.ObtenerRespuestasCorrectas(respuestasSeleccionadas);
+            var correcciones = await _context.ObtenerRespuestasCorrectas(respuestasSeleccionadas);
 
-            return View(correccions);
-      	}
+            return View("QuizMoResult", correcciones);
+        }
 
 		private bool QuizExists(int id)
         {

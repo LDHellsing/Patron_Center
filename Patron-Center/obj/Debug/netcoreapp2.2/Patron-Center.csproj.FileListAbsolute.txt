@@ -146,3 +146,4 @@ C:\PatronCenter\Patron-Center\obj\Debug\netcoreapp2.2\Razor\Views\RespuestaAlumn
 C:\PatronCenter\Patron-Center\obj\Debug\netcoreapp2.2\Razor\Views\RespuestaAlumnos\Index.g.cshtml.cs
 C:\PatronCenter\Patron-Center\obj\Debug\netcoreapp2.2\Razor\Views\Quizes\AnswerQuiz.g.cshtml.cs
 C:\PatronCenter\Patron-Center\obj\Debug\netcoreapp2.2\Patron-Center.csprojAssemblyReference.cache
+C:\PatronCenter\Patron-Center\obj\Debug\netcoreapp2.2\Razor\Views\Quizes\QuizMoResult.g.cshtml.cs

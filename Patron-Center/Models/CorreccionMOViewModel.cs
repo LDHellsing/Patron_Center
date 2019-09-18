@@ -11,9 +11,12 @@ namespace Patron_Center.Models
         public int OrdenPregunta { get; set; }
         public int IdRespuesta { get; set; }
         public bool RespuestaCorrecta { get; set; }
-        public CorreccionMOViewModel()
+        public CorreccionMOViewModel(string enunciadoPregunta, int ordenPregunta, int idRespuesta, bool respuestaCorrecta)
         {
-
+            this.EnunciadoPregunta = enunciadoPregunta;
+            this.OrdenPregunta = ordenPregunta;
+            this.IdRespuesta = idRespuesta;
+            this.RespuestaCorrecta = respuestaCorrecta;
         }
     }
 }

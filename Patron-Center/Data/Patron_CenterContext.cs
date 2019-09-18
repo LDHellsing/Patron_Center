@@ -90,20 +90,16 @@ namespace Patron_Center.Models
         {
             try
             {
-                List<CorreccionMOViewModel> coleccionRespuestas = new List<CorreccionMOViewModel>();
-                CorreccionMOViewModel respuestaCorrecta = new CorreccionMOViewModel();
-                List<Respuesta> resultado = new List<Respuesta>();
+               var coleccionRespuestas = new List<CorreccionMOViewModel>();
+                var resultado = new List<Respuesta>();
 
-                resultado = await Respuesta.Where(r => respuestasId.Contains(r.Id)).ToListAsync();
+                resultado = await Respuesta.Where(r => respuestasId.Contains(r.Id)).Include(p => p.Pregunta).ToListAsync();
 
                 foreach (var respuesta in resultado)
                 {
-                    respuestaCorrecta.EnunciadoPregunta = respuesta.Pregunta.Enunciado;
-                    respuestaCorrecta.OrdenPregunta = respuesta.Pregunta.Orden;
-                    respuestaCorrecta.IdRespuesta = respuesta.Id;
-                    respuestaCorrecta.RespuestaCorrecta = respuesta.RespuestaCorrecta;
+                    var respuestaCorrecta = new CorreccionMOViewModel(respuesta.Pregunta.Enunciado, respuesta.Pregunta.Orden, respuesta.Id, respuesta.RespuestaCorrecta);
                     coleccionRespuestas.Add(respuestaCorrecta);
-                };
+                }
 
                 Debug.WriteLine("respuestas resultante es ---------> " + coleccionRespuestas);
 
