@@ -44,25 +44,6 @@ namespace Patron_Center.Controllers
             return View(await patron_CenterContext.ToListAsync());
         }        
 
-        // GET: Unidades/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var unidad = await _context.Unidad
-                .Include(u => u.Curso)
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (unidad == null)
-            {
-                return NotFound();
-            }
-            ViewBag.CursoId = unidad.CursoId;
-            return View(unidad);
-        }
-
         // GET: Unidades/Create
         public IActionResult Create(int CursoId)
         {

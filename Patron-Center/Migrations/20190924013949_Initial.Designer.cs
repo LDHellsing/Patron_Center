@@ -10,14 +10,14 @@ using Patron_Center.Models;
 namespace Patron_Center.Migrations
 {
     [DbContext(typeof(Patron_CenterContext))]
-    [Migration("20190827013803_Correccion-Calificacion-RespuestaAlumno")]
-    partial class CorreccionCalificacionRespuestaAlumno
+    [Migration("20190924013949_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.2.4-servicing-10062")
+                .HasAnnotation("ProductVersion", "2.2.6-servicing-10079")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -99,11 +99,11 @@ namespace Patron_Center.Migrations
                         new
                         {
                             Id = 1,
-                            Descripcion = "Descripción de curso de prueba",
+                            Descripcion = "Aqui se dicta un curso destinado al manejo y el aprendisaje de patrones de diseño.",
                             DocenteId = 2,
                             Eliminado = false,
-                            FechaFinalizacion = new DateTime(2019, 8, 26, 22, 38, 2, 812, DateTimeKind.Local).AddTicks(6250),
-                            Nombre = "Curso de Prueba"
+                            FechaFinalizacion = new DateTime(2019, 9, 23, 22, 39, 48, 866, DateTimeKind.Local).AddTicks(8685),
+                            Nombre = "Patrones de Diseño"
                         });
                 });
 
@@ -131,6 +131,12 @@ namespace Patron_Center.Migrations
                             Id = 1,
                             CursoId = 1,
                             UsuarioId = 3
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CursoId = 1,
+                            UsuarioId = 6
                         });
                 });
 
@@ -163,15 +169,21 @@ namespace Patron_Center.Migrations
                             Id = 1,
                             Eliminado = false,
                             Orden = 1,
-                            Texto = "La diapositiva, transparencia, filmina o slide es una fotografía positiva (de colores reales) creada en un soporte transparente por medios fotoquímicos. Comparación entre los formatos fotográficos: Fotografía(propiamente dicha), foto, impresión fotográfica o positivo: Imagen opaca y positiva(de colores reales).Negativo: Imagen transparente y negativa(de colores invertidos). Diapositiva, filmina y película de cine: Imagen transparente y positiva(de colores reales). A las diapositivas se las llama también filminas porque se obtienen de recortar los cuadros de una filmina y colocarlos en sendos marcos cuadrados(en el caso de película de 35 mm, los marcos son de 5 cm de lado).",
-                            UnidadId = 1
+                            Texto = "Introduccion a Patrones de Diseño",
+                            UnidadId = 1,
+                            UrlVideo = "bx5WqFEndoo"
                         },
                         new
                         {
                             Id = 2,
                             Eliminado = false,
                             Orden = 2,
-                            Texto = "El proceso más antiguo de la fotografía en color fue el Autocromo. Este era un método de síntesis aditiva que producía diapositivas en colores, pero con baja definición y una resolución cromática limitada. Por el contrario, el proceso de síntesis sustractiva Kodachrome brindaba transparencias de colores brillantes. La película constaba de tres emulsiones, cada una de ellas sensible a una zona del espectro cromático. Y después del proceso aparecían los colorantes amarillo, magenta y cían. Introducido en 1935, fue ofrecido en un formato de 16 milímetros para películas cinematográficas, 35 mm para diapositivas y 8 mm para películas caseras. Aunque se utilizó originalmente para reportajes, ganó popularidad gradualmente. A comienzos de los años 1940, algunos aficionados usaban Kodachrome para tomar fotografías familiares, otros utilizaban adaptadores de rollos de película con cámaras de 4x5 pulgadas. En esta época, las películas en color tenían muchos defectos, eran costosas y las impresiones no duraban mucho tiempo.",
+                            Texto = @"TEMARIO: 
+ - Historia
+ - Definición de patrones 
+ - Tipos 
+ - Clasificación, 
+ - Objetivos",
                             UnidadId = 1
                         },
                         new
@@ -179,7 +191,8 @@ namespace Patron_Center.Migrations
                             Id = 3,
                             Eliminado = false,
                             Orden = 3,
-                            Texto = "Emulsiones más eficaces como Ektachrome y Fujichrome fueron sustituyendo a las de Kodachrome. Los aficionados las utilizaron hasta los años 1970, en que la impresión de copias en colores comenzó a desplazarla.En los últimos años del siglo XX, las transparencias en color fueron extensamente utilizadas en la fotografía publicitaria, documental, deportiva, de stock y de naturaleza. Los medios digitales han reemplazado gradualmente las transparencias en muchas de estas aplicaciones y su uso es, en la actualidad, infrecuente.",
+                            Texto = @"HISTORIA:
+ Surgen inspirados en los patrones arquitectónicos, que aparecen a fines de los años 70, con el fin de organizar y sistematizar las soluciones que diferentes arquitectos e ingenieros iban encontrando a problemas constructivos similares. Se formalizan a partir del libro “Design Patterns” de los autores Gamma, Helm, Johnsony Vlisides, llamados “la pandilla de los 4” (Gangof Four, o simplificado GoF),en 1995. En el libro se detalla la estructura que recomiendan emplear para la descripción de los patrones(estructura un poco más compleja de la que empleamos en este curso), y se formalizan más de 20 patrones de diseño, identificados por GoF en ese momento y todavía altamente vigentes al dia de hoy.",
                             UnidadId = 1
                         },
                         new
@@ -187,16 +200,60 @@ namespace Patron_Center.Migrations
                             Id = 4,
                             Eliminado = false,
                             Orden = 4,
-                            Texto = "Por lo general, las diapositivas son preferidas por profesionales y muchos aficionados al momento de trabajar con la fotografía tradicional. Esto se debe, en parte, a su nitidez y a su reproducción cromática. La duración de las transparencias es mayor a las impresiones en color, de hecho, el proceso Kodachrome es reconocido por sus cualidades archivísticas y por brindar colores que no se atenúan con el tiempo. El proceso K-14 de Kodachrome es extremadamente difícil de llevar a cabo, ya que una mínima desviación de las especificaciones puede afectar la calidad del producto final. Es un método naturalmente imperfecto. Pequeñas cantidades de contaminación en las capas de color producen un efecto específico e irreproducible.",
+                            Texto = @"DEFINICION DE PATRONES:
+ Los Patrones Definen soluciones a problemas comunes del desarrollo de software Estos deben cumplir con dos cosas:
+ 1) Debe comprobarse como efectivo en la resolución de un problema
+ 2) Debe ser reutilizable. 
+ Existen diferencias entre patrones de diseño y arquitectónicos las cuales son: (1) Los patrones arquitectónicos son mas abstractos (2) Los patrones arquitectónicos apoyan en el cumplimiento de atributos de calidad(Rendimiento, disponibilidad,etc).",
                             UnidadId = 1
                         },
                         new
                         {
                             Id = 5,
                             Eliminado = false,
-                            Orden = 1,
-                            Texto = "Esta unidad tiene solo una diapositiva.",
-                            UnidadId = 2
+                            Orden = 5,
+                            Texto = @"OBJETIVOS:
+ Que persiguen: Crear una biblioteca de módulos, elementos reutilizables, No reinventar la rueda, tener soluciones a problemas ya conocidos, Hablar un lenguaje común entre diseñadores, arquitectos, Estandarizar diseños, Facilitar el aprendizaje de técnicas a los nuevos diseñadores. Que no buscan: Imponer una solución como la mejor, Eliminar la creatividad, uso de otras opciones. No es obligación utilizarlos pero simplifican el trabajo de diseño",
+                            UnidadId = 1
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Eliminado = false,
+                            Orden = 6,
+                            Texto = @"TIPOS DE PATRONES:
+ 1) Arquitectónicos: Básicos, representan esquemas estructurales para la construcción de los sistemas(en muchos casos apoyan el cumplimiento de requerimientos no funcionales).
+ 2) Diseño: Apoyan en la definición de estructuras de diseño y sus relaciones(implementación) 3) Dialectos: Patrones específicos de un lenguaje 4) Interacción: Patrones para diseñar interfaces web de usuario",
+                            UnidadId = 1
+                        },
+                        new
+                        {
+                            Id = 7,
+                            Eliminado = false,
+                            Orden = 7,
+                            Texto = @"CLASIFICACION DE PATRONES:
+ 1) De Creación: participan en el momento de crear objetos, en general abstrayendo la forma en que se crean, y haciendo abstracta la referencia a que clase es que que se instancia. Ej: Singleton, Factory.
+ 2) Estructurales: tienen que ver con la forma en que las clases y los objetos son agrupados para formar grandes estructuras.Ej: Facade, Composite.
+ 3) De Comportamiento: se utilizan para modelar diferentes formas de interactuar entre los objetos para mejorar la performance del sistema.Ej: Observer, Strategy",
+                            UnidadId = 1
+                        },
+                        new
+                        {
+                            Id = 8,
+                            Eliminado = false,
+                            Orden = 8,
+                            Texto = @"ESTRUCTURA DE PATRONES:
+ 1) Nombre
+ 2) Intención – Que resuelve
+ 3) Motivación – Caso ilustrando el problema
+ 4) Aplicabilidad – Cuando aplicarlo
+ 5) Estructura – Diagrama de clases 
+ 6) Participantes – Que objetos interactúan
+ 7) Colaboraciones – Secuencia de mensajes
+ 8) Consecuencias – Ventajas y desventajas
+ 9) Técnica de implementación
+ 10) Usos conocidos – En que sistemas se usa 11) Patrones relacionados",
+                            UnidadId = 1
                         });
                 });
 
@@ -392,9 +449,9 @@ namespace Patron_Center.Migrations
                         {
                             Id = 1,
                             CursoId = 1,
-                            Descripcion = "Descripción de Unidad de prueba 1",
+                            Descripcion = "Unidadad introductoria para Patrones de diseño ",
                             Eliminado = false,
-                            Nombre = "1- Unidad de prueba 1"
+                            Nombre = "1- Introduccion"
                         },
                         new
                         {
@@ -457,7 +514,7 @@ namespace Patron_Center.Migrations
                             Documento = "2",
                             Eliminado = false,
                             Email = "docente@patroncenter.com",
-                            Nombre = "Docecente",
+                            Nombre = "Docente",
                             Password = "YWRtaW4=",
                             TipoUsuario = 1
                         },
@@ -493,6 +550,17 @@ namespace Patron_Center.Migrations
                             Nombre = "Docecente Eliminado",
                             Password = "YWRtaW4=",
                             TipoUsuario = 1
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Apellido = "Gonzalez",
+                            Documento = "49077339",
+                            Eliminado = false,
+                            Email = "agustingonzalezata@gmail.com",
+                            Nombre = "Agustin",
+                            Password = "YWRtaW4=",
+                            TipoUsuario = 0
                         });
                 });
 

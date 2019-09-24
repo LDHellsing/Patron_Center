@@ -271,7 +271,7 @@ namespace Patron_Center.Models
                 new Diapositiva
                 {
                     Id = 2,
-                    Texto = "TEMARIO: \r\n Historia,\r\n Definicion de patrones, \r\n Tipos, \r\n Clasificacion, \r\n Objetivos",
+                    Texto = "TEMARIO: \r\n - Historia\r\n - Definición de patrones \r\n - Tipos \r\n - Clasificación, \r\n - Objetivos",
                     Orden = 2,
                     Eliminado = false,
                     UnidadId = 1
@@ -281,7 +281,7 @@ namespace Patron_Center.Models
                 new Diapositiva
                 {
                     Id = 3,
-                    Texto = "HISTORIA: Surgen inspirados en los patrones arquitectónicos, que aparecen a fines de los años 70, con el fin de organizar y sistematizar las soluciones que diferentes arquitectos e ingenieros iban encontrando a problemas constructivos similares.     Se formalizan a partir del libro “Design Patterns” de los autores Gamma, Helm, Johnsony Vlisides, llamados “la pandilla de los 4” (Gangof Four, o simplificado GoF),en1995.     En el libro se detalla la estructura que recomiendan emplear para la descripción de los patrones(estructura un poco más compleja de la que empleamos en este curso), y se formalizan más de 20 patrones de diseño, identificados por GoF en ese momento y todavía altamente vigentes al dia de hoy.",
+                    Texto = "HISTORIA:\r\n Surgen inspirados en los patrones arquitectónicos, que aparecen a fines de los años 70, con el fin de organizar y sistematizar las soluciones que diferentes arquitectos e ingenieros iban encontrando a problemas constructivos similares. Se formalizan a partir del libro “Design Patterns” de los autores Gamma, Helm, Johnsony Vlisides, llamados “la pandilla de los 4” (Gangof Four, o simplificado GoF),en 1995. En el libro se detalla la estructura que recomiendan emplear para la descripción de los patrones(estructura un poco más compleja de la que empleamos en este curso), y se formalizan más de 20 patrones de diseño, identificados por GoF en ese momento y todavía altamente vigentes al dia de hoy.",
                     Orden = 3,
                     Eliminado = false,
                     UnidadId = 1
@@ -291,7 +291,7 @@ namespace Patron_Center.Models
                 new Diapositiva
                 {
                     Id = 4,
-                    Texto = "DEFINICION DE PATRONES: Los Patrones Definen soluciones a problemas comunes del desarrollo de software Estos deben cumplir con dos cosas: 1) Debe comprobarse como efectivo en la resolución de un problema 2) Debe ser reutilizable. \r\n Existen diferencias entre patrones de diseño y arquitectónicos las cuales son: (1) Los patrones arquitectónicos son mas abstractos (2) Los patrones arquitectónicos apoyan en el cumplimiento de atributos de calidad(Rendimiento, disponibilidad,etc).",
+                    Texto = "DEFINICION DE PATRONES:\r\n Los Patrones Definen soluciones a problemas comunes del desarrollo de software Estos deben cumplir con dos cosas:\r\n 1) Debe comprobarse como efectivo en la resolución de un problema\r\n 2) Debe ser reutilizable. \r\n Existen diferencias entre patrones de diseño y arquitectónicos las cuales son: (1) Los patrones arquitectónicos son mas abstractos (2) Los patrones arquitectónicos apoyan en el cumplimiento de atributos de calidad(Rendimiento, disponibilidad,etc).",
                     Orden = 4,
                     Eliminado = false,
                     UnidadId = 1
@@ -301,7 +301,7 @@ namespace Patron_Center.Models
                 new Diapositiva
                 {
                     Id = 5,
-                    Texto = "OBJETIVOS: Que persiguen: Crear una biblioteca de módulos, elementos reutilizables, No reinventar la rueda, tener soluciones a problemas ya conocidos, Hablar un lenguaje común entre diseñadores, arquitectos, Estandarizar diseños, Facilitar el aprendizaje de técnicas a los nuevos diseñadores. Que no buscan: Imponer una solución como la mejor, Eliminar la creatividad, uso de otras opciones. No es obligación utilizarlos pero simplifican el trabajo de diseño",
+                    Texto = "OBJETIVOS:\r\n Que persiguen: Crear una biblioteca de módulos, elementos reutilizables, No reinventar la rueda, tener soluciones a problemas ya conocidos, Hablar un lenguaje común entre diseñadores, arquitectos, Estandarizar diseños, Facilitar el aprendizaje de técnicas a los nuevos diseñadores. Que no buscan: Imponer una solución como la mejor, Eliminar la creatividad, uso de otras opciones. No es obligación utilizarlos pero simplifican el trabajo de diseño",
                     Orden = 5,
                     Eliminado = false,
                     UnidadId = 1
@@ -311,7 +311,7 @@ namespace Patron_Center.Models
                  new Diapositiva
                  {
                      Id = 6,
-                     Texto = "TIPOS DE PATRONES: 1) Arquitectónicos: Básicos, representan esquemas estructurales para la construcción de los sistemas(en muchos casos apoyan el cumplimiento de requerimientos no funcionales) 2) Diseño: Apoyan en la definición de estructuras de diseño y sus relaciones(implementación) 3) Dialectos: Patrones específicos de un lenguaje 4) Interacción: Patrones para diseñar interfaces web de usuario",
+                     Texto = "TIPOS DE PATRONES:\r\n 1) Arquitectónicos: Básicos, representan esquemas estructurales para la construcción de los sistemas(en muchos casos apoyan el cumplimiento de requerimientos no funcionales).\r\n 2) Diseño: Apoyan en la definición de estructuras de diseño y sus relaciones(implementación) 3) Dialectos: Patrones específicos de un lenguaje 4) Interacción: Patrones para diseñar interfaces web de usuario",
                      Orden = 6,
                      Eliminado = false,
                      UnidadId = 1
@@ -322,7 +322,7 @@ namespace Patron_Center.Models
                  new Diapositiva
                  {
                      Id = 7,
-                     Texto = "CLASIFICACION DE PATRONES: 1) De Creación: participan en el momento de crear objetos, en general abstrayendo la forma en que se crean, y haciendo abstracta la referencia a que clase es que que se instancia. Ej: Singleton, Factory. 2) Estructurales: tienen que ver con la forma en que las clases y los objetos son agrupados para formar grandes estructuras.Ej: Facade, Composite. 3) De Comportamiento: se utilizan para modelar diferentes formas de interactuar entre los objetos para mejorar la performance del sistema.Ej: Observer, Strategy",
+                     Texto = "CLASIFICACION DE PATRONES:\r\n 1) De Creación: participan en el momento de crear objetos, en general abstrayendo la forma en que se crean, y haciendo abstracta la referencia a que clase es que que se instancia. Ej: Singleton, Factory.\r\n 2) Estructurales: tienen que ver con la forma en que las clases y los objetos son agrupados para formar grandes estructuras.Ej: Facade, Composite.\r\n 3) De Comportamiento: se utilizan para modelar diferentes formas de interactuar entre los objetos para mejorar la performance del sistema.Ej: Observer, Strategy",
                      Orden = 7,
                      Eliminado = false,
                      UnidadId = 1
@@ -332,7 +332,7 @@ namespace Patron_Center.Models
                 new Diapositiva
                 {
                     Id = 8,
-                    Texto = "ESTRUCTURA DE PATRONES: 1) Nombre 2) Intención – Que resuelve 3) Motivación – Caso ilustrando el problema 4) Aplicabilidad – Cuando aplicarlo 5) Estructura – Diagrama de clases 6) Participantes – Que objetos interactúan 7) Colaboraciones – Secuencia de mensajes 8) Consecuencias – Ventajas y desventajas 9) Técnica de implementación 10) Usos conocidos – En que sistemas se usa 11) Patrones relacionados",
+                    Texto = "ESTRUCTURA DE PATRONES:\r\n 1) Nombre\r\n 2) Intención – Que resuelve\r\n 3) Motivación – Caso ilustrando el problema\r\n 4) Aplicabilidad – Cuando aplicarlo\r\n 5) Estructura – Diagrama de clases \r\n 6) Participantes – Que objetos interactúan\r\n 7) Colaboraciones – Secuencia de mensajes\r\n 8) Consecuencias – Ventajas y desventajas\r\n 9) Técnica de implementación\r\n 10) Usos conocidos – En que sistemas se usa 11) Patrones relacionados",
                     Orden = 8,
                     Eliminado = false,
                     UnidadId = 1

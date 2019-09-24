@@ -16,6 +16,14 @@
   <ItemGroup>
     <Compile Remove="Migrations\20190820224310_Initial.cs" />
     <Compile Remove="Migrations\20190820224310_Initial.Designer.cs" />
+    <Compile Remove="Migrations\20190822012935_Initial.cs" />
+    <Compile Remove="Migrations\20190822012935_Initial.Designer.cs" />
+    <Compile Remove="Migrations\20190827013803_Correccion-Calificacion-RespuestaAlumno.cs" />
+    <Compile Remove="Migrations\20190827013803_Correccion-Calificacion-RespuestaAlumno.Designer.cs" />
+    <Compile Remove="Migrations\20190923014852_diapos.cs" />
+    <Compile Remove="Migrations\20190923014852_diapos.Designer.cs" />
+    <Compile Remove="Migrations\20190924013346_Initial.cs" />
+    <Compile Remove="Migrations\20190924013346_Initial.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
