@@ -4,6 +4,7 @@
     ViewData["Title"] = "Resultados del Quiz";
 }
 
+
 @foreach (var correccion in Model)
 {
     if (correccion.RespuestaCorrecta == true)
@@ -30,5 +31,14 @@
 }
 
 
+<div>
+    Respuestas correctas: @ViewBag.RespuestasCorrectas
+</div>
+<div>
+    Respuestas incorrectas: @ViewBag.RespuestasIncorrectas
+</div>
+<div>
+    <h4>Puntaje: %@ViewBag.PuntajeTotal</h4>
+</div>
 
-
+<a asp-controller="Quizes" asp-action="Index" asp-route-UnidadId="@ViewBag.IdUnidad" class="btn btn-link">Volver a Practicos</a>

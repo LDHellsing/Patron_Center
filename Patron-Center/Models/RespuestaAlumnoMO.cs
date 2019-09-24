@@ -9,9 +9,8 @@ namespace Patron_Center.Models
 	{
 		public int IdQuiz { get; set; }
 		public string QuizName { get; set; }
-
 		public List<PreguntaViewModel> Preguntas { get; set; }
-
+        public int IdUnidad { get; set; }
 		public RespuestaAlumnoMO()
 		{
 			this.Preguntas = new List<PreguntaViewModel>();

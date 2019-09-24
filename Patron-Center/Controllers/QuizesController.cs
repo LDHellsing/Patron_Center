@@ -276,10 +276,11 @@ namespace Patron_Center.Controllers
                 ViewBag.TipoUsuario = HttpContext.Session.GetString("_TipoUsuario");
             }
 
-            var quizAux = await _context.CreateQuiz(1);
+            var quizAux = await _context.CreateQuiz(QuizId);
 			RespuestaAlumnoMO quiz = new RespuestaAlumnoMO();
 			quiz.IdQuiz = quizAux.Id;
 			quiz.QuizName = quizAux.Nombre;
+            quiz.IdUnidad = quizAux.UnidadId;
 			foreach (var pregunta in quizAux.Preguntas)
 			{
 				PreguntaViewModel preguntaViewModel = new PreguntaViewModel();
@@ -313,12 +314,49 @@ namespace Patron_Center.Controllers
             // Me traigo una lista que contiene los datos de las respuestas seleccionadas por el alumno en la BD
             var correcciones = await _context.ObtenerRespuestasCorrectas(respuestasSeleccionadas);
 
+            int respuestasCorrectas = 0;
+            int respuestasIncorrectas = 0;
+            int puntajeTotal = 0;
+            //promedio de respuestas en %
+            foreach (var correccion in correcciones)
+            {
+                if (correccion.RespuestaCorrecta)
+                {
+                    respuestasCorrectas++;
+                }
+                else
+                {
+                    respuestasIncorrectas++;
+                }
+            }
+
+            puntajeTotal = calcularResultado(respuestaAlumnoMO.Preguntas.Count, respuestasCorrectas);
+
+            ViewBag.IdUnidad = respuestaAlumnoMO.IdUnidad;
+            ViewBag.RespuestasCorrectas = respuestasCorrectas;
+            ViewBag.RespuestasIncorrectas = respuestasIncorrectas;
+            ViewBag.PuntajeTotal = puntajeTotal;
+
             return View("QuizMoResult", correcciones);
         }
 
 		private bool QuizExists(int id)
         {
             return _context.Quiz.Any(e => e.Id == id);
+        }
+
+        private int calcularResultado (int totalPreguntas, int respuestasCorrectas)
+        {
+            int puntaje = 0;
+            if (totalPreguntas == 0)
+            {
+                return puntaje;
+            }
+            else
+            {
+                puntaje = respuestasCorrectas * 100 / totalPreguntas;
+                return puntaje;
+            }
         }
 
     }
