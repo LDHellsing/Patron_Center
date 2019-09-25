@@ -35,10 +35,16 @@
                             <input class="btn btn-primary btn-sm" type="submit" value="Cursar Teórico" />
                         </p>
                     </form>
+                    <form asp-controller="Quizes" asp-action="ViewQuizes">
+                        <p>
+                            <input type="hidden" name="UnidadId" value="@item.Id">
+                            <input class="btn btn-primary btn-sm" type="submit" value="Cursar Prácticos" />
+                        </p>
+                    </form>
                 </td>
             </tr>
         }
     </tbody>
 </table>
 
-<a asp-controller="CursoUsuarios" asp-action="ViewUserLessons">Volver atras</a>
+<a asp-controller="CursoUsuarios" asp-action="ViewUserLessons">Volver atrás</a>

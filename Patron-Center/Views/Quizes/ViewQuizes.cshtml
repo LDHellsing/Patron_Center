@@ -1,0 +1,48 @@
+﻿@model IEnumerable<Patron_Center.Models.Quiz>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Evaluacion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Ejercicio)
+            </th>
+
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Evaluacion)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Ejercicio)
+                </td>
+                <td>
+                    <a asp-controller="Quizes" asp-action="AnswerQuiz" asp-route-QuizId="@item.Id" class="btn btn-link">Cursar Quiz</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div>
+    <a asp-controller="Unidades" asp-action="ViewUnitsLessons" asp-route-CursoId=@ViewBag.CursoId>Volver atrás</a>
+</div>

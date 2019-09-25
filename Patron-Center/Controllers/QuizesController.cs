@@ -277,34 +277,46 @@ namespace Patron_Center.Controllers
             }
 
             var quizAux = await _context.CreateQuiz(QuizId);
-			RespuestaAlumnoMO quiz = new RespuestaAlumnoMO();
-			quiz.IdQuiz = quizAux.Id;
-			quiz.QuizName = quizAux.Nombre;
+            RespuestaAlumnoMO quiz = new RespuestaAlumnoMO();
+            quiz.IdQuiz = quizAux.Id;
+            quiz.QuizName = quizAux.Nombre;
             quiz.IdUnidad = quizAux.UnidadId;
-			foreach (var pregunta in quizAux.Preguntas)
-			{
-				PreguntaViewModel preguntaViewModel = new PreguntaViewModel();
-				preguntaViewModel.IdPregunta = pregunta.Id;
-				preguntaViewModel.Enunciado = pregunta.Enunciado;
+            foreach (var pregunta in quizAux.Preguntas)
+            {
+                PreguntaViewModel preguntaViewModel = new PreguntaViewModel();
+                preguntaViewModel.IdPregunta = pregunta.Id;
+                preguntaViewModel.Enunciado = pregunta.Enunciado;
 
-				foreach (var respuesta in pregunta.Respuestas)
-				{
-					preguntaViewModel.Respuestas.Add(new RespuestaViewModel()
-					{
-						IdRespuesta = respuesta.Id,
-						Enunciado = respuesta.Enunciado
-					});
-				}
-				quiz.Preguntas.Add(preguntaViewModel);
-			}
-			
+                foreach (var respuesta in pregunta.Respuestas)
+                {
+                    preguntaViewModel.Respuestas.Add(new RespuestaViewModel()
+                    {
+                        IdRespuesta = respuesta.Id,
+                        Enunciado = respuesta.Enunciado
+                    });
+                }
+                quiz.Preguntas.Add(preguntaViewModel);
+            }
+
             return View("AnswerQuiz", quiz);
         }
-		[HttpPost]
-		[ValidateAntiForgeryToken]
-		// Esta coleccion de ints tiene todos los ids de las respuestas
-		public async Task<IActionResult> QuizCorrection(RespuestaAlumnoMO respuestaAlumnoMO)
-		{
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        // Esta coleccion de ints tiene todos los ids de las respuestas
+        public async Task<IActionResult> QuizCorrection(RespuestaAlumnoMO respuestaAlumnoMO)
+        {
+
+            if (HttpContext.Session.GetInt32("_IdUsuario") == null)
+            {
+                return RedirectToAction("Index", "Login");
+            }
+            else
+            {
+                ViewBag.Nombre = HttpContext.Session.GetString("_Nombre");
+                ViewBag.IdUsuario = HttpContext.Session.GetInt32("_IdUsuario");
+                ViewBag.TipoUsuario = HttpContext.Session.GetString("_TipoUsuario");
+            }
+
             List<int> respuestasSeleccionadas = new List<int>();
             // Las respuestas selccionadas desde la view vienen como strings este foreach lo que hace es crear una lista de ints con las respuestas seleccionadas
             foreach (var respuesta in respuestaAlumnoMO.Preguntas)
@@ -340,12 +352,34 @@ namespace Patron_Center.Controllers
             return View("QuizMoResult", correcciones);
         }
 
-		private bool QuizExists(int id)
+        // GET: Quizes para alumnos
+        public async Task<IActionResult> ViewQuizes(int UnidadId)
+        {
+            if (HttpContext.Session.GetInt32("_IdUsuario") == null)
+            {
+                return RedirectToAction("Index", "Login");
+            }
+            else
+            {
+                ViewBag.Nombre = HttpContext.Session.GetString("_Nombre");
+                ViewBag.IdUsuario = HttpContext.Session.GetInt32("_IdUsuario");
+                ViewBag.TipoUsuario = HttpContext.Session.GetString("_TipoUsuario");
+            }
+
+            var patron_CenterContext = _context.Quiz.Include(q => q.Unidad).Where(q => q.UnidadId == UnidadId);
+            var CursoId = patron_CenterContext.Select(c => c.Unidad.CursoId).FirstOrDefault();
+            ViewBag.UnidadId = UnidadId;
+            ViewBag.CursoId = CursoId;
+            return View(await patron_CenterContext.ToListAsync());
+        }
+
+
+        private bool QuizExists(int id)
         {
             return _context.Quiz.Any(e => e.Id == id);
         }
 
-        private int calcularResultado (int totalPreguntas, int respuestasCorrectas)
+        private int calcularResultado(int totalPreguntas, int respuestasCorrectas)
         {
             int puntaje = 0;
             if (totalPreguntas == 0)

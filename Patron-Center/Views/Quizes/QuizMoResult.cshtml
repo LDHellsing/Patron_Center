@@ -30,7 +30,6 @@
     }
 }
 
-
 <div>
     Respuestas correctas: @ViewBag.RespuestasCorrectas
 </div>
@@ -41,4 +40,6 @@
     <h4>Puntaje: %@ViewBag.PuntajeTotal</h4>
 </div>
 
-<a asp-controller="Quizes" asp-action="Index" asp-route-UnidadId="@ViewBag.IdUnidad" class="btn btn-link">Volver a Practicos</a>
+<div>
+    <a asp-controller="Quizes" asp-action="ViewQuizes" asp-route-UnidadId="@ViewBag.IdUnidad" class="btn btn-link">Volver a Prácticos</a>
+</div>
