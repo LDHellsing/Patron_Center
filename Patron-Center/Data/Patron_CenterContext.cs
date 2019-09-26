@@ -97,11 +97,9 @@ namespace Patron_Center.Models
 
                 foreach (var respuesta in resultado)
                 {
-                    var respuestaCorrecta = new CorreccionMOViewModel(respuesta.Pregunta.Enunciado, respuesta.Pregunta.Orden, respuesta.Id, respuesta.RespuestaCorrecta);
+                    var respuestaCorrecta = new CorreccionMOViewModel(respuesta.Pregunta.Enunciado, respuesta.Pregunta.Orden, respuesta.Id, respuesta.RespuestaCorrecta, respuesta.Pregunta.Puntaje);
                     coleccionRespuestas.Add(respuestaCorrecta);
                 }
-
-                Debug.WriteLine("respuestas resultante es ---------> " + coleccionRespuestas);
 
                 return coleccionRespuestas;
             }

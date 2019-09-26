@@ -317,39 +317,46 @@ namespace Patron_Center.Controllers
                 ViewBag.TipoUsuario = HttpContext.Session.GetString("_TipoUsuario");
             }
 
-            List<int> respuestasSeleccionadas = new List<int>();
-            // Las respuestas selccionadas desde la view vienen como strings este foreach lo que hace es crear una lista de ints con las respuestas seleccionadas
-            foreach (var respuesta in respuestaAlumnoMO.Preguntas)
+            if (ModelState.IsValid)
             {
-                respuestasSeleccionadas.Add(Int32.Parse(respuesta.Seleccionada));
-            }
-            // Me traigo una lista que contiene los datos de las respuestas seleccionadas por el alumno en la BD
-            var correcciones = await _context.ObtenerRespuestasCorrectas(respuestasSeleccionadas);
-
-            int respuestasCorrectas = 0;
-            int respuestasIncorrectas = 0;
-            int puntajeTotal = 0;
-            //promedio de respuestas en %
-            foreach (var correccion in correcciones)
-            {
-                if (correccion.RespuestaCorrecta)
+                List<int> respuestasSeleccionadas = new List<int>();
+                // Las respuestas selccionadas desde la view vienen como strings este foreach lo que hace es crear una lista de ints con las respuestas seleccionadas
+                foreach (var respuesta in respuestaAlumnoMO.Preguntas)
                 {
-                    respuestasCorrectas++;
+                    respuestasSeleccionadas.Add(Int32.Parse(respuesta.Seleccionada));
                 }
-                else
+                // Me traigo una lista que contiene los datos de las respuestas seleccionadas por el alumno en la BD
+                var correcciones = await _context.ObtenerRespuestasCorrectas(respuestasSeleccionadas);
+
+                int respuestasCorrectas = 0;
+                int respuestasIncorrectas = 0;
+                int puntajeTotal = 0;
+                //promedio de respuestas en %
+                foreach (var correccion in correcciones)
                 {
-                    respuestasIncorrectas++;
+                    if (correccion.RespuestaCorrecta)
+                    {
+                        respuestasCorrectas++;
+                        // Se asume que todos los quizes van a ser /100
+                        puntajeTotal += correccion.Puntaje;
+                    }
+                    else
+                    {
+                        respuestasIncorrectas++;
+                    }
                 }
+
+                // puntajeTotal = calcularResultado(puntajeTotal);
+
+                ViewBag.IdUnidad = respuestaAlumnoMO.IdUnidad;
+                ViewBag.RespuestasCorrectas = respuestasCorrectas;
+                ViewBag.RespuestasIncorrectas = respuestasIncorrectas;
+                ViewBag.PuntajeTotal = puntajeTotal;
+
+                return View("QuizMoResult", correcciones);
             }
-
-            puntajeTotal = calcularResultado(respuestaAlumnoMO.Preguntas.Count, respuestasCorrectas);
-
-            ViewBag.IdUnidad = respuestaAlumnoMO.IdUnidad;
-            ViewBag.RespuestasCorrectas = respuestasCorrectas;
-            ViewBag.RespuestasIncorrectas = respuestasIncorrectas;
-            ViewBag.PuntajeTotal = puntajeTotal;
-
-            return View("QuizMoResult", correcciones);
+            ViewBag.MensajeError = "Debe responder todas las preguntas";
+            return View("AnswerQuiz", respuestaAlumnoMO);
         }
 
         // GET: Quizes para alumnos
@@ -379,19 +386,19 @@ namespace Patron_Center.Controllers
             return _context.Quiz.Any(e => e.Id == id);
         }
 
-        private int calcularResultado(int totalPreguntas, int respuestasCorrectas)
-        {
-            int puntaje = 0;
-            if (totalPreguntas == 0)
-            {
-                return puntaje;
-            }
-            else
-            {
-                puntaje = respuestasCorrectas * 100 / totalPreguntas;
-                return puntaje;
-            }
-        }
+        //private int calcularResultado(int totalPreguntas, int respuestasCorrectas)
+        //{
+        //    int puntaje = 0;
+        //    if (totalPreguntas == 0)
+        //    {
+        //        return puntaje;
+        //    }
+        //    else
+        //    {
+        //        puntaje = respuestasCorrectas * 100 / totalPreguntas;
+        //        return puntaje;
+        //    }
+        //}
 
     }
 }
