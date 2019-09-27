@@ -138,7 +138,8 @@ namespace Patron_Center.Controllers
                 return NotFound();
             }
             ViewBag.UnidadId_ = quiz.UnidadId;
-            ViewData["UnidadId"] = new SelectList(_context.Unidad, "Id", "Descripcion", quiz.UnidadId);
+            ViewData["UnidadId"] = new SelectList(_context.Unidad, "Id", "Nombre", quiz.UnidadId);
+            
             return View(quiz);
         }
 

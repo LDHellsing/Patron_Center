@@ -13,19 +13,13 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Unidad)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Puntaje)
+                @Html.DisplayNameFor(model => model.Nombre)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Evaluacion)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Ejercicio)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Nombre)
             </th>
             <th></th>
         </tr>
@@ -35,10 +29,7 @@
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Unidad.Descripcion)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Puntaje)
+                    @Html.DisplayFor(modelItem => item.Nombre)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Evaluacion)
@@ -47,12 +38,8 @@
                     @Html.DisplayFor(modelItem => item.Ejercicio)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Nombre)
-                </td>
-                <td>
                     <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-link">Editar</a>
                     <a asp-controller="Preguntas" asp-action="Index" asp-route-QuizId="@item.Id" class="btn btn-link">Ver Preguntas</a>
-                    <a asp-controller="Quizes" asp-action="AnswerQuiz" asp-route-QuizId="@item.Id" class="btn btn-link">Cursar Quiz</a>
                 </td>
             </tr>
         }
