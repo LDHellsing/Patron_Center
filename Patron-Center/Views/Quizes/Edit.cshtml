@@ -24,18 +24,13 @@
                 <span asp-validation-for="Nombre" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Puntaje" class="control-label"></label>
-                <input asp-for="Puntaje" class="form-control" />
-                <span asp-validation-for="Puntaje" class="text-danger"></span>
-            </div>
-            <div class="form-group">
                 <label asp-for="Evaluacion" class="control-label"></label>
-                <select asp-for="Evaluacion" class="form-control"></select>
+                <select asp-for="Evaluacion" class="form-control" asp-items="Html.GetEnumSelectList<TipoQuiz>()"></select>
                 <span asp-validation-for="Evaluacion" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Ejercicio" class="control-label"></label>
-                <select asp-for="Ejercicio" class="form-control"></select>
+                <select asp-for="Ejercicio" class="form-control" asp-items="Html.GetEnumSelectList<TipoEjercicio>()"></select>
                 <span asp-validation-for="Ejercicio" class="text-danger"></span>
             </div>
             <div class="form-group form-check">

@@ -21,27 +21,33 @@
             <th>
                 @Html.DisplayNameFor(model => model.Ejercicio)
             </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Eliminado)
+            </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
         @foreach (var item in Model)
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Nombre)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Evaluacion)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Ejercicio)
-                </td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-link">Editar</a>
-                    <a asp-controller="Preguntas" asp-action="Index" asp-route-QuizId="@item.Id" class="btn btn-link">Ver Preguntas</a>
-                </td>
-            </tr>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Evaluacion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Ejercicio)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Eliminado)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-link">Editar</a>
+                <a asp-controller="Preguntas" asp-action="Index" asp-route-QuizId="@item.Id" class="btn btn-link">Ver Preguntas</a>
+            </td>
+        </tr>
         }
     </tbody>
 </table>

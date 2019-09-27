@@ -18,7 +18,6 @@ namespace Patron_Center.Models
         public int QuizId { get; set; }
         public Quiz Quiz { get; set; }
         public int Puntaje { get; set; }
-        [HiddenInput(DisplayValue = false)]
         [DisplayName("Inactivo")]
         public bool Eliminado { get; set; }
         [DisplayName("Comentario")]
