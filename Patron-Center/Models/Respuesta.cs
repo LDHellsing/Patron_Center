@@ -26,7 +26,8 @@ namespace Patron_Center.Models
 		public bool Seleccionada { get; set; }
         [DisplayName("Inactivo")]
         public bool Eliminado { get; set; }
-        [Required(ErrorMessage = "El enunciado es un campo requerido")]
+        [Required(ErrorMessage = "La respuesta es un campo requerido")]
+        [DisplayName("Respuesta")]
         public string Enunciado { get; set; }
     }
 }

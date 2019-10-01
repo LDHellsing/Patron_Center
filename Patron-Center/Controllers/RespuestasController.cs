@@ -63,7 +63,16 @@ namespace Patron_Center.Controllers
             {
                 ViewBag.InvalidUserMessage = "Usted no tiene permiso para acceder a este sitio. Por favor Ingrese con un usuario Administrador, ";
                 return View("Views/Shared/UnauthorisedUserError.cshtml");
+            }            
+
+            //Chequeo si existe otra respuesta correcta
+            var patron_CenterContext = _context.Respuesta.Where(r => r.PreguntaId == PreguntaId && r.RespuestaCorrecta == true);
+            //Si no existe otra respuesta correcta esta respuesta es correcta
+            if (patron_CenterContext.Count() == 0)
+            {
+                ViewBag.RespuestaCorrecta = true;
             }
+
             ViewBag.PreguntaId_ = PreguntaId;
             ViewData["PreguntaId"] = new SelectList(_context.Pregunta.Where(p => p.Id == PreguntaId), "Id", "Enunciado", PreguntaId);
             return View();
@@ -92,16 +101,28 @@ namespace Patron_Center.Controllers
                 ViewBag.InvalidUserMessage = "Usted no tiene permiso para acceder a este sitio. Por favor Ingrese con un usuario Administrador, ";
                 return View("Views/Shared/UnauthorisedUserError.cshtml");
             }
-
-            if (ModelState.IsValid)
+            //Chequeo si existe otra respuesta correcta
+            var patron_CenterContext = _context.Respuesta.Where(r => r.PreguntaId == respuesta.PreguntaId && r.RespuestaCorrecta == true);
+            
+            //Si no existe otra respuesta correcta y esta respuesta es correcta
+            if (patron_CenterContext.Count() == 0 && respuesta.RespuestaCorrecta == true || patron_CenterContext.Count() > 0 && respuesta.RespuestaCorrecta == false)
             {
-                _context.Add(respuesta);
-                await _context.SaveChangesAsync();
-                //return RedirectToAction(nameof(Index));
-                return RedirectToAction("Index", "Respuestas", new { PreguntaId = respuesta.PreguntaId });
+                if (ModelState.IsValid)
+                {
+                    _context.Add(respuesta);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction("Index", "Respuestas", new { PreguntaId = respuesta.PreguntaId });
+                }
+                ViewData["PreguntaId"] = new SelectList(_context.Pregunta, "Id", "Enunciado");
+                return View(respuesta);
             }
-            ViewData["PreguntaId"] = new SelectList(_context.Pregunta, "Id", "Enunciado");
-            return View(respuesta);
+            else
+            {
+                ViewBag.RespuestaCorrectaError = string.Format("No pueden existir mas de una respuesta correcta por pregunta.");
+                Create(respuesta.PreguntaId);
+                return View(respuesta);                
+            }
+            
         }
 
         // GET: Respuestas/Edit/5
