@@ -7,37 +7,26 @@
 
 @foreach (var correccion in Model)
 {
+
     if (correccion.RespuestaCorrecta == true)
     {
-        <div>
-            Pregunta @correccion.OrdenPregunta: @correccion.EnunciadoPregunta
+        <div class="alert alert-success" role="alert">
+            Pregunta @correccion.OrdenPregunta: @correccion.EnunciadoPregunta <b>Correcta</b>
         </div>
-        <div>
-            <b>Correcta</b>
-        </div>
-        <br />
     }
     else
     {
-        <div>
-            Pregunta @correccion.OrdenPregunta: @correccion.EnunciadoPregunta
-
+        <div class="alert alert-danger" role="alert">
+            Pregunta @correccion.OrdenPregunta: @correccion.EnunciadoPregunta <b>Incorrecta</b>
         </div>
-        <div>
-            <b>Incorrecta</b>
-        </div>
-        <br />
     }
 }
 
-<div>
+<div class="alert alert-info" role="alert">
     Respuestas correctas: @ViewBag.RespuestasCorrectas
-</div>
-<div>
     Respuestas incorrectas: @ViewBag.RespuestasIncorrectas
-</div>
-<div>
     <h4>Puntaje: @ViewBag.PuntajeTotal</h4>
+
 </div>
 
 <div>

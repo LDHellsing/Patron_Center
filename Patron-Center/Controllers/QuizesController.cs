@@ -278,28 +278,38 @@ namespace Patron_Center.Controllers
             }
 
             var quizAux = await _context.CreateQuiz(QuizId);
-            RespuestaAlumnoMO quiz = new RespuestaAlumnoMO();
-            quiz.IdQuiz = quizAux.Id;
-            quiz.QuizName = quizAux.Nombre;
-            quiz.IdUnidad = quizAux.UnidadId;
-            foreach (var pregunta in quizAux.Preguntas)
+
+            if (quizAux.Ejercicio == TipoEjercicio.Multiple_Opcion)
             {
-                PreguntaViewModel preguntaViewModel = new PreguntaViewModel();
-                preguntaViewModel.IdPregunta = pregunta.Id;
-                preguntaViewModel.Enunciado = pregunta.Enunciado;
-
-                foreach (var respuesta in pregunta.Respuestas)
+                RespuestaAlumnoMO quiz = new RespuestaAlumnoMO();
+                quiz.IdQuiz = quizAux.Id;
+                quiz.QuizName = quizAux.Nombre;
+                quiz.IdUnidad = quizAux.UnidadId;
+                foreach (var pregunta in quizAux.Preguntas)
                 {
-                    preguntaViewModel.Respuestas.Add(new RespuestaViewModel()
-                    {
-                        IdRespuesta = respuesta.Id,
-                        Enunciado = respuesta.Enunciado
-                    });
-                }
-                quiz.Preguntas.Add(preguntaViewModel);
-            }
+                    PreguntaViewModel preguntaViewModel = new PreguntaViewModel();
+                    preguntaViewModel.IdPregunta = pregunta.Id;
+                    preguntaViewModel.Enunciado = pregunta.Enunciado;
 
-            return View("AnswerQuiz", quiz);
+                    foreach (var respuesta in pregunta.Respuestas)
+                    {
+                        preguntaViewModel.Respuestas.Add(new RespuestaViewModel()
+                        {
+                            IdRespuesta = respuesta.Id,
+                            Enunciado = respuesta.Enunciado
+                        });
+                    }
+                    quiz.Preguntas.Add(preguntaViewModel);
+                }
+
+                return View("AnswerQuiz", quiz);
+            }
+            else
+            {
+                // AÑADIR ACA LA CREACION DEL VIEW MODEL DE QUIZ DE DESARROLLO Y RETORNAR LA VISTA AnswerQuizDesarrollo
+                return View("AnswerQuiz", quizAux);
+            }
+            
         }
         [HttpPost]
         [ValidateAntiForgeryToken]

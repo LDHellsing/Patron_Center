@@ -109,6 +109,24 @@ namespace Patron_Center.Models
                 return null;
             }
         }
+
+        //Puede que esto no sea necesario
+        //public async Task<Curso> getCursoByUnidad (int unidadId)
+        //{
+        //    Unidad unidad = null;
+
+        //    try
+        //    {
+        //        unidad = await Unidad.Where(u => u.Id == unidadId).Include(c => c.Curso).FirstAsync();
+        //        return unidad.Curso;
+        //    }
+        //    catch (InvalidOperationException e)
+        //    {
+        //        Debug.WriteLine(e);
+        //        return null;
+        //    };
+        //}
+
         //Relacion muchos a muchos Curso Usuario
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
