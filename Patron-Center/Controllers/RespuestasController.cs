@@ -63,7 +63,7 @@ namespace Patron_Center.Controllers
             {
                 ViewBag.InvalidUserMessage = "Usted no tiene permiso para acceder a este sitio. Por favor Ingrese con un usuario Administrador, ";
                 return View("Views/Shared/UnauthorisedUserError.cshtml");
-            }            
+            }
 
             //Chequeo si existe otra respuesta correcta
             var patron_CenterContext = _context.Respuesta.Where(r => r.PreguntaId == PreguntaId && r.RespuestaCorrecta == true);
@@ -103,7 +103,7 @@ namespace Patron_Center.Controllers
             }
             //Chequeo si existe otra respuesta correcta
             var patron_CenterContext = _context.Respuesta.Where(r => r.PreguntaId == respuesta.PreguntaId && r.RespuestaCorrecta == true);
-            
+
             //Si no existe otra respuesta correcta y esta respuesta es correcta
             if (patron_CenterContext.Count() == 0 && respuesta.RespuestaCorrecta == true || patron_CenterContext.Count() > 0 && respuesta.RespuestaCorrecta == false)
             {
@@ -118,11 +118,11 @@ namespace Patron_Center.Controllers
             }
             else
             {
-                ViewBag.RespuestaCorrectaError = string.Format("No pueden existir mas de una respuesta correcta por pregunta.");
+                ViewBag.RespuestaCorrectaError = string.Format("Debe existir una y solo una respuesta correcta para cada pregunta.");
                 Create(respuesta.PreguntaId);
-                return View(respuesta);                
+                return View(respuesta);
             }
-            
+
         }
 
         // GET: Respuestas/Edit/5
@@ -155,6 +155,7 @@ namespace Patron_Center.Controllers
             {
                 return NotFound();
             }
+            ViewBag.PreguntaCorrecta = respuesta.RespuestaCorrecta;
             ViewBag.PreguntaId_ = respuesta.PreguntaId;
             ViewData["PreguntaId"] = new SelectList(_context.Pregunta, "Id", "Enunciado", respuesta.PreguntaId);
             return View(respuesta);
@@ -207,9 +208,9 @@ namespace Patron_Center.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
-            }    
-            
+                return RedirectToAction("Index", "Respuestas", new { PreguntaId = respuesta.PreguntaId });
+            }
+
             ViewData["PreguntaId"] = new SelectList(_context.Pregunta, "Id", "Enunciado", respuesta.PreguntaId);
             return View(respuesta);
         }
