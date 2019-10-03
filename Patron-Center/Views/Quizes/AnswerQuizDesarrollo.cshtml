@@ -9,18 +9,18 @@
 
 <form asp-action="QuizCorrectionDesarrollo" method="post">
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-    @foreach (var pregunta in Model.Preguntas)
+    @for (int i = 0; i < Model.Preguntas.Count; i++)
     {
         <div class="form-group">
-            <label asp-for="@pregunta.Enunciado" class="control-label">@pregunta.Enunciado</label>
+            <label asp-for="@Model.Preguntas[i].Enunciado" class="control-label">@Model.Preguntas[i].Enunciado</label>
             <div>
-                <textarea asp-for="@pregunta.Respuesta" class="form-control"></textarea>
+                @Html.TextAreaFor(m => m.Preguntas[i].Respuesta, new { @class = "form-control" })
             </div>
             <div>
-                <input asp-for="@pregunta.Enunciado" class="form-control data-form" hidden="hidden" />
+                @Html.HiddenFor(x => Model.Preguntas[i].Enunciado)
             </div>
             <div>
-                <input asp-for="@pregunta.IdPregunta" class="form-control data-form" hidden="hidden" />
+                @Html.HiddenFor(x => Model.Preguntas[i].IdPregunta)
             </div>
         </div>
     }
