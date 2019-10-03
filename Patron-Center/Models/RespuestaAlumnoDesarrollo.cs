@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -7,22 +8,21 @@ namespace Patron_Center.Models
 {
     public class RespuestaAlumnoDesarrollo
     {
-        public class RespuestaAlumnoMO
+        public int IdQuiz { get; set; }
+        public string QuizName { get; set; }
+        public List<PreguntaViewModelDesarrollo> Preguntas { get; set; }
+        public int IdUnidad { get; set; }
+        public RespuestaAlumnoDesarrollo()
         {
-            public int IdQuiz { get; set; }
-            public string QuizName { get; set; }
-            public List<PreguntaViewModel> Preguntas { get; set; }
-            public int IdUnidad { get; set; }
-            public RespuestaAlumnoMO()
-            {
-                this.Preguntas = new List<PreguntaViewModel>();
-            }
+            this.Preguntas = new List<PreguntaViewModelDesarrollo>();
         }
-        public class PreguntaViewModel
-        {
-            public int IdPregunta { get; set; }
-            public string Enunciado { get; set; }
-            public string Respuesta { get; set; }
-        }
+    }
+
+    public class PreguntaViewModelDesarrollo
+    {
+        public int IdPregunta { get; set; }
+        public string Enunciado { get; set; }
+        [MaxLength(5000)]
+        public string Respuesta { get; set; }
     }
 }

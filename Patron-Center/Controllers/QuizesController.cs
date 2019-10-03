@@ -281,10 +281,10 @@ namespace Patron_Center.Controllers
 
             if (quizAux.Ejercicio == TipoEjercicio.Multiple_Opcion)
             {
-                RespuestaAlumnoMO quiz = new RespuestaAlumnoMO();
-                quiz.IdQuiz = quizAux.Id;
-                quiz.QuizName = quizAux.Nombre;
-                quiz.IdUnidad = quizAux.UnidadId;
+                RespuestaAlumnoMO quizMO = new RespuestaAlumnoMO();
+                quizMO.IdQuiz = quizAux.Id;
+                quizMO.QuizName = quizAux.Nombre;
+                quizMO.IdUnidad = quizAux.UnidadId;
                 foreach (var pregunta in quizAux.Preguntas)
                 {
                     PreguntaViewModel preguntaViewModel = new PreguntaViewModel();
@@ -299,15 +299,26 @@ namespace Patron_Center.Controllers
                             Enunciado = respuesta.Enunciado
                         });
                     }
-                    quiz.Preguntas.Add(preguntaViewModel);
+                    quizMO.Preguntas.Add(preguntaViewModel);
                 }
 
-                return View("AnswerQuiz", quiz);
+                return View("AnswerQuiz", quizMO);
             }
             else
             {
                 // AÑADIR ACA LA CREACION DEL VIEW MODEL DE QUIZ DE DESARROLLO Y RETORNAR LA VISTA AnswerQuizDesarrollo
-                return View("AnswerQuiz", quizAux);
+                RespuestaAlumnoDesarrollo quizDesarrollo = new RespuestaAlumnoDesarrollo();
+                quizDesarrollo.IdQuiz = quizAux.Id;
+                quizDesarrollo.QuizName = quizAux.Nombre;
+                quizDesarrollo.IdUnidad = quizAux.UnidadId;
+                foreach (var pregunta in quizAux.Preguntas)
+                {
+                    PreguntaViewModelDesarrollo preguntaViewModelDesarrollo = new PreguntaViewModelDesarrollo();
+                    preguntaViewModelDesarrollo.IdPregunta = pregunta.Id;
+                    preguntaViewModelDesarrollo.Enunciado = pregunta.Enunciado;
+                    quizDesarrollo.Preguntas.Add(preguntaViewModelDesarrollo);
+                }
+                return View("AnswerQuizDesarrollo", quizDesarrollo);
             }
             
         }
@@ -368,6 +379,26 @@ namespace Patron_Center.Controllers
             }
             ViewBag.MensajeError = "Debe responder todas las preguntas";
             return View("AnswerQuiz", respuestaAlumnoMO);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> QuizCorrectionDesarrollo(RespuestaAlumnoDesarrollo respuestaAlumnoDesarrollo)
+        {
+            if (HttpContext.Session.GetInt32("_IdUsuario") == null)
+            {
+                return RedirectToAction("Index", "Login");
+            }
+            else
+            {
+                ViewBag.Nombre = HttpContext.Session.GetString("_Nombre");
+                ViewBag.IdUsuario = HttpContext.Session.GetInt32("_IdUsuario");
+                ViewBag.TipoUsuario = HttpContext.Session.GetString("_TipoUsuario");
+            }
+
+            // AGREGAR LOGICA PARA PASAR EL ViewModel A UN OBJETO RespuestaAlumno Y GUARDARLO EN LA BD
+
+            return View();
         }
 
         // GET: Quizes para alumnos
