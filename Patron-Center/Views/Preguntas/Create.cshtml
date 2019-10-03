@@ -4,9 +4,8 @@
     ViewData["Title"] = "Create";
 }
 
-<h1>Create</h1>
+<h1>Crear pregunta</h1>
 
-<h4>Pregunta</h4>
 <hr />
 <div class="row">
     <div class="col-md-6">
@@ -33,11 +32,11 @@
             </div>
             <div class="form-group">
                 <label asp-for="Orden" class="control-label"></label>
-                <input asp-for="Orden" class="form-control" />
+                <input asp-for="Orden" class="form-control" value="@ViewBag.NextOrder"/>
                 <span asp-validation-for="Orden" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Crear" class="btn btn-primary" />
             </div>
         </form>
     </div>

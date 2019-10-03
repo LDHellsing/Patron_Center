@@ -196,70 +196,7 @@ namespace Patron_Center.Controllers
             return View(quiz);
         }
 
-        // GET: Quizes/Delete/5
-        public async Task<IActionResult> Delete(int? id)
-        {
-            if (HttpContext.Session.GetInt32("_IdUsuario") == null)
-            {
-                return RedirectToAction("Index", "Login");
-            }
-            else
-            {
-                ViewBag.Nombre = HttpContext.Session.GetString("_Nombre");
-                ViewBag.IdUsuario = HttpContext.Session.GetInt32("_IdUsuario");
-                ViewBag.TipoUsuario = HttpContext.Session.GetString("_TipoUsuario");
-            }
-
-            if (HttpContext.Session.GetString("_TipoUsuario") == "Alumno")
-            {
-                ViewBag.InvalidUserMessage = "Usted no tiene permiso para acceder a este sitio. Por favor Ingrese con un usuario Administrador, ";
-                return View("Views/Shared/UnauthorisedUserError.cshtml");
-            }
-
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var quiz = await _context.Quiz
-                .Include(q => q.Unidad)
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (quiz == null)
-            {
-                return NotFound();
-            }
-
-            return View(quiz);
-        }
-
-        // POST: Quizes/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            if (HttpContext.Session.GetInt32("_IdUsuario") == null)
-            {
-                return RedirectToAction("Index", "Login");
-            }
-            else
-            {
-                ViewBag.Nombre = HttpContext.Session.GetString("_Nombre");
-                ViewBag.IdUsuario = HttpContext.Session.GetInt32("_IdUsuario");
-                ViewBag.TipoUsuario = HttpContext.Session.GetString("_TipoUsuario");
-            }
-
-            if (HttpContext.Session.GetString("_TipoUsuario") == "Alumno")
-            {
-                ViewBag.InvalidUserMessage = "Usted no tiene permiso para acceder a este sitio. Por favor Ingrese con un usuario Administrador, ";
-                return View("Views/Shared/UnauthorisedUserError.cshtml");
-            }
-
-            var quiz = await _context.Quiz.FindAsync(id);
-            _context.Quiz.Remove(quiz);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
-        }
-
+  
         // Cursar quiz
         // GET
         // Quizes/AnswerQuiz
@@ -415,7 +352,7 @@ namespace Patron_Center.Controllers
                 ViewBag.TipoUsuario = HttpContext.Session.GetString("_TipoUsuario");
             }
 
-            var patron_CenterContext = _context.Quiz.Include(q => q.Unidad).Where(q => q.UnidadId == UnidadId);
+            var patron_CenterContext = _context.Quiz.Include(q => q.Unidad).Where(q => q.UnidadId == UnidadId && q.Eliminado != true);
             var CursoId = patron_CenterContext.Select(c => c.Unidad.CursoId).FirstOrDefault();
             ViewBag.UnidadId = UnidadId;
             ViewBag.CursoId = CursoId;
@@ -427,20 +364,5 @@ namespace Patron_Center.Controllers
         {
             return _context.Quiz.Any(e => e.Id == id);
         }
-
-        //private int calcularResultado(int totalPreguntas, int respuestasCorrectas)
-        //{
-        //    int puntaje = 0;
-        //    if (totalPreguntas == 0)
-        //    {
-        //        return puntaje;
-        //    }
-        //    else
-        //    {
-        //        puntaje = respuestasCorrectas * 100 / totalPreguntas;
-        //        return puntaje;
-        //    }
-        //}
-
     }
 }
