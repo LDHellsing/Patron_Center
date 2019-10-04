@@ -86,11 +86,11 @@ namespace Patron_Center.Models
             }
         }
 
-        public async Task<List<CorreccionMOViewModel>> ObtenerRespuestasCorrectas (List<int> respuestasId)
+        public async Task<List<CorreccionMOViewModel>> ObtenerRespuestasCorrectas(List<int> respuestasId)
         {
             try
             {
-               var coleccionRespuestas = new List<CorreccionMOViewModel>();
+                var coleccionRespuestas = new List<CorreccionMOViewModel>();
                 var resultado = new List<Respuesta>();
 
                 resultado = await Respuesta.Where(r => respuestasId.Contains(r.Id)).Include(p => p.Pregunta).ToListAsync();
@@ -270,7 +270,7 @@ namespace Patron_Center.Models
                     Eliminado = false
                 }
                 );
-            
+
             //Creación de Diapositivas
             modelBuilder.Entity<Diapositiva>().HasData(
                 new Diapositiva
@@ -303,16 +303,16 @@ namespace Patron_Center.Models
                     UnidadId = 1
                 }
                 );
-             modelBuilder.Entity<Diapositiva>().HasData(
-                new Diapositiva
-                {
-                    Id = 4,
-                    Texto = "DEFINICION DE PATRONES:\r\n\r\nLos Patrones Definen soluciones a problemas comunes del desarrollo de software.\r\nEstos deben cumplir con dos cosas:\r\n 1) Debe comprobarse como efectivo en la resolución de un problema\r\n 2) Debe ser reutilizable. \r\n\r\nExisten diferencias entre patrones de diseño y arquitectónicos las cuales son: \r\n (1) Los patrones arquitectónicos son mas abstractos \r\n (2) Los patrones arquitectónicos apoyan en el cumplimiento de atributos de calidad(Rendimiento, disponibilidad,etc).",
-                    Orden = 4,
-                    Eliminado = false,
-                    UnidadId = 1
-                }
-                );
+            modelBuilder.Entity<Diapositiva>().HasData(
+               new Diapositiva
+               {
+                   Id = 4,
+                   Texto = "DEFINICION DE PATRONES:\r\n\r\nLos Patrones Definen soluciones a problemas comunes del desarrollo de software.\r\nEstos deben cumplir con dos cosas:\r\n 1) Debe comprobarse como efectivo en la resolución de un problema\r\n 2) Debe ser reutilizable. \r\n\r\nExisten diferencias entre patrones de diseño y arquitectónicos las cuales son: \r\n (1) Los patrones arquitectónicos son mas abstractos \r\n (2) Los patrones arquitectónicos apoyan en el cumplimiento de atributos de calidad(Rendimiento, disponibilidad,etc).",
+                   Orden = 4,
+                   Eliminado = false,
+                   UnidadId = 1
+               }
+               );
             modelBuilder.Entity<Diapositiva>().HasData(
                 new Diapositiva
                 {
@@ -333,7 +333,7 @@ namespace Patron_Center.Models
                      UnidadId = 1
                  }
                  );
-             
+
             modelBuilder.Entity<Diapositiva>().HasData(
                  new Diapositiva
                  {
@@ -466,7 +466,7 @@ namespace Patron_Center.Models
                   Orden = 2,
                   Eliminado = false,
                   UnidadId = 2,
-                  
+
               }
               );
             modelBuilder.Entity<Diapositiva>().HasData(
@@ -477,7 +477,7 @@ namespace Patron_Center.Models
                    Orden = 3,
                    Eliminado = false,
                    UnidadId = 2,
-                   
+
                }
                );
             modelBuilder.Entity<Diapositiva>().HasData(
@@ -488,7 +488,7 @@ namespace Patron_Center.Models
                    Orden = 4,
                    Eliminado = false,
                    UnidadId = 2,
-                   
+
                }
                );
             modelBuilder.Entity<Diapositiva>().HasData(
@@ -499,7 +499,7 @@ namespace Patron_Center.Models
                    Orden = 5,
                    Eliminado = false,
                    UnidadId = 2,
-                 
+
                }
                );
         }

@@ -155,7 +155,7 @@ namespace Patron_Center.Controllers
             {
                 return NotFound();
             }
-            ViewBag.PreguntaCorrecta = respuesta.RespuestaCorrecta;
+            ViewBag.RespuestaCorrecta = respuesta.RespuestaCorrecta;
             ViewBag.PreguntaId_ = respuesta.PreguntaId;
             ViewData["PreguntaId"] = new SelectList(_context.Pregunta, "Id", "Enunciado", respuesta.PreguntaId);
             return View(respuesta);

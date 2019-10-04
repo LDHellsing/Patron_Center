@@ -39,7 +39,7 @@
                     @if (item.UrlVideo != null)
                     {
                    
-                        <a href="@(String.Format("{0}{1}", "www.youtube.com/watch?v=", item.UrlVideo))">Ver Video</a>
+                        <a target="_blank" href="@(String.Format("{0}{1}", "http://www.youtube.com/watch?v=", item.UrlVideo))">Ver Video</a>
 
                     }
                     else

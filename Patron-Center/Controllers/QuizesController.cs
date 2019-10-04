@@ -365,4 +365,18 @@ namespace Patron_Center.Controllers
             return _context.Quiz.Any(e => e.Id == id);
         }
     }
+
+    //private int calcularResultado(int totalPreguntas, int respuestasCorrectas)
+    //{
+    //    int puntaje = 0;
+    //    if (totalPreguntas == 0)
+    //    {
+    //        return puntaje;
+    //    }
+    //    else
+    //    {
+    //        puntaje = respuestasCorrectas * 100 / totalPreguntas;
+    //        return puntaje;
+    //    }
+    //}
 }

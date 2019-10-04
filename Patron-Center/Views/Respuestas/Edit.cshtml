@@ -6,9 +6,9 @@
 
 <h1>Editar respuesta</h1>
 
-@if (ViewBag.RespuestaCorrecta != null)
+@if (ViewBag.RespuestaCorrecta == true)
 {
-    <span class="text-info">Esta respuesta <b>debe ser correcta</b>.</span>
+    <span class="text-info">Esta respuesta <b>debe ser correcta</b>, no es posible inactivarla.</span>
 }
 else
 {
@@ -27,10 +27,10 @@ else
             </div>
             <div class="form-group">
                 <label asp-for="Enunciado" class="control-label"></label>
-                <input asp-for="Enunciado" class="form-control" />
+                <textarea asp-for="Enunciado" class="form-control" multiline="true" rows="3"></textarea>
                 <span asp-validation-for="Enunciado" class="text-danger"></span>
             </div>
-            @if (ViewBag.PreguntaCorrecta == true)
+            @if (ViewBag.RespuestaCorrecta == true)
             {
                 <input type="hidden" asp-for="Eliminado" />
             }
