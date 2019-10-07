@@ -9,20 +9,36 @@ END;
 
 GO
 
-IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20190822012935_Initial')
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20190925060044_diapos')
 BEGIN
-    CREATE TABLE [Correccion] (
+    CREATE TABLE [Calificacion] (
         [Id] int NOT NULL IDENTITY,
-        [IdQuiz] int NOT NULL,
-        [IdAlumno] int NOT NULL,
-        [Resultado] nvarchar(max) NOT NULL,
-        CONSTRAINT [PK_Correccion] PRIMARY KEY ([Id])
+        [UsuarioId] int NOT NULL,
+        [UnidadId] int NOT NULL,
+        [CursoId] int NOT NULL,
+        [Fecha] datetime2 NOT NULL,
+        [Nota] int NOT NULL,
+        CONSTRAINT [PK_Calificacion] PRIMARY KEY ([Id])
     );
 END;
 
 GO
 
-IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20190822012935_Initial')
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20190925060044_diapos')
+BEGIN
+    CREATE TABLE [RespuestaAlumno] (
+        [Id] int NOT NULL IDENTITY,
+        [UsuarioId] int NOT NULL,
+        [PreguntaId] int NOT NULL,
+        [RespuestaId] int NOT NULL,
+        [RespuestaDesarrollo] nvarchar(max) NULL,
+        CONSTRAINT [PK_RespuestaAlumno] PRIMARY KEY ([Id])
+    );
+END;
+
+GO
+
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20190925060044_diapos')
 BEGIN
     CREATE TABLE [Usuario] (
         [Id] int NOT NULL IDENTITY,
@@ -40,7 +56,24 @@ END;
 
 GO
 
-IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20190822012935_Initial')
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20190925060044_diapos')
+BEGIN
+    CREATE TABLE [Correccion] (
+        [Id] int NOT NULL IDENTITY,
+        [UsuarioId] int NOT NULL,
+        [QuizId] int NOT NULL,
+        [PreguntaId] int NOT NULL,
+        [IdProfesor] int NOT NULL,
+        [RespuestaAlumnoId] int NULL,
+        [Calificacion] int NOT NULL,
+        CONSTRAINT [PK_Correccion] PRIMARY KEY ([Id]),
+        CONSTRAINT [FK_Correccion_RespuestaAlumno_RespuestaAlumnoId] FOREIGN KEY ([RespuestaAlumnoId]) REFERENCES [RespuestaAlumno] ([Id]) ON DELETE NO ACTION
+    );
+END;
+
+GO
+
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20190925060044_diapos')
 BEGIN
     CREATE TABLE [Curso] (
         [Id] int NOT NULL IDENTITY,
@@ -58,7 +91,7 @@ END;
 
 GO
 
-IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20190822012935_Initial')
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20190925060044_diapos')
 BEGIN
     CREATE TABLE [CursoUsuario] (
         [Id] int NOT NULL IDENTITY,
@@ -72,7 +105,7 @@ END;
 
 GO
 
-IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20190822012935_Initial')
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20190925060044_diapos')
 BEGIN
     CREATE TABLE [Unidad] (
         [Id] int NOT NULL IDENTITY,
@@ -87,7 +120,7 @@ END;
 
 GO
 
-IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20190822012935_Initial')
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20190925060044_diapos')
 BEGIN
     CREATE TABLE [Diapositiva] (
         [Id] int NOT NULL IDENTITY,
@@ -103,7 +136,7 @@ END;
 
 GO
 
-IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20190822012935_Initial')
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20190925060044_diapos')
 BEGIN
     CREATE TABLE [Quiz] (
         [Id] int NOT NULL IDENTITY,
@@ -120,7 +153,7 @@ END;
 
 GO
 
-IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20190822012935_Initial')
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20190925060044_diapos')
 BEGIN
     CREATE TABLE [Pregunta] (
         [Id] int NOT NULL IDENTITY,
@@ -128,7 +161,6 @@ BEGIN
         [Puntaje] int NOT NULL,
         [Eliminado] bit NOT NULL,
         [ComentarioDocente] nvarchar(max) NULL,
-        [MultipleOpcion] bit NOT NULL,
         [Orden] int NOT NULL,
         [Enunciado] nvarchar(max) NOT NULL,
         CONSTRAINT [PK_Pregunta] PRIMARY KEY ([Id]),
@@ -138,7 +170,7 @@ END;
 
 GO
 
-IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20190822012935_Initial')
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20190925060044_diapos')
 BEGIN
     CREATE TABLE [Respuesta] (
         [Id] int NOT NULL IDENTITY,
@@ -154,87 +186,161 @@ END;
 
 GO
 
-IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20190822012935_Initial')
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20190925060044_diapos')
 BEGIN
     IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'Id', N'Apellido', N'Documento', N'Eliminado', N'Email', N'Nombre', N'Password', N'TipoUsuario') AND [object_id] = OBJECT_ID(N'[Usuario]'))
         SET IDENTITY_INSERT [Usuario] ON;
     INSERT INTO [Usuario] ([Id], [Apellido], [Documento], [Eliminado], [Email], [Nombre], [Password], [TipoUsuario])
     VALUES (1, N'Administrador', N'1', 0, N'admin@patroncenter.com', N'Administrador', N'YWRtaW4=', 2),
-    (2, N'Docente', N'2', 0, N'docente@patroncenter.com', N'Docecente', N'YWRtaW4=', 1),
+    (2, N'Docente', N'2', 0, N'docente@patroncenter.com', N'Docente', N'YWRtaW4=', 1),
     (3, N'Alumno', N'3', 0, N'alumno@patroncenter.com', N'Alumno', N'YWRtaW4=', 0),
     (4, N'Alumno', N'4', 1, N'alumno@patroncenter.com', N'Alumno Eliminado', N'YWRtaW4=', 0),
-    (5, N'Docente', N'5', 1, N'docente@patroncenter.com', N'Docecente Eliminado', N'YWRtaW4=', 1);
+    (5, N'Docente', N'5', 1, N'docente@patroncenter.com', N'Docecente Eliminado', N'YWRtaW4=', 1),
+    (6, N'Gonzalez', N'49077339', 0, N'agustingonzalezata@gmail.com', N'Agustin', N'YWRtaW4=', 0);
     IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'Id', N'Apellido', N'Documento', N'Eliminado', N'Email', N'Nombre', N'Password', N'TipoUsuario') AND [object_id] = OBJECT_ID(N'[Usuario]'))
         SET IDENTITY_INSERT [Usuario] OFF;
 END;
 
 GO
 
-IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20190822012935_Initial')
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20190925060044_diapos')
 BEGIN
     IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'Id', N'AlumnosId', N'Descripcion', N'DocenteId', N'Eliminado', N'FechaFinalizacion', N'Nombre') AND [object_id] = OBJECT_ID(N'[Curso]'))
         SET IDENTITY_INSERT [Curso] ON;
     INSERT INTO [Curso] ([Id], [AlumnosId], [Descripcion], [DocenteId], [Eliminado], [FechaFinalizacion], [Nombre])
-    VALUES (1, NULL, N'Descripción de curso de prueba', 2, 0, '2019-08-21T22:29:34.9103144-03:00', N'Curso de Prueba');
+    VALUES (1, NULL, N'Aqui se dicta un curso destinado al manejo y el aprendisaje de patrones de diseño.', 2, 0, '2019-09-25T03:00:44.1104382-03:00', N'Patrones de Diseño');
     IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'Id', N'AlumnosId', N'Descripcion', N'DocenteId', N'Eliminado', N'FechaFinalizacion', N'Nombre') AND [object_id] = OBJECT_ID(N'[Curso]'))
         SET IDENTITY_INSERT [Curso] OFF;
 END;
 
 GO
 
-IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20190822012935_Initial')
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20190925060044_diapos')
 BEGIN
     IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'Id', N'CursoId', N'UsuarioId') AND [object_id] = OBJECT_ID(N'[CursoUsuario]'))
         SET IDENTITY_INSERT [CursoUsuario] ON;
     INSERT INTO [CursoUsuario] ([Id], [CursoId], [UsuarioId])
-    VALUES (1, 1, 3);
+    VALUES (1, 1, 3),
+    (2, 1, 6);
     IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'Id', N'CursoId', N'UsuarioId') AND [object_id] = OBJECT_ID(N'[CursoUsuario]'))
         SET IDENTITY_INSERT [CursoUsuario] OFF;
 END;
 
 GO
 
-IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20190822012935_Initial')
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20190925060044_diapos')
 BEGIN
     IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'Id', N'CursoId', N'Descripcion', N'Eliminado', N'Nombre') AND [object_id] = OBJECT_ID(N'[Unidad]'))
         SET IDENTITY_INSERT [Unidad] ON;
     INSERT INTO [Unidad] ([Id], [CursoId], [Descripcion], [Eliminado], [Nombre])
-    VALUES (1, 1, N'Descripción de Unidad de prueba 1', 0, N'1- Unidad de prueba 1');
+    VALUES (1, 1, N'Unidadad introductoria para Patrones de diseño.', 0, N'1- Introduccion'),
+    (2, 1, N'En esta unidad se describe al Patron Singleton, sus funciones, sus características y para que se usa.', 0, N'2- Patron Singleton');
     IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'Id', N'CursoId', N'Descripcion', N'Eliminado', N'Nombre') AND [object_id] = OBJECT_ID(N'[Unidad]'))
         SET IDENTITY_INSERT [Unidad] OFF;
 END;
 
 GO
 
-IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20190822012935_Initial')
-BEGIN
-    IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'Id', N'CursoId', N'Descripcion', N'Eliminado', N'Nombre') AND [object_id] = OBJECT_ID(N'[Unidad]'))
-        SET IDENTITY_INSERT [Unidad] ON;
-    INSERT INTO [Unidad] ([Id], [CursoId], [Descripcion], [Eliminado], [Nombre])
-    VALUES (2, 1, N'Descripción de Unidad de prueba 2', 0, N'2- Unidad de prueba 2');
-    IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'Id', N'CursoId', N'Descripcion', N'Eliminado', N'Nombre') AND [object_id] = OBJECT_ID(N'[Unidad]'))
-        SET IDENTITY_INSERT [Unidad] OFF;
-END;
-
-GO
-
-IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20190822012935_Initial')
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20190925060044_diapos')
 BEGIN
     IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'Id', N'Eliminado', N'Orden', N'Texto', N'UnidadId', N'UrlVideo') AND [object_id] = OBJECT_ID(N'[Diapositiva]'))
         SET IDENTITY_INSERT [Diapositiva] ON;
     INSERT INTO [Diapositiva] ([Id], [Eliminado], [Orden], [Texto], [UnidadId], [UrlVideo])
-    VALUES (1, 0, 1, N'La diapositiva, transparencia, filmina o slide es una fotografía positiva (de colores reales) creada en un soporte transparente por medios fotoquímicos. Comparación entre los formatos fotográficos: Fotografía(propiamente dicha), foto, impresión fotográfica o positivo: Imagen opaca y positiva(de colores reales).Negativo: Imagen transparente y negativa(de colores invertidos). Diapositiva, filmina y película de cine: Imagen transparente y positiva(de colores reales). A las diapositivas se las llama también filminas porque se obtienen de recortar los cuadros de una filmina y colocarlos en sendos marcos cuadrados(en el caso de película de 35 mm, los marcos son de 5 cm de lado).', 1, NULL),
-    (2, 0, 2, N'El proceso más antiguo de la fotografía en color fue el Autocromo. Este era un método de síntesis aditiva que producía diapositivas en colores, pero con baja definición y una resolución cromática limitada. Por el contrario, el proceso de síntesis sustractiva Kodachrome brindaba transparencias de colores brillantes. La película constaba de tres emulsiones, cada una de ellas sensible a una zona del espectro cromático. Y después del proceso aparecían los colorantes amarillo, magenta y cían. Introducido en 1935, fue ofrecido en un formato de 16 milímetros para películas cinematográficas, 35 mm para diapositivas y 8 mm para películas caseras. Aunque se utilizó originalmente para reportajes, ganó popularidad gradualmente. A comienzos de los años 1940, algunos aficionados usaban Kodachrome para tomar fotografías familiares, otros utilizaban adaptadores de rollos de película con cámaras de 4x5 pulgadas. En esta época, las películas en color tenían muchos defectos, eran costosas y las impresiones no duraban mucho tiempo.', 1, NULL),
-    (3, 0, 3, N'Emulsiones más eficaces como Ektachrome y Fujichrome fueron sustituyendo a las de Kodachrome. Los aficionados las utilizaron hasta los años 1970, en que la impresión de copias en colores comenzó a desplazarla.En los últimos años del siglo XX, las transparencias en color fueron extensamente utilizadas en la fotografía publicitaria, documental, deportiva, de stock y de naturaleza. Los medios digitales han reemplazado gradualmente las transparencias en muchas de estas aplicaciones y su uso es, en la actualidad, infrecuente.', 1, NULL),
-    (4, 0, 4, N'Por lo general, las diapositivas son preferidas por profesionales y muchos aficionados al momento de trabajar con la fotografía tradicional. Esto se debe, en parte, a su nitidez y a su reproducción cromática. La duración de las transparencias es mayor a las impresiones en color, de hecho, el proceso Kodachrome es reconocido por sus cualidades archivísticas y por brindar colores que no se atenúan con el tiempo. El proceso K-14 de Kodachrome es extremadamente difícil de llevar a cabo, ya que una mínima desviación de las especificaciones puede afectar la calidad del producto final. Es un método naturalmente imperfecto. Pequeñas cantidades de contaminación en las capas de color producen un efecto específico e irreproducible.', 1, NULL),
-    (5, 0, 1, N'Esta unidad tiene solo una diapositiva.', 2, NULL);
+    VALUES (1, 0, 1, N'Introduccion a Patrones de Diseño', 1, N'bx5WqFEndoo'),
+    (2, 0, 2, N'TEMARIO: 
+
+                     - Historia
+                     - Definición de patrones
+                     - Tipos 
+                     - Clasificación 
+                     - Objetivos', 1, NULL),
+    (3, 0, 3, N'HISTORIA:
+
+                    Surgen inspirados en los patrones arquitectónicos, que aparecen a fines de los años 70, con el fin de organizar y sistematizar las soluciones que diferentes arquitectos e ingenieros iban encontrando a problemas constructivos similares.
+                    Se formalizan a partir del libro “Design Patterns” de los autores Gamma, Helm, Johnsony Vlisides, llamados “la pandilla de los 4” (Gang Of Four, o simplificado GoF), en 1995.
+                    En el libro se detalla la estructura que recomiendan emplear para la descripción de los patrones(estructura un poco más compleja de la que empleamos en este curso), y se formalizan más de 20 patrones de diseño, identificados por GoF en ese momento y todavía altamente vigentes al día de hoy.', 1, NULL),
+    (4, 0, 4, N'DEFINICION DE PATRONES:
+
+                    Los Patrones Definen soluciones a problemas comunes del desarrollo de software.
+                    Estos deben cumplir con dos cosas:
+                     1) Debe comprobarse como efectivo en la resolución de un problema
+                     2) Debe ser reutilizable. 
+
+                    Existen diferencias entre patrones de diseño y arquitectónicos las cuales son: 
+                     (1) Los patrones arquitectónicos son mas abstractos 
+                     (2) Los patrones arquitectónicos apoyan en el cumplimiento de atributos de calidad(Rendimiento, disponibilidad,etc).', 1, NULL),
+    (5, 0, 5, N'OBJETIVOS:
+
+                    Que persiguen:
+                    Crear una biblioteca de módulos, elementos reutilizables, No reinventar la rueda, tener soluciones a problemas ya conocidos, Hablar un lenguaje común entre diseñadores y arquitectos, Estandarizar diseños, Facilitar el aprendizaje de técnicas a los nuevos diseñadores. 
+
+                    Que no buscan: 
+                    Imponer una solución como la mejor, Eliminar la creatividad o el uso de otras opciones. 
+
+                    No es obligación utilizarlos pero simplifican el trabajo de diseño.', 1, NULL),
+    (6, 0, 6, N'TIPOS DE PATRONES:
+
+
+                     1)Arquitectónicos: Básicos, representan esquemas estructurales para la construcción de los sistemas(en muchos casos apoyan el cumplimiento de requerimientos no funcionales).
+
+
+                     2)Diseño: Apoyan en la definición de estructuras de diseño y sus relaciones(implementación). 
+
+
+                     3)Dialectos: Patrones específicos de un lenguaje. 
+
+                    4) Interacción: Patrones para diseñar interfaces web de usuario.', 1, NULL),
+    (7, 0, 7, N'CLASIFICACION DE PATRONES:
+
+                    1) De Creación: participan en el momento de crear objetos, en general abstrayendo la forma en que se crean, y haciendo abstracta la referencia a que clase es que que se instancia. Ej: Singleton, Factory.
+
+                    2) Estructurales: tienen que ver con la forma en que las clases y los objetos son agrupados para formar grandes estructuras.Ej: Facade, Composite.
+
+                    3) De Comportamiento: se utilizan para modelar diferentes formas de interactuar entre los objetos para mejorar la performance del sistema.Ej: Observer, Strategy.', 1, NULL),
+    (8, 0, 8, N'ESTRUCTURA DE PATRONES:
+
+                     1) Nombre
+                     2) Intención –> Que resuelve
+                     3) Motivación –> Caso ilustrando el problema
+                     4) Aplicabilidad –> Cuando aplicarlo
+                     5) Estructura –> Diagrama de clases 
+                     6) Participantes –> Que objetos interactúan
+                     7) Colaboraciones –> Secuencia de mensajes
+                     8) Consecuencias –> Ventajas y desventajas
+                     9) Técnica de implementación
+                     10) Usos conocidos –> En que sistemas se usa 
+                     11) Patrones relacionados', 1, NULL),
+    (9, 0, 1, N'Patron Singleton', 2, N'gocJeOHtj9w'),
+    (10, 0, 2, N'Problema:
+
+                     -> Debemos tener una única instancia de la clase y esta debe ser accesible desde todo el sistema.
+
+                     ->Se debe poder extender dicha clase por medio de herencia.', 2, NULL),
+    (11, 0, 3, N'Solución:
+
+
+                     -> El constructor de la clase debe ser privado.
+                     -> Se declara un atributo privado y estático del mismo tipo de la clase.
+                     -> Se declara un método público y estático que permite acceso a la instancia privada de la clase.', 2, NULL),
+    (12, 0, 4, N'Consecuencias:
+
+                     -> Se garantiza acceso a una única instancia de la clase(objeto).
+
+                     -> La instancia es visible en todo el sistema(global).
+
+                     -> Se mantiene el polimorfismo en la clase, es decir, no todos lo métodos son estáticos y por lo tanto pueden ser sobrescritos en clases derivadas.', 2, NULL),
+    (13, 0, 5, N'Ejemplo:
+
+                    En un parque de diversiones se desea contar los números de las entradas. Para esto se debe realizar un generador que adicionalmente brinda funcionalidades como: 
+                     -> Generar un número nuevo mayor a los anteriores
+                     -> Dada una hora devolver la cantidad de números generados en la hora parámetro.', 2, NULL);
     IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'Id', N'Eliminado', N'Orden', N'Texto', N'UnidadId', N'UrlVideo') AND [object_id] = OBJECT_ID(N'[Diapositiva]'))
         SET IDENTITY_INSERT [Diapositiva] OFF;
 END;
 
 GO
 
-IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20190822012935_Initial')
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20190925060044_diapos')
 BEGIN
     IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'Id', N'Ejercicio', N'Eliminado', N'Evaluacion', N'Nombre', N'Puntaje', N'UnidadId') AND [object_id] = OBJECT_ID(N'[Quiz]'))
         SET IDENTITY_INSERT [Quiz] ON;
@@ -246,31 +352,31 @@ END;
 
 GO
 
-IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20190822012935_Initial')
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20190925060044_diapos')
 BEGIN
-    IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'Id', N'ComentarioDocente', N'Eliminado', N'Enunciado', N'MultipleOpcion', N'Orden', N'Puntaje', N'QuizId') AND [object_id] = OBJECT_ID(N'[Pregunta]'))
+    IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'Id', N'ComentarioDocente', N'Eliminado', N'Enunciado', N'Orden', N'Puntaje', N'QuizId') AND [object_id] = OBJECT_ID(N'[Pregunta]'))
         SET IDENTITY_INSERT [Pregunta] ON;
-    INSERT INTO [Pregunta] ([Id], [ComentarioDocente], [Eliminado], [Enunciado], [MultipleOpcion], [Orden], [Puntaje], [QuizId])
-    VALUES (1, NULL, 0, N'Esta pregunta no es mas que una prueba', 1, 1, 5, 1);
-    IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'Id', N'ComentarioDocente', N'Eliminado', N'Enunciado', N'MultipleOpcion', N'Orden', N'Puntaje', N'QuizId') AND [object_id] = OBJECT_ID(N'[Pregunta]'))
+    INSERT INTO [Pregunta] ([Id], [ComentarioDocente], [Eliminado], [Enunciado], [Orden], [Puntaje], [QuizId])
+    VALUES (1, NULL, 0, N'Esta pregunta no es mas que una prueba', 1, 5, 1);
+    IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'Id', N'ComentarioDocente', N'Eliminado', N'Enunciado', N'Orden', N'Puntaje', N'QuizId') AND [object_id] = OBJECT_ID(N'[Pregunta]'))
         SET IDENTITY_INSERT [Pregunta] OFF;
 END;
 
 GO
 
-IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20190822012935_Initial')
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20190925060044_diapos')
 BEGIN
-    IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'Id', N'ComentarioDocente', N'Eliminado', N'Enunciado', N'MultipleOpcion', N'Orden', N'Puntaje', N'QuizId') AND [object_id] = OBJECT_ID(N'[Pregunta]'))
+    IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'Id', N'ComentarioDocente', N'Eliminado', N'Enunciado', N'Orden', N'Puntaje', N'QuizId') AND [object_id] = OBJECT_ID(N'[Pregunta]'))
         SET IDENTITY_INSERT [Pregunta] ON;
-    INSERT INTO [Pregunta] ([Id], [ComentarioDocente], [Eliminado], [Enunciado], [MultipleOpcion], [Orden], [Puntaje], [QuizId])
-    VALUES (2, NULL, 0, N'Esta pregunta no es mas que otra una prueba', 1, 2, 10, 1);
-    IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'Id', N'ComentarioDocente', N'Eliminado', N'Enunciado', N'MultipleOpcion', N'Orden', N'Puntaje', N'QuizId') AND [object_id] = OBJECT_ID(N'[Pregunta]'))
+    INSERT INTO [Pregunta] ([Id], [ComentarioDocente], [Eliminado], [Enunciado], [Orden], [Puntaje], [QuizId])
+    VALUES (2, NULL, 0, N'Esta pregunta no es mas que otra una prueba', 2, 10, 1);
+    IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'Id', N'ComentarioDocente', N'Eliminado', N'Enunciado', N'Orden', N'Puntaje', N'QuizId') AND [object_id] = OBJECT_ID(N'[Pregunta]'))
         SET IDENTITY_INSERT [Pregunta] OFF;
 END;
 
 GO
 
-IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20190822012935_Initial')
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20190925060044_diapos')
 BEGIN
     IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'Id', N'Eliminado', N'Enunciado', N'PreguntaId', N'RespuestaCorrecta', N'Seleccionada') AND [object_id] = OBJECT_ID(N'[Respuesta]'))
         SET IDENTITY_INSERT [Respuesta] ON;
@@ -285,73 +391,98 @@ END;
 
 GO
 
-IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20190822012935_Initial')
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20190925060044_diapos')
+BEGIN
+    CREATE INDEX [IX_Correccion_RespuestaAlumnoId] ON [Correccion] ([RespuestaAlumnoId]);
+END;
+
+GO
+
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20190925060044_diapos')
 BEGIN
     CREATE INDEX [IX_Curso_AlumnosId] ON [Curso] ([AlumnosId]);
 END;
 
 GO
 
-IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20190822012935_Initial')
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20190925060044_diapos')
 BEGIN
     CREATE INDEX [IX_Curso_DocenteId] ON [Curso] ([DocenteId]);
 END;
 
 GO
 
-IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20190822012935_Initial')
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20190925060044_diapos')
 BEGIN
     CREATE INDEX [IX_CursoUsuario_CursoId] ON [CursoUsuario] ([CursoId]);
 END;
 
 GO
 
-IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20190822012935_Initial')
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20190925060044_diapos')
 BEGIN
     CREATE INDEX [IX_CursoUsuario_UsuarioId] ON [CursoUsuario] ([UsuarioId]);
 END;
 
 GO
 
-IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20190822012935_Initial')
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20190925060044_diapos')
 BEGIN
     CREATE INDEX [IX_Diapositiva_UnidadId] ON [Diapositiva] ([UnidadId]);
 END;
 
 GO
 
-IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20190822012935_Initial')
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20190925060044_diapos')
 BEGIN
     CREATE INDEX [IX_Pregunta_QuizId] ON [Pregunta] ([QuizId]);
 END;
 
 GO
 
-IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20190822012935_Initial')
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20190925060044_diapos')
 BEGIN
     CREATE INDEX [IX_Quiz_UnidadId] ON [Quiz] ([UnidadId]);
 END;
 
 GO
 
-IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20190822012935_Initial')
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20190925060044_diapos')
 BEGIN
     CREATE INDEX [IX_Respuesta_PreguntaId] ON [Respuesta] ([PreguntaId]);
 END;
 
 GO
 
-IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20190822012935_Initial')
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20190925060044_diapos')
 BEGIN
     CREATE INDEX [IX_Unidad_CursoId] ON [Unidad] ([CursoId]);
 END;
 
 GO
 
-IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20190822012935_Initial')
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20190925060044_diapos')
 BEGIN
     INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
-    VALUES (N'20190822012935_Initial', N'2.2.6-servicing-10079');
+    VALUES (N'20190925060044_diapos', N'2.2.6-servicing-10079');
+END;
+
+GO
+
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20190927004802_diapos2')
+BEGIN
+    UPDATE [Curso] SET [FechaFinalizacion] = '2019-09-26T21:48:02.2458562-03:00'
+    WHERE [Id] = 1;
+    SELECT @@ROWCOUNT;
+
+END;
+
+GO
+
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20190927004802_diapos2')
+BEGIN
+    INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
+    VALUES (N'20190927004802_diapos2', N'2.2.6-servicing-10079');
 END;
 
 GO

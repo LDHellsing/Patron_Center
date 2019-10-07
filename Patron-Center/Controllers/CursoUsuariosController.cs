@@ -43,53 +43,7 @@ namespace Patron_Center.Controllers
             ViewBag.CursoId = CursoId;
 
             return View(await patron_CenterContext.ToListAsync());
-        }
-
-        // GET: CursoUsuarios/VerCursosUsuario
-        public async Task<IActionResult> ViewUserLessons()
-        {
-            if (HttpContext.Session.GetInt32("_IdUsuario") == null)
-            {
-                return RedirectToAction("Index", "Login");
-            }
-            else
-            {
-                ViewBag.Nombre = HttpContext.Session.GetString("_Nombre");
-                ViewBag.IdUsuario = HttpContext.Session.GetInt32("_IdUsuario");
-                ViewBag.TipoUsuario = HttpContext.Session.GetString("_TipoUsuario");
-            }
-
-            if (HttpContext.Session.GetString("_TipoUsuario") == "Alumno")
-            {
-                // Si el usuario es alumno muestro solo los cursos que tiene asignado.
-                var patron_CenterContextFiltrado = _context.CursoUsuario.Include(c => c.Curso).Include(c => c.Usuario).Where(c => c.UsuarioId == HttpContext.Session.GetInt32("_IdUsuario") && !c.Curso.Eliminado);
-                ViewBag.Nombre = HttpContext.Session.GetString("_Nombre");
-                ViewBag.IdUsuario = HttpContext.Session.GetString("_IdUsuario");
-                ViewBag.TipoUsuario = HttpContext.Session.GetString("_TipoUsuario");
-                return View(await patron_CenterContextFiltrado.ToListAsync());
-            }
-            if (HttpContext.Session.GetString("_TipoUsuario") == "Docente")
-            {
-                // Si el usuario es docente muestro solo los cursos que tiene asignado.
-                var patron_CenterContextFiltrado = _context.CursoUsuario.Include(c => c.Curso).Include(c => c.Usuario).Where(c => c.Curso.DocenteId == HttpContext.Session.GetInt32("_IdUsuario") && !c.Curso.Eliminado).GroupBy(c => c.CursoId).Select(c => c.FirstOrDefault());
-                ViewBag.Nombre = HttpContext.Session.GetString("_Nombre");
-                ViewBag.IdUsuario = HttpContext.Session.GetString("_IdUsuario");
-                ViewBag.TipoUsuario = HttpContext.Session.GetString("_TipoUsuario");
-                return View(await patron_CenterContextFiltrado.ToListAsync());
-            }
-            if (HttpContext.Session.GetString("_TipoUsuario") == "Administrador")
-            {
-                // Como el usuario es administrador muestra todos los cursos del sistema.
-                var patron_CenterContextFiltrado = _context.CursoUsuario.Include(c => c.Curso).Where(c => !c.Curso.Eliminado).GroupBy(c => c.CursoId).Select(c => c.FirstOrDefault());
-                ViewBag.Nombre = HttpContext.Session.GetString("_Nombre");
-                ViewBag.IdUsuario = HttpContext.Session.GetString("_IdUsuario");
-                ViewBag.TipoUsuario = HttpContext.Session.GetString("_TipoUsuario");
-                return View(await patron_CenterContextFiltrado.ToListAsync());
-            }
-
-            var patron_CenterContext = _context.CursoUsuario.Include(c => c.Curso).Include(c => c.Usuario);
-            return View(await patron_CenterContext.ToListAsync());
-        }
+        }     
 
         // GET: CursoUsuarios/Create
         public IActionResult Create(int CursoId)
@@ -282,6 +236,102 @@ namespace Patron_Center.Controllers
             ViewData["CursoId"] = new SelectList(_context.Curso, "Id", "Nombre", cursoUsuario.CursoId);
             ViewData["UsuarioId"] = new SelectList(_context.Usuario, "Id", "NombreCompleto", cursoUsuario.UsuarioId);
             return View(cursoUsuario);
+        }
+
+        // GET: CursoUsuarios/VerCursosUsuario
+        public async Task<IActionResult> ViewUserLessons()
+        {
+            if (HttpContext.Session.GetInt32("_IdUsuario") == null)
+            {
+                return RedirectToAction("Index", "Login");
+            }
+            else
+            {
+                ViewBag.Nombre = HttpContext.Session.GetString("_Nombre");
+                ViewBag.IdUsuario = HttpContext.Session.GetInt32("_IdUsuario");
+                ViewBag.TipoUsuario = HttpContext.Session.GetString("_TipoUsuario");
+            }
+
+            var TodayDate = DateTime.Today;
+
+            if (HttpContext.Session.GetString("_TipoUsuario") == "Alumno")
+            {
+                // Si el usuario es alumno muestro solo los cursos que tiene asignado.
+                var patron_CenterContextFiltrado = _context.CursoUsuario.Include(c => c.Curso).Include(c => c.Usuario).Where(c => c.UsuarioId == HttpContext.Session.GetInt32("_IdUsuario") && !c.Curso.Eliminado && c.Curso.FechaFinalizacion > TodayDate);
+                ViewBag.Nombre = HttpContext.Session.GetString("_Nombre");
+                ViewBag.IdUsuario = HttpContext.Session.GetString("_IdUsuario");
+                ViewBag.TipoUsuario = HttpContext.Session.GetString("_TipoUsuario");
+                return View(await patron_CenterContextFiltrado.ToListAsync());
+            }
+            if (HttpContext.Session.GetString("_TipoUsuario") == "Docente")
+            {
+                // Si el usuario es docente muestro solo los cursos que tiene asignado.
+                var patron_CenterContextFiltrado = _context.CursoUsuario.Include(c => c.Curso).Include(c => c.Usuario).Where(c => c.Curso.DocenteId == HttpContext.Session.GetInt32("_IdUsuario") && !c.Curso.Eliminado && c.Curso.FechaFinalizacion > TodayDate).GroupBy(c => c.CursoId).Select(c => c.FirstOrDefault());
+                ViewBag.Nombre = HttpContext.Session.GetString("_Nombre");
+                ViewBag.IdUsuario = HttpContext.Session.GetString("_IdUsuario");
+                ViewBag.TipoUsuario = HttpContext.Session.GetString("_TipoUsuario");
+                return View(await patron_CenterContextFiltrado.ToListAsync());
+            }
+            if (HttpContext.Session.GetString("_TipoUsuario") == "Administrador")
+            {
+                // Como el usuario es administrador muestra todos los cursos del sistema.
+                var patron_CenterContextFiltrado = _context.CursoUsuario.Include(c => c.Curso).Where(c => !c.Curso.Eliminado && c.Curso.FechaFinalizacion > TodayDate).GroupBy(c => c.CursoId).Select(c => c.FirstOrDefault());
+                ViewBag.Nombre = HttpContext.Session.GetString("_Nombre");
+                ViewBag.IdUsuario = HttpContext.Session.GetString("_IdUsuario");
+                ViewBag.TipoUsuario = HttpContext.Session.GetString("_TipoUsuario");
+                return View(await patron_CenterContextFiltrado.ToListAsync());
+            }
+
+            var patron_CenterContext = _context.CursoUsuario.Include(c => c.Curso).Include(c => c.Usuario);
+            return View(await patron_CenterContext.ToListAsync());
+        }
+
+        // GET: CursoUsuarios/VerCursosFinalizadosUsuario
+        public async Task<IActionResult> ViewUserFinishedLessons()
+        {
+            if (HttpContext.Session.GetInt32("_IdUsuario") == null)
+            {
+                return RedirectToAction("Index", "Login");
+            }
+            else
+            {
+                ViewBag.Nombre = HttpContext.Session.GetString("_Nombre");
+                ViewBag.IdUsuario = HttpContext.Session.GetInt32("_IdUsuario");
+                ViewBag.TipoUsuario = HttpContext.Session.GetString("_TipoUsuario");
+            }
+
+            var TodayDate = DateTime.Today;
+
+            if (HttpContext.Session.GetString("_TipoUsuario") == "Alumno")
+            {
+                // Si el usuario es alumno muestro solo los cursos que tiene asignado.
+                var patron_CenterContextFiltrado = _context.CursoUsuario.Include(c => c.Curso).Include(c => c.Usuario).Where(c => c.UsuarioId == HttpContext.Session.GetInt32("_IdUsuario") && !c.Curso.Eliminado && c.Curso.FechaFinalizacion < TodayDate);
+                ViewBag.Nombre = HttpContext.Session.GetString("_Nombre");
+                ViewBag.IdUsuario = HttpContext.Session.GetString("_IdUsuario");
+                ViewBag.TipoUsuario = HttpContext.Session.GetString("_TipoUsuario");
+                return View(await patron_CenterContextFiltrado.ToListAsync());
+            }
+            if (HttpContext.Session.GetString("_TipoUsuario") == "Docente")
+            {
+                // Si el usuario es docente muestro solo los cursos que tiene asignado.
+                var patron_CenterContextFiltrado = _context.CursoUsuario.Include(c => c.Curso).Include(c => c.Usuario).Where(c => c.Curso.DocenteId == HttpContext.Session.GetInt32("_IdUsuario") && !c.Curso.Eliminado && c.Curso.FechaFinalizacion < TodayDate).GroupBy(c => c.CursoId).Select(c => c.FirstOrDefault());
+                ViewBag.Nombre = HttpContext.Session.GetString("_Nombre");
+                ViewBag.IdUsuario = HttpContext.Session.GetString("_IdUsuario");
+                ViewBag.TipoUsuario = HttpContext.Session.GetString("_TipoUsuario");
+                return View(await patron_CenterContextFiltrado.ToListAsync());
+            }
+            if (HttpContext.Session.GetString("_TipoUsuario") == "Administrador")
+            {
+                // Como el usuario es administrador muestra todos los cursos del sistema.
+                var patron_CenterContextFiltrado = _context.CursoUsuario.Include(c => c.Curso).Where(c => !c.Curso.Eliminado && c.Curso.FechaFinalizacion < TodayDate).GroupBy(c => c.CursoId).Select(c => c.FirstOrDefault());
+                ViewBag.Nombre = HttpContext.Session.GetString("_Nombre");
+                ViewBag.IdUsuario = HttpContext.Session.GetString("_IdUsuario");
+                ViewBag.TipoUsuario = HttpContext.Session.GetString("_TipoUsuario");
+                return View(await patron_CenterContextFiltrado.ToListAsync());
+            }
+
+            var patron_CenterContext = _context.CursoUsuario.Include(c => c.Curso).Include(c => c.Usuario);
+            return View(await patron_CenterContext.ToListAsync());
         }
 
         private bool CursoUsuarioExists(int id)

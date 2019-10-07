@@ -68,12 +68,6 @@ C:\LDHellsing\Patron_Center\Patron-Center\obj\Debug\netcoreapp2.2\Patron-Center.
 C:\LDHellsing\Patron_Center\Patron-Center\obj\Debug\netcoreapp2.2\Patron-Center.dll
 C:\LDHellsing\Patron_Center\Patron-Center\obj\Debug\netcoreapp2.2\Patron-Center.pdb
 C:\LDHellsing\Patron_Center\Patron-Center\obj\Debug\netcoreapp2.2\Patron-Center.csproj.CopyComplete
-C:\PatronCenter\Patron-Center\obj\Debug\netcoreapp2.2\Patron-Center.csprojAssemblyReference.cache
-C:\PatronCenter\Patron-Center\obj\Debug\netcoreapp2.2\Patron-Center.csproj.CoreCompileInputs.cache
-C:\PatronCenter\Patron-Center\obj\Debug\netcoreapp2.2\Patron-Center.RazorAssemblyInfo.cache
-C:\PatronCenter\Patron-Center\obj\Debug\netcoreapp2.2\Patron-Center.RazorAssemblyInfo.cs
-C:\PatronCenter\Patron-Center\obj\Debug\netcoreapp2.2\Patron-Center.AssemblyInfoInputs.cache
-C:\PatronCenter\Patron-Center\obj\Debug\netcoreapp2.2\Patron-Center.AssemblyInfo.cs
 C:\PatronCenter\Patron-Center\bin\Debug\netcoreapp2.2\Patron-Center.deps.json
 C:\PatronCenter\Patron-Center\bin\Debug\netcoreapp2.2\Patron-Center.runtimeconfig.json
 C:\PatronCenter\Patron-Center\bin\Debug\netcoreapp2.2\Patron-Center.runtimeconfig.dev.json
@@ -81,6 +75,11 @@ C:\PatronCenter\Patron-Center\bin\Debug\netcoreapp2.2\Patron-Center.dll
 C:\PatronCenter\Patron-Center\bin\Debug\netcoreapp2.2\Patron-Center.pdb
 C:\PatronCenter\Patron-Center\bin\Debug\netcoreapp2.2\Patron-Center.Views.dll
 C:\PatronCenter\Patron-Center\bin\Debug\netcoreapp2.2\Patron-Center.Views.pdb
+C:\PatronCenter\Patron-Center\obj\Debug\netcoreapp2.2\Patron-Center.csproj.CoreCompileInputs.cache
+C:\PatronCenter\Patron-Center\obj\Debug\netcoreapp2.2\Patron-Center.RazorAssemblyInfo.cache
+C:\PatronCenter\Patron-Center\obj\Debug\netcoreapp2.2\Patron-Center.RazorAssemblyInfo.cs
+C:\PatronCenter\Patron-Center\obj\Debug\netcoreapp2.2\Patron-Center.AssemblyInfoInputs.cache
+C:\PatronCenter\Patron-Center\obj\Debug\netcoreapp2.2\Patron-Center.AssemblyInfo.cs
 C:\PatronCenter\Patron-Center\obj\Debug\netcoreapp2.2\Patron-Center.TagHelpers.input.cache
 C:\PatronCenter\Patron-Center\obj\Debug\netcoreapp2.2\Patron-Center.TagHelpers.output.cache
 C:\PatronCenter\Patron-Center\obj\Debug\netcoreapp2.2\Patron-Center.RazorCoreGenerate.cache
@@ -100,6 +99,7 @@ C:\PatronCenter\Patron-Center\obj\Debug\netcoreapp2.2\Razor\Views\Cursos\Index.g
 C:\PatronCenter\Patron-Center\obj\Debug\netcoreapp2.2\Razor\Views\CursoUsuarios\Create.g.cshtml.cs
 C:\PatronCenter\Patron-Center\obj\Debug\netcoreapp2.2\Razor\Views\CursoUsuarios\Edit.g.cshtml.cs
 C:\PatronCenter\Patron-Center\obj\Debug\netcoreapp2.2\Razor\Views\CursoUsuarios\Index.g.cshtml.cs
+C:\PatronCenter\Patron-Center\obj\Debug\netcoreapp2.2\Razor\Views\CursoUsuarios\ViewUserFinishedLessons.g.cshtml.cs
 C:\PatronCenter\Patron-Center\obj\Debug\netcoreapp2.2\Razor\Views\CursoUsuarios\ViewUserLessons.g.cshtml.cs
 C:\PatronCenter\Patron-Center\obj\Debug\netcoreapp2.2\Razor\Views\Diapositivas\Create.g.cshtml.cs
 C:\PatronCenter\Patron-Center\obj\Debug\netcoreapp2.2\Razor\Views\Diapositivas\Edit.g.cshtml.cs
