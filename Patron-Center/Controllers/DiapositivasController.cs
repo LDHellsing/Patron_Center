@@ -208,7 +208,7 @@ namespace Patron_Center.Controllers
             ViewBag.CursoId = Unidad.CursoId;
             var patron_CenterContext = _context.Diapositiva.Include(d => d.Unidad).Where(d => d.UnidadId == UnidadId && d.Eliminado == false).OrderBy(d => d.Id).OrderBy(d => d.Orden);
             //Nuevo registro para mostrar al final de la diapositiva.
-            var slides = patron_CenterContext.Concat(new Diapositiva[] { new Diapositiva { Id = 9999999, Texto = "Fin de diapositiva.", Orden = 999999,Eliminado = false } });
+            var slides = patron_CenterContext.Concat(new Diapositiva[] { new Diapositiva { Id = 9999999, Texto = "Fin de la presentación.", Orden = 999999,Eliminado = false } });
             return View(await slides.ToListAsync());
         }
 

@@ -24,6 +24,26 @@
     <Compile Remove="Migrations\20190923014852_diapos.Designer.cs" />
     <Compile Remove="Migrations\20190924013346_Initial.cs" />
     <Compile Remove="Migrations\20190924013346_Initial.Designer.cs" />
+    <Compile Remove="Migrations\20191008003439_quiz1.cs" />
+    <Compile Remove="Migrations\20191008003439_quiz1.Designer.cs" />
+    <Compile Remove="Migrations\20191008003954_quiz1.cs" />
+    <Compile Remove="Migrations\20191008003954_quiz1.Designer.cs" />
+    <Compile Remove="Migrations\20191008004812_quiz1.cs" />
+    <Compile Remove="Migrations\20191008004812_quiz1.Designer.cs" />
+    <Compile Remove="Migrations\20191008005005_quiz1.cs" />
+    <Compile Remove="Migrations\20191008005005_quiz1.Designer.cs" />
+    <Compile Remove="Migrations\20191008005316_quiz1.cs" />
+    <Compile Remove="Migrations\20191008005316_quiz1.Designer.cs" />
+    <Compile Remove="Migrations\20191008011509_quiz1.cs" />
+    <Compile Remove="Migrations\20191008011509_quiz1.Designer.cs" />
+    <Compile Remove="Migrations\20191008011947_quiz1.cs" />
+    <Compile Remove="Migrations\20191008011947_quiz1.Designer.cs" />
+    <Compile Remove="Migrations\20191008012704_quiz1.cs" />
+    <Compile Remove="Migrations\20191008012704_quiz1.Designer.cs" />
+    <Compile Remove="Migrations\20191008012803_quiz1.cs" />
+    <Compile Remove="Migrations\20191008012803_quiz1.Designer.cs" />
+    <Compile Remove="Migrations\20191008013033_quiz1.cs" />
+    <Compile Remove="Migrations\20191008013033_quiz1.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

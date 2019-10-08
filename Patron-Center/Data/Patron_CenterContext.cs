@@ -276,7 +276,7 @@ namespace Patron_Center.Models
                 new Diapositiva
                 {
                     Id = 1,
-                    Texto = "Introduccion a Patrones de Diseño",
+                    Texto = "Introducción a Patrones de Diseño",
                     Orden = 1,
                     Eliminado = false,
                     UnidadId = 1,
@@ -287,7 +287,13 @@ namespace Patron_Center.Models
                 new Diapositiva
                 {
                     Id = 2,
-                    Texto = "TEMARIO: \r\n\r\n - Historia\r\n - Definición de patrones\r\n - Tipos \r\n - Clasificación \r\n - Objetivos",
+                    Texto = @"TEMARIO:
+
+- Historia
+- Definición de patrones
+- Tipos de patrones
+- Clasificación de patrones
+- Objetivos",
                     Orden = 2,
                     Eliminado = false,
                     UnidadId = 1
@@ -297,7 +303,13 @@ namespace Patron_Center.Models
                 new Diapositiva
                 {
                     Id = 3,
-                    Texto = "HISTORIA:\r\n\r\nSurgen inspirados en los patrones arquitectónicos, que aparecen a fines de los años 70, con el fin de organizar y sistematizar las soluciones que diferentes arquitectos e ingenieros iban encontrando a problemas constructivos similares.\r\nSe formalizan a partir del libro “Design Patterns” de los autores Gamma, Helm, Johnsony Vlisides, llamados “la pandilla de los 4” (Gang Of Four, o simplificado GoF), en 1995.\r\nEn el libro se detalla la estructura que recomiendan emplear para la descripción de los patrones(estructura un poco más compleja de la que empleamos en este curso), y se formalizan más de 20 patrones de diseño, identificados por GoF en ese momento y todavía altamente vigentes al día de hoy.",
+                    Texto = @"HISTORIA:
+
+Surgen inspirados en los patrones arquitectónicos, que aparecen a fines de los años 70, con el fin de organizar y sistematizar las soluciones que diferentes arquitectos e ingenieros iban encontrando a problemas constructivos similares.
+
+Se formalizan a partir del libro “Design Patterns” de los autores Gamma, Helm, Johnsony Vlisides, llamados “la pandilla de los 4” (Gang Of Four, o simplificado GoF), en 1995.
+
+En el libro se detalla la estructura que recomiendan emplear para la descripción de los patrones(estructura un poco más compleja de la que empleamos en este curso), y se formalizan más de 20 patrones de diseño, identificados por GoF en ese momento y todavía altamente vigentes al día de hoy.",
                     Orden = 3,
                     Eliminado = false,
                     UnidadId = 1
@@ -307,7 +319,16 @@ namespace Patron_Center.Models
                new Diapositiva
                {
                    Id = 4,
-                   Texto = "DEFINICION DE PATRONES:\r\n\r\nLos Patrones Definen soluciones a problemas comunes del desarrollo de software.\r\nEstos deben cumplir con dos cosas:\r\n 1) Debe comprobarse como efectivo en la resolución de un problema\r\n 2) Debe ser reutilizable. \r\n\r\nExisten diferencias entre patrones de diseño y arquitectónicos las cuales son: \r\n (1) Los patrones arquitectónicos son mas abstractos \r\n (2) Los patrones arquitectónicos apoyan en el cumplimiento de atributos de calidad(Rendimiento, disponibilidad,etc).",
+                   Texto = @"DEFINICION DE PATRONES:
+
+Los Patrones Definen soluciones a problemas comunes del desarrollo de software.
+Estos deben cumplir con dos cosas:
+1) Debe comprobarse como efectivo en la resolución de un problema.
+2) Debe ser reutilizable.
+
+Existen diferencias entre patrones de diseño y arquitectónicos las cuales son:
+1) Los patrones arquitectónicos son mas abstractos.
+2) Los patrones arquitectónicos apoyan en el cumplimiento de atributos de calidad (rendimiento, disponibilidad, etc).",
                    Orden = 4,
                    Eliminado = false,
                    UnidadId = 1
@@ -317,7 +338,22 @@ namespace Patron_Center.Models
                 new Diapositiva
                 {
                     Id = 5,
-                    Texto = "OBJETIVOS:\r\n\r\nQue persiguen:\r\nCrear una biblioteca de módulos, elementos reutilizables, No reinventar la rueda, tener soluciones a problemas ya conocidos, Hablar un lenguaje común entre diseñadores y arquitectos, Estandarizar diseños, Facilitar el aprendizaje de técnicas a los nuevos diseñadores. \r\n\r\nQue no buscan: \r\nImponer una solución como la mejor, Eliminar la creatividad o el uso de otras opciones. \r\n\r\nNo es obligación utilizarlos pero simplifican el trabajo de diseño.",
+                    Texto = @"OBJETIVOS:
+
+Que persiguen?
+- Crear una biblioteca de módulos.
+- Elementos reutilizables.
+- No reinventar la rueda.
+- Tener soluciones a problemas ya conocidos.
+- Hablar un lenguaje común entre diseñadores y arquitectos.
+- Estandarizar diseños.
+- Facilitar el aprendizaje de técnicas a los nuevos diseñadores.
+
+Que no buscan?
+- Imponer una solución como la mejor.
+- Eliminar la creatividad o el uso de otras opciones.
+
+No es obligación utilizarlos pero simplifican el trabajo de diseño.",
                     Orden = 5,
                     Eliminado = false,
                     UnidadId = 1
@@ -327,7 +363,19 @@ namespace Patron_Center.Models
                  new Diapositiva
                  {
                      Id = 6,
-                     Texto = "TIPOS DE PATRONES:\r\n\r\n\r\n 1)Arquitectónicos: Básicos, representan esquemas estructurales para la construcción de los sistemas(en muchos casos apoyan el cumplimiento de requerimientos no funcionales).\r\n\r\n\r\n 2)Diseño: Apoyan en la definición de estructuras de diseño y sus relaciones(implementación). \r\n\r\n\r\n 3)Dialectos: Patrones específicos de un lenguaje. \r\n\r\n4) Interacción: Patrones para diseñar interfaces web de usuario.",
+                     Texto = @"TIPOS DE PATRONES:
+
+1) Arquitectónicos:
+Básicos, representan esquemas estructurales para la construcción de los sistemas (en muchos casos apoyan el cumplimiento de requerimientos no funcionales).
+
+2) Diseño:
+Apoyan en la definición de estructuras de diseño y sus relaciones (implementación).
+
+3) Dialectos:
+Patrones específicos de un lenguaje.
+
+4) Interacción:
+Patrones para diseñar interfaces web de usuario.",
                      Orden = 6,
                      Eliminado = false,
                      UnidadId = 1
@@ -338,7 +386,16 @@ namespace Patron_Center.Models
                  new Diapositiva
                  {
                      Id = 7,
-                     Texto = "CLASIFICACION DE PATRONES:\r\n\r\n1) De Creación: participan en el momento de crear objetos, en general abstrayendo la forma en que se crean, y haciendo abstracta la referencia a que clase es que que se instancia. Ej: Singleton, Factory.\r\n\r\n2) Estructurales: tienen que ver con la forma en que las clases y los objetos son agrupados para formar grandes estructuras.Ej: Facade, Composite.\r\n\r\n3) De Comportamiento: se utilizan para modelar diferentes formas de interactuar entre los objetos para mejorar la performance del sistema.Ej: Observer, Strategy.",
+                     Texto = @"CLASIFICACION DE PATRONES:
+
+1) De Creación:
+Participan en el momento de crear objetos, en general abstrayendo la forma en que se crean, y haciendo abstracta la referencia a que clase es que que se instancia. Ej: Singleton, Factory.
+
+2) Estructurales:
+Tienen que ver con la forma en que las clases y los objetos son agrupados para formar grandes estructuras.Ej: Facade, Composite.
+
+3) De Comportamiento:
+Se utilizan para modelar diferentes formas de interactuar entre los objetos para mejorar la performance del sistema.Ej: Observer, Strategy.",
                      Orden = 7,
                      Eliminado = false,
                      UnidadId = 1
@@ -348,7 +405,19 @@ namespace Patron_Center.Models
                 new Diapositiva
                 {
                     Id = 8,
-                    Texto = "ESTRUCTURA DE PATRONES:\r\n\r\n 1) Nombre\r\n 2) Intención –> Que resuelve\r\n 3) Motivación –> Caso ilustrando el problema\r\n 4) Aplicabilidad –> Cuando aplicarlo\r\n 5) Estructura –> Diagrama de clases \r\n 6) Participantes –> Que objetos interactúan\r\n 7) Colaboraciones –> Secuencia de mensajes\r\n 8) Consecuencias –> Ventajas y desventajas\r\n 9) Técnica de implementación\r\n 10) Usos conocidos –> En que sistemas se usa \r\n 11) Patrones relacionados",
+                    Texto = @"ESTRUCTURA DE PATRONES:
+
+1) Nombre
+2) Intención –> Que resuelve.
+3) Motivación –> Caso ilustrando el problema.
+4) Aplicabilidad –> Cuando aplicarlo.
+5) Estructura –> Diagrama de clases.
+6) Participantes –> Que objetos interactúan.
+7) Colaboraciones –> Secuencia de mensajes.
+8) Consecuencias –> Ventajas y desventajas.
+9) Técnica de implementación.
+10) Usos conocidos –> En que sistemas se usa.
+11) Patrones relacionados.",
                     Orden = 8,
                     Eliminado = false,
                     UnidadId = 1
@@ -360,11 +429,11 @@ namespace Patron_Center.Models
                 {
                     Id = 1,
                     UnidadId = 1,
-                    Puntaje = 5,
+                    Puntaje = 10,
                     Evaluacion = TipoQuiz.Ejercicio,
                     Ejercicio = TipoEjercicio.Multiple_Opcion,
                     Eliminado = false,
-                    Nombre = "Quiz de Prueba"
+                    Nombre = "Introducción a Patrones de diseño"
                 }
                 );
             // Creacion de Preguntas
@@ -373,10 +442,10 @@ namespace Patron_Center.Models
                 {
                     Id = 1,
                     QuizId = 1,
-                    Puntaje = 5,
+                    Puntaje = 25,
                     Eliminado = false,
                     Orden = 1,
-                    Enunciado = "Esta pregunta no es mas que una prueba"
+                    Enunciado = "¿Que persiguen los patrones de diseño?"
                 }
                 );
             modelBuilder.Entity<Pregunta>().HasData(
@@ -384,22 +453,44 @@ namespace Patron_Center.Models
                 {
                     Id = 2,
                     QuizId = 1,
-                    Puntaje = 10,
+                    Puntaje = 25,
                     Eliminado = false,
                     Orden = 2,
-                    Enunciado = "Esta pregunta no es mas que otra una prueba"
+                    Enunciado = "¿Cual de los siguientes tipos NO es un tipo de patrón de diseño?"
                 }
                 );
+            modelBuilder.Entity<Pregunta>().HasData(
+                new Pregunta
+                {
+                    Id = 3,
+                    QuizId = 1,
+                    Puntaje = 25,
+                    Eliminado = false,
+                    Orden = 2,
+                    Enunciado = "Los patrones de Creación particicipan en el momento de crear obejetos..."
+                }
+                );
+            modelBuilder.Entity<Pregunta>().HasData(
+               new Pregunta
+               {
+                   Id = 4,
+                   QuizId = 1,
+                   Puntaje = 25,
+                   Eliminado = false,
+                   Orden = 2,
+                   Enunciado = "Los patrones de Comportamiento empeoran la performance del sistema..."
+               }
+               );
             // Creacion de Respuestas
             modelBuilder.Entity<Respuesta>().HasData(
                 new Respuesta
                 {
                     Id = 1,
                     PreguntaId = 1,
-                    RespuestaCorrecta = false,
+                    RespuestaCorrecta = true,
                     Seleccionada = false,
                     Eliminado = false,
-                    Enunciado = "Esta respuesta no es correcta y no esta seleccionada"
+                    Enunciado = "Estandarizar diseños"
                 }
                 );
             modelBuilder.Entity<Respuesta>().HasData(
@@ -407,34 +498,122 @@ namespace Patron_Center.Models
                 {
                     Id = 2,
                     PreguntaId = 1,
-                    RespuestaCorrecta = true,
-                    Seleccionada = true,
+                    RespuestaCorrecta = false,
+                    Seleccionada = false,
                     Eliminado = false,
-                    Enunciado = "Esta respuesta es correcta y esta seleccionada"
+                    Enunciado = "Imponer una solución como la mejor"
                 }
                 );
             modelBuilder.Entity<Respuesta>().HasData(
                 new Respuesta
                 {
                     Id = 3,
-                    PreguntaId = 2,
-                    RespuestaCorrecta = true,
+                    PreguntaId = 1,
+                    RespuestaCorrecta = false,
                     Seleccionada = false,
                     Eliminado = false,
-                    Enunciado = "Esta respuesta es correcta y no esta seleccionada"
+                    Enunciado = "Eliminar la creatividad, uso de otras opciones"
                 }
                 );
             modelBuilder.Entity<Respuesta>().HasData(
                 new Respuesta
                 {
                     Id = 4,
-                    PreguntaId = 2,
+                    PreguntaId = 1,
                     RespuestaCorrecta = false,
-                    Seleccionada = true,
+                    Seleccionada = false,
                     Eliminado = false,
-                    Enunciado = "Esta respuesta no es correcta y esta seleccionada"
+                    Enunciado = "Reinventar la rueda"
                 }
                 );
+            modelBuilder.Entity<Respuesta>().HasData(
+                new Respuesta
+                {
+                    Id = 5,
+                    PreguntaId = 2,
+                    RespuestaCorrecta = true,
+                    Seleccionada = false,
+                    Eliminado = false,
+                    Enunciado = "Definicón"
+                }
+                );
+            modelBuilder.Entity<Respuesta>().HasData(
+                new Respuesta
+                {
+                    Id = 6,
+                    PreguntaId = 2,
+                    RespuestaCorrecta = false,
+                    Seleccionada = false,
+                    Eliminado = false,
+                    Enunciado = "Arquitectónico"
+                }
+                );
+            modelBuilder.Entity<Respuesta>().HasData(
+                new Respuesta
+                {
+                    Id = 7,
+                    PreguntaId = 2,
+                    RespuestaCorrecta = false,
+                    Seleccionada = false,
+                    Eliminado = false,
+                    Enunciado = "Dialectos"
+                }
+                );
+            modelBuilder.Entity<Respuesta>().HasData(
+                new Respuesta
+                {
+                    Id = 8,
+                    PreguntaId = 2,
+                    RespuestaCorrecta = false,
+                    Seleccionada = false,
+                    Eliminado = false,
+                    Enunciado = "Interacción"
+                }
+                );
+            modelBuilder.Entity<Respuesta>().HasData(
+                new Respuesta
+                {
+                    Id = 9,
+                    PreguntaId = 3,
+                    RespuestaCorrecta = true,
+                    Seleccionada = false,
+                    Eliminado = false,
+                    Enunciado = "Verdadero"
+                }
+                );
+            modelBuilder.Entity<Respuesta>().HasData(
+                new Respuesta
+                {
+                    Id = 10,
+                    PreguntaId = 3,
+                    RespuestaCorrecta = false,
+                    Seleccionada = false,
+                    Eliminado = false,
+                    Enunciado = "Falso"
+                }
+                );
+            modelBuilder.Entity<Respuesta>().HasData(
+               new Respuesta
+               {
+                   Id = 11,
+                   PreguntaId = 4,
+                   RespuestaCorrecta = true,
+                   Seleccionada = false,
+                   Eliminado = false,
+                   Enunciado = "Falso"
+               }
+               );
+            modelBuilder.Entity<Respuesta>().HasData(
+              new Respuesta
+              {
+                  Id = 12,
+                  PreguntaId = 4,
+                  RespuestaCorrecta = false,
+                  Seleccionada = false,
+                  Eliminado = false,
+                  Enunciado = "Verdadero"
+              }
+              );
 
             //unidad 2
             modelBuilder.Entity<Unidad>().HasData(

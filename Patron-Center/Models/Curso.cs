@@ -37,7 +37,7 @@ namespace Patron_Center.Models
         [DisplayName("Docente")]
         public virtual Usuario Docente { get; set; }
 
-        [DisplayName("Alumnos")]
+        [DisplayName("Listado Alumnos")]
         public List<CursoUsuario> CursoUsuario { get; set; }
 
         [DisplayName("Alumnos")]

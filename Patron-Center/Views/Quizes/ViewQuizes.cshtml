@@ -36,7 +36,12 @@
                     @Html.DisplayFor(modelItem => item.Ejercicio)
                 </td>
                 <td>
-                    <a asp-controller="Quizes" asp-action="AnswerQuiz" asp-route-QuizId="@item.Id" class="btn btn-link">Cursar Quiz</a>
+                    <form asp-controller="Quizes" asp-action="AnswerQuiz">
+                        <p>
+                            <input type="hidden" name="QuizId" value="@item.Id">
+                            <input class="btn btn-primary btn-sm btn-block" type="submit" value="Cursar Quiz" />
+                        </p>
+                    </form>
                 </td>
             </tr>
         }
