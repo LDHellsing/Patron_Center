@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -9,8 +10,10 @@ namespace Patron_Center.Models
     {
         public int Id { get; set; }
         public int UsuarioId { get; set; }
+        public int DocenteId { get; set; }
         public int PreguntaId { get; set; }
-        public int RespuestaId { get; set; }
         public string RespuestaDesarrollo { get; set; }
+        [DisplayName("Puntaje")]
+        public int? PuntajeObtenido { get; set; }
     }
 }

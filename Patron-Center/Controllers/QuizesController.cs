@@ -243,7 +243,6 @@ namespace Patron_Center.Controllers
             }
             else
             {
-                // AÑADIR ACA LA CREACION DEL VIEW MODEL DE QUIZ DE DESARROLLO Y RETORNAR LA VISTA AnswerQuizDesarrollo
                 RespuestaAlumnoDesarrollo quizDesarrollo = new RespuestaAlumnoDesarrollo();
                 quizDesarrollo.IdQuiz = quizAux.Id;
                 quizDesarrollo.QuizName = quizAux.Nombre;
@@ -334,8 +333,25 @@ namespace Patron_Center.Controllers
             }
 
             // AGREGAR LOGICA PARA PASAR EL ViewModel A UN OBJETO RespuestaAlumno Y GUARDARLO EN LA BD
+            var curso = new Curso();
+            curso = await _context.getCursoByUnidad(respuestaAlumnoDesarrollo.IdUnidad);
 
-            return View();
+            foreach (var pregunta in respuestaAlumnoDesarrollo.Preguntas)
+            {
+                var respuestaAlumno = new RespuestaAlumno();
+                respuestaAlumno.UsuarioId = (int) HttpContext.Session.GetInt32("_IdUsuario");
+                respuestaAlumno.DocenteId = curso.DocenteId;
+                respuestaAlumno.PreguntaId = pregunta.IdPregunta;
+                respuestaAlumno.RespuestaDesarrollo = pregunta.Respuesta;
+                respuestaAlumno.PuntajeObtenido = null;
+
+                _context.RespuestaAlumno.Add(respuestaAlumno);
+            }
+            // por ahora va a retornar a la lista de quiz, despues hay que hacer que redireccione a el index de respuesta alumno y muestre las correcciones completas y pendientes
+            // Se puede añadir filtros.
+            await _context.SaveChangesAsync();
+            ViewBag.MensajeEvaluacion = "Gracias por su participación, la corrección de su evaluacion esta pendiente.";
+            return RedirectToAction("ViewQuizes", "Quizes", new { UnidadId = respuestaAlumnoDesarrollo.IdUnidad });
         }
 
         // GET: Quizes para alumnos

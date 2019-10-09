@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Patron_Center.Models;
 
 namespace Patron_Center.Migrations
 {
     [DbContext(typeof(Patron_CenterContext))]
-    partial class Patron_CenterContextModelSnapshot : ModelSnapshot
+    [Migration("20191008232828_Modificacion-Tabala-Respuesta-Alumno")]
+    partial class ModificacionTabalaRespuestaAlumno
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -100,7 +102,7 @@ namespace Patron_Center.Migrations
                             Descripcion = "Aqui se dicta un curso destinado al manejo y el aprendisaje de patrones de diseño.",
                             DocenteId = 2,
                             Eliminado = false,
-                            FechaFinalizacion = new DateTime(2019, 10, 8, 21, 35, 8, 445, DateTimeKind.Local).AddTicks(1785),
+                            FechaFinalizacion = new DateTime(2019, 10, 8, 20, 28, 26, 874, DateTimeKind.Local).AddTicks(2350),
                             Nombre = "Patrones de Diseño"
                         });
                 });
@@ -604,7 +606,7 @@ En un parque de diversiones se desea contar los números de las entradas. Para e
 
                     b.Property<int>("PreguntaId");
 
-                    b.Property<int?>("PuntajeObtenido");
+                    b.Property<int>("PuntajeObtenido");
 
                     b.Property<string>("RespuestaDesarrollo");
 
