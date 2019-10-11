@@ -27,7 +27,7 @@ namespace Patron_Center.Migrations
 
                     b.Property<int>("CursoId");
 
-                    b.Property<DateTime>("Fecha");
+                    b.Property<string>("Fecha");
 
                     b.Property<int>("Nota");
 
@@ -38,31 +38,6 @@ namespace Patron_Center.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Calificacion");
-                });
-
-            modelBuilder.Entity("Patron_Center.Models.Correccion", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("Calificacion");
-
-                    b.Property<int>("IdProfesor");
-
-                    b.Property<int>("PreguntaId");
-
-                    b.Property<int>("QuizId");
-
-                    b.Property<int?>("RespuestaAlumnoId");
-
-                    b.Property<int>("UsuarioId");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("RespuestaAlumnoId");
-
-                    b.ToTable("Correccion");
                 });
 
             modelBuilder.Entity("Patron_Center.Models.Curso", b =>
@@ -100,7 +75,7 @@ namespace Patron_Center.Migrations
                             Descripcion = "Aqui se dicta un curso destinado al manejo y el aprendisaje de patrones de diseño.",
                             DocenteId = 2,
                             Eliminado = false,
-                            FechaFinalizacion = new DateTime(2019, 10, 8, 21, 35, 8, 445, DateTimeKind.Local).AddTicks(1785),
+                            FechaFinalizacion = new DateTime(2019, 10, 10, 22, 56, 28, 673, DateTimeKind.Local).AddTicks(4796),
                             Nombre = "Patrones de Diseño"
                         });
                 });
@@ -600,6 +575,8 @@ En un parque de diversiones se desea contar los números de las entradas. Para e
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int>("CursoId");
+
                     b.Property<int>("DocenteId");
 
                     b.Property<int>("PreguntaId");
@@ -607,6 +584,8 @@ En un parque de diversiones se desea contar los números de las entradas. Para e
                     b.Property<int?>("PuntajeObtenido");
 
                     b.Property<string>("RespuestaDesarrollo");
+
+                    b.Property<int>("UnidadId");
 
                     b.Property<int>("UsuarioId");
 
@@ -755,13 +734,6 @@ En un parque de diversiones se desea contar los números de las entradas. Para e
                             Password = "YWRtaW4=",
                             TipoUsuario = 0
                         });
-                });
-
-            modelBuilder.Entity("Patron_Center.Models.Correccion", b =>
-                {
-                    b.HasOne("Patron_Center.Models.RespuestaAlumno", "RespuestaAlumno")
-                        .WithMany()
-                        .HasForeignKey("RespuestaAlumnoId");
                 });
 
             modelBuilder.Entity("Patron_Center.Models.Curso", b =>

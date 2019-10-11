@@ -22,7 +22,6 @@ namespace Patron_Center.Models
         public DbSet<Respuesta> Respuesta { get; set; }
         public DbSet<Pregunta> Pregunta { get; set; }
         public DbSet<Quiz> Quiz { get; set; }
-        public DbSet<Correccion> Correccion { get; set; }
         public DbSet<Calificacion> Calificacion { get; set; }
         public DbSet<RespuestaAlumno> RespuestaAlumno { get; set; }
 

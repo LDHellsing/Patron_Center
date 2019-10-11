@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Patron_Center.Migrations
 {
-    public partial class diapos : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -17,7 +17,7 @@ namespace Patron_Center.Migrations
                     UsuarioId = table.Column<int>(nullable: false),
                     UnidadId = table.Column<int>(nullable: false),
                     CursoId = table.Column<int>(nullable: false),
-                    Fecha = table.Column<DateTime>(nullable: false),
+                    Fecha = table.Column<string>(nullable: true),
                     Nota = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
@@ -32,9 +32,12 @@ namespace Patron_Center.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     UsuarioId = table.Column<int>(nullable: false),
+                    DocenteId = table.Column<int>(nullable: false),
                     PreguntaId = table.Column<int>(nullable: false),
-                    RespuestaId = table.Column<int>(nullable: false),
-                    RespuestaDesarrollo = table.Column<string>(nullable: true)
+                    CursoId = table.Column<int>(nullable: false),
+                    UnidadId = table.Column<int>(nullable: false),
+                    RespuestaDesarrollo = table.Column<string>(nullable: true),
+                    PuntajeObtenido = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -59,30 +62,6 @@ namespace Patron_Center.Migrations
                 {
                     table.PrimaryKey("PK_Usuario", x => x.Id);
                     table.UniqueConstraint("Documento", x => x.Documento);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Correccion",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    UsuarioId = table.Column<int>(nullable: false),
-                    QuizId = table.Column<int>(nullable: false),
-                    PreguntaId = table.Column<int>(nullable: false),
-                    IdProfesor = table.Column<int>(nullable: false),
-                    RespuestaAlumnoId = table.Column<int>(nullable: true),
-                    Calificacion = table.Column<int>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Correccion", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Correccion_RespuestaAlumno_RespuestaAlumnoId",
-                        column: x => x.RespuestaAlumnoId,
-                        principalTable: "RespuestaAlumno",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -273,7 +252,7 @@ namespace Patron_Center.Migrations
             migrationBuilder.InsertData(
                 table: "Curso",
                 columns: new[] { "Id", "AlumnosId", "Descripcion", "DocenteId", "Eliminado", "FechaFinalizacion", "Nombre" },
-                values: new object[] { 1, null, "Aqui se dicta un curso destinado al manejo y el aprendisaje de patrones de diseño.", 2, false, new DateTime(2019, 9, 25, 3, 0, 44, 110, DateTimeKind.Local).AddTicks(4382), "Patrones de Diseño" });
+                values: new object[] { 1, null, "Aqui se dicta un curso destinado al manejo y el aprendisaje de patrones de diseño.", 2, false, new DateTime(2019, 10, 10, 22, 56, 28, 673, DateTimeKind.Local).AddTicks(4796), "Patrones de Diseño" });
 
             migrationBuilder.InsertData(
                 table: "CursoUsuario",
@@ -298,70 +277,83 @@ namespace Patron_Center.Migrations
                 columns: new[] { "Id", "Eliminado", "Orden", "Texto", "UnidadId", "UrlVideo" },
                 values: new object[,]
                 {
-                    { 1, false, 1, "Introduccion a Patrones de Diseño", 1, "bx5WqFEndoo" },
-                    { 2, false, 2, @"TEMARIO: 
+                    { 1, false, 1, "Introducción a Patrones de Diseño", 1, "bx5WqFEndoo" },
+                    { 2, false, 2, @"TEMARIO:
 
-                 - Historia
-                 - Definición de patrones
-                 - Tipos 
-                 - Clasificación 
-                 - Objetivos", 1, null },
+                - Historia
+                - Definición de patrones
+                - Tipos de patrones
+                - Clasificación de patrones
+                - Objetivos", 1, null },
                     { 3, false, 3, @"HISTORIA:
 
                 Surgen inspirados en los patrones arquitectónicos, que aparecen a fines de los años 70, con el fin de organizar y sistematizar las soluciones que diferentes arquitectos e ingenieros iban encontrando a problemas constructivos similares.
+
                 Se formalizan a partir del libro “Design Patterns” de los autores Gamma, Helm, Johnsony Vlisides, llamados “la pandilla de los 4” (Gang Of Four, o simplificado GoF), en 1995.
+
                 En el libro se detalla la estructura que recomiendan emplear para la descripción de los patrones(estructura un poco más compleja de la que empleamos en este curso), y se formalizan más de 20 patrones de diseño, identificados por GoF en ese momento y todavía altamente vigentes al día de hoy.", 1, null },
                     { 4, false, 4, @"DEFINICION DE PATRONES:
 
                 Los Patrones Definen soluciones a problemas comunes del desarrollo de software.
                 Estos deben cumplir con dos cosas:
-                 1) Debe comprobarse como efectivo en la resolución de un problema
-                 2) Debe ser reutilizable. 
+                1) Debe comprobarse como efectivo en la resolución de un problema.
+                2) Debe ser reutilizable.
 
-                Existen diferencias entre patrones de diseño y arquitectónicos las cuales son: 
-                 (1) Los patrones arquitectónicos son mas abstractos 
-                 (2) Los patrones arquitectónicos apoyan en el cumplimiento de atributos de calidad(Rendimiento, disponibilidad,etc).", 1, null },
+                Existen diferencias entre patrones de diseño y arquitectónicos las cuales son:
+                1) Los patrones arquitectónicos son mas abstractos.
+                2) Los patrones arquitectónicos apoyan en el cumplimiento de atributos de calidad (rendimiento, disponibilidad, etc).", 1, null },
                     { 5, false, 5, @"OBJETIVOS:
 
-                Que persiguen:
-                Crear una biblioteca de módulos, elementos reutilizables, No reinventar la rueda, tener soluciones a problemas ya conocidos, Hablar un lenguaje común entre diseñadores y arquitectos, Estandarizar diseños, Facilitar el aprendizaje de técnicas a los nuevos diseñadores. 
+                Que persiguen?
+                - Crear una biblioteca de módulos.
+                - Elementos reutilizables.
+                - No reinventar la rueda.
+                - Tener soluciones a problemas ya conocidos.
+                - Hablar un lenguaje común entre diseñadores y arquitectos.
+                - Estandarizar diseños.
+                - Facilitar el aprendizaje de técnicas a los nuevos diseñadores.
 
-                Que no buscan: 
-                Imponer una solución como la mejor, Eliminar la creatividad o el uso de otras opciones. 
+                Que no buscan?
+                - Imponer una solución como la mejor.
+                - Eliminar la creatividad o el uso de otras opciones.
 
                 No es obligación utilizarlos pero simplifican el trabajo de diseño.", 1, null },
                     { 6, false, 6, @"TIPOS DE PATRONES:
 
+                1) Arquitectónicos:
+                Básicos, representan esquemas estructurales para la construcción de los sistemas (en muchos casos apoyan el cumplimiento de requerimientos no funcionales).
 
-                 1)Arquitectónicos: Básicos, representan esquemas estructurales para la construcción de los sistemas(en muchos casos apoyan el cumplimiento de requerimientos no funcionales).
+                2) Diseño:
+                Apoyan en la definición de estructuras de diseño y sus relaciones (implementación).
 
+                3) Dialectos:
+                Patrones específicos de un lenguaje.
 
-                 2)Diseño: Apoyan en la definición de estructuras de diseño y sus relaciones(implementación). 
-
-
-                 3)Dialectos: Patrones específicos de un lenguaje. 
-
-                4) Interacción: Patrones para diseñar interfaces web de usuario.", 1, null },
+                4) Interacción:
+                Patrones para diseñar interfaces web de usuario.", 1, null },
                     { 7, false, 7, @"CLASIFICACION DE PATRONES:
 
-                1) De Creación: participan en el momento de crear objetos, en general abstrayendo la forma en que se crean, y haciendo abstracta la referencia a que clase es que que se instancia. Ej: Singleton, Factory.
+                1) De Creación:
+                Participan en el momento de crear objetos, en general abstrayendo la forma en que se crean, y haciendo abstracta la referencia a que clase es que que se instancia. Ej: Singleton, Factory.
 
-                2) Estructurales: tienen que ver con la forma en que las clases y los objetos son agrupados para formar grandes estructuras.Ej: Facade, Composite.
+                2) Estructurales:
+                Tienen que ver con la forma en que las clases y los objetos son agrupados para formar grandes estructuras.Ej: Facade, Composite.
 
-                3) De Comportamiento: se utilizan para modelar diferentes formas de interactuar entre los objetos para mejorar la performance del sistema.Ej: Observer, Strategy.", 1, null },
+                3) De Comportamiento:
+                Se utilizan para modelar diferentes formas de interactuar entre los objetos para mejorar la performance del sistema.Ej: Observer, Strategy.", 1, null },
                     { 8, false, 8, @"ESTRUCTURA DE PATRONES:
 
-                 1) Nombre
-                 2) Intención –> Que resuelve
-                 3) Motivación –> Caso ilustrando el problema
-                 4) Aplicabilidad –> Cuando aplicarlo
-                 5) Estructura –> Diagrama de clases 
-                 6) Participantes –> Que objetos interactúan
-                 7) Colaboraciones –> Secuencia de mensajes
-                 8) Consecuencias –> Ventajas y desventajas
-                 9) Técnica de implementación
-                 10) Usos conocidos –> En que sistemas se usa 
-                 11) Patrones relacionados", 1, null },
+                1) Nombre
+                2) Intención –> Que resuelve.
+                3) Motivación –> Caso ilustrando el problema.
+                4) Aplicabilidad –> Cuando aplicarlo.
+                5) Estructura –> Diagrama de clases.
+                6) Participantes –> Que objetos interactúan.
+                7) Colaboraciones –> Secuencia de mensajes.
+                8) Consecuencias –> Ventajas y desventajas.
+                9) Técnica de implementación.
+                10) Usos conocidos –> En que sistemas se usa.
+                11) Patrones relacionados.", 1, null },
                     { 9, false, 1, "Patron Singleton", 2, "gocJeOHtj9w" },
                     { 10, false, 2, @"Problema:
 
@@ -391,33 +383,37 @@ namespace Patron_Center.Migrations
             migrationBuilder.InsertData(
                 table: "Quiz",
                 columns: new[] { "Id", "Ejercicio", "Eliminado", "Evaluacion", "Nombre", "Puntaje", "UnidadId" },
-                values: new object[] { 1, 0, false, 1, "Quiz de Prueba", 5, 1 });
+                values: new object[] { 1, 0, false, 1, "Introducción a Patrones de diseño", 10, 1 });
 
             migrationBuilder.InsertData(
                 table: "Pregunta",
                 columns: new[] { "Id", "ComentarioDocente", "Eliminado", "Enunciado", "Orden", "Puntaje", "QuizId" },
-                values: new object[] { 1, null, false, "Esta pregunta no es mas que una prueba", 1, 5, 1 });
-
-            migrationBuilder.InsertData(
-                table: "Pregunta",
-                columns: new[] { "Id", "ComentarioDocente", "Eliminado", "Enunciado", "Orden", "Puntaje", "QuizId" },
-                values: new object[] { 2, null, false, "Esta pregunta no es mas que otra una prueba", 2, 10, 1 });
+                values: new object[,]
+                {
+                    { 1, null, false, "¿Que persiguen los patrones de diseño?", 1, 25, 1 },
+                    { 2, null, false, "¿Cual de los siguientes tipos NO es un tipo de patrón de diseño?", 2, 25, 1 },
+                    { 3, null, false, "Los patrones de Creación particicipan en el momento de crear obejetos...", 2, 25, 1 },
+                    { 4, null, false, "Los patrones de Comportamiento empeoran la performance del sistema...", 2, 25, 1 }
+                });
 
             migrationBuilder.InsertData(
                 table: "Respuesta",
                 columns: new[] { "Id", "Eliminado", "Enunciado", "PreguntaId", "RespuestaCorrecta", "Seleccionada" },
                 values: new object[,]
                 {
-                    { 1, false, "Esta respuesta no es correcta y no esta seleccionada", 1, false, false },
-                    { 2, false, "Esta respuesta es correcta y esta seleccionada", 1, true, true },
-                    { 3, false, "Esta respuesta es correcta y no esta seleccionada", 2, true, false },
-                    { 4, false, "Esta respuesta no es correcta y esta seleccionada", 2, false, true }
+                    { 1, false, "Estandarizar diseños", 1, true, false },
+                    { 2, false, "Imponer una solución como la mejor", 1, false, false },
+                    { 3, false, "Eliminar la creatividad, uso de otras opciones", 1, false, false },
+                    { 4, false, "Reinventar la rueda", 1, false, false },
+                    { 5, false, "Definicón", 2, true, false },
+                    { 6, false, "Arquitectónico", 2, false, false },
+                    { 7, false, "Dialectos", 2, false, false },
+                    { 8, false, "Interacción", 2, false, false },
+                    { 9, false, "Verdadero", 3, true, false },
+                    { 10, false, "Falso", 3, false, false },
+                    { 11, false, "Falso", 4, true, false },
+                    { 12, false, "Verdadero", 4, false, false }
                 });
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Correccion_RespuestaAlumnoId",
-                table: "Correccion",
-                column: "RespuestaAlumnoId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Curso_AlumnosId",
@@ -469,9 +465,6 @@ namespace Patron_Center.Migrations
         {
             migrationBuilder.DropTable(
                 name: "Calificacion");
-
-            migrationBuilder.DropTable(
-                name: "Correccion");
 
             migrationBuilder.DropTable(
                 name: "CursoUsuario");

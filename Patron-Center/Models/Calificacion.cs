@@ -11,7 +11,7 @@ namespace Patron_Center.Models
         public int UsuarioId { get; set; }
         public int UnidadId { get; set; }
         public int CursoId { get; set; }
-        public DateTime Fecha { get; set; }
+        public string Fecha { get; set; }
         //Calificacion final de la evaluacion
         public int Nota { get; set; }
     }

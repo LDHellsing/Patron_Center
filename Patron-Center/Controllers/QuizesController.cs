@@ -215,6 +215,15 @@ namespace Patron_Center.Controllers
             }
 
             var quizAux = await _context.CreateQuiz(QuizId);
+            
+            if (quizAux.Evaluacion == TipoQuiz.Evaluacion)
+            {
+                HttpContext.Session.SetString("_Evaluacion", "true");
+            }
+            else
+            {
+                HttpContext.Session.SetString("_Evaluacion", "false");
+            }
 
             if (quizAux.Ejercicio == TipoEjercicio.Multiple_Opcion)
             {
@@ -306,6 +315,18 @@ namespace Patron_Center.Controllers
 
                 // puntajeTotal = calcularResultado(puntajeTotal);
 
+                if (HttpContext.Session.GetString("_Evaluacion") == "true")
+                {
+                   var curso = await _context.getCursoByUnidad(respuestaAlumnoMO.IdUnidad);
+                   var calificacionEvaluacion = new Calificacion();
+                    calificacionEvaluacion.CursoId = curso.Id;
+                    calificacionEvaluacion.UnidadId = respuestaAlumnoMO.IdUnidad;
+                    calificacionEvaluacion.UsuarioId = (int)HttpContext.Session.GetInt32("_IdUsuario");
+                    calificacionEvaluacion.Fecha = DateTime.Now.ToString("dd/MM/yyyy");
+                    calificacionEvaluacion.Nota = puntajeTotal;
+                    _context.Calificacion.Add(calificacionEvaluacion);
+                    await _context.SaveChangesAsync();
+                }
                 ViewBag.IdUnidad = respuestaAlumnoMO.IdUnidad;
                 ViewBag.RespuestasCorrectas = respuestasCorrectas;
                 ViewBag.RespuestasIncorrectas = respuestasIncorrectas;
@@ -339,9 +360,11 @@ namespace Patron_Center.Controllers
             foreach (var pregunta in respuestaAlumnoDesarrollo.Preguntas)
             {
                 var respuestaAlumno = new RespuestaAlumno();
-                respuestaAlumno.UsuarioId = (int) HttpContext.Session.GetInt32("_IdUsuario");
+                respuestaAlumno.UsuarioId = (int)HttpContext.Session.GetInt32("_IdUsuario");
                 respuestaAlumno.DocenteId = curso.DocenteId;
                 respuestaAlumno.PreguntaId = pregunta.IdPregunta;
+                respuestaAlumno.UnidadId = respuestaAlumnoDesarrollo.IdUnidad;
+                respuestaAlumno.CursoId = curso.Id;
                 respuestaAlumno.RespuestaDesarrollo = pregunta.Respuesta;
                 respuestaAlumno.PuntajeObtenido = null;
 
@@ -349,9 +372,20 @@ namespace Patron_Center.Controllers
             }
             // por ahora va a retornar a la lista de quiz, despues hay que hacer que redireccione a el index de respuesta alumno y muestre las correcciones completas y pendientes
             // Se puede añadir filtros.
-            await _context.SaveChangesAsync();
-            ViewBag.MensajeEvaluacion = "Gracias por su participación, la corrección de su evaluacion esta pendiente.";
-            return RedirectToAction("ViewQuizes", "Quizes", new { UnidadId = respuestaAlumnoDesarrollo.IdUnidad });
+            if (HttpContext.Session.GetString("_Evaluacion") == "true")
+            {
+                await _context.SaveChangesAsync();
+                ViewBag.QuizDevMessage = "Su evalución fue enviada correctamente y será corregida por el docente en breve, ";
+                ViewBag.IdUnidad = respuestaAlumnoDesarrollo.IdUnidad;
+                return View("Views/Quizes/QuizDevFinished.cshtml");
+
+            }
+            else
+            {
+                ViewBag.QuizDevMessage = "Gracias por su participación, ";
+                ViewBag.IdUnidad = respuestaAlumnoDesarrollo.IdUnidad;
+                return View("Views/Quizes/QuizDevFinished.cshtml");
+            }
         }
 
         // GET: Quizes para alumnos

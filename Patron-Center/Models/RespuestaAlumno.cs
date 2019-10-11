@@ -12,6 +12,8 @@ namespace Patron_Center.Models
         public int UsuarioId { get; set; }
         public int DocenteId { get; set; }
         public int PreguntaId { get; set; }
+        public int CursoId { get; set; }
+        public int UnidadId { get; set; }
         public string RespuestaDesarrollo { get; set; }
         [DisplayName("Puntaje")]
         public int? PuntajeObtenido { get; set; }
