@@ -37,6 +37,10 @@
                     <input class="form-check-input" asp-for="Eliminado" /> @Html.DisplayNameFor(model => model.Eliminado)
                 </label>
             </div>
+            @if (ViewBag.InvalidTypeQuiz != null)
+            {
+                <span class="text-danger">@ViewBag.InvalidTypeQuiz</span>
+            }
             <div class="form-group">
                 <input type="submit" value="Grabar" class="btn btn-primary" />
             </div>

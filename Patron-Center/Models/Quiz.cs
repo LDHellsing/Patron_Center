@@ -19,9 +19,10 @@ namespace Patron_Center.Models
         [DisplayName("Nota")]
         public int Puntaje { get; set; }
         [Required(ErrorMessage = "El tipo de evaluacion es un campo requerido")]
-        [DisplayName("Evaluación")]
+        [DisplayName("Tipo de Evaluación")]
         public TipoQuiz Evaluacion { get; set; }
-        [Required(ErrorMessage = "El tipo de ejercicio un campo requerido")]
+        [Required(ErrorMessage = "El tipo de práctico un campo requerido")]
+        [DisplayName("Tipo de Ejercicio")]
         public TipoEjercicio Ejercicio { get; set; }
         [DisplayName("Inactivo")]
         public bool Eliminado { get; set; }

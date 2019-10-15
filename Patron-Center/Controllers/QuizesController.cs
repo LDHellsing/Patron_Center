@@ -97,10 +97,20 @@ namespace Patron_Center.Controllers
 
             if (ModelState.IsValid)
             {
-                _context.Add(quiz);
-                await _context.SaveChangesAsync();
-                // return RedirectToAction(nameof(Index));
-                return RedirectToAction("Index", "Quizes", new { UnidadId = quiz.UnidadId });
+                if (quiz.Evaluacion == TipoQuiz.Ejercicio && quiz.Ejercicio == TipoEjercicio.Desarrollo)
+                {
+                    ViewBag.InvalidTypeQuiz = "Los ejercicios deben ser siempre Multiple Opición";
+                    //Cargo nuevamente los combobox
+                    Create(quiz.UnidadId);
+                    return View(quiz);
+                }
+                else
+                {
+                    _context.Add(quiz);
+                    await _context.SaveChangesAsync();
+                    // return RedirectToAction(nameof(Index));
+                    return RedirectToAction("Index", "Quizes", new { UnidadId = quiz.UnidadId });
+                }
             }
             ViewData["UnidadId"] = new SelectList(_context.Unidad, "Id", "Nombre", quiz.UnidadId);
 
@@ -139,7 +149,7 @@ namespace Patron_Center.Controllers
             }
             ViewBag.UnidadId_ = quiz.UnidadId;
             ViewData["UnidadId"] = new SelectList(_context.Unidad, "Id", "Nombre", quiz.UnidadId);
-            
+
             return View(quiz);
         }
 
@@ -174,20 +184,30 @@ namespace Patron_Center.Controllers
 
             if (ModelState.IsValid)
             {
-                try
+                if (quiz.Evaluacion == TipoQuiz.Ejercicio && quiz.Ejercicio == TipoEjercicio.Desarrollo)
                 {
-                    _context.Update(quiz);
-                    await _context.SaveChangesAsync();
+                    ViewBag.InvalidTypeQuiz = "Los ejercicios deben ser siempre Multiple Opición";
+                    //Cargo nuevamente los combobox
+                    await Edit(quiz.Id);
+                    return View(quiz);
                 }
-                catch (DbUpdateConcurrencyException)
+                else
                 {
-                    if (!QuizExists(quiz.Id))
+                    try
                     {
-                        return NotFound();
+                        _context.Update(quiz);
+                        await _context.SaveChangesAsync();
                     }
-                    else
+                    catch (DbUpdateConcurrencyException)
                     {
-                        throw;
+                        if (!QuizExists(quiz.Id))
+                        {
+                            return NotFound();
+                        }
+                        else
+                        {
+                            throw;
+                        }
                     }
                 }
                 return RedirectToAction(nameof(Index));
@@ -196,7 +216,7 @@ namespace Patron_Center.Controllers
             return View(quiz);
         }
 
-  
+
         // Cursar quiz
         // GET
         // Quizes/AnswerQuiz
@@ -215,7 +235,7 @@ namespace Patron_Center.Controllers
             }
 
             var quizAux = await _context.CreateQuiz(QuizId);
-            
+
             if (quizAux.Evaluacion == TipoQuiz.Evaluacion)
             {
                 HttpContext.Session.SetString("_Evaluacion", "true");
@@ -265,7 +285,7 @@ namespace Patron_Center.Controllers
                 }
                 return View("AnswerQuizDesarrollo", quizDesarrollo);
             }
-            
+
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -317,8 +337,8 @@ namespace Patron_Center.Controllers
 
                 if (HttpContext.Session.GetString("_Evaluacion") == "true")
                 {
-                   var curso = await _context.getCursoByUnidad(respuestaAlumnoMO.IdUnidad);
-                   var calificacionEvaluacion = new Calificacion();
+                    var curso = await _context.getCursoByUnidad(respuestaAlumnoMO.IdUnidad);
+                    var calificacionEvaluacion = new Calificacion();
                     calificacionEvaluacion.CursoId = curso.Id;
                     calificacionEvaluacion.UnidadId = respuestaAlumnoMO.IdUnidad;
                     calificacionEvaluacion.UsuarioId = (int)HttpContext.Session.GetInt32("_IdUsuario");

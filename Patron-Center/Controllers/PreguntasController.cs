@@ -40,6 +40,7 @@ namespace Patron_Center.Controllers
             }
             var patron_CenterContext = _context.Pregunta.Include(p => p.Quiz).Where(p => p.QuizId == QuizId);
             var UnidadId = patron_CenterContext.Select(u => u.Quiz.UnidadId).FirstOrDefault();
+            ViewBag.QuizType = patron_CenterContext.Select(p => p.Quiz.Ejercicio).FirstOrDefault();
             ViewBag.QuizId = QuizId;
             ViewBag.UnidadId = UnidadId;
             return View(await patron_CenterContext.ToListAsync());
@@ -217,7 +218,7 @@ namespace Patron_Center.Controllers
             }
             ViewData["QuizId"] = new SelectList(_context.Quiz, "Id", "Nombre", pregunta.QuizId);
             return View(pregunta);
-        }  
+        }
 
         private bool PreguntaExists(int id)
         {

@@ -13,7 +13,12 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="UnidadId" class="control-label"></label>
-                <select asp-for="UnidadId" class ="form-control" asp-items="ViewBag.UnidadId"></select>
+                <select asp-for="UnidadId" class="form-control" asp-items="ViewBag.UnidadId"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="Nombre" class="control-label"></label>
+                <input asp-for="Nombre" class="form-control" />
+                <span asp-validation-for="Nombre" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Evaluacion" class="control-label"></label>
@@ -25,13 +30,14 @@
                 <select asp-for="Ejercicio" asp-items="Html.GetEnumSelectList<TipoEjercicio>()" class="form-control"></select>
                 <span asp-validation-for="Ejercicio" class="text-danger"></span>
             </div>
+
+            @if (ViewBag.InvalidTypeQuiz != null)
+            {
+                <span class="text-danger">@ViewBag.InvalidTypeQuiz</span>
+            }
+
             <div class="form-group">
-                <label asp-for="Nombre" class="control-label"></label>
-                <input asp-for="Nombre" class="form-control" />
-                <span asp-validation-for="Nombre" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Crear" class="btn btn-primary" />
             </div>
         </form>
     </div>
