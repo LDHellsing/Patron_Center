@@ -620,7 +620,7 @@ Se utilizan para modelar diferentes formas de interactuar entre los objetos para
                 {
                     Id = 2,
                     CursoId = 1,
-                    Nombre = "2- Patron Singleton",
+                    Nombre = "2- Patrón Singleton",
                     Descripcion = "En esta unidad se describe al Patron Singleton, sus funciones, sus características y para que se usa.",
                     Eliminado = false
                 }
@@ -629,7 +629,7 @@ Se utilizan para modelar diferentes formas de interactuar entre los objetos para
                new Diapositiva
                {
                    Id = 9,
-                   Texto = "Patron Singleton",
+                   Texto = "Patrón Singleton",
                    Orden = 1,
                    Eliminado = false,
                    UnidadId = 2,
@@ -640,7 +640,11 @@ Se utilizan para modelar diferentes formas de interactuar entre los objetos para
               new Diapositiva
               {
                   Id = 10,
-                  Texto = "Problema:\r\n\r\n -> Debemos tener una única instancia de la clase y esta debe ser accesible desde todo el sistema.\r\n\r\n ->Se debe poder extender dicha clase por medio de herencia.",
+                  Texto = @"Problema:
+
+- Debemos tener una única instancia de la clase y esta debe ser accesible desde todo el sistema.
+
+- Se debe poder extender dicha clase por medio de herencia.",
                   Orden = 2,
                   Eliminado = false,
                   UnidadId = 2,
@@ -651,7 +655,13 @@ Se utilizan para modelar diferentes formas de interactuar entre los objetos para
                new Diapositiva
                {
                    Id = 11,
-                   Texto = "Solución:\r\n\r\n\r\n -> El constructor de la clase debe ser privado.\r\n -> Se declara un atributo privado y estático del mismo tipo de la clase.\r\n -> Se declara un método público y estático que permite acceso a la instancia privada de la clase.",
+                   Texto = @"Solución:
+
+1- El constructor de la clase debe ser privado.
+
+2- Se declara un atributo privado y estático del mismo tipo de la clase.
+
+3- Se declara un método público y estático que permite acceso a la instancia privada de la clase.",
                    Orden = 3,
                    Eliminado = false,
                    UnidadId = 2,
@@ -662,7 +672,13 @@ Se utilizan para modelar diferentes formas de interactuar entre los objetos para
                new Diapositiva
                {
                    Id = 12,
-                   Texto = "Consecuencias:\r\n\r\n -> Se garantiza acceso a una única instancia de la clase(objeto).\r\n\r\n -> La instancia es visible en todo el sistema(global).\r\n\r\n -> Se mantiene el polimorfismo en la clase, es decir, no todos lo métodos son estáticos y por lo tanto pueden ser sobrescritos en clases derivadas.",
+                   Texto = @"Consecuencias:
+
+- Se garantiza acceso a una única instancia de la clase (objeto).
+
+- La instancia es visible en todo el sistema (global).
+
+- Se mantiene el polimorfismo en la clase, es decir, no todos lo métodos son estáticos y por lo tanto pueden ser sobrescritos en clases derivadas.",
                    Orden = 4,
                    Eliminado = false,
                    UnidadId = 2,
@@ -673,13 +689,84 @@ Se utilizan para modelar diferentes formas de interactuar entre los objetos para
                new Diapositiva
                {
                    Id = 13,
-                   Texto = "Ejemplo:\r\n\r\nEn un parque de diversiones se desea contar los números de las entradas. Para esto se debe realizar un generador que adicionalmente brinda funcionalidades como: \r\n -> Generar un número nuevo mayor a los anteriores\r\n -> Dada una hora devolver la cantidad de números generados en la hora parámetro.",
+                   Texto = @"Ejemplo:
+
+En un parque de diversiones se desea contar los números de las entradas. Para esto se debe realizar un generador que adicionalmente brinda funcionalidades como:
+- Generar un número nuevo mayor a los anteriores
+
+- Dada una hora devolver la cantidad de números generados en la hora parámetro.",
                    Orden = 5,
                    Eliminado = false,
                    UnidadId = 2,
 
                }
                );
+            //unidad 3
+            modelBuilder.Entity<Unidad>().HasData(
+                new Unidad
+                {
+                    Id = 3,
+                    CursoId = 1,
+                    Nombre = "3- Patrón Facade",
+                    Descripcion = "En esta unidad se describe al Patron Facade, sus funciones, sus características y para que se usa.",
+                    Eliminado = false
+                }
+                );
+            modelBuilder.Entity<Diapositiva>().HasData(
+               new Diapositiva
+               {
+                   Id = 14,
+                   Texto = "Patrón Singleton",
+                   Orden = 1,
+                   Eliminado = false,
+                   UnidadId = 3,
+               }
+               );
+            modelBuilder.Entity<Diapositiva>().HasData(
+               new Diapositiva
+               {
+                   Id = 15,
+                   Texto = @"
+Problema:
+
+- Se necesita una interfaz de métodos unificados que provean un punto de acceso a un subsistema.
+
+- Se desea bajar el acoplamiento entre clases de un subsistema y las clases externas que la utilizan.
+
+- Mejorar la separación de capas entre subsistemas.",
+                   Orden = 1,
+                   Eliminado = false,
+                   UnidadId = 3,
+               }
+               );
+            modelBuilder.Entity<Diapositiva>().HasData(
+              new Diapositiva
+              {
+                  Id = 16,
+                  Texto = @"Solución:
+
+Crear una clase Facade que provea todos los métodos necesarios para ejecutar operaciones del subsistema.",
+                  Orden = 1,
+                  Eliminado = false,
+                  UnidadId = 3,
+              }
+              );
+            modelBuilder.Entity<Diapositiva>().HasData(
+              new Diapositiva
+  {
+                  Id = 17,
+                  Texto = @"Motivación:
+
+- Estructurar un sistema en subsistemas ayuda a reducir la complejidad.
+
+- Una meta común de diseño es reducir el número de dependencias entre subsistemas.
+
+- Una forma de lograr esto es introducir un objeto fachada, una única y simple fachada de servicios generales del subsistemas.",
+                  Orden = 1,
+                  Eliminado = false,
+                  UnidadId = 3,
+  }
+  ); 
         }
 
 

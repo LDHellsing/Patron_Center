@@ -15,7 +15,7 @@ namespace Patron_Center.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.2.4-servicing-10062")
+                .HasAnnotation("ProductVersion", "2.2.6-servicing-10079")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -75,7 +75,7 @@ namespace Patron_Center.Migrations
                             Descripcion = "Aqui se dicta un curso destinado al manejo y el aprendisaje de patrones de diseño.",
                             DocenteId = 2,
                             Eliminado = false,
-                            FechaFinalizacion = new DateTime(2019, 10, 10, 22, 56, 28, 673, DateTimeKind.Local).AddTicks(4796),
+                            FechaFinalizacion = new DateTime(2019, 10, 16, 19, 39, 53, 968, DateTimeKind.Local).AddTicks(5091),
                             Nombre = "Patrones de Diseño"
                         });
                 });
@@ -276,7 +276,7 @@ Se utilizan para modelar diferentes formas de interactuar entre los objetos para
                             Id = 9,
                             Eliminado = false,
                             Orden = 1,
-                            Texto = "Patron Singleton",
+                            Texto = "Patrón Singleton",
                             UnidadId = 2,
                             UrlVideo = "gocJeOHtj9w"
                         },
@@ -287,9 +287,9 @@ Se utilizan para modelar diferentes formas de interactuar entre los objetos para
                             Orden = 2,
                             Texto = @"Problema:
 
- -> Debemos tener una única instancia de la clase y esta debe ser accesible desde todo el sistema.
+- Debemos tener una única instancia de la clase y esta debe ser accesible desde todo el sistema.
 
- ->Se debe poder extender dicha clase por medio de herencia.",
+- Se debe poder extender dicha clase por medio de herencia.",
                             UnidadId = 2
                         },
                         new
@@ -299,10 +299,11 @@ Se utilizan para modelar diferentes formas de interactuar entre los objetos para
                             Orden = 3,
                             Texto = @"Solución:
 
+1- El constructor de la clase debe ser privado.
 
- -> El constructor de la clase debe ser privado.
- -> Se declara un atributo privado y estático del mismo tipo de la clase.
- -> Se declara un método público y estático que permite acceso a la instancia privada de la clase.",
+2- Se declara un atributo privado y estático del mismo tipo de la clase.
+
+3- Se declara un método público y estático que permite acceso a la instancia privada de la clase.",
                             UnidadId = 2
                         },
                         new
@@ -312,11 +313,11 @@ Se utilizan para modelar diferentes formas de interactuar entre los objetos para
                             Orden = 4,
                             Texto = @"Consecuencias:
 
- -> Se garantiza acceso a una única instancia de la clase(objeto).
+- Se garantiza acceso a una única instancia de la clase (objeto).
 
- -> La instancia es visible en todo el sistema(global).
+- La instancia es visible en todo el sistema (global).
 
- -> Se mantiene el polimorfismo en la clase, es decir, no todos lo métodos son estáticos y por lo tanto pueden ser sobrescritos en clases derivadas.",
+- Se mantiene el polimorfismo en la clase, es decir, no todos lo métodos son estáticos y por lo tanto pueden ser sobrescritos en clases derivadas.",
                             UnidadId = 2
                         },
                         new
@@ -326,10 +327,58 @@ Se utilizan para modelar diferentes formas de interactuar entre los objetos para
                             Orden = 5,
                             Texto = @"Ejemplo:
 
-En un parque de diversiones se desea contar los números de las entradas. Para esto se debe realizar un generador que adicionalmente brinda funcionalidades como: 
- -> Generar un número nuevo mayor a los anteriores
- -> Dada una hora devolver la cantidad de números generados en la hora parámetro.",
+En un parque de diversiones se desea contar los números de las entradas. Para esto se debe realizar un generador que adicionalmente brinda funcionalidades como:
+- Generar un número nuevo mayor a los anteriores
+
+- Dada una hora devolver la cantidad de números generados en la hora parámetro.",
                             UnidadId = 2
+                        },
+                        new
+                        {
+                            Id = 14,
+                            Eliminado = false,
+                            Orden = 1,
+                            Texto = "Patrón Singleton",
+                            UnidadId = 3
+                        },
+                        new
+                        {
+                            Id = 15,
+                            Eliminado = false,
+                            Orden = 1,
+                            Texto = @"
+Problema:
+
+- Se necesita una interfaz de métodos unificados que provean un punto de acceso a un subsistema.
+
+- Se desea bajar el acoplamiento entre clases de un subsistema y las clases externas que la utilizan.
+
+- Mejorar la separación de capas entre subsistemas.",
+                            UnidadId = 3
+                        },
+                        new
+                        {
+                            Id = 16,
+                            Eliminado = false,
+                            Orden = 1,
+                            Texto = @"Solución:
+
+Crear una clase Facade que provea todos los métodos necesarios para ejecutar operaciones del subsistema.",
+                            UnidadId = 3
+                        },
+                        new
+                        {
+                            Id = 17,
+                            Eliminado = false,
+                            Orden = 1,
+                            Texto = @"Motivación:
+
+- Estructurar un sistema en subsistemas ayuda a reducir la complejidad.
+
+- Una meta común de diseño es reducir el número de dependencias entre subsistemas.
+
+- Una forma de lograr esto es introducir un objeto fachada, una única y simple fachada de servicios generales del subsistemas.",
+                            UnidadId = 3
                         });
                 });
 
@@ -631,7 +680,15 @@ En un parque de diversiones se desea contar los números de las entradas. Para e
                             CursoId = 1,
                             Descripcion = "En esta unidad se describe al Patron Singleton, sus funciones, sus características y para que se usa.",
                             Eliminado = false,
-                            Nombre = "2- Patron Singleton"
+                            Nombre = "2- Patrón Singleton"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            CursoId = 1,
+                            Descripcion = "En esta unidad se describe al Patron Facade, sus funciones, sus características y para que se usa.",
+                            Eliminado = false,
+                            Nombre = "3- Patrón Facade"
                         });
                 });
 

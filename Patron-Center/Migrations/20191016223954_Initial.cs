@@ -252,7 +252,7 @@ namespace Patron_Center.Migrations
             migrationBuilder.InsertData(
                 table: "Curso",
                 columns: new[] { "Id", "AlumnosId", "Descripcion", "DocenteId", "Eliminado", "FechaFinalizacion", "Nombre" },
-                values: new object[] { 1, null, "Aqui se dicta un curso destinado al manejo y el aprendisaje de patrones de diseño.", 2, false, new DateTime(2019, 10, 10, 22, 56, 28, 673, DateTimeKind.Local).AddTicks(4796), "Patrones de Diseño" });
+                values: new object[] { 1, null, "Aqui se dicta un curso destinado al manejo y el aprendisaje de patrones de diseño.", 2, false, new DateTime(2019, 10, 16, 19, 39, 53, 968, DateTimeKind.Local).AddTicks(5091), "Patrones de Diseño" });
 
             migrationBuilder.InsertData(
                 table: "CursoUsuario",
@@ -269,7 +269,8 @@ namespace Patron_Center.Migrations
                 values: new object[,]
                 {
                     { 1, 1, "Unidadad introductoria para Patrones de diseño.", false, "1- Introduccion" },
-                    { 2, 1, "En esta unidad se describe al Patron Singleton, sus funciones, sus características y para que se usa.", false, "2- Patron Singleton" }
+                    { 2, 1, "En esta unidad se describe al Patron Singleton, sus funciones, sus características y para que se usa.", false, "2- Patrón Singleton" },
+                    { 3, 1, "En esta unidad se describe al Patron Facade, sus funciones, sus características y para que se usa.", false, "3- Patrón Facade" }
                 });
 
             migrationBuilder.InsertData(
@@ -278,30 +279,84 @@ namespace Patron_Center.Migrations
                 values: new object[,]
                 {
                     { 1, false, 1, "Introducción a Patrones de Diseño", 1, "bx5WqFEndoo" },
-                    { 2, false, 2, @"TEMARIO:
+                    { 15, false, 1, @"
+                Problema:
 
-                - Historia
-                - Definición de patrones
-                - Tipos de patrones
-                - Clasificación de patrones
-                - Objetivos", 1, null },
-                    { 3, false, 3, @"HISTORIA:
+                - Se necesita una interfaz de métodos unificados que provean un punto de acceso a un subsistema.
 
-                Surgen inspirados en los patrones arquitectónicos, que aparecen a fines de los años 70, con el fin de organizar y sistematizar las soluciones que diferentes arquitectos e ingenieros iban encontrando a problemas constructivos similares.
+                - Se desea bajar el acoplamiento entre clases de un subsistema y las clases externas que la utilizan.
 
-                Se formalizan a partir del libro “Design Patterns” de los autores Gamma, Helm, Johnsony Vlisides, llamados “la pandilla de los 4” (Gang Of Four, o simplificado GoF), en 1995.
+                - Mejorar la separación de capas entre subsistemas.", 3, null },
+                    { 14, false, 1, "Patrón Singleton", 3, null },
+                    { 13, false, 5, @"Ejemplo:
 
-                En el libro se detalla la estructura que recomiendan emplear para la descripción de los patrones(estructura un poco más compleja de la que empleamos en este curso), y se formalizan más de 20 patrones de diseño, identificados por GoF en ese momento y todavía altamente vigentes al día de hoy.", 1, null },
-                    { 4, false, 4, @"DEFINICION DE PATRONES:
+                En un parque de diversiones se desea contar los números de las entradas. Para esto se debe realizar un generador que adicionalmente brinda funcionalidades como:
+                - Generar un número nuevo mayor a los anteriores
 
-                Los Patrones Definen soluciones a problemas comunes del desarrollo de software.
-                Estos deben cumplir con dos cosas:
-                1) Debe comprobarse como efectivo en la resolución de un problema.
-                2) Debe ser reutilizable.
+                - Dada una hora devolver la cantidad de números generados en la hora parámetro.", 2, null },
+                    { 12, false, 4, @"Consecuencias:
 
-                Existen diferencias entre patrones de diseño y arquitectónicos las cuales son:
-                1) Los patrones arquitectónicos son mas abstractos.
-                2) Los patrones arquitectónicos apoyan en el cumplimiento de atributos de calidad (rendimiento, disponibilidad, etc).", 1, null },
+                - Se garantiza acceso a una única instancia de la clase (objeto).
+
+                - La instancia es visible en todo el sistema (global).
+
+                - Se mantiene el polimorfismo en la clase, es decir, no todos lo métodos son estáticos y por lo tanto pueden ser sobrescritos en clases derivadas.", 2, null },
+                    { 11, false, 3, @"Solución:
+
+                1- El constructor de la clase debe ser privado.
+
+                2- Se declara un atributo privado y estático del mismo tipo de la clase.
+
+                3- Se declara un método público y estático que permite acceso a la instancia privada de la clase.", 2, null },
+                    { 10, false, 2, @"Problema:
+
+                - Debemos tener una única instancia de la clase y esta debe ser accesible desde todo el sistema.
+
+                - Se debe poder extender dicha clase por medio de herencia.", 2, null },
+                    { 9, false, 1, "Patrón Singleton", 2, "gocJeOHtj9w" },
+                    { 17, false, 1, @"Motivación:
+
+                - Estructurar un sistema en subsistemas ayuda a reducir la complejidad.
+
+                - Una meta común de diseño es reducir el número de dependencias entre subsistemas.
+
+                - Una forma de lograr esto es introducir un objeto fachada, una única y simple fachada de servicios generales del subsistemas.", 3, null },
+                    { 8, false, 8, @"ESTRUCTURA DE PATRONES:
+
+                1) Nombre
+                2) Intención –> Que resuelve.
+                3) Motivación –> Caso ilustrando el problema.
+                4) Aplicabilidad –> Cuando aplicarlo.
+                5) Estructura –> Diagrama de clases.
+                6) Participantes –> Que objetos interactúan.
+                7) Colaboraciones –> Secuencia de mensajes.
+                8) Consecuencias –> Ventajas y desventajas.
+                9) Técnica de implementación.
+                10) Usos conocidos –> En que sistemas se usa.
+                11) Patrones relacionados.", 1, null },
+                    { 7, false, 7, @"CLASIFICACION DE PATRONES:
+
+                1) De Creación:
+                Participan en el momento de crear objetos, en general abstrayendo la forma en que se crean, y haciendo abstracta la referencia a que clase es que que se instancia. Ej: Singleton, Factory.
+
+                2) Estructurales:
+                Tienen que ver con la forma en que las clases y los objetos son agrupados para formar grandes estructuras.Ej: Facade, Composite.
+
+                3) De Comportamiento:
+                Se utilizan para modelar diferentes formas de interactuar entre los objetos para mejorar la performance del sistema.Ej: Observer, Strategy.", 1, null },
+                    { 6, false, 6, @"TIPOS DE PATRONES:
+
+                1) Arquitectónicos:
+                Básicos, representan esquemas estructurales para la construcción de los sistemas (en muchos casos apoyan el cumplimiento de requerimientos no funcionales).
+
+                2) Diseño:
+                Apoyan en la definición de estructuras de diseño y sus relaciones (implementación).
+
+                3) Dialectos:
+                Patrones específicos de un lenguaje.
+
+                4) Interacción:
+                Patrones para diseñar interfaces web de usuario.", 1, null },
                     { 5, false, 5, @"OBJETIVOS:
 
                 Que persiguen?
@@ -318,66 +373,33 @@ namespace Patron_Center.Migrations
                 - Eliminar la creatividad o el uso de otras opciones.
 
                 No es obligación utilizarlos pero simplifican el trabajo de diseño.", 1, null },
-                    { 6, false, 6, @"TIPOS DE PATRONES:
+                    { 4, false, 4, @"DEFINICION DE PATRONES:
 
-                1) Arquitectónicos:
-                Básicos, representan esquemas estructurales para la construcción de los sistemas (en muchos casos apoyan el cumplimiento de requerimientos no funcionales).
+                Los Patrones Definen soluciones a problemas comunes del desarrollo de software.
+                Estos deben cumplir con dos cosas:
+                1) Debe comprobarse como efectivo en la resolución de un problema.
+                2) Debe ser reutilizable.
 
-                2) Diseño:
-                Apoyan en la definición de estructuras de diseño y sus relaciones (implementación).
+                Existen diferencias entre patrones de diseño y arquitectónicos las cuales son:
+                1) Los patrones arquitectónicos son mas abstractos.
+                2) Los patrones arquitectónicos apoyan en el cumplimiento de atributos de calidad (rendimiento, disponibilidad, etc).", 1, null },
+                    { 3, false, 3, @"HISTORIA:
 
-                3) Dialectos:
-                Patrones específicos de un lenguaje.
+                Surgen inspirados en los patrones arquitectónicos, que aparecen a fines de los años 70, con el fin de organizar y sistematizar las soluciones que diferentes arquitectos e ingenieros iban encontrando a problemas constructivos similares.
 
-                4) Interacción:
-                Patrones para diseñar interfaces web de usuario.", 1, null },
-                    { 7, false, 7, @"CLASIFICACION DE PATRONES:
+                Se formalizan a partir del libro “Design Patterns” de los autores Gamma, Helm, Johnsony Vlisides, llamados “la pandilla de los 4” (Gang Of Four, o simplificado GoF), en 1995.
 
-                1) De Creación:
-                Participan en el momento de crear objetos, en general abstrayendo la forma en que se crean, y haciendo abstracta la referencia a que clase es que que se instancia. Ej: Singleton, Factory.
+                En el libro se detalla la estructura que recomiendan emplear para la descripción de los patrones(estructura un poco más compleja de la que empleamos en este curso), y se formalizan más de 20 patrones de diseño, identificados por GoF en ese momento y todavía altamente vigentes al día de hoy.", 1, null },
+                    { 2, false, 2, @"TEMARIO:
 
-                2) Estructurales:
-                Tienen que ver con la forma en que las clases y los objetos son agrupados para formar grandes estructuras.Ej: Facade, Composite.
+                - Historia
+                - Definición de patrones
+                - Tipos de patrones
+                - Clasificación de patrones
+                - Objetivos", 1, null },
+                    { 16, false, 1, @"Solución:
 
-                3) De Comportamiento:
-                Se utilizan para modelar diferentes formas de interactuar entre los objetos para mejorar la performance del sistema.Ej: Observer, Strategy.", 1, null },
-                    { 8, false, 8, @"ESTRUCTURA DE PATRONES:
-
-                1) Nombre
-                2) Intención –> Que resuelve.
-                3) Motivación –> Caso ilustrando el problema.
-                4) Aplicabilidad –> Cuando aplicarlo.
-                5) Estructura –> Diagrama de clases.
-                6) Participantes –> Que objetos interactúan.
-                7) Colaboraciones –> Secuencia de mensajes.
-                8) Consecuencias –> Ventajas y desventajas.
-                9) Técnica de implementación.
-                10) Usos conocidos –> En que sistemas se usa.
-                11) Patrones relacionados.", 1, null },
-                    { 9, false, 1, "Patron Singleton", 2, "gocJeOHtj9w" },
-                    { 10, false, 2, @"Problema:
-
-                 -> Debemos tener una única instancia de la clase y esta debe ser accesible desde todo el sistema.
-
-                 ->Se debe poder extender dicha clase por medio de herencia.", 2, null },
-                    { 11, false, 3, @"Solución:
-
-
-                 -> El constructor de la clase debe ser privado.
-                 -> Se declara un atributo privado y estático del mismo tipo de la clase.
-                 -> Se declara un método público y estático que permite acceso a la instancia privada de la clase.", 2, null },
-                    { 12, false, 4, @"Consecuencias:
-
-                 -> Se garantiza acceso a una única instancia de la clase(objeto).
-
-                 -> La instancia es visible en todo el sistema(global).
-
-                 -> Se mantiene el polimorfismo en la clase, es decir, no todos lo métodos son estáticos y por lo tanto pueden ser sobrescritos en clases derivadas.", 2, null },
-                    { 13, false, 5, @"Ejemplo:
-
-                En un parque de diversiones se desea contar los números de las entradas. Para esto se debe realizar un generador que adicionalmente brinda funcionalidades como: 
-                 -> Generar un número nuevo mayor a los anteriores
-                 -> Dada una hora devolver la cantidad de números generados en la hora parámetro.", 2, null }
+                Crear una clase Facade que provea todos los métodos necesarios para ejecutar operaciones del subsistema.", 3, null }
                 });
 
             migrationBuilder.InsertData(

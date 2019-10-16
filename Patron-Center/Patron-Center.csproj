@@ -44,6 +44,12 @@
     <Compile Remove="Migrations\20191008012803_quiz1.Designer.cs" />
     <Compile Remove="Migrations\20191008013033_quiz1.cs" />
     <Compile Remove="Migrations\20191008013033_quiz1.Designer.cs" />
+    <Compile Remove="Migrations\20191011015629_Initial.cs" />
+    <Compile Remove="Migrations\20191011015629_Initial.Designer.cs" />
+    <Compile Remove="Migrations\20191016223144_Initial.cs" />
+    <Compile Remove="Migrations\20191016223144_Initial.Designer.cs" />
+    <Compile Remove="Migrations\20191016223413_Initial.cs" />
+    <Compile Remove="Migrations\20191016223413_Initial.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
