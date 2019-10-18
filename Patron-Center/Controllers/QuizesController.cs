@@ -317,23 +317,26 @@ namespace Patron_Center.Controllers
 
                 int respuestasCorrectas = 0;
                 int respuestasIncorrectas = 0;
+                int puntajeObtenido = 0;
                 int puntajeTotal = 0;
+                int puntajeNota = 0;
                 //promedio de respuestas en %
                 foreach (var correccion in correcciones)
                 {
                     if (correccion.RespuestaCorrecta)
                     {
                         respuestasCorrectas++;
-                        // Se asume que todos los quizes van a ser /100
                         puntajeTotal += correccion.Puntaje;
+                        puntajeObtenido += correccion.Puntaje;
                     }
                     else
                     {
                         respuestasIncorrectas++;
+                        puntajeTotal += correccion.Puntaje;
                     }
                 }
 
-                // puntajeTotal = calcularResultado(puntajeTotal);
+                puntajeNota = calcularResultado(puntajeTotal, puntajeObtenido);
 
                 if (HttpContext.Session.GetString("_Evaluacion") == "true")
                 {
@@ -343,14 +346,14 @@ namespace Patron_Center.Controllers
                     calificacionEvaluacion.UnidadId = respuestaAlumnoMO.IdUnidad;
                     calificacionEvaluacion.UsuarioId = (int)HttpContext.Session.GetInt32("_IdUsuario");
                     calificacionEvaluacion.Fecha = DateTime.Now.ToString("dd/MM/yyyy");
-                    calificacionEvaluacion.Nota = puntajeTotal;
+                    calificacionEvaluacion.Nota = puntajeNota;
                     _context.Calificacion.Add(calificacionEvaluacion);
                     await _context.SaveChangesAsync();
                 }
                 ViewBag.IdUnidad = respuestaAlumnoMO.IdUnidad;
                 ViewBag.RespuestasCorrectas = respuestasCorrectas;
                 ViewBag.RespuestasIncorrectas = respuestasIncorrectas;
-                ViewBag.PuntajeTotal = puntajeTotal;
+                ViewBag.PuntajeTotal = puntajeNota;
 
                 return View("QuizMoResult", correcciones);
             }
@@ -373,7 +376,6 @@ namespace Patron_Center.Controllers
                 ViewBag.TipoUsuario = HttpContext.Session.GetString("_TipoUsuario");
             }
 
-            // AGREGAR LOGICA PARA PASAR EL ViewModel A UN OBJETO RespuestaAlumno Y GUARDARLO EN LA BD
             var curso = new Curso();
             curso = await _context.getCursoByUnidad(respuestaAlumnoDesarrollo.IdUnidad);
 
@@ -390,8 +392,7 @@ namespace Patron_Center.Controllers
 
                 _context.RespuestaAlumno.Add(respuestaAlumno);
             }
-            // por ahora va a retornar a la lista de quiz, despues hay que hacer que redireccione a el index de respuesta alumno y muestre las correcciones completas y pendientes
-            // Se puede añadir filtros.
+
             if (HttpContext.Session.GetString("_Evaluacion") == "true")
             {
                 await _context.SaveChangesAsync();
@@ -434,19 +435,19 @@ namespace Patron_Center.Controllers
         {
             return _context.Quiz.Any(e => e.Id == id);
         }
-    }
 
-    //private int calcularResultado(int totalPreguntas, int respuestasCorrectas)
-    //{
-    //    int puntaje = 0;
-    //    if (totalPreguntas == 0)
-    //    {
-    //        return puntaje;
-    //    }
-    //    else
-    //    {
-    //        puntaje = respuestasCorrectas * 100 / totalPreguntas;
-    //        return puntaje;
-    //    }
-    //}
+        private int calcularResultado(int puntajeTotal, int puntajeObtenido)
+        {
+            double puntaje = 0;
+            if (puntajeObtenido == 0)
+            {
+                return (int) puntaje;
+            }
+            else
+            {
+                puntaje = (double) puntajeObtenido * 100 / puntajeTotal;
+                return (int)Math.Round(puntaje);
+            }
+        }
+    }
 }

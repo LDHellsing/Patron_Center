@@ -11,13 +11,13 @@
     if (correccion.RespuestaCorrecta == true)
     {
         <div class="alert alert-success" role="alert">
-            Pregunta @correccion.OrdenPregunta: @correccion.EnunciadoPregunta <b>Correcta</b>
+            @correccion.EnunciadoPregunta <b>Correcta</b>
         </div>
     }
     else
     {
         <div class="alert alert-danger" role="alert">
-            Pregunta @correccion.OrdenPregunta: @correccion.EnunciadoPregunta <b>Incorrecta</b>
+            @correccion.EnunciadoPregunta <b>Incorrecta</b>
         </div>
     }
 }
@@ -25,7 +25,7 @@
 <div class="alert alert-info" role="alert">
     Respuestas correctas: @ViewBag.RespuestasCorrectas
     Respuestas incorrectas: @ViewBag.RespuestasIncorrectas
-    <h4>Puntaje: @ViewBag.PuntajeTotal</h4>
+    <h4>Puntaje: % @ViewBag.PuntajeTotal</h4>
 
 </div>
 

@@ -30,6 +30,9 @@ namespace Patron_Center.Models
 		public List<Pregunta> Preguntas { get; set; }
         [Required(ErrorMessage = "El nombre es un campo requerido")]
         public string Nombre { get; set; }
+        // Crear el CRUD de nuevo para que tome esta nueva property
+        // [Required(ErrorMessage = "El minimo de aprobacion es un campo requerido")]
+        // public int MinimoAprobacion { get; set; }
 
     }
 }
