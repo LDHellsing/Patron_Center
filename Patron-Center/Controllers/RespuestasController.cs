@@ -39,7 +39,7 @@ namespace Patron_Center.Controllers
                 return View("Views/Shared/UnauthorisedUserError.cshtml");
             }
             var patron_CenterContext = _context.Respuesta.Include(r => r.Pregunta).Where(r => r.PreguntaId == PreguntaId);
-            var QuizId = patron_CenterContext.Select(q => q.Pregunta.QuizId).FirstOrDefault();
+            var QuizId = _context.Pregunta.Select(q => q.QuizId).FirstOrDefault();
             ViewBag.PreguntaId = PreguntaId;
             ViewBag.QuizId = QuizId;
             return View(await patron_CenterContext.ToListAsync());

@@ -40,7 +40,7 @@ namespace Patron_Center.Controllers
             }
 
             var patron_CenterContext = _context.Quiz.Include(q => q.Unidad).Where(q => q.UnidadId == UnidadId);
-            var CursoId = patron_CenterContext.Select(c => c.Unidad.CursoId).FirstOrDefault();
+            var CursoId = _context.Unidad.Select(c => c.CursoId).FirstOrDefault();
             ViewBag.UnidadId = UnidadId;
             ViewBag.CursoId = CursoId;
             return View(await patron_CenterContext.ToListAsync());
@@ -210,7 +210,8 @@ namespace Patron_Center.Controllers
                         }
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                //return RedirectToAction(nameof(Index));
+                return RedirectToAction("Index", "Quizes", new { UnidadId = quiz.UnidadId });
             }
             ViewData["UnidadId"] = new SelectList(_context.Unidad, "Id", "Descripcion", quiz.UnidadId);
             return View(quiz);
