@@ -35,14 +35,20 @@ namespace Patron_Center.Controllers
 
             if (HttpContext.Session.GetString("_TipoUsuario") == "Alumno")
             {
-                var patron_CenterContext = _context.Calificacion.Include(c => c.Curso).Include(u => u.Unidad).Include(us => us.Usuario).Where(c => c.UsuarioId == HttpContext.Session.GetInt32("_IdUsuario"));
+                var patron_CenterContext = _context.Calificacion.Include(c => c.Curso).Include(u => u.Unidad).Include(us => us.Usuario).Where(c => c.UsuarioId == HttpContext.Session.GetInt32("_IdUsuario")).OrderByDescending(c => c.Fecha);
                 ViewBag.Nombre = HttpContext.Session.GetString("_Nombre");
                 ViewBag.IdUsuario = HttpContext.Session.GetString("_IdUsuario");
                 ViewBag.TipoUsuario = HttpContext.Session.GetString("_TipoUsuario");
                 return View(await patron_CenterContext.ToListAsync());
             }
-
-                return View(await _context.Calificacion.ToListAsync());
+            else
+            {
+                var patron_CenterContext = _context.Calificacion.Include(c => c.Curso).Include(u => u.Unidad).Include(us => us.Usuario).OrderByDescending(c => c.Fecha);
+                ViewBag.Nombre = HttpContext.Session.GetString("_Nombre");
+                ViewBag.IdUsuario = HttpContext.Session.GetString("_IdUsuario");
+                ViewBag.TipoUsuario = HttpContext.Session.GetString("_TipoUsuario");
+                return View(await patron_CenterContext.ToListAsync());
+            }
         }
 
         // GET: Calificaciones/Details/5
