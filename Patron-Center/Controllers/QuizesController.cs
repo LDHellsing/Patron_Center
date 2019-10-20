@@ -104,13 +104,25 @@ namespace Patron_Center.Controllers
                     Create(quiz.UnidadId);
                     return View(quiz);
                 }
-                else
+
+                if (quiz.Evaluacion == TipoQuiz.Evaluacion)
                 {
-                    _context.Add(quiz);
-                    await _context.SaveChangesAsync();
-                    // return RedirectToAction(nameof(Index));
-                    return RedirectToAction("Index", "Quizes", new { UnidadId = quiz.UnidadId });
+                    var evaluationsCount = _context.Quiz.Where(q => q.UnidadId == quiz.UnidadId && q.Evaluacion == TipoQuiz.Evaluacion && q.Eliminado == false);
+
+                    if (evaluationsCount.Count() > 0)
+                    {
+                        ViewBag.ExistingEvaluation = "Ya existe una evalución para esta unidad, no es posible crear una nueva.";
+                        //Cargo nuevamente los combobox
+                        Create(quiz.UnidadId);
+                        return View(quiz);
+                    }
                 }
+                _context.Add(quiz);
+                await _context.SaveChangesAsync();
+                // return RedirectToAction(nameof(Index));
+                return RedirectToAction("Index", "Quizes", new { UnidadId = quiz.UnidadId });
+
+
             }
             ViewData["UnidadId"] = new SelectList(_context.Unidad, "Id", "Nombre", quiz.UnidadId);
 
@@ -191,24 +203,35 @@ namespace Patron_Center.Controllers
                     await Edit(quiz.Id);
                     return View(quiz);
                 }
-                else
+
+                if (quiz.Evaluacion == TipoQuiz.Evaluacion)
                 {
-                    try
+                    var evaluationsCount = _context.Quiz.Where(q => q.UnidadId == quiz.UnidadId && q.Evaluacion == TipoQuiz.Evaluacion && q.Eliminado == false);
+
+                    if (evaluationsCount.Count() > 0)
                     {
-                        _context.Update(quiz);
-                        await _context.SaveChangesAsync();
+                        ViewBag.ExistingEvaluation = "Ya existe una evalución para esta unidad, no es posible crear una nueva.";
+                        //Cargo nuevamente los combobox
+                        Create(quiz.UnidadId);
+                        return View(quiz);
                     }
-                    catch (DbUpdateConcurrencyException)
+                }
+                try
+                {
+                    _context.Update(quiz);
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!QuizExists(quiz.Id))
                     {
-                        if (!QuizExists(quiz.Id))
-                        {
-                            return NotFound();
-                        }
-                        else
-                        {
-                            throw;
-                        }
+                        return NotFound();
                     }
+                    else
+                    {
+                        throw;
+                    }
+
                 }
                 //return RedirectToAction(nameof(Index));
                 return RedirectToAction("Index", "Quizes", new { UnidadId = quiz.UnidadId });
@@ -425,6 +448,16 @@ namespace Patron_Center.Controllers
             }
 
             var patron_CenterContext = _context.Quiz.Include(q => q.Unidad).Where(q => q.UnidadId == UnidadId && q.Eliminado != true);
+            // Detección de evaluciones que fueron cursadas.
+            foreach (var practico in patron_CenterContext)
+            {
+                var calificaciones = _context.Calificacion.Where(c => c.UsuarioId == HttpContext.Session.GetInt32("_IdUsuario") && c.UnidadId == UnidadId);
+                if (calificaciones.Count() > 0)
+                {
+                    practico.EvalucionCursada = true;
+                }
+            }
+
             var CursoId = patron_CenterContext.Select(c => c.Unidad.CursoId).FirstOrDefault();
             ViewBag.UnidadId = UnidadId;
             ViewBag.CursoId = CursoId;
@@ -442,11 +475,11 @@ namespace Patron_Center.Controllers
             double puntaje = 0;
             if (puntajeObtenido == 0)
             {
-                return (int) puntaje;
+                return (int)puntaje;
             }
             else
             {
-                puntaje = (double) puntajeObtenido * 100 / puntajeTotal;
+                puntaje = (double)puntajeObtenido * 100 / puntajeTotal;
                 return (int)Math.Round(puntaje);
             }
         }

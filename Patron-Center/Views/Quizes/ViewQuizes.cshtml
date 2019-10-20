@@ -36,12 +36,20 @@
                     @Html.DisplayFor(modelItem => item.Ejercicio)
                 </td>
                 <td>
-                    <form asp-controller="Quizes" asp-action="AnswerQuiz">
-                        <p>
-                            <input type="hidden" name="QuizId" value="@item.Id">
-                            <input class="btn btn-primary btn-sm btn-block" type="submit" value="Cursar Quiz" />
-                        </p>
-                    </form>
+                    @if (item.EvalucionCursada == true)
+                    {
+                        <input class="btn btn-info btn-sm btn-block" type="submit" value="Evaluación Cursada" data-toggle="tooltip" data-placement="top" title="No puedes cursar una evaluación mas de una vez." />
+                    }
+                    else
+                    {
+                        <form asp-controller="Quizes" asp-action="AnswerQuiz">
+                            <p>
+                                <input type="hidden" name="QuizId" value="@item.Id">
+                                <input class="btn btn-primary btn-sm btn-block" type="submit" value="Cursar Quiz" />
+                            </p>
+                        </form>
+                    }
+
                 </td>
             </tr>
         }

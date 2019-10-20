@@ -41,6 +41,10 @@
             {
                 <span class="text-danger">@ViewBag.InvalidTypeQuiz</span>
             }
+            @if (ViewBag.ExistingEvaluation != null)
+            {
+                <span class="text-danger">@ViewBag.ExistingEvaluation</span>
+            }
             <div class="form-group">
                 <input type="submit" value="Grabar" class="btn btn-primary" />
             </div>
