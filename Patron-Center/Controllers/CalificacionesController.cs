@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -21,7 +22,27 @@ namespace Patron_Center.Controllers
         // GET: Calificaciones
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Calificacion.ToListAsync());
+            if (HttpContext.Session.GetInt32("_IdUsuario") == null)
+            {
+                return RedirectToAction("Index", "Login");
+            }
+            else
+            {
+                ViewBag.Nombre = HttpContext.Session.GetString("_Nombre");
+                ViewBag.IdUsuario = HttpContext.Session.GetInt32("_IdUsuario");
+                ViewBag.TipoUsuario = HttpContext.Session.GetString("_TipoUsuario");
+            }
+
+            if (HttpContext.Session.GetString("_TipoUsuario") == "Alumno")
+            {
+                var patron_CenterContext = _context.Calificacion.Include(c => c.Curso).Include(u => u.Unidad).Include(us => us.Usuario).Where(c => c.UsuarioId == HttpContext.Session.GetInt32("_IdUsuario"));
+                ViewBag.Nombre = HttpContext.Session.GetString("_Nombre");
+                ViewBag.IdUsuario = HttpContext.Session.GetString("_IdUsuario");
+                ViewBag.TipoUsuario = HttpContext.Session.GetString("_TipoUsuario");
+                return View(await patron_CenterContext.ToListAsync());
+            }
+
+                return View(await _context.Calificacion.ToListAsync());
         }
 
         // GET: Calificaciones/Details/5
@@ -115,34 +136,6 @@ namespace Patron_Center.Controllers
             return View(calificacion);
         }
 
-        // GET: Calificaciones/Delete/5
-        public async Task<IActionResult> Delete(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var calificacion = await _context.Calificacion
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (calificacion == null)
-            {
-                return NotFound();
-            }
-
-            return View(calificacion);
-        }
-
-        // POST: Calificaciones/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            var calificacion = await _context.Calificacion.FindAsync(id);
-            _context.Calificacion.Remove(calificacion);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
-        }
 
         private bool CalificacionExists(int id)
         {

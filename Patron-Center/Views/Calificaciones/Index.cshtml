@@ -4,11 +4,9 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>Mis Calificaciones</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+
 <table class="table">
     <thead>
         <tr>
@@ -16,10 +14,10 @@
                 @Html.DisplayNameFor(model => model.UsuarioId)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.UnidadId)
+                @Html.DisplayNameFor(model => model.CursoId)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.CursoId)
+                @Html.DisplayNameFor(model => model.UnidadId)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Fecha)
@@ -27,31 +25,25 @@
             <th>
                 @Html.DisplayNameFor(model => model.Nota)
             </th>
-            <th></th>
         </tr>
     </thead>
     <tbody>
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.UsuarioId)
+                @(String.Format("{0} {1}", item.Usuario.Nombre, item.Usuario.Apellido))
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.UnidadId)
+                @Html.DisplayFor(modelItem => item.Curso.Nombre)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.CursoId)
+                @Html.DisplayFor(modelItem => item.Unidad.Nombre)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Fecha)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Nota)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
             </td>
         </tr>
 }
