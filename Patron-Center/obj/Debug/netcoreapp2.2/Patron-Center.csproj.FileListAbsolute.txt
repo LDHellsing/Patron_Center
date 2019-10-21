@@ -143,7 +143,6 @@ C:\PatronCenter\Patron-Center\obj\Debug\netcoreapp2.2\Razor\Views\Calificaciones
 C:\PatronCenter\Patron-Center\obj\Debug\netcoreapp2.2\Razor\Views\Calificaciones\Details.g.cshtml.cs
 C:\PatronCenter\Patron-Center\obj\Debug\netcoreapp2.2\Razor\Views\Calificaciones\Edit.g.cshtml.cs
 C:\PatronCenter\Patron-Center\obj\Debug\netcoreapp2.2\Razor\Views\Calificaciones\Index.g.cshtml.cs
-C:\PatronCenter\Patron-Center\obj\Debug\netcoreapp2.2\Patron-Center.csprojAssemblyReference.cache
 C:\PatronCenter\Patron_Center\Patron-Center\bin\Debug\netcoreapp2.2\Patron-Center.deps.json
 C:\PatronCenter\Patron_Center\Patron-Center\bin\Debug\netcoreapp2.2\Patron-Center.runtimeconfig.json
 C:\PatronCenter\Patron_Center\Patron-Center\bin\Debug\netcoreapp2.2\Patron-Center.runtimeconfig.dev.json

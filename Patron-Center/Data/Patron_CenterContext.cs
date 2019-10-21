@@ -465,7 +465,7 @@ Se utilizan para modelar diferentes formas de interactuar entre los objetos para
                     QuizId = 1,
                     Puntaje = 25,
                     Eliminado = false,
-                    Orden = 2,
+                    Orden = 3,
                     Enunciado = "Los patrones de Creación particicipan en el momento de crear obejetos..."
                 }
                 );
@@ -476,7 +476,7 @@ Se utilizan para modelar diferentes formas de interactuar entre los objetos para
                    QuizId = 1,
                    Puntaje = 25,
                    Eliminado = false,
-                   Orden = 2,
+                   Orden = 4,
                    Enunciado = "Los patrones de Comportamiento empeoran la performance del sistema..."
                }
                );

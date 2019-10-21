@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -275,11 +276,20 @@ namespace Patron_Center.Controllers
                 quizMO.IdQuiz = quizAux.Id;
                 quizMO.QuizName = quizAux.Nombre;
                 quizMO.IdUnidad = quizAux.UnidadId;
+
+                //Ordenamos aleatoriamente las preguntas
+                var preguntasAleatorias = MesclarPreguntas(quizAux.Preguntas);
+                quizAux.Preguntas = preguntasAleatorias;
+
                 foreach (var pregunta in quizAux.Preguntas)
                 {
                     PreguntaViewModel preguntaViewModel = new PreguntaViewModel();
                     preguntaViewModel.IdPregunta = pregunta.Id;
                     preguntaViewModel.Enunciado = pregunta.Enunciado;
+
+                    //Ordenamos aleatoriamenta las respuestas
+                    var respuestasAleatroias = MesclarRespuestas(pregunta.Respuestas);
+                    pregunta.Respuestas = respuestasAleatroias;
 
                     foreach (var respuesta in pregunta.Respuestas)
                     {
@@ -360,7 +370,7 @@ namespace Patron_Center.Controllers
                     }
                 }
 
-                puntajeNota = calcularResultado(puntajeTotal, puntajeObtenido);
+                puntajeNota = CalcularResultado(puntajeTotal, puntajeObtenido);
 
                 if (HttpContext.Session.GetString("_Evaluacion") == "true")
                 {
@@ -470,7 +480,7 @@ namespace Patron_Center.Controllers
             return _context.Quiz.Any(e => e.Id == id);
         }
 
-        private int calcularResultado(int puntajeTotal, int puntajeObtenido)
+        private int CalcularResultado(int puntajeTotal, int puntajeObtenido)
         {
             double puntaje = 0;
             if (puntajeObtenido == 0)
@@ -482,6 +492,32 @@ namespace Patron_Center.Controllers
                 puntaje = (double)puntajeObtenido * 100 / puntajeTotal;
                 return (int)Math.Round(puntaje);
             }
+        }
+        private List<Pregunta> MesclarPreguntas (List<Pregunta> preguntasQuiz)
+        {
+            var rng = new Random();
+            int i = preguntasQuiz.Count;
+            while (i > 1)
+            {
+                int j = rng.Next(i--);
+                Pregunta temp = preguntasQuiz[i];
+                preguntasQuiz[i] = preguntasQuiz[j];
+                preguntasQuiz[j] = temp;
+            }
+            return preguntasQuiz;
+        }
+        private List<Respuesta> MesclarRespuestas(List<Respuesta> respuestasPregunta)
+        {
+            var rng = new Random();
+            int i = respuestasPregunta.Count;
+            while (i > 1)
+            {
+                int j = rng.Next(i--);
+                Respuesta temp = respuestasPregunta[i];
+                respuestasPregunta[i] = respuestasPregunta[j];
+                respuestasPregunta[j] = temp;
+            }
+            return respuestasPregunta;
         }
     }
 }
