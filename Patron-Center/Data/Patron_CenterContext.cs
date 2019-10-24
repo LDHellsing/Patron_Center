@@ -135,9 +135,9 @@ namespace Patron_Center.Models
             if (tipoUsuario == "Alumno")
             {
                 var calificaciones =  from ca in Calificacion
-                            join u in Usuario on ca.UsuarioId equals u.Id
-                            join cu in Curso on ca.CursoId equals cu.Id
-                            join uni in Unidad on ca.UnidadId equals uni.Id
+                            join u in Usuario on ca.IdUnidad equals u.Id
+                            join cu in Curso on ca.IdCurso equals cu.Id
+                            join uni in Unidad on ca.IdUnidad equals uni.Id
                             where ca.IdAlumno == IdUsuario
                             select new
                             {

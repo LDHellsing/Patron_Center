@@ -209,10 +209,5 @@ C:\PatronCenter\Patron_Center\Patron-Center\obj\Debug\netcoreapp2.2\Patron-Cente
 C:\PatronCenter\Patron_Center\Patron-Center\obj\Debug\netcoreapp2.2\Patron-Center.dll
 C:\PatronCenter\Patron_Center\Patron-Center\obj\Debug\netcoreapp2.2\Patron-Center.pdb
 C:\PatronCenter\Patron_Center\Patron-Center\obj\Debug\netcoreapp2.2\Patron-Center.csproj.CopyComplete
-C:\PatronCenter\Patron-Center\obj\Debug\netcoreapp2.2\Razor\Views\Calificaciones\Create.g.cshtml.cs
-C:\PatronCenter\Patron-Center\obj\Debug\netcoreapp2.2\Razor\Views\Calificaciones\Delete.g.cshtml.cs
-C:\PatronCenter\Patron-Center\obj\Debug\netcoreapp2.2\Razor\Views\Calificaciones\Details.g.cshtml.cs
-C:\PatronCenter\Patron-Center\obj\Debug\netcoreapp2.2\Razor\Views\Calificaciones\Edit.g.cshtml.cs
 C:\PatronCenter\Patron-Center\obj\Debug\netcoreapp2.2\Razor\Views\Calificaciones\Index.g.cshtml.cs
-C:\PatronCenter\Patron-Center\obj\Debug\netcoreapp2.2\Patron-Center.csprojAssemblyReference.cache
 C:\PatronCenter\Patron_Center\Patron-Center\obj\Debug\netcoreapp2.2\Patron-Center.csprojAssemblyReference.cache
