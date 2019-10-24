@@ -39,17 +39,20 @@
                                         {
                                             <a class="dropdown-item" text-dark" asp-area="" asp-controller="Usuarios" asp-action="Index">Gestión de Usuarios</a>
                                         }
-                                    <a class="dropdown-item" text-dark" asp-area="" asp-controller="Cursos" asp-action="Index">Gestión de Cursos</a>
+                                        <a class="dropdown-item" text-dark" asp-area="" asp-controller="Cursos" asp-action="Index">Gestión de Cursos</a>
                                     </div>
                                 </li>
                             }
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Cursos</a>
                                 <div class="dropdown-menu">
-                                    <a class="dropdown-item" text-dark" asp-area="" asp-controller="CursoUsuarios" asp-action="ViewUserLessons">Ver mis cursos</a>
-                                    <a class="dropdown-item" text-dark" asp-area="" asp-controller="CursoUsuarios" asp-action="ViewUserFinishedLessons">Mis Cursos Finalizados</a>
-                                    <a class="dropdown-item" text-dark" asp-area="" asp-controller="Calificaciones" asp-action="Index">Mis Calificaciones</a>
+                                    <a class="dropdown-item" text-dark" asp-area="" asp-controller="CursoUsuarios" asp-action="ViewUserLessons">Cursos</a>
+                                    <a class="dropdown-item" text-dark" asp-area="" asp-controller="CursoUsuarios" asp-action="ViewUserFinishedLessons">Cursos Finalizados</a>
+                                    <a class="dropdown-item" text-dark" asp-area="" asp-controller="Calificaciones" asp-action="Index">Calificaciones</a>
                                 </div>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" text-dark" asp-area="" asp-controller="Calificaciones" asp-action="Index">Calificaciones</a>
                             </li>
                         </ul>
                     </div>
@@ -68,7 +71,7 @@
                                             </div>
                                             <div class="container">
                                                 <form asp-controller="Login" asp-action="Logout" class="dropdown-item">
-                                                    <button type="submit" class="btn btn-link text-body" style="text-decoration: none">Logout</button>
+                                                    <button type="submit" class="btn btn-link text-body" style="text-decoration: none">Salir</button>
                                                 </form>
                                             </div>
                                         </div>
