@@ -15,7 +15,7 @@ namespace Patron_Center.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.2.6-servicing-10079")
+                .HasAnnotation("ProductVersion", "2.2.4-servicing-10062")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -25,15 +25,15 @@ namespace Patron_Center.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("CursoId");
-
                     b.Property<string>("Fecha");
 
+                    b.Property<int>("IdAlumno");
+
+                    b.Property<int>("IdCurso");
+
+                    b.Property<int>("IdUnidad");
+
                     b.Property<int>("Nota");
-
-                    b.Property<int>("UnidadId");
-
-                    b.Property<int>("UsuarioId");
 
                     b.HasKey("Id");
 
@@ -75,7 +75,7 @@ namespace Patron_Center.Migrations
                             Descripcion = "Aqui se dicta un curso destinado al manejo y el aprendisaje de patrones de diseño.",
                             DocenteId = 2,
                             Eliminado = false,
-                            FechaFinalizacion = new DateTime(2019, 10, 20, 8, 49, 53, 808, DateTimeKind.Local).AddTicks(9042),
+                            FechaFinalizacion = new DateTime(2019, 10, 23, 23, 10, 53, 871, DateTimeKind.Local).AddTicks(8977),
                             Nombre = "Patrones de Diseño"
                         });
                 });
@@ -388,8 +388,6 @@ Crear una clase Facade que provea todos los métodos necesarios para ejecutar op
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("ComentarioDocente");
-
                     b.Property<bool>("Eliminado");
 
                     b.Property<string>("Enunciado")
@@ -431,7 +429,7 @@ Crear una clase Facade que provea todos los métodos necesarios para ejecutar op
                             Id = 3,
                             Eliminado = false,
                             Enunciado = "Los patrones de Creación particicipan en el momento de crear obejetos...",
-                            Orden = 2,
+                            Orden = 3,
                             Puntaje = 25,
                             QuizId = 1
                         },
@@ -440,7 +438,7 @@ Crear una clase Facade que provea todos los métodos necesarios para ejecutar op
                             Id = 4,
                             Eliminado = false,
                             Enunciado = "Los patrones de Comportamiento empeoran la performance del sistema...",
-                            Orden = 2,
+                            Orden = 4,
                             Puntaje = 25,
                             QuizId = 1
                         });
@@ -499,8 +497,6 @@ Crear una clase Facade que provea todos los métodos necesarios para ejecutar op
 
                     b.Property<bool>("RespuestaCorrecta");
 
-                    b.Property<bool>("Seleccionada");
-
                     b.HasKey("Id");
 
                     b.HasIndex("PreguntaId");
@@ -514,8 +510,7 @@ Crear una clase Facade que provea todos los métodos necesarios para ejecutar op
                             Eliminado = false,
                             Enunciado = "Estandarizar diseños",
                             PreguntaId = 1,
-                            RespuestaCorrecta = true,
-                            Seleccionada = false
+                            RespuestaCorrecta = true
                         },
                         new
                         {
@@ -523,8 +518,7 @@ Crear una clase Facade que provea todos los métodos necesarios para ejecutar op
                             Eliminado = false,
                             Enunciado = "Imponer una solución como la mejor",
                             PreguntaId = 1,
-                            RespuestaCorrecta = false,
-                            Seleccionada = false
+                            RespuestaCorrecta = false
                         },
                         new
                         {
@@ -532,8 +526,7 @@ Crear una clase Facade que provea todos los métodos necesarios para ejecutar op
                             Eliminado = false,
                             Enunciado = "Eliminar la creatividad, uso de otras opciones",
                             PreguntaId = 1,
-                            RespuestaCorrecta = false,
-                            Seleccionada = false
+                            RespuestaCorrecta = false
                         },
                         new
                         {
@@ -541,8 +534,7 @@ Crear una clase Facade que provea todos los métodos necesarios para ejecutar op
                             Eliminado = false,
                             Enunciado = "Reinventar la rueda",
                             PreguntaId = 1,
-                            RespuestaCorrecta = false,
-                            Seleccionada = false
+                            RespuestaCorrecta = false
                         },
                         new
                         {
@@ -550,8 +542,7 @@ Crear una clase Facade que provea todos los métodos necesarios para ejecutar op
                             Eliminado = false,
                             Enunciado = "Definicón",
                             PreguntaId = 2,
-                            RespuestaCorrecta = true,
-                            Seleccionada = false
+                            RespuestaCorrecta = true
                         },
                         new
                         {
@@ -559,8 +550,7 @@ Crear una clase Facade que provea todos los métodos necesarios para ejecutar op
                             Eliminado = false,
                             Enunciado = "Arquitectónico",
                             PreguntaId = 2,
-                            RespuestaCorrecta = false,
-                            Seleccionada = false
+                            RespuestaCorrecta = false
                         },
                         new
                         {
@@ -568,8 +558,7 @@ Crear una clase Facade que provea todos los métodos necesarios para ejecutar op
                             Eliminado = false,
                             Enunciado = "Dialectos",
                             PreguntaId = 2,
-                            RespuestaCorrecta = false,
-                            Seleccionada = false
+                            RespuestaCorrecta = false
                         },
                         new
                         {
@@ -577,8 +566,7 @@ Crear una clase Facade que provea todos los métodos necesarios para ejecutar op
                             Eliminado = false,
                             Enunciado = "Interacción",
                             PreguntaId = 2,
-                            RespuestaCorrecta = false,
-                            Seleccionada = false
+                            RespuestaCorrecta = false
                         },
                         new
                         {
@@ -586,8 +574,7 @@ Crear una clase Facade que provea todos los métodos necesarios para ejecutar op
                             Eliminado = false,
                             Enunciado = "Verdadero",
                             PreguntaId = 3,
-                            RespuestaCorrecta = true,
-                            Seleccionada = false
+                            RespuestaCorrecta = true
                         },
                         new
                         {
@@ -595,8 +582,7 @@ Crear una clase Facade que provea todos los métodos necesarios para ejecutar op
                             Eliminado = false,
                             Enunciado = "Falso",
                             PreguntaId = 3,
-                            RespuestaCorrecta = false,
-                            Seleccionada = false
+                            RespuestaCorrecta = false
                         },
                         new
                         {
@@ -604,8 +590,7 @@ Crear una clase Facade que provea todos los métodos necesarios para ejecutar op
                             Eliminado = false,
                             Enunciado = "Falso",
                             PreguntaId = 4,
-                            RespuestaCorrecta = true,
-                            Seleccionada = false
+                            RespuestaCorrecta = true
                         },
                         new
                         {
@@ -613,8 +598,7 @@ Crear una clase Facade que provea todos los métodos necesarios para ejecutar op
                             Eliminado = false,
                             Enunciado = "Verdadero",
                             PreguntaId = 4,
-                            RespuestaCorrecta = false,
-                            Seleccionada = false
+                            RespuestaCorrecta = false
                         });
                 });
 

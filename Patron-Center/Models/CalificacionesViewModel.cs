@@ -6,20 +6,18 @@ using System.Threading.Tasks;
 
 namespace Patron_Center.Models
 {
-    public class Calificacion
+    public class CalificacionesViewModel
     {
         public int Id { get; set; }
         [DisplayName("Alumno")]
-        public int IdAlumno { get; set; }
-        [DisplayName("Unidad")]
-        public int IdUnidad { get; set; }
+        public string NombreCompletoAlumno { get; set; }
         [DisplayName("Curso")]
-        public int IdCurso { get; set; }
-        [DisplayName("Fecha de evalución")]
+        public string NombreCurso { get; set; }
+        [DisplayName("Unidad")]
+        public string NombreUnidad { get; set; }
+        [DisplayName("Fecha de evaluación")]
         public string Fecha { get; set; }
-        //Calificacion final de la evaluacion
         [DisplayName("Nota")]
         public int Nota { get; set; }
-
     }
 }

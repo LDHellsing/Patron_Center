@@ -126,6 +126,79 @@ namespace Patron_Center.Models
             };
         }
 
+        // traer todas las calificaciones
+        public List<CalificacionesViewModel> getCalificaciones (string tipoUsuario, int IdUsuario)
+        {
+            
+            var listaCalificaciones = new List<CalificacionesViewModel>();
+
+            if (tipoUsuario == "Alumno")
+            {
+                var calificaciones =  from ca in Calificacion
+                            join u in Usuario on ca.IdAlumno equals u.Id
+                            join cu in Curso on ca.IdCurso equals cu.Id
+                            join uni in Unidad on ca.IdUnidad equals uni.Id
+                            where ca.IdAlumno == IdUsuario
+                            select new
+                            {
+                                id = ca.Id,
+                                fecha = ca.Fecha,
+                                nota = ca.Nota,
+                                nombreCompleto = u.Nombre + " " + u.Apellido,
+                                nombreCurso = cu.Nombre,
+                                nombreUnidad = uni.Nombre
+
+                            };
+
+                foreach (var ca in calificaciones)
+                {
+                    var calificacion = new CalificacionesViewModel();
+
+                    calificacion.Id = ca.id;
+                    calificacion.NombreCompletoAlumno = ca.nombreCompleto;
+                    calificacion.NombreCurso = ca.nombreCurso;
+                    calificacion.NombreUnidad = ca.nombreUnidad;
+                    calificacion.Fecha = ca.fecha;
+                    calificacion.Nota = ca.nota;
+
+                    listaCalificaciones.Add(calificacion);
+                }
+            }
+            else
+            {
+                var calificaciones = from ca in Calificacion
+                                     join u in Usuario on ca.IdAlumno equals u.Id
+                                     join cu in Curso on ca.IdCurso equals cu.Id
+                                     join uni in Unidad on ca.IdUnidad equals uni.Id
+                                     select new
+                                     {
+                                         id = ca.Id,
+                                         fecha = ca.Fecha,
+                                         nota = ca.Nota,
+                                         nombreCompleto = u.Nombre + " " + u.Apellido,
+                                         nombreCurso = cu.Nombre,
+                                         nombreUnidad = uni.Nombre
+
+                                     };
+
+                foreach (var ca in calificaciones)
+                {
+                    var calificacion = new CalificacionesViewModel();
+
+                    calificacion.Id = ca.id;
+                    calificacion.NombreCompletoAlumno = ca.nombreCompleto;
+                    calificacion.NombreCurso = ca.nombreCurso;
+                    calificacion.NombreUnidad = ca.nombreUnidad;
+                    calificacion.Fecha = ca.fecha;
+                    calificacion.Nota = ca.nota;
+
+                    listaCalificaciones.Add(calificacion);
+                }
+            }
+            return listaCalificaciones;
+        }
+
+
         //Relacion muchos a muchos Curso Usuario
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -487,7 +560,6 @@ Se utilizan para modelar diferentes formas de interactuar entre los objetos para
                     Id = 1,
                     PreguntaId = 1,
                     RespuestaCorrecta = true,
-                    Seleccionada = false,
                     Eliminado = false,
                     Enunciado = "Estandarizar diseños"
                 }
@@ -498,7 +570,6 @@ Se utilizan para modelar diferentes formas de interactuar entre los objetos para
                     Id = 2,
                     PreguntaId = 1,
                     RespuestaCorrecta = false,
-                    Seleccionada = false,
                     Eliminado = false,
                     Enunciado = "Imponer una solución como la mejor"
                 }
@@ -509,7 +580,6 @@ Se utilizan para modelar diferentes formas de interactuar entre los objetos para
                     Id = 3,
                     PreguntaId = 1,
                     RespuestaCorrecta = false,
-                    Seleccionada = false,
                     Eliminado = false,
                     Enunciado = "Eliminar la creatividad, uso de otras opciones"
                 }
@@ -520,7 +590,6 @@ Se utilizan para modelar diferentes formas de interactuar entre los objetos para
                     Id = 4,
                     PreguntaId = 1,
                     RespuestaCorrecta = false,
-                    Seleccionada = false,
                     Eliminado = false,
                     Enunciado = "Reinventar la rueda"
                 }
@@ -531,7 +600,6 @@ Se utilizan para modelar diferentes formas de interactuar entre los objetos para
                     Id = 5,
                     PreguntaId = 2,
                     RespuestaCorrecta = true,
-                    Seleccionada = false,
                     Eliminado = false,
                     Enunciado = "Definicón"
                 }
@@ -542,7 +610,6 @@ Se utilizan para modelar diferentes formas de interactuar entre los objetos para
                     Id = 6,
                     PreguntaId = 2,
                     RespuestaCorrecta = false,
-                    Seleccionada = false,
                     Eliminado = false,
                     Enunciado = "Arquitectónico"
                 }
@@ -553,7 +620,6 @@ Se utilizan para modelar diferentes formas de interactuar entre los objetos para
                     Id = 7,
                     PreguntaId = 2,
                     RespuestaCorrecta = false,
-                    Seleccionada = false,
                     Eliminado = false,
                     Enunciado = "Dialectos"
                 }
@@ -564,7 +630,6 @@ Se utilizan para modelar diferentes formas de interactuar entre los objetos para
                     Id = 8,
                     PreguntaId = 2,
                     RespuestaCorrecta = false,
-                    Seleccionada = false,
                     Eliminado = false,
                     Enunciado = "Interacción"
                 }
@@ -575,7 +640,6 @@ Se utilizan para modelar diferentes formas de interactuar entre los objetos para
                     Id = 9,
                     PreguntaId = 3,
                     RespuestaCorrecta = true,
-                    Seleccionada = false,
                     Eliminado = false,
                     Enunciado = "Verdadero"
                 }
@@ -586,7 +650,6 @@ Se utilizan para modelar diferentes formas de interactuar entre los objetos para
                     Id = 10,
                     PreguntaId = 3,
                     RespuestaCorrecta = false,
-                    Seleccionada = false,
                     Eliminado = false,
                     Enunciado = "Falso"
                 }
@@ -597,7 +660,6 @@ Se utilizan para modelar diferentes formas de interactuar entre los objetos para
                    Id = 11,
                    PreguntaId = 4,
                    RespuestaCorrecta = true,
-                   Seleccionada = false,
                    Eliminado = false,
                    Enunciado = "Falso"
                }
@@ -608,7 +670,6 @@ Se utilizan para modelar diferentes formas de interactuar entre los objetos para
                   Id = 12,
                   PreguntaId = 4,
                   RespuestaCorrecta = false,
-                  Seleccionada = false,
                   Eliminado = false,
                   Enunciado = "Verdadero"
               }

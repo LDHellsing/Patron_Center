@@ -14,9 +14,9 @@ namespace Patron_Center.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    UsuarioId = table.Column<int>(nullable: false),
-                    UnidadId = table.Column<int>(nullable: false),
-                    CursoId = table.Column<int>(nullable: false),
+                    IdAlumno = table.Column<int>(nullable: false),
+                    IdUnidad = table.Column<int>(nullable: false),
+                    IdCurso = table.Column<int>(nullable: false),
                     Fecha = table.Column<string>(nullable: true),
                     Nota = table.Column<int>(nullable: false)
                 },
@@ -198,7 +198,6 @@ namespace Patron_Center.Migrations
                     QuizId = table.Column<int>(nullable: false),
                     Puntaje = table.Column<int>(nullable: false),
                     Eliminado = table.Column<bool>(nullable: false),
-                    ComentarioDocente = table.Column<string>(nullable: true),
                     Orden = table.Column<int>(nullable: false),
                     Enunciado = table.Column<string>(nullable: false)
                 },
@@ -221,7 +220,6 @@ namespace Patron_Center.Migrations
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     PreguntaId = table.Column<int>(nullable: false),
                     RespuestaCorrecta = table.Column<bool>(nullable: false),
-                    Seleccionada = table.Column<bool>(nullable: false),
                     Eliminado = table.Column<bool>(nullable: false),
                     Enunciado = table.Column<string>(nullable: false)
                 },
@@ -252,7 +250,7 @@ namespace Patron_Center.Migrations
             migrationBuilder.InsertData(
                 table: "Curso",
                 columns: new[] { "Id", "AlumnosId", "Descripcion", "DocenteId", "Eliminado", "FechaFinalizacion", "Nombre" },
-                values: new object[] { 1, null, "Aqui se dicta un curso destinado al manejo y el aprendisaje de patrones de diseño.", 2, false, new DateTime(2019, 10, 16, 19, 39, 53, 968, DateTimeKind.Local).AddTicks(5091), "Patrones de Diseño" });
+                values: new object[] { 1, null, "Aqui se dicta un curso destinado al manejo y el aprendisaje de patrones de diseño.", 2, false, new DateTime(2019, 10, 23, 23, 10, 53, 871, DateTimeKind.Local).AddTicks(8977), "Patrones de Diseño" });
 
             migrationBuilder.InsertData(
                 table: "CursoUsuario",
@@ -409,32 +407,32 @@ namespace Patron_Center.Migrations
 
             migrationBuilder.InsertData(
                 table: "Pregunta",
-                columns: new[] { "Id", "ComentarioDocente", "Eliminado", "Enunciado", "Orden", "Puntaje", "QuizId" },
+                columns: new[] { "Id", "Eliminado", "Enunciado", "Orden", "Puntaje", "QuizId" },
                 values: new object[,]
                 {
-                    { 1, null, false, "¿Que persiguen los patrones de diseño?", 1, 25, 1 },
-                    { 2, null, false, "¿Cual de los siguientes tipos NO es un tipo de patrón de diseño?", 2, 25, 1 },
-                    { 3, null, false, "Los patrones de Creación particicipan en el momento de crear obejetos...", 2, 25, 1 },
-                    { 4, null, false, "Los patrones de Comportamiento empeoran la performance del sistema...", 2, 25, 1 }
+                    { 1, false, "¿Que persiguen los patrones de diseño?", 1, 25, 1 },
+                    { 2, false, "¿Cual de los siguientes tipos NO es un tipo de patrón de diseño?", 2, 25, 1 },
+                    { 3, false, "Los patrones de Creación particicipan en el momento de crear obejetos...", 3, 25, 1 },
+                    { 4, false, "Los patrones de Comportamiento empeoran la performance del sistema...", 4, 25, 1 }
                 });
 
             migrationBuilder.InsertData(
                 table: "Respuesta",
-                columns: new[] { "Id", "Eliminado", "Enunciado", "PreguntaId", "RespuestaCorrecta", "Seleccionada" },
+                columns: new[] { "Id", "Eliminado", "Enunciado", "PreguntaId", "RespuestaCorrecta" },
                 values: new object[,]
                 {
-                    { 1, false, "Estandarizar diseños", 1, true, false },
-                    { 2, false, "Imponer una solución como la mejor", 1, false, false },
-                    { 3, false, "Eliminar la creatividad, uso de otras opciones", 1, false, false },
-                    { 4, false, "Reinventar la rueda", 1, false, false },
-                    { 5, false, "Definicón", 2, true, false },
-                    { 6, false, "Arquitectónico", 2, false, false },
-                    { 7, false, "Dialectos", 2, false, false },
-                    { 8, false, "Interacción", 2, false, false },
-                    { 9, false, "Verdadero", 3, true, false },
-                    { 10, false, "Falso", 3, false, false },
-                    { 11, false, "Falso", 4, true, false },
-                    { 12, false, "Verdadero", 4, false, false }
+                    { 1, false, "Estandarizar diseños", 1, true },
+                    { 2, false, "Imponer una solución como la mejor", 1, false },
+                    { 3, false, "Eliminar la creatividad, uso de otras opciones", 1, false },
+                    { 4, false, "Reinventar la rueda", 1, false },
+                    { 5, false, "Definicón", 2, true },
+                    { 6, false, "Arquitectónico", 2, false },
+                    { 7, false, "Dialectos", 2, false },
+                    { 8, false, "Interacción", 2, false },
+                    { 9, false, "Verdadero", 3, true },
+                    { 10, false, "Falso", 3, false },
+                    { 11, false, "Falso", 4, true },
+                    { 12, false, "Verdadero", 4, false }
                 });
 
             migrationBuilder.CreateIndex(

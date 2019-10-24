@@ -376,9 +376,9 @@ namespace Patron_Center.Controllers
                 {
                     var curso = await _context.getCursoByUnidad(respuestaAlumnoMO.IdUnidad);
                     var calificacionEvaluacion = new Calificacion();
-                    calificacionEvaluacion.CursoId = curso.Id;
-                    calificacionEvaluacion.UnidadId = respuestaAlumnoMO.IdUnidad;
-                    calificacionEvaluacion.UsuarioId = (int)HttpContext.Session.GetInt32("_IdUsuario");
+                    calificacionEvaluacion.IdCurso = curso.Id;
+                    calificacionEvaluacion.IdUnidad = respuestaAlumnoMO.IdUnidad;
+                    calificacionEvaluacion.IdAlumno = (int)HttpContext.Session.GetInt32("_IdUsuario");
                     calificacionEvaluacion.Fecha = DateTime.Now.ToString("dd/MM/yyyy");
                     calificacionEvaluacion.Nota = puntajeNota;
                     _context.Calificacion.Add(calificacionEvaluacion);
@@ -461,7 +461,7 @@ namespace Patron_Center.Controllers
             // Detección de evaluciones que fueron cursadas.
             foreach (var practico in patron_CenterContext)
             {
-                var calificaciones = _context.Calificacion.Where(c => c.UsuarioId == HttpContext.Session.GetInt32("_IdUsuario") && c.UnidadId == UnidadId);
+                var calificaciones = _context.Calificacion.Where(c => c.IdAlumno == HttpContext.Session.GetInt32("_IdUsuario") && c.IdUnidad == UnidadId);
                 if (calificaciones.Count() > 0)
                 {
                     practico.EvalucionCursada = true;

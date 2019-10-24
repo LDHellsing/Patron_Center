@@ -20,10 +20,6 @@ namespace Patron_Center.Models
         public Pregunta Pregunta { get; set; }
         [DisplayName("¿Respuesta Correcta?")]
         public bool RespuestaCorrecta { get; set; }
-        //Esta property va a ser true si es la respuesta que el alumno eligio (solo para MultipleOpcion)
-        [HiddenInput(DisplayValue = false)]
-		[BindProperty, Required]
-		public bool Seleccionada { get; set; }
         [DisplayName("Inactivo")]
         public bool Eliminado { get; set; }
         [Required(ErrorMessage = "La respuesta es un campo requerido")]

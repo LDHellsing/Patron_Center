@@ -20,8 +20,6 @@ namespace Patron_Center.Models
         public int Puntaje { get; set; }
         [DisplayName("Inactivo")]
         public bool Eliminado { get; set; }
-        [DisplayName("Comentario")]
-        public string ComentarioDocente { get; set; }
 		[BindProperty]
 		public List<Respuesta> Respuestas { get; set; }
         //testear si el orden se reinicia a 0 cuando se crea un nuevo quiz
