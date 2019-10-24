@@ -100,7 +100,7 @@ namespace Patron_Center.Controllers
             {
                 if (quiz.Evaluacion == TipoQuiz.Ejercicio && quiz.Ejercicio == TipoEjercicio.Desarrollo)
                 {
-                    ViewBag.InvalidTypeQuiz = "Los ejercicios deben ser siempre Multiple Opición";
+                    ViewBag.InvalidTypeQuiz = "Los ejercicios deben ser siempre Multiple Opción";
                     //Cargo nuevamente los combobox
                     Create(quiz.UnidadId);
                     return View(quiz);
@@ -199,7 +199,7 @@ namespace Patron_Center.Controllers
             {
                 if (quiz.Evaluacion == TipoQuiz.Ejercicio && quiz.Ejercicio == TipoEjercicio.Desarrollo)
                 {
-                    ViewBag.InvalidTypeQuiz = "Los ejercicios deben ser siempre Multiple Opición";
+                    ViewBag.InvalidTypeQuiz = "Los ejercicios deben ser siempre Multiple Opción";
                     //Cargo nuevamente los combobox
                     await Edit(quiz.Id);
                     return View(quiz);
