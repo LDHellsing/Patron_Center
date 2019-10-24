@@ -153,10 +153,6 @@ C:\PatronCenter\Patron_Center\Patron-Center\obj\Debug\netcoreapp2.2\Patron-Cente
 C:\PatronCenter\Patron_Center\Patron-Center\obj\Debug\netcoreapp2.2\Patron-Center.TagHelpers.input.cache
 C:\PatronCenter\Patron_Center\Patron-Center\obj\Debug\netcoreapp2.2\Patron-Center.TagHelpers.output.cache
 C:\PatronCenter\Patron_Center\Patron-Center\obj\Debug\netcoreapp2.2\Patron-Center.RazorCoreGenerate.cache
-C:\PatronCenter\Patron_Center\Patron-Center\obj\Debug\netcoreapp2.2\Razor\Views\Calificaciones\Create.g.cshtml.cs
-C:\PatronCenter\Patron_Center\Patron-Center\obj\Debug\netcoreapp2.2\Razor\Views\Calificaciones\Delete.g.cshtml.cs
-C:\PatronCenter\Patron_Center\Patron-Center\obj\Debug\netcoreapp2.2\Razor\Views\Calificaciones\Details.g.cshtml.cs
-C:\PatronCenter\Patron_Center\Patron-Center\obj\Debug\netcoreapp2.2\Razor\Views\Calificaciones\Edit.g.cshtml.cs
 C:\PatronCenter\Patron_Center\Patron-Center\obj\Debug\netcoreapp2.2\Razor\Views\Calificaciones\Index.g.cshtml.cs
 C:\PatronCenter\Patron_Center\Patron-Center\obj\Debug\netcoreapp2.2\Razor\Views\Cursos\Create.g.cshtml.cs
 C:\PatronCenter\Patron_Center\Patron-Center\obj\Debug\netcoreapp2.2\Razor\Views\Cursos\Edit.g.cshtml.cs
@@ -219,3 +215,4 @@ C:\PatronCenter\Patron-Center\obj\Debug\netcoreapp2.2\Razor\Views\Calificaciones
 C:\PatronCenter\Patron-Center\obj\Debug\netcoreapp2.2\Razor\Views\Calificaciones\Edit.g.cshtml.cs
 C:\PatronCenter\Patron-Center\obj\Debug\netcoreapp2.2\Razor\Views\Calificaciones\Index.g.cshtml.cs
 C:\PatronCenter\Patron-Center\obj\Debug\netcoreapp2.2\Patron-Center.csprojAssemblyReference.cache
+C:\PatronCenter\Patron_Center\Patron-Center\obj\Debug\netcoreapp2.2\Patron-Center.csprojAssemblyReference.cache
