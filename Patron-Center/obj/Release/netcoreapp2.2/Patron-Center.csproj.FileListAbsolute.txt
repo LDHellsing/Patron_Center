@@ -77,3 +77,11 @@ C:\PatronCenter\Patron-Center\obj\Release\netcoreapp2.2\Razor\Views\RespuestaAlu
 C:\PatronCenter\Patron-Center\obj\Release\netcoreapp2.2\Razor\Views\RespuestaAlumnos\Details.g.cshtml.cs
 C:\PatronCenter\Patron-Center\obj\Release\netcoreapp2.2\Razor\Views\RespuestaAlumnos\Edit.g.cshtml.cs
 C:\PatronCenter\Patron-Center\obj\Release\netcoreapp2.2\Razor\Views\RespuestaAlumnos\Index.g.cshtml.cs
+C:\PatronCenter\Patron_Center\Patron-Center\obj\Release\netcoreapp2.2\Patron-Center.csprojAssemblyReference.cache
+C:\PatronCenter\Patron_Center\Patron-Center\obj\Release\netcoreapp2.2\Patron-Center.csproj.CoreCompileInputs.cache
+C:\PatronCenter\Patron_Center\Patron-Center\obj\Release\netcoreapp2.2\Patron-Center.RazorAssemblyInfo.cache
+C:\PatronCenter\Patron_Center\Patron-Center\obj\Release\netcoreapp2.2\Patron-Center.RazorAssemblyInfo.cs
+C:\PatronCenter\Patron_Center\Patron-Center\obj\Release\netcoreapp2.2\Patron-Center.AssemblyInfoInputs.cache
+C:\PatronCenter\Patron_Center\Patron-Center\obj\Release\netcoreapp2.2\Patron-Center.AssemblyInfo.cs
+C:\PatronCenter\Patron_Center\Patron-Center\obj\Release\netcoreapp2.2\Patron-Center.dll
+C:\PatronCenter\Patron_Center\Patron-Center\obj\Release\netcoreapp2.2\Patron-Center.pdb

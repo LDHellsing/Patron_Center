@@ -21,7 +21,7 @@ namespace Patron_Center.Controllers
         }
 
         // GET: Calificaciones
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
             if (HttpContext.Session.GetInt32("_IdUsuario") == null)
             {

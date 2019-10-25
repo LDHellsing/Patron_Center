@@ -459,12 +459,13 @@ namespace Patron_Center.Controllers
 
             var patron_CenterContext = _context.Quiz.Include(q => q.Unidad).Where(q => q.UnidadId == UnidadId && q.Eliminado != true);
             // Detección de evaluciones que fueron cursadas.
-            foreach (var practico in patron_CenterContext)
-            {
-                var calificaciones = _context.Calificacion.Where(c => c.IdAlumno == HttpContext.Session.GetInt32("_IdUsuario") && c.IdUnidad == UnidadId);
-                if (calificaciones.Count() > 0)
+            foreach (var quiz in patron_CenterContext)
+            {                
+                var calificacion = _context.Calificacion.Where(c => c.IdAlumno == HttpContext.Session.GetInt32("_IdUsuario") && c.IdUnidad == quiz.UnidadId && quiz.Evaluacion == TipoQuiz.Evaluacion);
+
+                if (calificacion.Count() > 0)
                 {
-                    practico.EvalucionCursada = true;
+                    quiz.EvalucionCursada = true;
                 }
             }
 

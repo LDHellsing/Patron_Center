@@ -139,6 +139,11 @@ C:\PatronCenter\Patron-Center\obj\Debug\netcoreapp2.2\Razor\Views\RespuestaAlumn
 C:\PatronCenter\Patron-Center\obj\Debug\netcoreapp2.2\Razor\Views\RespuestaAlumnos\Index.g.cshtml.cs
 C:\PatronCenter\Patron-Center\obj\Debug\netcoreapp2.2\Razor\Views\Quizes\QuizDevFinished.g.cshtml.cs
 C:\PatronCenter\Patron-Center\obj\Debug\netcoreapp2.2\Razor\Views\Calificaciones\Index.g.cshtml.cs
+C:\PatronCenter\Patron_Center\Patron-Center\obj\Debug\netcoreapp2.2\Patron-Center.csproj.CoreCompileInputs.cache
+C:\PatronCenter\Patron_Center\Patron-Center\obj\Debug\netcoreapp2.2\Patron-Center.RazorAssemblyInfo.cache
+C:\PatronCenter\Patron_Center\Patron-Center\obj\Debug\netcoreapp2.2\Patron-Center.RazorAssemblyInfo.cs
+C:\PatronCenter\Patron_Center\Patron-Center\obj\Debug\netcoreapp2.2\Patron-Center.AssemblyInfoInputs.cache
+C:\PatronCenter\Patron_Center\Patron-Center\obj\Debug\netcoreapp2.2\Patron-Center.AssemblyInfo.cs
 C:\PatronCenter\Patron_Center\Patron-Center\bin\Debug\netcoreapp2.2\Patron-Center.deps.json
 C:\PatronCenter\Patron_Center\Patron-Center\bin\Debug\netcoreapp2.2\Patron-Center.runtimeconfig.json
 C:\PatronCenter\Patron_Center\Patron-Center\bin\Debug\netcoreapp2.2\Patron-Center.runtimeconfig.dev.json
@@ -146,12 +151,6 @@ C:\PatronCenter\Patron_Center\Patron-Center\bin\Debug\netcoreapp2.2\Patron-Cente
 C:\PatronCenter\Patron_Center\Patron-Center\bin\Debug\netcoreapp2.2\Patron-Center.pdb
 C:\PatronCenter\Patron_Center\Patron-Center\bin\Debug\netcoreapp2.2\Patron-Center.Views.dll
 C:\PatronCenter\Patron_Center\Patron-Center\bin\Debug\netcoreapp2.2\Patron-Center.Views.pdb
-C:\PatronCenter\Patron_Center\Patron-Center\obj\Debug\netcoreapp2.2\Patron-Center.csprojAssemblyReference.cache
-C:\PatronCenter\Patron_Center\Patron-Center\obj\Debug\netcoreapp2.2\Patron-Center.csproj.CoreCompileInputs.cache
-C:\PatronCenter\Patron_Center\Patron-Center\obj\Debug\netcoreapp2.2\Patron-Center.RazorAssemblyInfo.cache
-C:\PatronCenter\Patron_Center\Patron-Center\obj\Debug\netcoreapp2.2\Patron-Center.RazorAssemblyInfo.cs
-C:\PatronCenter\Patron_Center\Patron-Center\obj\Debug\netcoreapp2.2\Patron-Center.AssemblyInfoInputs.cache
-C:\PatronCenter\Patron_Center\Patron-Center\obj\Debug\netcoreapp2.2\Patron-Center.AssemblyInfo.cs
 C:\PatronCenter\Patron_Center\Patron-Center\obj\Debug\netcoreapp2.2\Patron-Center.TagHelpers.input.cache
 C:\PatronCenter\Patron_Center\Patron-Center\obj\Debug\netcoreapp2.2\Patron-Center.TagHelpers.output.cache
 C:\PatronCenter\Patron_Center\Patron-Center\obj\Debug\netcoreapp2.2\Patron-Center.RazorCoreGenerate.cache
@@ -211,3 +210,4 @@ C:\PatronCenter\Patron_Center\Patron-Center\obj\Debug\netcoreapp2.2\Patron-Cente
 C:\PatronCenter\Patron_Center\Patron-Center\obj\Debug\netcoreapp2.2\Patron-Center.dll
 C:\PatronCenter\Patron_Center\Patron-Center\obj\Debug\netcoreapp2.2\Patron-Center.pdb
 C:\PatronCenter\Patron_Center\Patron-Center\obj\Debug\netcoreapp2.2\Patron-Center.csproj.CopyComplete
+C:\PatronCenter\Patron_Center\Patron-Center\obj\Debug\netcoreapp2.2\Patron-Center.csprojAssemblyReference.cache
