@@ -12,8 +12,8 @@ namespace Patron_Center.Models
         [DisplayName("Documento")]
         [Required(ErrorMessage = "Documento es un campo requerido")]
         public string User { get; set; }
-        [DisplayName("Password")]
-        [Required(ErrorMessage = "Password es un campo requerido")]
+        [DisplayName("Contraseña")]
+        [Required(ErrorMessage = "Contraseña es un campo requerido")]
         public string Password { get; set; }
     }
 }

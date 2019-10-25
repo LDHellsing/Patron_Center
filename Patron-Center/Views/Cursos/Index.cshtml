@@ -54,8 +54,8 @@
                 <td>
                     @if (ViewBag.TipoUsuario == "Administrador")
                     {
-                        <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-link">Editar</a>
-                        <a asp-controller="CursoUsuarios" asp-action="Index" asp-route-CursoId="@item.Id" class="btn btn-link">Alumnos</a>
+                        <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-primary btn-sm btn-block">Editar</a>
+                        <a asp-controller="CursoUsuarios" asp-action="Index" asp-route-CursoId="@item.Id" class="btn btn-primary btn-sm btn-block">Alumnos</a>
                     }
 
                     @if (item.Finalizado == true)
@@ -64,7 +64,7 @@
                     }
                     else
                     {
-                        <a asp-controller="Unidades" asp-action="Index" asp-route-CursoId="@item.Id" class="btn btn-link">Unidades</a>
+                        <a asp-controller="Unidades" asp-action="Index" asp-route-CursoId="@item.Id" class="btn btn-primary btn-sm btn-block">Unidades</a>
                     }
                 </td>
             </tr>

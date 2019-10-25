@@ -44,8 +44,8 @@
                     @Html.DisplayFor(modelItem => item.Eliminado)
                 </td>
                 <td>
-                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-link">Editar</a>
-                    <a asp-controller="Preguntas" asp-action="Index" asp-route-QuizId="@item.Id" class="btn btn-link">Preguntas</a>
+                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-primary btn-sm btn-block">Editar</a>
+                    <a asp-controller="Preguntas" asp-action="Index" asp-route-QuizId="@item.Id" class="btn btn-primary btn-sm btn-block">Preguntas</a>
                 </td>
             </tr>
         }
