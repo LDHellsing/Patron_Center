@@ -128,47 +128,16 @@ namespace Patron_Center.Models
         // traer todas las calificaciones
         public List<CalificacionesViewModel> GetEvaluationScores(string tipoUsuario, int IdUsuario)
         {
-            
+
             var listaCalificaciones = new List<CalificacionesViewModel>();
 
             if (tipoUsuario == "Alumno")
-            {
-                var calificaciones =  from ca in Calificacion
-                            join u in Usuario on ca.IdUnidad equals u.Id
-                            join cu in Curso on ca.IdCurso equals cu.Id
-                            join uni in Unidad on ca.IdUnidad equals uni.Id
-                            where ca.IdAlumno == IdUsuario
-                            select new
-                            {
-                                id = ca.Id,
-                                fecha = ca.Fecha,
-                                nota = ca.Nota,
-                                nombreCompleto = u.Nombre + " " + u.Apellido,
-                                nombreCurso = cu.Nombre,
-                                nombreUnidad = uni.Nombre
-
-                            };
-
-                foreach (var ca in calificaciones)
-                {
-                    var calificacion = new CalificacionesViewModel();
-
-                    calificacion.Id = ca.id;
-                    calificacion.NombreCompletoAlumno = ca.nombreCompleto;
-                    calificacion.NombreCurso = ca.nombreCurso;
-                    calificacion.NombreUnidad = ca.nombreUnidad;
-                    calificacion.Fecha = ca.fecha;
-                    calificacion.Nota = ca.nota;
-
-                    listaCalificaciones.Add(calificacion);
-                }
-            }
-            else
             {
                 var calificaciones = from ca in Calificacion
                                      join u in Usuario on ca.IdAlumno equals u.Id
                                      join cu in Curso on ca.IdCurso equals cu.Id
                                      join uni in Unidad on ca.IdUnidad equals uni.Id
+                                     where ca.IdAlumno == IdUsuario
                                      select new
                                      {
                                          id = ca.Id,
@@ -193,8 +162,76 @@ namespace Patron_Center.Models
 
                     listaCalificaciones.Add(calificacion);
                 }
+                return listaCalificaciones;
             }
-            return listaCalificaciones;
+            else
+            {
+                if (tipoUsuario == "Docente")
+                {
+                    var calificaciones = from ca in Calificacion
+                                         join u in Usuario on ca.IdAlumno equals u.Id
+                                         join cu in Curso on ca.IdCurso equals cu.Id
+                                         join uni in Unidad on ca.IdUnidad equals uni.Id
+                                         where cu.DocenteId == IdUsuario
+                                         select new
+                                         {
+                                             id = ca.Id,
+                                             fecha = ca.Fecha,
+                                             nota = ca.Nota,
+                                             nombreCompleto = $"{u.Nombre} {u.Apellido} ({u.Documento})",
+                                             nombreCurso = cu.Nombre,
+                                             nombreUnidad = uni.Nombre
+
+                                         };
+
+                    foreach (var ca in calificaciones)
+                    {
+                        var calificacion = new CalificacionesViewModel();
+
+                        calificacion.Id = ca.id;
+                        calificacion.NombreCompletoAlumno = ca.nombreCompleto;
+                        calificacion.NombreCurso = ca.nombreCurso;
+                        calificacion.NombreUnidad = ca.nombreUnidad;
+                        calificacion.Fecha = ca.fecha;
+                        calificacion.Nota = ca.nota;
+
+                        listaCalificaciones.Add(calificacion);
+                    }
+                    return listaCalificaciones;
+                }
+                else
+                {
+                    var calificaciones = from ca in Calificacion
+                                         join u in Usuario on ca.IdAlumno equals u.Id
+                                         join cu in Curso on ca.IdCurso equals cu.Id
+                                         join uni in Unidad on ca.IdUnidad equals uni.Id
+                                         select new
+                                         {
+                                             id = ca.Id,
+                                             fecha = ca.Fecha,
+                                             nota = ca.Nota,
+                                             nombreCompleto = $"{u.Nombre} {u.Apellido} ({u.Documento})",
+                                             nombreCurso = cu.Nombre,
+                                             nombreUnidad = uni.Nombre
+
+                                         };
+
+                    foreach (var ca in calificaciones)
+                    {
+                        var calificacion = new CalificacionesViewModel();
+
+                        calificacion.Id = ca.id;
+                        calificacion.NombreCompletoAlumno = ca.nombreCompleto;
+                        calificacion.NombreCurso = ca.nombreCurso;
+                        calificacion.NombreUnidad = ca.nombreUnidad;
+                        calificacion.Fecha = ca.fecha;
+                        calificacion.Nota = ca.nota;
+
+                        listaCalificaciones.Add(calificacion);
+                    }
+                }
+                return listaCalificaciones;
+            }
         }
 
         //Obtener todos los Ids de los cursos que tienen alguna correccion pendiente
@@ -240,19 +277,19 @@ namespace Patron_Center.Models
         {
             var correccionPendiente = new CorreccionDesarrolloViewModel();
             var correcciones = from r in RespuestaAlumno
-                                 join u in Usuario on r.UsuarioId equals u.Id
-                                 join p in Pregunta on r.PreguntaId equals p.Id
-                                 join q in Quiz on p.QuizId equals q.Id
+                               join u in Usuario on r.UsuarioId equals u.Id
+                               join p in Pregunta on r.PreguntaId equals p.Id
+                               join q in Quiz on p.QuizId equals q.Id
                                where r.UsuarioId == idAlumno && r.DocenteId == idDocente && r.PuntajeObtenido == null
                                select new
-                                 {
-                                     id = r.Id,
-                                     enunciadoPregunta = p.Enunciado,
-                                     respuestaAlumno = r.RespuestaDesarrollo,
-                                     nombreCompleto = $"{u.Nombre} {u.Apellido} ({u.Documento})",
-                                     nombreQuiz = q.Nombre,
+                               {
+                                   id = r.Id,
+                                   enunciadoPregunta = p.Enunciado,
+                                   respuestaAlumno = r.RespuestaDesarrollo,
+                                   nombreCompleto = $"{u.Nombre} {u.Apellido} ({u.Documento})",
+                                   nombreQuiz = q.Nombre,
 
-                                 };
+                               };
             foreach (var elemento in correcciones)
             {
                 var aux = new CorreccionDesarrollo();
@@ -886,7 +923,7 @@ Crear una clase Facade que provea todos los métodos necesarios para ejecutar op
               );
             modelBuilder.Entity<Diapositiva>().HasData(
               new Diapositiva
-  {
+              {
                   Id = 17,
                   Texto = @"Motivación:
 
@@ -898,8 +935,8 @@ Crear una clase Facade que provea todos los métodos necesarios para ejecutar op
                   Orden = 1,
                   Eliminado = false,
                   UnidadId = 3,
-  }
-  ); 
+              }
+  );
         }
 
 

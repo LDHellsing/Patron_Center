@@ -212,3 +212,7 @@ C:\PatronCenter\Patron_Center\Patron-Center\obj\Debug\netcoreapp2.2\Patron-Cente
 C:\PatronCenter\Patron_Center\Patron-Center\obj\Debug\netcoreapp2.2\Patron-Center.csproj.CopyComplete
 C:\PatronCenter\Patron_Center\Patron-Center\obj\Debug\netcoreapp2.2\Patron-Center.csprojAssemblyReference.cache
 C:\PatronCenter\Patron-Center\obj\Debug\netcoreapp2.2\Patron-Center.csprojAssemblyReference.cache
+C:\PatronCenter\Patron-Center\obj\Debug\netcoreapp2.2\Razor\Views\RespuestaAlumnos\CorreccionesPendientesAlumnos.g.cshtml.cs
+C:\PatronCenter\Patron-Center\obj\Debug\netcoreapp2.2\Razor\Views\RespuestaAlumnos\CorreccionesPendientesCursos.g.cshtml.cs
+C:\PatronCenter\Patron-Center\obj\Debug\netcoreapp2.2\Razor\Views\RespuestaAlumnos\CorreccionesPendientesUnidades.g.cshtml.cs
+C:\PatronCenter\Patron-Center\obj\Debug\netcoreapp2.2\Razor\Views\RespuestaAlumnos\CorrecionDesarrollo.g.cshtml.cs
