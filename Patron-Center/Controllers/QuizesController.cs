@@ -347,7 +347,7 @@ namespace Patron_Center.Controllers
                     respuestasSeleccionadas.Add(Int32.Parse(respuesta.Seleccionada));
                 }
                 // Me traigo una lista que contiene los datos de las respuestas seleccionadas por el alumno en la BD
-                var correcciones = await _context.ObtenerRespuestasCorrectas(respuestasSeleccionadas);
+                var correcciones = await _context.GetCorrectAnswersAsync(respuestasSeleccionadas);
 
                 int respuestasCorrectas = 0;
                 int respuestasIncorrectas = 0;
@@ -374,7 +374,7 @@ namespace Patron_Center.Controllers
 
                 if (HttpContext.Session.GetString("_Evaluacion") == "true")
                 {
-                    var curso = await _context.getCursoByUnidad(respuestaAlumnoMO.IdUnidad);
+                    var curso = await _context.GetCourseByUnitAsync(respuestaAlumnoMO.IdUnidad);
                     var calificacionEvaluacion = new Calificacion();
                     calificacionEvaluacion.IdCurso = curso.Id;
                     calificacionEvaluacion.IdUnidad = respuestaAlumnoMO.IdUnidad;
@@ -411,7 +411,7 @@ namespace Patron_Center.Controllers
             }
 
             var curso = new Curso();
-            curso = await _context.getCursoByUnidad(respuestaAlumnoDesarrollo.IdUnidad);
+            curso = await _context.GetCourseByUnitAsync(respuestaAlumnoDesarrollo.IdUnidad);
 
             foreach (var pregunta in respuestaAlumnoDesarrollo.Preguntas)
             {

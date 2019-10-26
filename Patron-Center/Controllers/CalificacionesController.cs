@@ -38,7 +38,7 @@ namespace Patron_Center.Controllers
             int idUsuario = (int) HttpContext.Session.GetInt32("_IdUsuario");
             var tipoUsuario = HttpContext.Session.GetString("_TipoUsuario");
 
-            var calificaciones = _context.getCalificaciones(tipoUsuario, idUsuario);
+            var calificaciones = _context.GetEvaluationScores(tipoUsuario, idUsuario);
 
             return View(calificaciones);
         }

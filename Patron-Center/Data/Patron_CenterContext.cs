@@ -85,7 +85,7 @@ namespace Patron_Center.Models
             }
         }
 
-        public async Task<List<CorreccionMOViewModel>> ObtenerRespuestasCorrectas(List<int> respuestasId)
+        public async Task<List<CorreccionMOViewModel>> GetCorrectAnswersAsync(List<int> respuestasId)
         {
             try
             {
@@ -109,8 +109,7 @@ namespace Patron_Center.Models
             }
         }
 
-        //Puede que esto no sea necesario
-        public async Task<Curso> getCursoByUnidad(int unidadId)
+        public async Task<Curso> GetCourseByUnitAsync(int unidadId)
         {
             Unidad unidad = null;
 
@@ -127,7 +126,7 @@ namespace Patron_Center.Models
         }
 
         // traer todas las calificaciones
-        public List<CalificacionesViewModel> getCalificaciones (string tipoUsuario, int IdUsuario)
+        public List<CalificacionesViewModel> GetEvaluationScores(string tipoUsuario, int IdUsuario)
         {
             
             var listaCalificaciones = new List<CalificacionesViewModel>();
@@ -175,7 +174,7 @@ namespace Patron_Center.Models
                                          id = ca.Id,
                                          fecha = ca.Fecha,
                                          nota = ca.Nota,
-                                         nombreCompleto = u.Nombre + " " + u.Apellido,
+                                         nombreCompleto = $"{u.Nombre} {u.Apellido} ({u.Documento})",
                                          nombreCurso = cu.Nombre,
                                          nombreUnidad = uni.Nombre
 
@@ -196,6 +195,79 @@ namespace Patron_Center.Models
                 }
             }
             return listaCalificaciones;
+        }
+
+        //Obtener todos los Ids de los cursos que tienen alguna correccion pendiente
+        public async Task<List<int>> GetCoursesWithPendingCorrectionsAsync(int idDocente)
+        {
+            var idsCursos = await RespuestaAlumno.Where(d => d.DocenteId == idDocente && d.PuntajeObtenido == null).Select(c => c.CursoId).Distinct().ToListAsync();
+
+
+            foreach (var curso in idsCursos)
+            {
+                Console.WriteLine("idCurso " + curso);
+            }
+            return idsCursos;
+        }
+
+        //Obtener todos los ids de las unidades que tienen una correccion pendiente para un curso especifico y un docente especifico
+        public async Task<List<int>> GetUnitsWithPendingCorrectionsAsync(int idCurso, int idDocente)
+        {
+            var idsUnidades = await RespuestaAlumno.Where(c => c.CursoId == idCurso && c.DocenteId == idDocente && c.PuntajeObtenido == null).Select(u => u.UnidadId).Distinct().ToListAsync();
+
+            foreach (var unidad in idsUnidades)
+            {
+                Console.WriteLine("idUnidad " + unidad);
+            }
+            return idsUnidades;
+        }
+
+        //Obtener todos los ids de los alumnos que tienen una correccion pendiente para una unidad especifica
+        public async Task<List<int>> GetStudentsWithPendingCorrectionsAsync(int idUnidad, int idDocente)
+        {
+            var idsAlumnos = await RespuestaAlumno.Where(u => u.UnidadId == idUnidad && u.DocenteId == idDocente && u.PuntajeObtenido == null).Select(a => a.UsuarioId).Distinct().ToListAsync();
+
+
+            foreach (var alumno in idsAlumnos)
+            {
+                Console.WriteLine("IdAlumno" + alumno);
+            }
+            return idsAlumnos;
+        }
+
+        //Obtener la correccion pendiente para un alumno en especifico
+        public CorreccionDesarrolloViewModel GetPendingCorrection(int idAlumno, int idDocente)
+        {
+            var correccionPendiente = new CorreccionDesarrolloViewModel();
+            var correcciones = from r in RespuestaAlumno
+                                 join u in Usuario on r.UsuarioId equals u.Id
+                                 join p in Pregunta on r.PreguntaId equals p.Id
+                                 join q in Quiz on p.QuizId equals q.Id
+                               where r.UsuarioId == idAlumno && r.DocenteId == idDocente && r.PuntajeObtenido == null
+                               select new
+                                 {
+                                     id = r.Id,
+                                     enunciadoPregunta = p.Enunciado,
+                                     respuestaAlumno = r.RespuestaDesarrollo,
+                                     nombreCompleto = $"{u.Nombre} {u.Apellido} ({u.Documento})",
+                                     nombreQuiz = q.Nombre,
+
+                                 };
+            foreach (var elemento in correcciones)
+            {
+                var aux = new CorreccionDesarrollo();
+
+                correccionPendiente.NombreAlumno = elemento.nombreCompleto;
+                correccionPendiente.NombreQuiz = elemento.nombreQuiz;
+                aux.Id = elemento.id;
+                aux.EnunciadoPregunta = elemento.enunciadoPregunta;
+                aux.RespuestaAlumno = elemento.respuestaAlumno;
+                correccionPendiente.Correcciones.Add(aux);
+
+                Console.WriteLine($" alumno {elemento.nombreCompleto} quiz {elemento.nombreQuiz} idCorreccion {elemento.id} enunciado {elemento.enunciadoPregunta} respuesta {elemento.respuestaAlumno}");
+            }
+
+            return correccionPendiente;
         }
 
 
