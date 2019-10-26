@@ -243,8 +243,7 @@ namespace Patron_Center.Controllers
 
 
         // Cursar quiz
-        // GET
-        // Quizes/AnswerQuiz
+        // GET: Quizes/AnswerQuiz
         public async Task<IActionResult> AnswerQuiz(int QuizId)
         {
 
