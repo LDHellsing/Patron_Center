@@ -456,23 +456,32 @@ namespace Patron_Center.Controllers
                 ViewBag.TipoUsuario = HttpContext.Session.GetString("_TipoUsuario");
             }
 
-            var patron_CenterContext = _context.Quiz.Include(q => q.Unidad).Where(q => q.UnidadId == UnidadId && q.Eliminado != true);
-            // Detección de evaluciones que fueron cursadas.
+            var patron_CenterContext = _context.Quiz.Include(q => q.Unidad).Include(c => c.Unidad.Curso).Where(q => q.UnidadId == UnidadId && q.Eliminado != true);
+            // Detección de evaluciones que fueron cursadas o ya estan finalizadas.
             foreach (var quiz in patron_CenterContext)
             {
-                var calificacion = _context.Calificacion.Where(c => c.IdAlumno == HttpContext.Session.GetInt32("_IdUsuario") && c.IdUnidad == quiz.UnidadId && quiz.Evaluacion == TipoQuiz.Evaluacion);
-
-                if (calificacion.Count() > 0)
+                if (quiz.Unidad.Curso.FechaFinalizacion < DateTime.Now)
                 {
-                    quiz.EvalucionCursada = true;
+                    quiz.CursoFinalizado = true;
                 }
                 else
                 {
-                    var respuestaAlumno = _context.RespuestaAlumno.Where(r => r.UsuarioId == HttpContext.Session.GetInt32("_IdUsuario") && r.UnidadId == quiz.UnidadId && quiz.Evaluacion == TipoQuiz.Evaluacion);
+                    //Evaluaciones con calificación
+                    var calificacion = _context.Calificacion.Where(c => c.IdAlumno == HttpContext.Session.GetInt32("_IdUsuario") && c.IdUnidad == quiz.UnidadId && quiz.Evaluacion == TipoQuiz.Evaluacion);
 
-                    if (respuestaAlumno.Count() > 0)
+                    if (calificacion.Count() > 0)
                     {
                         quiz.EvalucionCursada = true;
+                    }
+                    else
+                    {
+                        //Evaluaciones con respuestas
+                        var respuestaAlumno = _context.RespuestaAlumno.Where(r => r.UsuarioId == HttpContext.Session.GetInt32("_IdUsuario") && r.UnidadId == quiz.UnidadId && quiz.Evaluacion == TipoQuiz.Evaluacion);
+
+                        if (respuestaAlumno.Count() > 0)
+                        {
+                            quiz.EvalucionCursada = true;
+                        }
                     }
                 }
             }

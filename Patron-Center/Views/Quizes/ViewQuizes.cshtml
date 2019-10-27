@@ -40,6 +40,10 @@
                     {
                         <input class="btn btn-info btn-sm btn-block" type="submit" value="Evaluación Cursada" data-toggle="tooltip" data-placement="top" title="No puedes cursar una evaluación mas de una vez." />
                     }
+                    else if (item.CursoFinalizado == true)
+                    {
+                        <input class="btn btn-info btn-sm btn-block" type="submit" value="Curso Finalizado" data-toggle="tooltip" data-placement="top" title="No puedes cursar una evaluación de un curso que ya finalizó." />
+                    }
                     else
                     {
                         <form asp-controller="Quizes" asp-action="AnswerQuiz">

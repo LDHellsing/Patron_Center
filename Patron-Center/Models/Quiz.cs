@@ -33,6 +33,8 @@ namespace Patron_Center.Models
         public string Nombre { get; set; }
         [NotMapped]
         public Boolean EvalucionCursada { get; set; }
+        [NotMapped]
+        public Boolean CursoFinalizado { get; set; }
 
         // Crear el CRUD de nuevo para que tome esta nueva property
         // [Required(ErrorMessage = "El minimo de aprobacion es un campo requerido")]
