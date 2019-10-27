@@ -72,9 +72,17 @@ namespace Patron_Center.Models
         {
             try
             {
-                Quiz quizAux = await Quiz.Where(q => q.Id == quizId).Include(p => p.Preguntas).ThenInclude(re => re.Respuestas).FirstAsync();
 
-                Debug.WriteLine("El quiz resultante es ---------> " + quizAux.Preguntas.ElementAt(0).Enunciado);
+                var quizAux = await Quiz.Where(q => q.Id == quizId && q.Eliminado == false).FirstAsync();
+
+                var preguntasAux = await Pregunta.Where(p => p.QuizId == quizId && p.Eliminado == false).ToListAsync();
+                quizAux.Preguntas = preguntasAux;
+
+                foreach (var pregunta in preguntasAux)
+                {
+                    var respuestas = await Respuesta.Where(r => r.PreguntaId == pregunta.Id && r.Eliminado == false).ToListAsync();
+                    pregunta.Respuestas = respuestas;
+                }
 
                 return quizAux;
             }
