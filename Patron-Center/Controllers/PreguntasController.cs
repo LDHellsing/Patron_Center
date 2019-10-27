@@ -39,10 +39,12 @@ namespace Patron_Center.Controllers
                 return View("Views/Shared/UnauthorisedUserError.cshtml");
             }
             var patron_CenterContext = _context.Pregunta.Include(p => p.Quiz).Where(p => p.QuizId == QuizId);
-            var UnidadId = patron_CenterContext.Select(u => u.Quiz.UnidadId).FirstOrDefault();
             ViewBag.QuizType = patron_CenterContext.Select(p => p.Quiz.Ejercicio).FirstOrDefault();
-            ViewBag.QuizId = QuizId;
+
+            var UnidadId = _context.Quiz.Where(u => u.Id == QuizId).Select(u => u.UnidadId).FirstOrDefault();
             ViewBag.UnidadId = UnidadId;
+            ViewBag.QuizId = QuizId;
+
             return View(await patron_CenterContext.ToListAsync());
         }
 
@@ -213,7 +215,7 @@ namespace Patron_Center.Controllers
                         return NotFound();
                     }
                     else
-                    {                        
+                    {
                         throw;
                     }
                 }

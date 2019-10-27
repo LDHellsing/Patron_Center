@@ -38,8 +38,8 @@ namespace Patron_Center.Controllers
                 ViewBag.InvalidUserMessage = "Usted no tiene permiso para acceder a este sitio. Por favor Ingrese con un usuario Administrador, ";
                 return View("Views/Shared/UnauthorisedUserError.cshtml");
             }
-            var patron_CenterContext = _context.Respuesta.Include(r => r.Pregunta).Where(r => r.PreguntaId == PreguntaId);
-            var QuizId = _context.Pregunta.Select(q => q.QuizId).FirstOrDefault();
+            var patron_CenterContext = _context.Respuesta.Include(r => r.Pregunta).Include(p => p.Pregunta).Where(r => r.PreguntaId == PreguntaId);
+            var QuizId = _context.Pregunta.Where(p => p.Id == PreguntaId).Select(p => p.QuizId).FirstOrDefault();
             ViewBag.PreguntaId = PreguntaId;
             ViewBag.QuizId = QuizId;
             return View(await patron_CenterContext.ToListAsync());
