@@ -216,3 +216,7 @@ C:\PatronCenter\Patron-Center\obj\Debug\netcoreapp2.2\Razor\Views\RespuestaAlumn
 C:\PatronCenter\Patron-Center\obj\Debug\netcoreapp2.2\Razor\Views\RespuestaAlumnos\CorreccionesPendientesCursos.g.cshtml.cs
 C:\PatronCenter\Patron-Center\obj\Debug\netcoreapp2.2\Razor\Views\RespuestaAlumnos\CorreccionesPendientesUnidades.g.cshtml.cs
 C:\PatronCenter\Patron-Center\obj\Debug\netcoreapp2.2\Razor\Views\RespuestaAlumnos\CorrecionDesarrollo.g.cshtml.cs
+C:\PatronCenter\Patron_Center\Patron-Center\obj\Debug\netcoreapp2.2\Razor\Views\RespuestaAlumnos\CorreccionesPendientesAlumnos.g.cshtml.cs
+C:\PatronCenter\Patron_Center\Patron-Center\obj\Debug\netcoreapp2.2\Razor\Views\RespuestaAlumnos\CorreccionesPendientesCursos.g.cshtml.cs
+C:\PatronCenter\Patron_Center\Patron-Center\obj\Debug\netcoreapp2.2\Razor\Views\RespuestaAlumnos\CorreccionesPendientesUnidades.g.cshtml.cs
+C:\PatronCenter\Patron_Center\Patron-Center\obj\Debug\netcoreapp2.2\Razor\Views\RespuestaAlumnos\CorrecionDesarrollo.g.cshtml.cs
