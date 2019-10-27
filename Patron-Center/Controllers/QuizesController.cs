@@ -207,7 +207,7 @@ namespace Patron_Center.Controllers
 
                 if (quiz.Evaluacion == TipoQuiz.Evaluacion)
                 {
-                    var evaluationsCount = _context.Quiz.Where(q => q.UnidadId == quiz.UnidadId && q.Evaluacion == TipoQuiz.Evaluacion && q.Eliminado == false);
+                    var evaluationsCount = _context.Quiz.Where(q => q.UnidadId == quiz.UnidadId && q.Evaluacion == TipoQuiz.Evaluacion && q.Eliminado == false && q.Id != quiz.Id);
 
                     if (evaluationsCount.Count() > 0)
                     {
