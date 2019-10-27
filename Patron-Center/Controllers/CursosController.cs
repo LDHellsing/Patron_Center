@@ -110,9 +110,16 @@ namespace Patron_Center.Controllers
 
             if (ModelState.IsValid)
             {
-                _context.Add(curso);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                if (curso.FechaFinalizacion <= DateTime.Now)
+                {
+                    ViewBag.DateError = "La Fecha de Finalización debe ser mayor a hoy";
+                }
+                else
+                {
+                    _context.Add(curso);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
+                }
             }
             ViewData["DocenteId"] = new SelectList(_context.Usuario.Where(x => x.TipoUsuario.Equals(TipoUsuario.Docente) && !x.Eliminado), "Id", "NombreCompleto");
             return View(curso);
@@ -181,29 +188,40 @@ namespace Patron_Center.Controllers
             {
                 return NotFound();
             }
-
-            if (ModelState.IsValid)
+            if (curso.FechaFinalizacion <= DateTime.Now)
             {
-                try
+                ViewBag.DateError = "La Fecha de Finalización debe ser mayor a hoy";
+            }
+            else
+            {
+
+                if (ModelState.IsValid)
                 {
-                    _context.Update(curso);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!CursoExists(curso.Id))
+                    try
                     {
-                        return NotFound();
+
+                        _context.Update(curso);
+                        await _context.SaveChangesAsync();
+
+
                     }
-                    else
+                    catch (DbUpdateConcurrencyException)
                     {
-                        throw;
+                        if (!CursoExists(curso.Id))
+                        {
+                            return NotFound();
+                        }
+                        else
+                        {
+                            throw;
+                        }
                     }
+                    return RedirectToAction(nameof(Index));
                 }
-                return RedirectToAction(nameof(Index));
             }
             ViewData["DocenteId"] = new SelectList(_context.Usuario.Where(x => x.TipoUsuario.Equals(TipoUsuario.Docente) && !x.Eliminado), "Id", "NombreCompleto");
             return View(curso);
+
         }
 
         private bool CursoExists(int id)

@@ -17,15 +17,18 @@ namespace Patron_Center.Models
         [DisplayName("Ejercicio")]
         public int QuizId { get; set; }
         public Quiz Quiz { get; set; }
+        [Range(1, 100, ErrorMessage = "El puntaje debe ser entre 1 y 100")]
+        [Required(ErrorMessage = "El campo Puntaje de pregunta es requerido")]
         public int Puntaje { get; set; }
         [DisplayName("Inactivo")]
         public bool Eliminado { get; set; }
 		[BindProperty]
 		public List<Respuesta> Respuestas { get; set; }
         //testear si el orden se reinicia a 0 cuando se crea un nuevo quiz
-        [Required(ErrorMessage = "El campo orden de pregunta es requerido")]
+        [Required(ErrorMessage = "El campo Orden es requerido")]
+        [Range(1, 1000, ErrorMessage = "El Orden debe ser entre 1 y 1000")]
         public int Orden { get; set; }
-        [Required(ErrorMessage = "El enunciado es un campo requerido")]
+        [Required(ErrorMessage = "El Enunciado es un campo requerido")]
         public string Enunciado { get; set; }
     }
 }

@@ -47,7 +47,7 @@ namespace Patron_Center.Models
         {
             get
             {
-                return string.Format("{0} {1}", Nombre, Apellido);
+                return string.Format("{0} {1} ({2})", Nombre, Apellido, Documento);
             }
         }
     }

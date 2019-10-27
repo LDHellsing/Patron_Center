@@ -24,6 +24,7 @@ namespace Patron_Center.Models
         public String UrlVideo { get; set; }
 
         [Required(ErrorMessage = "Orden es un campo requerido")]
+        [Range(1, 1000, ErrorMessage = "El Orden debe ser entre 1 y 1000")]
         [DisplayName("Orden")]
         public int Orden { get; set; }
 

@@ -87,6 +87,7 @@ namespace Patron_Center.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Texto,UrlVide,Orden,Eliminado,UnidadId")] Diapositiva diapositiva)
         {
+            ViewBag.UnidadId_ = diapositiva.UnidadId;
 
             if (ModelState.IsValid)
             {

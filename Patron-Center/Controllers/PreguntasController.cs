@@ -116,6 +116,8 @@ namespace Patron_Center.Controllers
                 return View("Views/Shared/UnauthorisedUserError.cshtml");
             }
 
+            ViewBag.QuizId_ = pregunta.QuizId;
+
             if (ModelState.IsValid)
             {
                 // Quiz quizPadre = await _context.Quiz.FindAsync(pregunta.QuizId);
@@ -190,6 +192,7 @@ namespace Patron_Center.Controllers
                 ViewBag.InvalidUserMessage = "Usted no tiene permiso para acceder a este sitio. Por favor Ingrese con un usuario Administrador, ";
                 return View("Views/Shared/UnauthorisedUserError.cshtml");
             }
+            ViewBag.QuizId_ = pregunta.QuizId;
 
             if (id != pregunta.Id)
             {
@@ -210,7 +213,7 @@ namespace Patron_Center.Controllers
                         return NotFound();
                     }
                     else
-                    {
+                    {                        
                         throw;
                     }
                 }

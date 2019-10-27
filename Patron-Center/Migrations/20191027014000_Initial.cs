@@ -250,7 +250,7 @@ namespace Patron_Center.Migrations
             migrationBuilder.InsertData(
                 table: "Curso",
                 columns: new[] { "Id", "AlumnosId", "Descripcion", "DocenteId", "Eliminado", "FechaFinalizacion", "Nombre" },
-                values: new object[] { 1, null, "Aqui se dicta un curso destinado al manejo y el aprendisaje de patrones de diseño.", 2, false, new DateTime(2019, 10, 23, 23, 10, 53, 871, DateTimeKind.Local).AddTicks(8977), "Patrones de Diseño" });
+                values: new object[] { 1, null, "Aqui se dicta un curso destinado al manejo y el aprendisaje de patrones de diseño.", 2, false, new DateTime(2019, 12, 31, 0, 0, 0, 0, DateTimeKind.Unspecified), "Patrones de Diseño" });
 
             migrationBuilder.InsertData(
                 table: "CursoUsuario",

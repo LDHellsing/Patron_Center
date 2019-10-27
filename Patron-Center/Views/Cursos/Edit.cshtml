@@ -38,6 +38,10 @@
                 <select asp-for="DocenteId" class="form-control" asp-items="ViewBag.DocenteId"></select>
                 <span asp-validation-for="DocenteId" class="text-danger"></span>
             </div>
+            @if (ViewBag.DateError != null)
+            {
+                <span class="text-danger">@ViewBag.DateError</span>
+            }
             <div class="form-group">
                 <input type="submit" value="Editar" class="btn btn-primary" />
             </div>

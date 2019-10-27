@@ -418,7 +418,7 @@ namespace Patron_Center.Models
                     Id = 1,
                     Nombre = "Patrones de Diseño",
                     Descripcion = "Aqui se dicta un curso destinado al manejo y el aprendisaje de patrones de diseño.",
-                    FechaFinalizacion = DateTime.Now,
+                    FechaFinalizacion = DateTime.Parse("2019-12-31"),
                     Eliminado = false,
                     DocenteId = 2
                 }
