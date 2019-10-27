@@ -49,9 +49,10 @@
         <div class="form-group">
             <input asp-for="@Model.QuizName" class="form-control data-form" hidden="hidden" />
         </div>
+
         <div class="form-group">
             <input type="submit" value="Enviar" class="btn btn-primary" />
+            <a asp-controller="Quizes" asp-action="ViewQuizes" asp-route-UnidadId="@Model.IdUnidad" class="btn btn-secondary">Cancelar</a>
         </div>
     </form>
-
 </div>
