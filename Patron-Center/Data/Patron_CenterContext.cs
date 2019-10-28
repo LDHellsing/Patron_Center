@@ -414,19 +414,7 @@ namespace Patron_Center.Models
                    Eliminado = true
                }
                );
-            modelBuilder.Entity<Usuario>().HasData(
-             new Usuario
-             {
-                 Id = 6,
-                 Documento = "49077339",
-                 Nombre = "Agustin",
-                 Apellido = "Gonzalez",
-                 Email = "agustingonzalezata@gmail.com",
-                 Password = "YWRtaW4=",
-                 TipoUsuario = TipoUsuario.Alumno,
-                 Eliminado = false
-             }
-             );
+
             //Creación de Cursos
             modelBuilder.Entity<Curso>().HasData(
                 new Curso
@@ -448,14 +436,6 @@ namespace Patron_Center.Models
                     UsuarioId = 3
                 }
                 );
-            modelBuilder.Entity<CursoUsuario>().HasData(
-              new CursoUsuario
-              {
-                  Id = 2,
-                  CursoId = 1,
-                  UsuarioId = 6
-              }
-              );
             //Creación de Unidades
             modelBuilder.Entity<Unidad>().HasData(
                 new Unidad
@@ -627,7 +607,7 @@ Se utilizan para modelar diferentes formas de interactuar entre los objetos para
                     Id = 1,
                     UnidadId = 1,
                     Puntaje = 10,
-                    Evaluacion = TipoQuiz.Ejercicio,
+                    Evaluacion = TipoQuiz.Evaluacion,
                     Ejercicio = TipoEjercicio.Multiple_Opcion,
                     Eliminado = false,
                     Nombre = "Introducción a Patrones de diseño"
@@ -887,6 +867,51 @@ En un parque de diversiones se desea contar los números de las entradas. Para e
 
                }
                );
+            modelBuilder.Entity<Quiz>().HasData(
+                new Quiz
+                {
+                    Id = 2,
+                    UnidadId = 2,
+                    Puntaje = 10,
+                    Evaluacion = TipoQuiz.Evaluacion,
+                    Ejercicio = TipoEjercicio.Desarrollo,
+                    Eliminado = false,
+                    Nombre = "Patrón Singleton"
+                }
+                );
+            modelBuilder.Entity<Pregunta>().HasData(
+               new Pregunta
+               {
+                   Id = 5,
+                   QuizId = 2,
+                   Puntaje = 50,
+                   Eliminado = false,
+                   Orden = 4,
+                   Enunciado = "¿Que soluciona el patron Singleton?"
+               }
+               );
+            modelBuilder.Entity<Pregunta>().HasData(
+               new Pregunta
+               {
+                   Id = 6,
+                   QuizId = 2,
+                   Puntaje = 25,
+                   Eliminado = false,
+                   Orden = 4,
+                   Enunciado = "¿Que garantiza el patron Singleton?"
+               }
+               );
+            modelBuilder.Entity<Pregunta>().HasData(
+               new Pregunta
+               {
+                   Id = 7,
+                   QuizId = 2,
+                   Puntaje = 25,
+                   Eliminado = false,
+                   Orden = 4,
+                   Enunciado = "Describa brevemente un ejemplo de utilización del patron Singleton"
+               }
+               );
             //unidad 3
             modelBuilder.Entity<Unidad>().HasData(
                 new Unidad
@@ -902,7 +927,7 @@ En un parque de diversiones se desea contar los números de las entradas. Para e
                new Diapositiva
                {
                    Id = 14,
-                   Texto = "Patrón Singleton",
+                   Texto = "Patrón Facade",
                    Orden = 1,
                    Eliminado = false,
                    UnidadId = 3,
@@ -953,6 +978,51 @@ Crear una clase Facade que provea todos los métodos necesarios para ejecutar op
                   UnidadId = 3,
               }
   );
+            modelBuilder.Entity<Quiz>().HasData(
+     new Quiz
+     {
+         Id = 3,
+         UnidadId = 3,
+         Puntaje = 10,
+         Evaluacion = TipoQuiz.Evaluacion,
+         Ejercicio = TipoEjercicio.Desarrollo,
+         Eliminado = false,
+         Nombre = "Patrón Singleton"
+     }
+     );
+            modelBuilder.Entity<Pregunta>().HasData(
+               new Pregunta
+               {
+                   Id = 8,
+                   QuizId = 3,
+                   Puntaje = 50,
+                   Eliminado = false,
+                   Orden = 4,
+                   Enunciado = "¿Que soluciona el patron Facade?"
+               }
+               );
+            modelBuilder.Entity<Pregunta>().HasData(
+               new Pregunta
+               {
+                   Id = 9,
+                   QuizId = 3,
+                   Puntaje = 25,
+                   Eliminado = false,
+                   Orden = 4,
+                   Enunciado = "¿Que motiva utilizar el patron Facade?"
+               }
+               );
+            modelBuilder.Entity<Pregunta>().HasData(
+               new Pregunta
+               {
+                   Id = 10,
+                   QuizId = 3,
+                   Puntaje = 25,
+                   Eliminado = false,
+                   Orden = 4,
+                   Enunciado = "¿Mejora la separación en capas el patron Facade? Explique"
+               }
+               );
         }
 
 

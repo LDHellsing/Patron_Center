@@ -486,8 +486,9 @@ namespace Patron_Center.Controllers
                 }
             }
 
-            var CursoId = patron_CenterContext.Where(q => q.UnidadId == UnidadId).Select(c => c.Unidad.CursoId).FirstOrDefault();
+            
             ViewBag.UnidadId = UnidadId;
+            var CursoId = _context.Unidad.Where(u => u.Id == UnidadId).Select(u => u.CursoId).FirstOrDefault();
             ViewBag.CursoId = CursoId;
             return View(await patron_CenterContext.ToListAsync());
         }

@@ -243,8 +243,7 @@ namespace Patron_Center.Migrations
                     { 2, "Docente", "2", false, "docente@patroncenter.com", "Docente", "YWRtaW4=", 1 },
                     { 3, "Alumno", "3", false, "alumno@patroncenter.com", "Alumno", "YWRtaW4=", 0 },
                     { 4, "Alumno", "4", true, "alumno@patroncenter.com", "Alumno Eliminado", "YWRtaW4=", 0 },
-                    { 5, "Docente", "5", true, "docente@patroncenter.com", "Docecente Eliminado", "YWRtaW4=", 1 },
-                    { 6, "Gonzalez", "49077339", false, "agustingonzalezata@gmail.com", "Agustin", "YWRtaW4=", 0 }
+                    { 5, "Docente", "5", true, "docente@patroncenter.com", "Docecente Eliminado", "YWRtaW4=", 1 }
                 });
 
             migrationBuilder.InsertData(
@@ -255,11 +254,7 @@ namespace Patron_Center.Migrations
             migrationBuilder.InsertData(
                 table: "CursoUsuario",
                 columns: new[] { "Id", "CursoId", "UsuarioId" },
-                values: new object[,]
-                {
-                    { 1, 1, 3 },
-                    { 2, 1, 6 }
-                });
+                values: new object[] { 1, 1, 3 });
 
             migrationBuilder.InsertData(
                 table: "Unidad",
@@ -277,6 +272,9 @@ namespace Patron_Center.Migrations
                 values: new object[,]
                 {
                     { 1, false, 1, "Introducción a Patrones de Diseño", 1, "bx5WqFEndoo" },
+                    { 16, false, 1, @"Solución:
+
+                Crear una clase Facade que provea todos los métodos necesarios para ejecutar operaciones del subsistema.", 3, null },
                     { 15, false, 1, @"
                 Problema:
 
@@ -285,7 +283,7 @@ namespace Patron_Center.Migrations
                 - Se desea bajar el acoplamiento entre clases de un subsistema y las clases externas que la utilizan.
 
                 - Mejorar la separación de capas entre subsistemas.", 3, null },
-                    { 14, false, 1, "Patrón Singleton", 3, null },
+                    { 14, false, 1, "Patrón Facade", 3, null },
                     { 13, false, 5, @"Ejemplo:
 
                 En un parque de diversiones se desea contar los números de las entradas. Para esto se debe realizar un generador que adicionalmente brinda funcionalidades como:
@@ -311,7 +309,6 @@ namespace Patron_Center.Migrations
                 - Debemos tener una única instancia de la clase y esta debe ser accesible desde todo el sistema.
 
                 - Se debe poder extender dicha clase por medio de herencia.", 2, null },
-                    { 9, false, 1, "Patrón Singleton", 2, "gocJeOHtj9w" },
                     { 17, false, 1, @"Motivación:
 
                 - Estructurar un sistema en subsistemas ayuda a reducir la complejidad.
@@ -319,6 +316,7 @@ namespace Patron_Center.Migrations
                 - Una meta común de diseño es reducir el número de dependencias entre subsistemas.
 
                 - Una forma de lograr esto es introducir un objeto fachada, una única y simple fachada de servicios generales del subsistemas.", 3, null },
+                    { 9, false, 1, "Patrón Singleton", 2, "gocJeOHtj9w" },
                     { 8, false, 8, @"ESTRUCTURA DE PATRONES:
 
                 1) Nombre
@@ -394,16 +392,18 @@ namespace Patron_Center.Migrations
                 - Definición de patrones
                 - Tipos de patrones
                 - Clasificación de patrones
-                - Objetivos", 1, null },
-                    { 16, false, 1, @"Solución:
-
-                Crear una clase Facade que provea todos los métodos necesarios para ejecutar operaciones del subsistema.", 3, null }
+                - Objetivos", 1, null }
                 });
 
             migrationBuilder.InsertData(
                 table: "Quiz",
                 columns: new[] { "Id", "Ejercicio", "Eliminado", "Evaluacion", "Nombre", "Puntaje", "UnidadId" },
-                values: new object[] { 1, 0, false, 1, "Introducción a Patrones de diseño", 10, 1 });
+                values: new object[,]
+                {
+                    { 2, 1, false, 0, "Patrón Singleton", 10, 2 },
+                    { 1, 0, false, 0, "Introducción a Patrones de diseño", 10, 1 },
+                    { 3, 1, false, 0, "Patrón Singleton", 10, 3 }
+                });
 
             migrationBuilder.InsertData(
                 table: "Pregunta",
@@ -413,7 +413,13 @@ namespace Patron_Center.Migrations
                     { 1, false, "¿Que persiguen los patrones de diseño?", 1, 25, 1 },
                     { 2, false, "¿Cual de los siguientes tipos NO es un tipo de patrón de diseño?", 2, 25, 1 },
                     { 3, false, "Los patrones de Creación particicipan en el momento de crear obejetos...", 3, 25, 1 },
-                    { 4, false, "Los patrones de Comportamiento empeoran la performance del sistema...", 4, 25, 1 }
+                    { 4, false, "Los patrones de Comportamiento empeoran la performance del sistema...", 4, 25, 1 },
+                    { 5, false, "¿Que soluciona el patron Singleton?", 4, 50, 2 },
+                    { 6, false, "¿Que garantiza el patron Singleton?", 4, 25, 2 },
+                    { 7, false, "Describa brevemente un ejemplo de utilización del patron Singleton", 4, 25, 2 },
+                    { 8, false, "¿Que soluciona el patron Facade?", 4, 50, 3 },
+                    { 9, false, "¿Que motiva utilizar el patron Facade?", 4, 25, 3 },
+                    { 10, false, "¿Mejora la separación en capas el patron Facade? Explique", 4, 25, 3 }
                 });
 
             migrationBuilder.InsertData(

@@ -10,7 +10,7 @@ using Patron_Center.Models;
 namespace Patron_Center.Migrations
 {
     [DbContext(typeof(Patron_CenterContext))]
-    [Migration("20191027014000_Initial")]
+    [Migration("20191028232842_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -106,12 +106,6 @@ namespace Patron_Center.Migrations
                             Id = 1,
                             CursoId = 1,
                             UsuarioId = 3
-                        },
-                        new
-                        {
-                            Id = 2,
-                            CursoId = 1,
-                            UsuarioId = 6
                         });
                 });
 
@@ -340,7 +334,7 @@ En un parque de diversiones se desea contar los números de las entradas. Para e
                             Id = 14,
                             Eliminado = false,
                             Orden = 1,
-                            Texto = "Patrón Singleton",
+                            Texto = "Patrón Facade",
                             UnidadId = 3
                         },
                         new
@@ -443,6 +437,60 @@ Crear una clase Facade que provea todos los métodos necesarios para ejecutar op
                             Orden = 4,
                             Puntaje = 25,
                             QuizId = 1
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Eliminado = false,
+                            Enunciado = "¿Que soluciona el patron Singleton?",
+                            Orden = 4,
+                            Puntaje = 50,
+                            QuizId = 2
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Eliminado = false,
+                            Enunciado = "¿Que garantiza el patron Singleton?",
+                            Orden = 4,
+                            Puntaje = 25,
+                            QuizId = 2
+                        },
+                        new
+                        {
+                            Id = 7,
+                            Eliminado = false,
+                            Enunciado = "Describa brevemente un ejemplo de utilización del patron Singleton",
+                            Orden = 4,
+                            Puntaje = 25,
+                            QuizId = 2
+                        },
+                        new
+                        {
+                            Id = 8,
+                            Eliminado = false,
+                            Enunciado = "¿Que soluciona el patron Facade?",
+                            Orden = 4,
+                            Puntaje = 50,
+                            QuizId = 3
+                        },
+                        new
+                        {
+                            Id = 9,
+                            Eliminado = false,
+                            Enunciado = "¿Que motiva utilizar el patron Facade?",
+                            Orden = 4,
+                            Puntaje = 25,
+                            QuizId = 3
+                        },
+                        new
+                        {
+                            Id = 10,
+                            Eliminado = false,
+                            Enunciado = "¿Mejora la separación en capas el patron Facade? Explique",
+                            Orden = 4,
+                            Puntaje = 25,
+                            QuizId = 3
                         });
                 });
 
@@ -477,10 +525,30 @@ Crear una clase Facade que provea todos los métodos necesarios para ejecutar op
                             Id = 1,
                             Ejercicio = 0,
                             Eliminado = false,
-                            Evaluacion = 1,
+                            Evaluacion = 0,
                             Nombre = "Introducción a Patrones de diseño",
                             Puntaje = 10,
                             UnidadId = 1
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Ejercicio = 1,
+                            Eliminado = false,
+                            Evaluacion = 0,
+                            Nombre = "Patrón Singleton",
+                            Puntaje = 10,
+                            UnidadId = 2
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Ejercicio = 1,
+                            Eliminado = false,
+                            Evaluacion = 0,
+                            Nombre = "Patrón Singleton",
+                            Puntaje = 10,
+                            UnidadId = 3
                         });
                 });
 
@@ -765,17 +833,6 @@ Crear una clase Facade que provea todos los métodos necesarios para ejecutar op
                             Nombre = "Docecente Eliminado",
                             Password = "YWRtaW4=",
                             TipoUsuario = 1
-                        },
-                        new
-                        {
-                            Id = 6,
-                            Apellido = "Gonzalez",
-                            Documento = "49077339",
-                            Eliminado = false,
-                            Email = "agustingonzalezata@gmail.com",
-                            Nombre = "Agustin",
-                            Password = "YWRtaW4=",
-                            TipoUsuario = 0
                         });
                 });
 
