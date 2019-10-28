@@ -109,7 +109,8 @@ namespace Patron_Center.Controllers
                 ViewData["CursoId"] = new SelectList(_context.Curso.Where(x => !x.Eliminado && x.Id == cursoUsuario.CursoId), "Id", "Nombre", cursoUsuario.CursoId);
                 ViewData["UsuarioId"] = new SelectList(_context.Usuario.Where(x => x.TipoUsuario.Equals(TipoUsuario.Alumno) && !x.Eliminado), "Id", "NombreCompleto", cursoUsuario.UsuarioId);
                 ViewBag.CursoId_ = cursoUsuario.CursoId;
-                return View(cursoUsuario);
+                //return View(cursoUsuario);
+                return RedirectToAction("Index", "CursoUsuarios", new { CursoId = cursoUsuario.CursoId });
             }
             else
             {

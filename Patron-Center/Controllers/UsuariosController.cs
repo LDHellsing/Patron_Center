@@ -140,9 +140,9 @@ namespace Patron_Center.Controllers
 
                     _context.Add(usuario);
                     await _context.SaveChangesAsync();
-                    return RedirectToAction(nameof(Create));
+                    return RedirectToAction(nameof(Index));
                 }
-                return View(usuario);
+                return RedirectToAction(nameof(Create));
             }
             else
             {
@@ -217,18 +217,18 @@ namespace Patron_Center.Controllers
                 {
                     //Encripto password
                     var PasswordToBytes = System.Text.Encoding.UTF8.GetBytes(usuario.Password);
-                    usuario.Password = System.Convert.ToBase64String(PasswordToBytes);                 
+                    usuario.Password = System.Convert.ToBase64String(PasswordToBytes);
 
                     _context.Update(usuario);
                     await _context.SaveChangesAsync();
 
-                    if(usuario.Id == HttpContext.Session.GetInt32("_IdUsuario"))
+                    if (usuario.Id == HttpContext.Session.GetInt32("_IdUsuario"))
                     {
                         HttpContext.Session.SetString("_Nombre", usuario.Nombre);
                         HttpContext.Session.SetString("_TipoUsuario", Enum.GetName(typeof(TipoUsuario), usuario.TipoUsuario));
                     }
 
-                    
+
                 }
                 catch (DbUpdateConcurrencyException)
                 {
