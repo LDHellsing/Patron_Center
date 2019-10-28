@@ -22,12 +22,46 @@ namespace Patron_Center.Controllers
         // GET: RespuestaAlumnos
         public async Task<IActionResult> Index()
         {
+            if (HttpContext.Session.GetInt32("_IdUsuario") == null)
+            {
+                return RedirectToAction("Index", "Login");
+            }
+            else
+            {
+                ViewBag.Nombre = HttpContext.Session.GetString("_Nombre");
+                ViewBag.IdUsuario = HttpContext.Session.GetInt32("_IdUsuario");
+                ViewBag.TipoUsuario = HttpContext.Session.GetString("_TipoUsuario");
+            }
+
+            if (HttpContext.Session.GetString("_TipoUsuario") != "Docente")
+            {
+                ViewBag.InvalidUserMessage = "Usted no tiene permiso para acceder a este sitio. Por favor Ingrese con un usuario Docente, ";
+                return View("Views/Shared/UnauthorisedUserError.cshtml");
+            }
+
             return View(await _context.RespuestaAlumno.ToListAsync());
         }
 
         // GET: RespuestaAlumnos/Details/5
         public async Task<IActionResult> Details(int? id)
         {
+            if (HttpContext.Session.GetInt32("_IdUsuario") == null)
+            {
+                return RedirectToAction("Index", "Login");
+            }
+            else
+            {
+                ViewBag.Nombre = HttpContext.Session.GetString("_Nombre");
+                ViewBag.IdUsuario = HttpContext.Session.GetInt32("_IdUsuario");
+                ViewBag.TipoUsuario = HttpContext.Session.GetString("_TipoUsuario");
+            }
+
+            if (HttpContext.Session.GetString("_TipoUsuario") != "Docente")
+            {
+                ViewBag.InvalidUserMessage = "Usted no tiene permiso para acceder a este sitio. Por favor Ingrese con un usuario Docente, ";
+                return View("Views/Shared/UnauthorisedUserError.cshtml");
+            }
+
             if (id == null)
             {
                 return NotFound();
@@ -46,6 +80,23 @@ namespace Patron_Center.Controllers
         // GET: RespuestaAlumnos/Create
         public IActionResult Create()
         {
+            if (HttpContext.Session.GetInt32("_IdUsuario") == null)
+            {
+                return RedirectToAction("Index", "Login");
+            }
+            else
+            {
+                ViewBag.Nombre = HttpContext.Session.GetString("_Nombre");
+                ViewBag.IdUsuario = HttpContext.Session.GetInt32("_IdUsuario");
+                ViewBag.TipoUsuario = HttpContext.Session.GetString("_TipoUsuario");
+            }
+
+            if (HttpContext.Session.GetString("_TipoUsuario") != "Docente")
+            {
+                ViewBag.InvalidUserMessage = "Usted no tiene permiso para acceder a este sitio. Por favor Ingrese con un usuario Docente, ";
+                return View("Views/Shared/UnauthorisedUserError.cshtml");
+            }
+
             return View();
         }
 
@@ -56,6 +107,23 @@ namespace Patron_Center.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,UsuarioId,DocenteId,PreguntaId,RespuestaDesarrollo,PuntajeObtenido")] RespuestaAlumno respuestaAlumno)
         {
+            if (HttpContext.Session.GetInt32("_IdUsuario") == null)
+            {
+                return RedirectToAction("Index", "Login");
+            }
+            else
+            {
+                ViewBag.Nombre = HttpContext.Session.GetString("_Nombre");
+                ViewBag.IdUsuario = HttpContext.Session.GetInt32("_IdUsuario");
+                ViewBag.TipoUsuario = HttpContext.Session.GetString("_TipoUsuario");
+            }
+
+            if (HttpContext.Session.GetString("_TipoUsuario") != "Docente")
+            {
+                ViewBag.InvalidUserMessage = "Usted no tiene permiso para acceder a este sitio. Por favor Ingrese con un usuario Docente, ";
+                return View("Views/Shared/UnauthorisedUserError.cshtml");
+            }
+
             if (ModelState.IsValid)
             {
                 _context.Add(respuestaAlumno);
@@ -68,6 +136,23 @@ namespace Patron_Center.Controllers
         // GET: RespuestaAlumnos/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
+            if (HttpContext.Session.GetInt32("_IdUsuario") == null)
+            {
+                return RedirectToAction("Index", "Login");
+            }
+            else
+            {
+                ViewBag.Nombre = HttpContext.Session.GetString("_Nombre");
+                ViewBag.IdUsuario = HttpContext.Session.GetInt32("_IdUsuario");
+                ViewBag.TipoUsuario = HttpContext.Session.GetString("_TipoUsuario");
+            }
+
+            if (HttpContext.Session.GetString("_TipoUsuario") != "Docente")
+            {
+                ViewBag.InvalidUserMessage = "Usted no tiene permiso para acceder a este sitio. Por favor Ingrese con un usuario Docente, ";
+                return View("Views/Shared/UnauthorisedUserError.cshtml");
+            }
+
             if (id == null)
             {
                 return NotFound();
@@ -88,6 +173,23 @@ namespace Patron_Center.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,UsuarioId,DocenteId,PreguntaId,RespuestaDesarrollo,PuntajeObtenido")] RespuestaAlumno respuestaAlumno)
         {
+            if (HttpContext.Session.GetInt32("_IdUsuario") == null)
+            {
+                return RedirectToAction("Index", "Login");
+            }
+            else
+            {
+                ViewBag.Nombre = HttpContext.Session.GetString("_Nombre");
+                ViewBag.IdUsuario = HttpContext.Session.GetInt32("_IdUsuario");
+                ViewBag.TipoUsuario = HttpContext.Session.GetString("_TipoUsuario");
+            }
+
+            if (HttpContext.Session.GetString("_TipoUsuario") != "Docente")
+            {
+                ViewBag.InvalidUserMessage = "Usted no tiene permiso para acceder a este sitio. Por favor Ingrese con un usuario Docente, ";
+                return View("Views/Shared/UnauthorisedUserError.cshtml");
+            }
+
             if (id != respuestaAlumno.Id)
             {
                 return NotFound();
@@ -119,6 +221,23 @@ namespace Patron_Center.Controllers
         // GET: RespuestaAlumnos/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
+            if (HttpContext.Session.GetInt32("_IdUsuario") == null)
+            {
+                return RedirectToAction("Index", "Login");
+            }
+            else
+            {
+                ViewBag.Nombre = HttpContext.Session.GetString("_Nombre");
+                ViewBag.IdUsuario = HttpContext.Session.GetInt32("_IdUsuario");
+                ViewBag.TipoUsuario = HttpContext.Session.GetString("_TipoUsuario");
+            }
+
+            if (HttpContext.Session.GetString("_TipoUsuario") != "Docente")
+            {
+                ViewBag.InvalidUserMessage = "Usted no tiene permiso para acceder a este sitio. Por favor Ingrese con un usuario Docente, ";
+                return View("Views/Shared/UnauthorisedUserError.cshtml");
+            }
+
             if (id == null)
             {
                 return NotFound();
@@ -139,6 +258,23 @@ namespace Patron_Center.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
+            if (HttpContext.Session.GetInt32("_IdUsuario") == null)
+            {
+                return RedirectToAction("Index", "Login");
+            }
+            else
+            {
+                ViewBag.Nombre = HttpContext.Session.GetString("_Nombre");
+                ViewBag.IdUsuario = HttpContext.Session.GetInt32("_IdUsuario");
+                ViewBag.TipoUsuario = HttpContext.Session.GetString("_TipoUsuario");
+            }
+
+            if (HttpContext.Session.GetString("_TipoUsuario") != "Docente")
+            {
+                ViewBag.InvalidUserMessage = "Usted no tiene permiso para acceder a este sitio. Por favor Ingrese con un usuario Docente, ";
+                return View("Views/Shared/UnauthorisedUserError.cshtml");
+            }
+
             var respuestaAlumno = await _context.RespuestaAlumno.FindAsync(id);
             _context.RespuestaAlumno.Remove(respuestaAlumno);
             await _context.SaveChangesAsync();
@@ -148,6 +284,23 @@ namespace Patron_Center.Controllers
         // GET: RespuestaAlumnos/Correcciones
         public async Task<IActionResult> Correcciones()
         {
+            if (HttpContext.Session.GetInt32("_IdUsuario") == null)
+            {
+                return RedirectToAction("Index", "Login");
+            }
+            else
+            {
+                ViewBag.Nombre = HttpContext.Session.GetString("_Nombre");
+                ViewBag.IdUsuario = HttpContext.Session.GetInt32("_IdUsuario");
+                ViewBag.TipoUsuario = HttpContext.Session.GetString("_TipoUsuario");
+            }
+
+            if (HttpContext.Session.GetString("_TipoUsuario") != "Docente")
+            {
+                ViewBag.InvalidUserMessage = "Usted no tiene permiso para acceder a este sitio. Por favor Ingrese con un usuario Docente, ";
+                return View("Views/Shared/UnauthorisedUserError.cshtml");
+            }
+
             var cursosIds = await _context.GetCoursesWithPendingCorrectionsAsync((int)HttpContext.Session.GetInt32("_IdUsuario"));
             var cursos = new List<Curso>();
 
@@ -162,6 +315,23 @@ namespace Patron_Center.Controllers
         // GET: RespuestaAlumnos/CorreccionesUnidades
         public async Task<IActionResult> CorreccionesUnidades(int CursoId)
         {
+            if (HttpContext.Session.GetInt32("_IdUsuario") == null)
+            {
+                return RedirectToAction("Index", "Login");
+            }
+            else
+            {
+                ViewBag.Nombre = HttpContext.Session.GetString("_Nombre");
+                ViewBag.IdUsuario = HttpContext.Session.GetInt32("_IdUsuario");
+                ViewBag.TipoUsuario = HttpContext.Session.GetString("_TipoUsuario");
+            }
+
+            if (HttpContext.Session.GetString("_TipoUsuario") != "Docente")
+            {
+                ViewBag.InvalidUserMessage = "Usted no tiene permiso para acceder a este sitio. Por favor Ingrese con un usuario Docente, ";
+                return View("Views/Shared/UnauthorisedUserError.cshtml");
+            }
+
             var unidadesIds = await _context.GetUnitsWithPendingCorrectionsAsync(CursoId, (int)HttpContext.Session.GetInt32("_IdUsuario"));
             var unidades = new List<Unidad>();
 
@@ -177,6 +347,23 @@ namespace Patron_Center.Controllers
         // GET: RespuestaAlumnos/CorreccionesAlumnos
         public async Task<IActionResult> CorreccionesAlumnos(int UnidadId)
         {
+            if (HttpContext.Session.GetInt32("_IdUsuario") == null)
+            {
+                return RedirectToAction("Index", "Login");
+            }
+            else
+            {
+                ViewBag.Nombre = HttpContext.Session.GetString("_Nombre");
+                ViewBag.IdUsuario = HttpContext.Session.GetInt32("_IdUsuario");
+                ViewBag.TipoUsuario = HttpContext.Session.GetString("_TipoUsuario");
+            }
+
+            if (HttpContext.Session.GetString("_TipoUsuario") != "Docente")
+            {
+                ViewBag.InvalidUserMessage = "Usted no tiene permiso para acceder a este sitio. Por favor Ingrese con un usuario Docente, ";
+                return View("Views/Shared/UnauthorisedUserError.cshtml");
+            }
+
             HttpContext.Session.SetInt32("_UnidadIdCorreccion", UnidadId);
             var alumnosIds = await _context.GetStudentsWithPendingCorrectionsAsync(UnidadId, (int)HttpContext.Session.GetInt32("_IdUsuario"));
             var alumnos = new List<Usuario>();
@@ -207,6 +394,23 @@ namespace Patron_Center.Controllers
         // POST: RespuestaAlumnos/Corregir
         public async Task<IActionResult> Corregir(CorreccionDesarrolloViewModel correccionDesarrolloViewModel)
         {
+            if (HttpContext.Session.GetInt32("_IdUsuario") == null)
+            {
+                return RedirectToAction("Index", "Login");
+            }
+            else
+            {
+                ViewBag.Nombre = HttpContext.Session.GetString("_Nombre");
+                ViewBag.IdUsuario = HttpContext.Session.GetInt32("_IdUsuario");
+                ViewBag.TipoUsuario = HttpContext.Session.GetString("_TipoUsuario");
+            }
+
+            if (HttpContext.Session.GetString("_TipoUsuario") != "Docente")
+            {
+                ViewBag.InvalidUserMessage = "Usted no tiene permiso para acceder a este sitio. Por favor Ingrese con un usuario Docente, ";
+                return View("Views/Shared/UnauthorisedUserError.cshtml");
+            }
+
             if (ModelState.IsValid)
             {
                 // Valida que el docente no ingrese una nota superior al máximo asignado a una pregunta
