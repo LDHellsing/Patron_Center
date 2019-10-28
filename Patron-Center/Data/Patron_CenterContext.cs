@@ -281,14 +281,14 @@ namespace Patron_Center.Models
         }
 
         //Obtener la correccion pendiente para un alumno en especifico
-        public CorreccionDesarrolloViewModel GetPendingCorrection(int idAlumno, int idDocente)
+        public CorreccionDesarrolloViewModel GetPendingCorrection(int idAlumno, int idDocente, int idUnidad)
         {
             var correccionPendiente = new CorreccionDesarrolloViewModel();
             var correcciones = from r in RespuestaAlumno
                                join u in Usuario on r.UsuarioId equals u.Id
                                join p in Pregunta on r.PreguntaId equals p.Id
                                join q in Quiz on p.QuizId equals q.Id
-                               where r.UsuarioId == idAlumno && r.DocenteId == idDocente && r.PuntajeObtenido == null
+                               where r.UsuarioId == idAlumno && r.DocenteId == idDocente && r.UnidadId == idUnidad && r.PuntajeObtenido == null
                                select new
                                {
                                    id = r.Id,

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -22,6 +23,7 @@ namespace Patron_Center.Models
         public int Id { get; set; }
         public string EnunciadoPregunta { get; set; }
         public string RespuestaAlumno { get; set; }
+        [Required(ErrorMessage = "No todas las respuestas fueron corregidas")]
         public int PuntajeAsignado { get; set; }
     }
 }

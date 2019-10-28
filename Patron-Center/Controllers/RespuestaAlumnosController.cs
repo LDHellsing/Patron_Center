@@ -146,7 +146,7 @@ namespace Patron_Center.Controllers
         }
 
         // GET: RespuestaAlumnos/Correcciones
-        public async Task<IActionResult> Correciones()
+        public async Task<IActionResult> Correcciones()
         {
             var cursosIds = await _context.GetCoursesWithPendingCorrectionsAsync((int)HttpContext.Session.GetInt32("_IdUsuario"));
             var cursos = new List<Curso>();
@@ -170,12 +170,14 @@ namespace Patron_Center.Controllers
                 var aux = await _context.Unidad.FindAsync(id);
                 unidades.Add(aux);
             }
+            HttpContext.Session.SetInt32("_IdCursoCorreccion", CursoId);
             return View("CorreccionesPendientesUnidades", unidades);
         }
 
         // GET: RespuestaAlumnos/CorreccionesAlumnos
         public async Task<IActionResult> CorreccionesAlumnos(int UnidadId)
         {
+            HttpContext.Session.SetInt32("_UnidadIdCorreccion", UnidadId);
             var alumnosIds = await _context.GetStudentsWithPendingCorrectionsAsync(UnidadId, (int)HttpContext.Session.GetInt32("_IdUsuario"));
             var alumnos = new List<Usuario>();
 
@@ -184,14 +186,19 @@ namespace Patron_Center.Controllers
                 var aux = await _context.Usuario.FindAsync(id);
                 alumnos.Add(aux);
             }
+            ViewBag.CursoId = HttpContext.Session.GetInt32("_IdCursoCorreccion");
+            ViewBag.UnidadId = HttpContext.Session.GetInt32("_UnidadIdCorreccion");
             return View("CorreccionesPendientesAlumnos", alumnos);
         }
 
         // GET: RespuestaAlumnos/Corregir
         public IActionResult Corregir(int AlumnoId)
         {
-            var correccionPendiente = _context.GetPendingCorrection(AlumnoId, (int)HttpContext.Session.GetInt32("_IdUsuario"));
+            var idDocente = (int)HttpContext.Session.GetInt32("_IdUsuario");
+            var idUnidad = (int)HttpContext.Session.GetInt32("_UnidadIdCorreccion");
+            var correccionPendiente = _context.GetPendingCorrection(AlumnoId, idDocente, idUnidad);
 
+            ViewBag.UnidadId = idUnidad;
             return View("CorrecionDesarrollo", correccionPendiente);
         }
 
@@ -203,7 +210,7 @@ namespace Patron_Center.Controllers
             // Logica de validacion y guardado de correccion aca
 
             //puede que sea mejor redireccionar a una view donde le muestre un mensaje de confirmacion con los datos añadidos
-            return RedirectToAction("Correciones", "RespuestaAlumnos");
+            return RedirectToAction("Correcciones", "RespuestaAlumnos");
         }
 
         private bool RespuestaAlumnoExists(int id)

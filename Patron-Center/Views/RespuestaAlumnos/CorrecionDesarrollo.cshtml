@@ -4,3 +4,39 @@
     ViewData["Title"] = "Corrección";
 }
 
+<h3>@Model.NombreAlumno</h3> <br />
+<h6>@Model.NombreQuiz</h6> <br />
+
+<form asp-action="Corregir" method="post">
+    @for (int i = 0; i < Model.Correcciones.Count; i++)
+    {
+        <div class="form-group">
+            <label asp-for="@Model.Correcciones[i].EnunciadoPregunta" class="control-label">@Model.Correcciones[i].EnunciadoPregunta</label>
+            <div>
+                <label asp-for="@Model.Correcciones[i].RespuestaAlumno" class="control-label">@Model.Correcciones[i].RespuestaAlumno</label>
+            </div>
+            <div>
+                @Html.TextBoxFor(m => m.Correcciones[i].PuntajeAsignado, new { @class = "form-control" })
+            </div>
+            <div>
+                @Html.HiddenFor(x => Model.Correcciones[i].EnunciadoPregunta)
+            </div>
+            <div>
+                @Html.HiddenFor(x => Model.Correcciones[i].RespuestaAlumno)
+            </div>
+            <div>
+                @Html.HiddenFor(x => Model.Correcciones[i].Id)
+            </div>
+        </div>
+    }
+    <div>
+        @Html.HiddenFor(m => m.NombreAlumno)
+    </div>
+    <div>
+        @Html.HiddenFor(m => m.NombreQuiz)
+    </div>
+    <div class="form-group">
+            <input type="submit" value="Enviar" class="btn btn-primary" />
+            <a asp-controller="RespuestaAlumnos" asp-action="CorreccionesAlumnos" asp-route-UnidadId="@ViewBag.UnidadId" class="btn btn-secondary">Cancelar</a>
+        </div>
+</form>
