@@ -296,6 +296,10 @@ namespace Patron_Center.Models
                                    respuestaAlumno = r.RespuestaDesarrollo,
                                    nombreCompleto = $"{u.Nombre} {u.Apellido} ({u.Documento})",
                                    nombreQuiz = q.Nombre,
+                                   puntajePregunta = p.Puntaje,
+                                   alumnoId = r.UsuarioId,
+                                   cursoId = r.CursoId,
+                                   unidadId = r.UnidadId
 
                                };
             foreach (var elemento in correcciones)
@@ -304,9 +308,13 @@ namespace Patron_Center.Models
 
                 correccionPendiente.NombreAlumno = elemento.nombreCompleto;
                 correccionPendiente.NombreQuiz = elemento.nombreQuiz;
+                correccionPendiente.IdAlumno = elemento.alumnoId;
+                correccionPendiente.IdCurso = elemento.cursoId;
+                correccionPendiente.IdUnidad = elemento.unidadId;
                 aux.Id = elemento.id;
                 aux.EnunciadoPregunta = elemento.enunciadoPregunta;
                 aux.RespuestaAlumno = elemento.respuestaAlumno;
+                aux.PuntajeMaximoPregunta = elemento.puntajePregunta;
                 correccionPendiente.Correcciones.Add(aux);
 
                 Console.WriteLine($" alumno {elemento.nombreCompleto} quiz {elemento.nombreQuiz} idCorreccion {elemento.id} enunciado {elemento.enunciadoPregunta} respuesta {elemento.respuestaAlumno}");

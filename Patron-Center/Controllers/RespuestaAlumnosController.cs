@@ -207,10 +207,44 @@ namespace Patron_Center.Controllers
         // POST: RespuestaAlumnos/Corregir
         public async Task<IActionResult> Corregir(CorreccionDesarrolloViewModel correccionDesarrolloViewModel)
         {
-            // Logica de validacion y guardado de correccion aca
+            if (ModelState.IsValid)
+            {
+                // Valida que el docente no ingrese una nota superior al máximo asignado a una pregunta
+                foreach (var correccion in correccionDesarrolloViewModel.Correcciones)
+                {
+                    if(correccion.PuntajeAsignado > correccion.PuntajeMaximoPregunta)
+                    {
+                        ViewBag.MensajeError = "El puntaje asignado a una pregunta no puede superar el máximo de la misma";
+                        return View("CorrecionDesarrollo", correccionDesarrolloViewModel);
+                    }
+                }
 
-            //puede que sea mejor redireccionar a una view donde le muestre un mensaje de confirmacion con los datos añadidos
-            return RedirectToAction("Correcciones", "RespuestaAlumnos");
+                var notaFinal = 0;
+
+                foreach (var correccion in correccionDesarrolloViewModel.Correcciones)
+                {
+                    notaFinal += correccion.PuntajeAsignado;
+                    var correccionAux = await _context.RespuestaAlumno.FindAsync(correccion.Id);
+                    correccionAux.PuntajeObtenido = correccion.PuntajeAsignado;
+                    _context.Update(correccionAux);
+                    await _context.SaveChangesAsync();
+                }
+
+                // Creamos la calificación final de la evaluación
+                var calificacion = new Calificacion();
+                calificacion.IdAlumno = correccionDesarrolloViewModel.IdAlumno;
+                calificacion.IdCurso = correccionDesarrolloViewModel.IdCurso;
+                calificacion.IdUnidad = correccionDesarrolloViewModel.IdUnidad;
+                calificacion.Fecha = DateTime.Now.ToString("dd/MM/yyyy");
+                calificacion.Nota = notaFinal;
+                _context.Calificacion.Add(calificacion);
+                await _context.SaveChangesAsync();
+
+                return RedirectToAction("Correcciones", "RespuestaAlumnos");
+            }
+
+            ViewBag.MensajeError = "Todas las respuestas deben tener un puntaje y este debe estar entre cero y el puntaje máximo de la pregunta";
+            return View("CorrecionDesarrollo", correccionDesarrolloViewModel);
         }
 
         private bool RespuestaAlumnoExists(int id)

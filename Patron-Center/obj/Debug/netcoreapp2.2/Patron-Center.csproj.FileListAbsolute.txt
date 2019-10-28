@@ -139,7 +139,6 @@ C:\PatronCenter\Patron-Center\obj\Debug\netcoreapp2.2\Razor\Views\RespuestaAlumn
 C:\PatronCenter\Patron-Center\obj\Debug\netcoreapp2.2\Razor\Views\RespuestaAlumnos\Index.g.cshtml.cs
 C:\PatronCenter\Patron-Center\obj\Debug\netcoreapp2.2\Razor\Views\Quizes\QuizDevFinished.g.cshtml.cs
 C:\PatronCenter\Patron-Center\obj\Debug\netcoreapp2.2\Razor\Views\Calificaciones\Index.g.cshtml.cs
-C:\PatronCenter\Patron-Center\obj\Debug\netcoreapp2.2\Patron-Center.csprojAssemblyReference.cache
 C:\PatronCenter\Patron-Center\obj\Debug\netcoreapp2.2\Razor\Views\RespuestaAlumnos\CorreccionesPendientesAlumnos.g.cshtml.cs
 C:\PatronCenter\Patron-Center\obj\Debug\netcoreapp2.2\Razor\Views\RespuestaAlumnos\CorreccionesPendientesCursos.g.cshtml.cs
 C:\PatronCenter\Patron-Center\obj\Debug\netcoreapp2.2\Razor\Views\RespuestaAlumnos\CorreccionesPendientesUnidades.g.cshtml.cs

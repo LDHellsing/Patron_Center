@@ -10,6 +10,9 @@ namespace Patron_Center.Models
     {
         public string NombreQuiz { get; set; }
         public string NombreAlumno { get; set; }
+        public int IdAlumno { get; set; }
+        public int IdCurso { get; set; }
+        public int IdUnidad { get; set; }
         public List<CorreccionDesarrollo> Correcciones { get; set; }
 
         public CorreccionDesarrolloViewModel()
@@ -22,7 +25,9 @@ namespace Patron_Center.Models
     {
         public int Id { get; set; }
         public string EnunciadoPregunta { get; set; }
+        public int PuntajeMaximoPregunta { get; set; }
         public string RespuestaAlumno { get; set; }
+        [Range(0, 100, ErrorMessage = "El puntaje debe ser entre 1 y 100")]
         [Required(ErrorMessage = "No todas las respuestas fueron corregidas")]
         public int PuntajeAsignado { get; set; }
     }

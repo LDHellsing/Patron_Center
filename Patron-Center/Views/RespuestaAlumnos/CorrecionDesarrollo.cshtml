@@ -7,11 +7,19 @@
 <h3>@Model.NombreAlumno</h3> <br />
 <h6>@Model.NombreQuiz</h6> <br />
 
+@if (ViewBag.MensajeError != null && ViewBag.MensajeError != "")
+{
+    <div class="alert alert-danger" role="alert">
+        @ViewBag.MensajeError
+    </div>
+}
+
 <form asp-action="Corregir" method="post">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
     @for (int i = 0; i < Model.Correcciones.Count; i++)
     {
         <div class="form-group">
-            <label asp-for="@Model.Correcciones[i].EnunciadoPregunta" class="control-label">@Model.Correcciones[i].EnunciadoPregunta</label>
+            <label asp-for="@Model.Correcciones[i].EnunciadoPregunta" class="control-label">@Model.Correcciones[i].EnunciadoPregunta (max @Model.Correcciones[i].PuntajeMaximoPregunta)</label>
             <div>
                 <label asp-for="@Model.Correcciones[i].RespuestaAlumno" class="control-label">@Model.Correcciones[i].RespuestaAlumno</label>
             </div>
@@ -27,6 +35,9 @@
             <div>
                 @Html.HiddenFor(x => Model.Correcciones[i].Id)
             </div>
+            <div>
+                @Html.HiddenFor(x => Model.Correcciones[i].PuntajeMaximoPregunta)
+            </div>
         </div>
     }
     <div>
@@ -35,8 +46,17 @@
     <div>
         @Html.HiddenFor(m => m.NombreQuiz)
     </div>
+    <div>
+        @Html.HiddenFor(m => m.IdAlumno)
+    </div>
+    <div>
+        @Html.HiddenFor(m => m.IdCurso)
+    </div>
+    <div>
+        @Html.HiddenFor(m => m.IdUnidad)
+    </div>
     <div class="form-group">
-            <input type="submit" value="Enviar" class="btn btn-primary" />
-            <a asp-controller="RespuestaAlumnos" asp-action="CorreccionesAlumnos" asp-route-UnidadId="@ViewBag.UnidadId" class="btn btn-secondary">Cancelar</a>
-        </div>
+        <input type="submit" value="Enviar" class="btn btn-primary" />
+        <a asp-controller="RespuestaAlumnos" asp-action="CorreccionesAlumnos" asp-route-UnidadId="@Model.IdUnidad" class="btn btn-secondary">Cancelar</a>
+    </div>
 </form>
