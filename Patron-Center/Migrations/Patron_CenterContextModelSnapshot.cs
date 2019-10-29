@@ -422,7 +422,7 @@ Crear una clase Facade que provea todos los métodos necesarios para ejecutar op
                         {
                             Id = 3,
                             Eliminado = false,
-                            Enunciado = "Los patrones de Creación particicipan en el momento de crear obejetos...",
+                            Enunciado = "Los patrones de Creación participan en el momento de crear objetos...",
                             Orden = 3,
                             Puntaje = 25,
                             QuizId = 1
@@ -435,6 +435,33 @@ Crear una clase Facade que provea todos los métodos necesarios para ejecutar op
                             Orden = 4,
                             Puntaje = 25,
                             QuizId = 1
+                        },
+                        new
+                        {
+                            Id = 11,
+                            Eliminado = false,
+                            Enunciado = "¿en que décadas aparecen los primeros patrones de diseño?",
+                            Orden = 1,
+                            Puntaje = 20,
+                            QuizId = 4
+                        },
+                        new
+                        {
+                            Id = 12,
+                            Eliminado = false,
+                            Enunciado = "¿Que no persigue un patrón de diseño?",
+                            Orden = 2,
+                            Puntaje = 40,
+                            QuizId = 4
+                        },
+                        new
+                        {
+                            Id = 13,
+                            Eliminado = false,
+                            Enunciado = "¿Que debe cumplir un patron de diseño?",
+                            Orden = 3,
+                            Puntaje = 40,
+                            QuizId = 4
                         },
                         new
                         {
@@ -530,6 +557,16 @@ Crear una clase Facade que provea todos los métodos necesarios para ejecutar op
                         },
                         new
                         {
+                            Id = 4,
+                            Ejercicio = 0,
+                            Eliminado = false,
+                            Evaluacion = 1,
+                            Nombre = "Ejercicio Introducción a Patrones de diseño",
+                            Puntaje = 10,
+                            UnidadId = 1
+                        },
+                        new
+                        {
                             Id = 2,
                             Ejercicio = 1,
                             Eliminado = false,
@@ -608,7 +645,7 @@ Crear una clase Facade que provea todos los métodos necesarios para ejecutar op
                         {
                             Id = 5,
                             Eliminado = false,
-                            Enunciado = "Definicón",
+                            Enunciado = "Definición",
                             PreguntaId = 2,
                             RespuestaCorrecta = true
                         },
@@ -666,6 +703,78 @@ Crear una clase Facade que provea todos los métodos necesarios para ejecutar op
                             Eliminado = false,
                             Enunciado = "Verdadero",
                             PreguntaId = 4,
+                            RespuestaCorrecta = false
+                        },
+                        new
+                        {
+                            Id = 13,
+                            Eliminado = false,
+                            Enunciado = "70",
+                            PreguntaId = 11,
+                            RespuestaCorrecta = true
+                        },
+                        new
+                        {
+                            Id = 14,
+                            Eliminado = false,
+                            Enunciado = "80",
+                            PreguntaId = 11,
+                            RespuestaCorrecta = false
+                        },
+                        new
+                        {
+                            Id = 15,
+                            Eliminado = false,
+                            Enunciado = "90",
+                            PreguntaId = 11,
+                            RespuestaCorrecta = false
+                        },
+                        new
+                        {
+                            Id = 16,
+                            Eliminado = false,
+                            Enunciado = "Eliminar la creatividad, uso de otras opciones",
+                            PreguntaId = 12,
+                            RespuestaCorrecta = true
+                        },
+                        new
+                        {
+                            Id = 17,
+                            Eliminado = false,
+                            Enunciado = "Imponer una solución como la mejor",
+                            PreguntaId = 12,
+                            RespuestaCorrecta = false
+                        },
+                        new
+                        {
+                            Id = 18,
+                            Eliminado = false,
+                            Enunciado = "Estandarizar diseños",
+                            PreguntaId = 12,
+                            RespuestaCorrecta = false
+                        },
+                        new
+                        {
+                            Id = 19,
+                            Eliminado = false,
+                            Enunciado = "Ser reutilizable y comprobarse como efectivo en la resolución de un problema",
+                            PreguntaId = 13,
+                            RespuestaCorrecta = true
+                        },
+                        new
+                        {
+                            Id = 20,
+                            Eliminado = false,
+                            Enunciado = "No importa si es reutilizable, solo debe ser efectivo en la resolución de un problema",
+                            PreguntaId = 13,
+                            RespuestaCorrecta = false
+                        },
+                        new
+                        {
+                            Id = 21,
+                            Eliminado = false,
+                            Enunciado = "Debe ser reutilizable, e imponer una solución como la mejor",
+                            PreguntaId = 13,
                             RespuestaCorrecta = false
                         });
                 });

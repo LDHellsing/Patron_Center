@@ -644,7 +644,7 @@ Se utilizan para modelar diferentes formas de interactuar entre los objetos para
                     Puntaje = 25,
                     Eliminado = false,
                     Orden = 3,
-                    Enunciado = "Los patrones de Creación particicipan en el momento de crear obejetos..."
+                    Enunciado = "Los patrones de Creación participan en el momento de crear objetos..."
                 }
                 );
             modelBuilder.Entity<Pregunta>().HasData(
@@ -658,6 +658,53 @@ Se utilizan para modelar diferentes formas de interactuar entre los objetos para
                    Enunciado = "Los patrones de Comportamiento empeoran la performance del sistema..."
                }
                );
+            modelBuilder.Entity<Quiz>().HasData(
+                new Quiz
+                {
+                    Id = 4,
+                    UnidadId = 1,
+                    Puntaje = 10,
+                    Evaluacion = TipoQuiz.Ejercicio,
+                    Ejercicio = TipoEjercicio.Multiple_Opcion,
+                    Eliminado = false,
+                    Nombre = "Ejercicio Introducción a Patrones de diseño"
+                }
+                );
+            modelBuilder.Entity<Pregunta>().HasData(
+               new Pregunta
+               {
+                   Id = 11,
+                   QuizId = 4,
+                   Puntaje = 20,
+                   Eliminado = false,
+                   Orden = 1,
+                   Enunciado = "¿en que décadas aparecen los primeros patrones de diseño?"
+               }
+               );
+            modelBuilder.Entity<Pregunta>().HasData(
+               new Pregunta
+               {
+                   Id = 12,
+                   QuizId = 4,
+                   Puntaje = 40,
+                   Eliminado = false,
+                   Orden = 2,
+                   Enunciado = "¿Que no persigue un patrón de diseño?"
+               }
+               );
+            modelBuilder.Entity<Pregunta>().HasData(
+               new Pregunta
+               {
+                   Id = 13,
+                   QuizId = 4,
+                   Puntaje = 40,
+                   Eliminado = false,
+                   Orden = 3,
+                   Enunciado = "¿Que debe cumplir un patron de diseño?"
+               }
+               );
+
+
             // Creacion de Respuestas
             modelBuilder.Entity<Respuesta>().HasData(
                 new Respuesta
@@ -706,7 +753,7 @@ Se utilizan para modelar diferentes formas de interactuar entre los objetos para
                     PreguntaId = 2,
                     RespuestaCorrecta = true,
                     Eliminado = false,
-                    Enunciado = "Definicón"
+                    Enunciado = "Definición"
                 }
                 );
             modelBuilder.Entity<Respuesta>().HasData(
@@ -779,6 +826,96 @@ Se utilizan para modelar diferentes formas de interactuar entre los objetos para
                   Enunciado = "Verdadero"
               }
               );
+            modelBuilder.Entity<Respuesta>().HasData(
+              new Respuesta
+              {
+                  Id = 13,
+                  PreguntaId = 11,
+                  RespuestaCorrecta = true,
+                  Eliminado = false,
+                  Enunciado = "70"
+              }
+              );
+           modelBuilder.Entity<Respuesta>().HasData(
+            new Respuesta
+            {
+                Id = 14,
+                PreguntaId = 11,
+                RespuestaCorrecta = false,
+                Eliminado = false,
+                Enunciado = "80"
+            }
+            );
+           modelBuilder.Entity<Respuesta>().HasData(
+            new Respuesta
+            {
+                Id = 15,
+                PreguntaId = 11,
+                RespuestaCorrecta = false,
+                Eliminado = false,
+                Enunciado = "90"
+            }
+            );
+            modelBuilder.Entity<Respuesta>().HasData(
+ new Respuesta
+ {
+     Id = 16,
+     PreguntaId = 12,
+     RespuestaCorrecta = true,
+     Eliminado = false,
+     Enunciado = "Eliminar la creatividad, uso de otras opciones"
+ }
+ );
+            modelBuilder.Entity<Respuesta>().HasData(
+new Respuesta
+{
+Id = 17,
+PreguntaId = 12,
+RespuestaCorrecta = false,
+Eliminado = false,
+Enunciado = "Imponer una solución como la mejor"
+}
+);
+            modelBuilder.Entity<Respuesta>().HasData(
+new Respuesta
+{
+    Id = 18,
+    PreguntaId = 12,
+    RespuestaCorrecta = false,
+    Eliminado = false,
+    Enunciado = "Estandarizar diseños"
+}
+);
+            modelBuilder.Entity<Respuesta>().HasData(
+new Respuesta
+{
+    Id = 19,
+    PreguntaId = 13,
+    RespuestaCorrecta = true,
+    Eliminado = false,
+    Enunciado = "Ser reutilizable y comprobarse como efectivo en la resolución de un problema"
+}
+);
+            modelBuilder.Entity<Respuesta>().HasData(
+new Respuesta
+{
+Id = 20,
+PreguntaId = 13,
+RespuestaCorrecta = false,
+Eliminado = false,
+Enunciado = "No importa si es reutilizable, solo debe ser efectivo en la resolución de un problema"
+}
+);
+            modelBuilder.Entity<Respuesta>().HasData(
+new Respuesta
+{
+Id = 21,
+PreguntaId = 13,
+RespuestaCorrecta = false,
+Eliminado = false,
+Enunciado = "Debe ser reutilizable, e imponer una solución como la mejor"
+}
+);
 
             //unidad 2
             modelBuilder.Entity<Unidad>().HasData(

@@ -151,7 +151,6 @@ C:\PatronCenter\Patron_Center\Patron-Center\bin\Debug\netcoreapp2.2\Patron-Cente
 C:\PatronCenter\Patron_Center\Patron-Center\bin\Debug\netcoreapp2.2\Patron-Center.pdb
 C:\PatronCenter\Patron_Center\Patron-Center\bin\Debug\netcoreapp2.2\Patron-Center.Views.dll
 C:\PatronCenter\Patron_Center\Patron-Center\bin\Debug\netcoreapp2.2\Patron-Center.Views.pdb
-C:\PatronCenter\Patron_Center\Patron-Center\obj\Debug\netcoreapp2.2\Patron-Center.csprojAssemblyReference.cache
 C:\PatronCenter\Patron_Center\Patron-Center\obj\Debug\netcoreapp2.2\Patron-Center.csproj.CoreCompileInputs.cache
 C:\PatronCenter\Patron_Center\Patron-Center\obj\Debug\netcoreapp2.2\Patron-Center.RazorAssemblyInfo.cache
 C:\PatronCenter\Patron_Center\Patron-Center\obj\Debug\netcoreapp2.2\Patron-Center.RazorAssemblyInfo.cs
@@ -220,3 +219,4 @@ C:\PatronCenter\Patron_Center\Patron-Center\obj\Debug\netcoreapp2.2\Patron-Cente
 C:\PatronCenter\Patron_Center\Patron-Center\obj\Debug\netcoreapp2.2\Patron-Center.dll
 C:\PatronCenter\Patron_Center\Patron-Center\obj\Debug\netcoreapp2.2\Patron-Center.pdb
 C:\PatronCenter\Patron_Center\Patron-Center\obj\Debug\netcoreapp2.2\Patron-Center.csproj.CopyComplete
+C:\PatronCenter\Patron_Center\Patron-Center\obj\Debug\netcoreapp2.2\Patron-Center.csprojAssemblyReference.cache

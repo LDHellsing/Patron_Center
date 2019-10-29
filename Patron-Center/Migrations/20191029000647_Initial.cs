@@ -400,8 +400,9 @@ namespace Patron_Center.Migrations
                 columns: new[] { "Id", "Ejercicio", "Eliminado", "Evaluacion", "Nombre", "Puntaje", "UnidadId" },
                 values: new object[,]
                 {
-                    { 2, 1, false, 0, "Patrón Singleton", 10, 2 },
                     { 1, 0, false, 0, "Introducción a Patrones de diseño", 10, 1 },
+                    { 2, 1, false, 0, "Patrón Singleton", 10, 2 },
+                    { 4, 0, false, 1, "Ejercicio Introducción a Patrones de diseño", 10, 1 },
                     { 3, 1, false, 0, "Patrón Singleton", 10, 3 }
                 });
 
@@ -412,8 +413,11 @@ namespace Patron_Center.Migrations
                 {
                     { 1, false, "¿Que persiguen los patrones de diseño?", 1, 25, 1 },
                     { 2, false, "¿Cual de los siguientes tipos NO es un tipo de patrón de diseño?", 2, 25, 1 },
-                    { 3, false, "Los patrones de Creación particicipan en el momento de crear obejetos...", 3, 25, 1 },
+                    { 3, false, "Los patrones de Creación participan en el momento de crear objetos...", 3, 25, 1 },
                     { 4, false, "Los patrones de Comportamiento empeoran la performance del sistema...", 4, 25, 1 },
+                    { 11, false, "¿en que décadas aparecen los primeros patrones de diseño?", 1, 20, 4 },
+                    { 12, false, "¿Que no persigue un patrón de diseño?", 2, 40, 4 },
+                    { 13, false, "¿Que debe cumplir un patron de diseño?", 3, 40, 4 },
                     { 5, false, "¿Que soluciona el patron Singleton?", 4, 50, 2 },
                     { 6, false, "¿Que garantiza el patron Singleton?", 4, 25, 2 },
                     { 7, false, "Describa brevemente un ejemplo de utilización del patron Singleton", 4, 25, 2 },
@@ -428,17 +432,26 @@ namespace Patron_Center.Migrations
                 values: new object[,]
                 {
                     { 1, false, "Estandarizar diseños", 1, true },
-                    { 2, false, "Imponer una solución como la mejor", 1, false },
-                    { 3, false, "Eliminar la creatividad, uso de otras opciones", 1, false },
-                    { 4, false, "Reinventar la rueda", 1, false },
-                    { 5, false, "Definicón", 2, true },
-                    { 6, false, "Arquitectónico", 2, false },
-                    { 7, false, "Dialectos", 2, false },
-                    { 8, false, "Interacción", 2, false },
-                    { 9, false, "Verdadero", 3, true },
-                    { 10, false, "Falso", 3, false },
+                    { 19, false, "Ser reutilizable y comprobarse como efectivo en la resolución de un problema", 13, true },
+                    { 18, false, "Estandarizar diseños", 12, false },
+                    { 17, false, "Imponer una solución como la mejor", 12, false },
+                    { 16, false, "Eliminar la creatividad, uso de otras opciones", 12, true },
+                    { 15, false, "90", 11, false },
+                    { 14, false, "80", 11, false },
+                    { 13, false, "70", 11, true },
+                    { 12, false, "Verdadero", 4, false },
+                    { 20, false, "No importa si es reutilizable, solo debe ser efectivo en la resolución de un problema", 13, false },
                     { 11, false, "Falso", 4, true },
-                    { 12, false, "Verdadero", 4, false }
+                    { 9, false, "Verdadero", 3, true },
+                    { 8, false, "Interacción", 2, false },
+                    { 7, false, "Dialectos", 2, false },
+                    { 6, false, "Arquitectónico", 2, false },
+                    { 5, false, "Definición", 2, true },
+                    { 4, false, "Reinventar la rueda", 1, false },
+                    { 3, false, "Eliminar la creatividad, uso de otras opciones", 1, false },
+                    { 2, false, "Imponer una solución como la mejor", 1, false },
+                    { 10, false, "Falso", 3, false },
+                    { 21, false, "Debe ser reutilizable, e imponer una solución como la mejor", 13, false }
                 });
 
             migrationBuilder.CreateIndex(
