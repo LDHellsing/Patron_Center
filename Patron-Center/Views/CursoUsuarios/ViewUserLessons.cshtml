@@ -1,0 +1,51 @@
+﻿@model IEnumerable<Patron_Center.Models.CursoUsuario>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Cursos</h1>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                <span>Nombre</span>
+            </th>
+            <th>
+                <span>Descripción</span>
+            </th>
+            <th>
+                <span>Finalización del curso</span>
+            </th>
+            <th>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model)
+{
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Curso.Nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Curso.Descripcion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Curso.FechaFinalizacion)
+            </td>
+            <td>
+                <form asp-controller="Unidades" asp-action="ViewUnitsLessons">
+                    <p>
+                        <input type="hidden" name="CursoId" value="@item.Curso.Id">
+                        <input class="btn btn-primary btn-sm btn-block" type="submit" value="Acceder al curso" />
+                    </p>
+                </form>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+<a asp-controller="Home" asp-action="Index">Volver al inicio</a>

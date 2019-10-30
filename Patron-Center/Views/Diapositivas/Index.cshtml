@@ -1,0 +1,66 @@
+﻿ @model IEnumerable<Patron_Center.Models.Diapositiva>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Listado de Diapositivas</h1>
+
+<p>
+    <a asp-controller="Diapositivas" asp-action="Create" asp-route-UnidadId="@ViewBag.UnidadId" class="btn btn-primary btn-sm">Crear Diapositiva</a>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Texto)
+            </th>
+            <th>
+                YouTube
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Orden)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Eliminado)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td width="700px">
+                    @Html.DisplayFor(modelItem => item.Texto)
+                </td>
+                <td>
+                    @if (item.UrlVideo != null)
+                    {
+                   
+                        <a target="_blank" href="@(String.Format("{0}{1}", "http://www.youtube.com/watch?v=", item.UrlVideo))">Ver Video</a>
+
+                    }
+                    else
+                    {
+                        <p>Sin Video</p>
+                    }
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Orden)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Eliminado)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-primary btn-sm btn-block">Editar</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<div>
+    <a asp-controller="Unidades" asp-action="Index" asp-route-CursoId=@ViewBag.CursoId>Volver atrás</a>
+</div>
+

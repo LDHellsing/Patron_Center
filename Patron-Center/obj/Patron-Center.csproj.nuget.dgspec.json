@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Admin\\source\\repos\\Patron_Center\\Patron-Center\\Patron-Center\\Patron-Center.csproj": {}
+    "C:\\PatronCenter\\Patron_Center\\Patron-Center\\Patron-Center.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Admin\\source\\repos\\Patron_Center\\Patron-Center\\Patron-Center\\Patron-Center.csproj": {
+    "C:\\PatronCenter\\Patron_Center\\Patron-Center\\Patron-Center.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Admin\\source\\repos\\Patron_Center\\Patron-Center\\Patron-Center\\Patron-Center.csproj",
+        "projectUniqueName": "C:\\PatronCenter\\Patron_Center\\Patron-Center\\Patron-Center.csproj",
         "projectName": "Patron-Center",
-        "projectPath": "C:\\Users\\Admin\\source\\repos\\Patron_Center\\Patron-Center\\Patron-Center\\Patron-Center.csproj",
-        "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Admin\\source\\repos\\Patron_Center\\Patron-Center\\Patron-Center\\obj\\",
+        "projectPath": "C:\\PatronCenter\\Patron_Center\\Patron-Center\\Patron-Center.csproj",
+        "packagesPath": "C:\\Users\\Lucho\\.nuget\\packages\\",
+        "outputPath": "C:\\PatronCenter\\Patron_Center\\Patron-Center\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Lucho\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -57,6 +57,10 @@
               "target": "Package",
               "version": "[2.2.0, )",
               "autoReferenced": true
+            },
+            "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
+              "target": "Package",
+              "version": "[2.2.4, )"
             }
           },
           "imports": [

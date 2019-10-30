@@ -1,0 +1,57 @@
+﻿@model IEnumerable<Patron_Center.Models.Quiz>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Listado de Prácticos</h1>
+
+<p>
+    <a asp-controller="Quizes" asp-action="Create" asp-route-UnidadId="@ViewBag.UnidadId" class="btn btn-primary btn-sm">Crear</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Evaluacion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Ejercicio)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Eliminado)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Evaluacion)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Ejercicio)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Eliminado)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-primary btn-sm btn-block">Editar</a>
+                    <a asp-controller="Preguntas" asp-action="Index" asp-route-QuizId="@item.Id" class="btn btn-primary btn-sm btn-block">Preguntas</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div>
+    <a asp-controller="Unidades" asp-action="Index" asp-route-CursoId=@ViewBag.CursoId>Volver atrás</a>
+</div>

@@ -1,0 +1,53 @@
+﻿@model List<Patron_Center.Models.CalificacionesViewModel>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Calificaciones</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Alumno
+            </th>
+            <th>
+                Unidad
+            </th>
+            <th>
+                Curso
+            </th>
+            <th>
+                Fecha de evaluación
+            </th>
+            <th>
+                Nota
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NombreCompletoAlumno)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NombreUnidad)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NombreCurso)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Fecha)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nota)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<a asp-controller="Home" asp-action="Index">Volver al inicio</a>

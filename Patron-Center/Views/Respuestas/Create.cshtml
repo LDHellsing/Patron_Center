@@ -1,0 +1,59 @@
+﻿@model Patron_Center.Models.Respuesta
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h4>Crear Respuesta</h4>
+<hr />
+@if (ViewBag.RespuestaCorrecta != null)
+{
+    <span class="text-info">Esta respuesta <b>debe ser correcta</b> porque no existe otra respuesta correcta para esta pregunta.</span>
+}
+else
+{
+    <span class="text-info">Esta respuesta <b>NO debe ser correcta</b> porque ya existe una respuesta correcta para esta pregunta.</span>
+}
+
+<div class="row">
+    <div class="col-md-6">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="PreguntaId" class="control-label"></label>
+                <select asp-for="PreguntaId" class="form-control" asp-items="ViewBag.PreguntaId"></select>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    @if (ViewBag.RespuestaCorrecta != null)
+                    {
+                        <input class="form-check-input" asp-for="RespuestaCorrecta" checked /> @Html.DisplayNameFor(model => model.RespuestaCorrecta)
+                    }
+                    else
+                    {
+                        <input class="form-check-input" asp-for="RespuestaCorrecta" /> @Html.DisplayNameFor(model => model.RespuestaCorrecta)
+                    }
+
+                </label>
+            </div>
+            <div class="form-group">
+                <label asp-for="Enunciado" class="control-label"></label>
+                <textarea asp-for="Enunciado" class="form-control" multiline="true" rows="3"></textarea>
+                <span asp-validation-for="Enunciado" class="text-danger"></span>
+            </div>
+            @if (ViewBag.RespuestaCorrectaError != null)
+            {
+                <span class="text-danger">@ViewBag.RespuestaCorrectaError</span>
+            }
+
+            <div class="form-group">
+                <input type="submit" value="Crear" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-controller="Respuestas" asp-action="Index" asp-route-PreguntaId=@ViewBag.PreguntaId_>Volver atrás</a>
+</div>
+

@@ -1,0 +1,34 @@
+﻿@model IEnumerable<CorreccionMOViewModel>
+
+@{
+    ViewData["Title"] = "Resultados del Quiz";
+}
+
+
+@foreach (var correccion in Model)
+{
+
+    if (correccion.RespuestaCorrecta == true)
+    {
+        <div class="alert alert-success" role="alert">
+            @correccion.EnunciadoPregunta <b>Correcta</b>
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-danger" role="alert">
+            @correccion.EnunciadoPregunta <b>Incorrecta</b>
+        </div>
+    }
+}
+
+<div class="alert alert-info" role="alert">
+    Respuestas correctas: @ViewBag.RespuestasCorrectas
+    Respuestas incorrectas: @ViewBag.RespuestasIncorrectas
+    <h4>Puntaje: @ViewBag.PuntajeTotal</h4>
+
+</div>
+
+<div>
+    <a asp-controller="Quizes" asp-action="ViewQuizes" asp-route-UnidadId="@ViewBag.IdUnidad" class="btn btn-link">Volver a Prácticos</a>
+</div>

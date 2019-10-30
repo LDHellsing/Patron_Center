@@ -1,0 +1,40 @@
+﻿@model Patron_Center.Models.RespuestaAlumnoDesarrollo
+
+@{
+    ViewData["Title"] = "Anawer Quiz Desarrollo";
+}
+
+<h1>@Model.QuizName</h1>
+<br />
+
+<form asp-action="QuizCorrectionDesarrollo" method="post">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    @for (int i = 0; i < Model.Preguntas.Count; i++)
+    {
+        <div class="form-group">
+            <label asp-for="@Model.Preguntas[i].Enunciado" class="control-label">@Model.Preguntas[i].Enunciado</label>
+            <div>
+                @Html.TextAreaFor(m => m.Preguntas[i].Respuesta, new { @class = "form-control" })
+            </div>
+            <div>
+                @Html.HiddenFor(x => Model.Preguntas[i].Enunciado)
+            </div>
+            <div>
+                @Html.HiddenFor(x => Model.Preguntas[i].IdPregunta)
+            </div>
+        </div>
+    }
+    <div class="form-group">
+        <input asp-for="@Model.IdQuiz" class="form-control data-form" hidden="hidden" />
+    </div>
+    <div class="form-group">
+        <input asp-for="@Model.IdUnidad" class="form-control data-form" hidden="hidden" />
+    </div>
+    <div class="form-group">
+        <input asp-for="@Model.QuizName" class="form-control data-form" hidden="hidden" />
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Enviar" class="btn btn-primary" />
+        <a asp-controller="Quizes" asp-action="ViewQuizes" asp-route-UnidadId="@Model.IdUnidad" class="btn btn-secondary">Cancelar</a>
+    </div>
+</form>

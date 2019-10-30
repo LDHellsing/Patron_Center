@@ -1,0 +1,56 @@
+﻿@model IEnumerable<Patron_Center.Models.Respuesta>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Listado de Respuestas</h1>
+
+<p>
+    <a asp-controller="Respuestas" asp-action="Create" asp-route-PreguntaId="@ViewBag.PreguntaId" class="btn btn-primary btn-sm">Crear</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Enunciado)
+                
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RespuestaCorrecta)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Eliminado)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Pregunta)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                
+                @Html.DisplayFor(modelItem => item.Enunciado)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RespuestaCorrecta)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Eliminado)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Pregunta.Enunciado)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-primary btn-sm btn-block">Editar</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+<div>
+    <a asp-controller="Preguntas" asp-action="Index" asp-route-QuizId=@ViewBag.QuizId>Volver atrás</a>
+</div>

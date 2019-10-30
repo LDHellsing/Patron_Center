@@ -1,0 +1,39 @@
+﻿@model IEnumerable<Patron_Center.Models.Unidad>
+
+@{
+    ViewData["Title"] = "Unidades con correciones pendientes";
+}
+
+<h1>Unidades con Correcciones Pendientes</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Descripcion)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Descripcion)
+                </td>
+                <td>
+                    <a asp-controller="RespuestaAlumnos" asp-action="CorreccionesAlumnos" asp-route-UnidadId="@item.Id" class="btn btn-primary btn-sm btn-block">Alumnos</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<div>
+    <a asp-controller="RespuestaAlumnos" asp-action="Correcciones">Volver atrás</a>
+</div>

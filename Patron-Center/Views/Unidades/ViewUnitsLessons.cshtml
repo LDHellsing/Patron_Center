@@ -1,0 +1,50 @@
+﻿@model IEnumerable<Patron_Center.Models.Unidad>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Unidades</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Descripcion)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Descripcion)
+                </td>
+                <td>
+                    <form asp-controller="Diapositivas" asp-action="ViewSlides">
+                        <p>
+                            <input type="hidden" name="UnidadId" value="@item.Id">
+                            <input class="btn btn-primary btn-sm btn-block" type="submit" value="Cursar Teórico" />
+                        </p>
+                    </form>
+                    <form asp-controller="Quizes" asp-action="ViewQuizes">
+                        <p>
+                            <input type="hidden" name="UnidadId" value="@item.Id">
+                            <input class="btn btn-primary btn-sm btn-block" type="submit" value="Cursar Prácticos" />
+                        </p>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<a asp-controller="CursoUsuarios" asp-action="ViewUserLessons">Volver atrás</a>

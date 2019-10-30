@@ -1,0 +1,65 @@
+﻿@model IEnumerable<Patron_Center.Models.Quiz>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Listado de Prácticos</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Evaluacion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Ejercicio)
+            </th>
+
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Evaluacion)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Ejercicio)
+                </td>
+                <td>
+                    @if (item.EvalucionCursada == true)
+                    {
+                        <input class="btn btn-info btn-sm btn-block" type="submit" value="Evaluación Cursada" data-toggle="tooltip" data-placement="top" title="No puedes cursar una evaluación mas de una vez." />
+                    }
+                    else if (item.CursoFinalizado == true)
+                    {
+                        <input class="btn btn-info btn-sm btn-block" type="submit" value="Curso Finalizado" data-toggle="tooltip" data-placement="top" title="No puedes cursar una evaluación de un curso que ya finalizó." />
+                    }
+                    else
+                    {
+                        <form asp-controller="Quizes" asp-action="AnswerQuiz">
+                            <p>
+                                <input type="hidden" name="QuizId" value="@item.Id">
+                                <input class="btn btn-primary btn-sm btn-block" type="submit" value="Cursar Práctico" />
+                            </p>
+                        </form>
+                    }
+
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div>
+    <a asp-controller="Unidades" asp-action="ViewUnitsLessons" asp-route-CursoId=@ViewBag.CursoId>Volver atrás</a>
+</div>

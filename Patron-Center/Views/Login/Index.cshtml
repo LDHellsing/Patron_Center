@@ -1,0 +1,53 @@
+﻿@model Patron_Center.Models.LoginViewModel
+
+@{
+    ViewData["Title"] = "Login";
+}
+    <body>
+        <header>
+            <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+                <div class="container">
+                    <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Patron Center</a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                            aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                </div>
+            </nav>
+        </header>
+        <h1>Bienvenido a Patron Center</h1>
+        <p>Ingrese su número de documento y contraseña para acceder.</p>
+        <div class="row">
+            <div class="col-md-4">
+                <form asp-action="Index">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    @if (ViewBag.InvalidUserMessage != null)
+                    {
+                        <div class="alert alert-danger" role="alert">
+                            @ViewBag.InvalidUserMessage
+                        </div>
+                    }
+                    <div class="form-group">
+                        <label asp-for="User" class="control-label"></label>
+                        <input asp-for="User" class="form-control" />
+                        <span asp-validation-for="User" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Password" class="control-label"></label>
+                        <input type="password" asp-for="Password" class="form-control" />
+                        <span asp-validation-for="Password" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Inciar Sesión" class="btn btn-primary" />
+                    </div>
+                </form>
+            </div>
+            <div class="col-md-4">
+                <img src="~/images/PatronCenterLogo.png" class="img-fluid" alt="Patron Center Logo">
+            </div>
+        </div>
+
+    </body>
+            @section Scripts {
+                @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+            }

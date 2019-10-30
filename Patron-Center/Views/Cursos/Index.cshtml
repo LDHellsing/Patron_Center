@@ -1,0 +1,74 @@
+﻿@model IEnumerable<Patron_Center.Models.Curso>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Listado de Cursos</h1>
+@if (ViewBag.TipoUsuario == "Administrador")
+{
+    <p>
+        <a asp-action="Create" class="btn btn-primary btn-sm">Crear</a>
+    </p>
+}
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Descripcion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FechaFinalizacion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Eliminado)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Docente)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Descripcion)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FechaFinalizacion)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Eliminado)
+                </td>
+                <td>
+                    @(String.Format("{0} {1}", item.Docente.Nombre, item.Docente.Apellido))
+                </td>
+                <td>
+                    @if (ViewBag.TipoUsuario == "Administrador")
+                    {
+                        <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-primary btn-sm btn-block">Editar</a>
+                        <a asp-controller="CursoUsuarios" asp-action="Index" asp-route-CursoId="@item.Id" class="btn btn-primary btn-sm btn-block">Alumnos</a>
+                    }
+
+                    @if (item.Finalizado == true)
+                    {
+                        <a class="alert-primary"><b>Curso Finalizado</b></a>
+                    }
+                    else
+                    {
+                        <a asp-controller="Unidades" asp-action="Index" asp-route-CursoId="@item.Id" class="btn btn-primary btn-sm btn-block">Unidades</a>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<a asp-controller="Home" asp-action="Index">Volver al inicio</a>

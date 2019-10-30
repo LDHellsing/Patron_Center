@@ -1,0 +1,50 @@
+﻿@model IEnumerable<Patron_Center.Models.Curso>
+
+@{
+    ViewData["Title"] = "Cursos con correciones pendientes";
+}
+
+<h1>Cursos con Correcciones Pendientes</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Descripcion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FechaFinalizacion)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Descripcion)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FechaFinalizacion)
+                </td>
+                <td>
+                    @if (item.Finalizado == true)
+                    {
+                        <a class="alert-primary"><b>Curso Finalizado</b></a>
+                    }
+                    else
+                    {
+                        <a asp-controller="RespuestaAlumnos" asp-action="CorreccionesUnidades" asp-route-CursoId="@item.Id" class="btn btn-primary btn-sm btn-block">Unidades</a>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<a asp-controller="Home" asp-action="Index">Volver al inicio</a>
